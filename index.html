@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Academia Soubac Ajedrez</title>
+    <link rel="stylesheet" href="styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+
+  <body>
+    <header>
+      <div class="logo-container">
+        <img src="SOUBAC.png" alt="Logo Academia" class="logo" />
+        <h1>ACADEMIA SOUBAC AJEDREZ</h1>
+      </div>
+
+      <nav class="menu-botones">
+        <button onclick="mostrarSeccion('inicio')">
+          <svg viewBox="0 0 24 24" width="18" height="18">
+            <path d="M12 3L3 10h2v10h5v-6h4v6h5V10h2z" />
+          </svg>
+          Inicio
+        </button>
+
+        <button onclick="mostrarSeccion('informacion')">
+          <svg viewBox="0 0 24 24" width="18" height="18">
+            <path
+              d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+            />
+          </svg>
+          Información
+        </button>
+
+        <button onclick="mostrarSeccion('historia')">
+          <svg viewBox="0 0 24 24" width="18" height="18">
+            <path
+              d="M4 3h14a2 2 0 012 2v14a2 2 0 01-2 2H4zM6 7h8v2H6zm0 4h12v2H6zm0 4h10v2H6z"
+            />
+          </svg>
+          Historia
+        </button>
+
+        <button onclick="mostrarSeccion('fotos')">
+          <svg viewBox="0 0 24 24" width="18" height="18">
+            <path d="M21 19V5H3v14h18zM8.5 13.5l2.5 3 3.5-4.5 4.5 6H5z" />
+          </svg>
+          Fotos
+        </button>
+
+        <button onclick="mostrarSeccion('videos')">
+          <svg viewBox="0 0 24 24" width="18" height="18">
+            <path
+              d="M17 10.5V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-4.5l4 4v-11z"
+            />
+          </svg>
+          Videos
+        </button>
+        <button onclick="mostrarSeccion('plataformas')">
+          <svg viewBox="0 0 24 24" width="18" height="18">
+            <path d="M4 4h16v12H4zm2 2v8h12V6zM8 18h8v2H8z"/>
+          </svg>
+          Plataformas
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- INICIO -->
+      <section id="inicio" class="seccion activa">
+        <div class="hero">
+          <div>
+            <img src="CLASE.png" alt="Clase" />
+            <center><h3>Clases presenciales</h3></center>
+          </div>
+
+          <div>
+            <img src="2VIRTUAL.png" alt="Virtual" />
+           <center> <h3>Clases virtuales</h3></center>
+          </div>
+
+          <div>
+            <img src="REVICION.png" alt="Revisión" />
+          <center><h3>Juega y aprende</h3></center>
+          </div>
+        </div>
+        <div class="bienvenida">
+          <h2>¡Bienvenido a SOUBAC AJEDREZ! ♟️</h2>
+        
+          <p>
+            Somos una academia dedicada a la formación integral de niños, jóvenes y adultos
+            apasionados por el ajedrez.
+          </p>
+        
+          <p>
+            En <strong>SOUBAC AJEDREZ</strong> brindamos clases
+            <strong>presenciales</strong> y <strong>virtuales</strong>,
+            adaptándonos a cada estudiante para potenciar su concentración,
+            disciplina, estrategia y pensamiento lógico.
+          </p>
+        
+          <p>
+            Te invitamos a formar parte de nuestra comunidad y seguir creciendo
+            movimiento a movimiento.
+          </p>
+        </div>
+        <div class="ubicaciones">
+          <h2>Nuestras sedes</h2>
+        
+          <div class="sedes-container">
+            <div class="sede-card">
+              <p>📍 Calle 2 de Mayo 321,interior 302 Lambayeque</p>
+            </div>
+        
+            <div class="sede-card">
+              <p>📍 Urb.Sol de Pimentel</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- INFORMACION -->
+      <div class="botones-info">
+        <section id="informacion" class="seccion">
+          <center>
+            <h2>Libros totalmente gratis para que puedas DESCARGAR</h2>
+          </center>
+        
+          <div class="botones-info">
+            <a href="https://drive.google.com/drive/folders/1s7tAnuWdynVDA54csrYfxV7MKj_L0i9k?usp=drive_link" target="_blank">
+              Aperturas
+              <span>Domina las bases del inicio.</span>
+              <strong>Libro de aperturas →</strong>
+            </a>
+        
+            <a href="https://drive.google.com/drive/folders/1s7tAnuWdynVDA54csrYfxV7MKj_L0i9k?usp=drive_link" target="_blank">
+              Temas tácticos
+              <span>Mejora cálculo y visión táctica.</span>
+              <strong>Libro táctico →</strong>
+            </a>
+        
+            <a href="https://drive.google.com/drive/u/0/folders/1nPCAhvg_FlbYNdUQX7f3SKEYF1a0eUvt" target="_blank">
+              Defensas
+              <span>Aprende a defenderte mejor.</span>
+              <strong>Libro de defensas →</strong>
+            </a>
+        
+            <a href="https://drive.google.com/drive/folders/1Rdlm2b3JLb_sGrIqVpJ2YJlT12IQUEFQ?usp=sharing" target="_blank">
+              Historia
+              <span>Conoce la evolución del ajedrez.</span>
+              <strong>Libro histórico →</strong>
+            </a>
+        
+            <a href="https://drive.google.com/drive/folders/1BMTeaEMbn0aLVgg1LiCSLGcdNyMWaonM?usp=sharing" target="_blank">
+              Gambitos
+              <span>Ataques agresivos y dinámicos.</span>
+              <strong>Libro de gambitos →</strong>
+            </a>
+        
+            <a href="LINK6" target="_blank">
+              Principiantes
+              <span>Ideal para empezar desde cero.</span>
+              <strong>Libro básico →</strong>
+            </a>
+          </div>
+        </section>
+
+      <!-- HISTORIA -->
+      <section id="historia" class="seccion">
+        <div class="historia-container">
+      
+          <div class="historia-imagen">
+            <img src="ROBERTO.jpeg" alt="Fundador">
+
+            <div class="fundador">
+              ROBERTO LEYVA VIDAURRE
+              <p>PROMOTOR</p>
+            </div>
+          </div>
+
+          <div class="historia-texto">
+            <center><h2>Historia</h2></center>
+
+            <p>
+              <p>
+                La historia de <strong>SOUBAC AJEDREZ</strong> comenzó un 3 de enero del 2019, en
+                una pequeña sede ubicada en la calle 2 de Mayo 253, en departamento de
+                <strong>LAMBAYEQUE</strong>.
+              
+                Todo inició con solo 4 alumnos, un tablero y un sueño enorme:
+                enseñar ajedrez con pasión, disciplina y cariño.
+              
+                Poco a poco, los padres comenzaron a recomendarnos. Los alumnos crecían no solo en
+                nivel, sino también en confianza, concentración y valores.
+              
+                Ese mismo año realizamos nuestro primer torneo interno y vivimos uno
+                de nuestros primeros grandes logros cuando nuestra alumna Laura
+                Fabiola, con apenas 6 años, obtuvo el primer puesto en un torneo
+                realizado en <strong>CHICLAYO</strong>.
+              
+                Luego llegó la pandemia y nos reinventamos
+                con clases virtuales por Zoom, llegando a distintos departamentos
+                del Perú y otros países.
+              
+                Hoy <strong>SOUBAC AJEDREZ</strong> continúa creciendo con
+                sedes presenciales, clases virtuales y estudiantes en diferentes
+                partes del mundo.<p>
+                  <strong>SOUBAC AJEDREZ</strong> no es solo una academia.
+                  Es una familia que nació con un sueño y sigue creciendo
+                  movimiento a movimiento.
+                </p>
+              </p>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOTOS -->
+      <section id="fotos" class="seccion">
+        <h1>Galería</h1>
+
+        <div class="galeria">
+          <div class="card-galeria">
+            <img src="1.jpeg" alt="Foto 1" />
+            <p>Imagen 1</p>
+          </div>
+
+          <div class="card-galeria">
+            <img src="2.jpeg" alt="Foto 2" />
+            <p>Torneo en Lima</p>
+          </div>
+
+          <div class="card-galeria">
+            <img src="3.jpeg" alt="Foto 3" />
+            <p>Imagen 3</p>
+          </div>
+
+          <div class="card-galeria">
+            <img src="T4.jpeg" alt="Foto 4" />
+            <p>Imagen 4</p>
+          </div>
+
+          <div class="card-galeria">
+            <img src="T2.jpeg" alt="Foto 5" />
+            <p>Imagen 5</p>
+          </div>
+
+          <div class="card-galeria">
+            <img src="T1.jpeg" alt="Foto 6" />
+            <p>Imagen 6</p>
+          </div>
+
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/594076647_845745071540395_6511262897519415399_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_ohc=GlVv98TNS3kQ7kNvwE_ttiQ&_nc_oc=AdoM1Z6xjjFfrqE9owLh2e4XYWRJL4HovZ4LdearvLgC03PsqLuP8MzSV2_38ESgTP8&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=QrTU-Jp0J2BJefcFzxxgLw&_nc_ss=7b2a8&oh=00_Af4QGTirUBkQGPiry_YL26PAO-5eRFxlLV1-OroQLjcdjw&oe=6A0BE675" alt="Foto 9" />
+            <p>RECONOCIMIENTO ESPECIAL
+              Santisteban Ventura Estrella Paulina – Soubac Ajedrez</p>
+          </div>
+            <div class="card-galeria">
+              <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/594063967_845745101540392_1823272042178930582_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_ohc=BtDOAhVB6-oQ7kNvwF9X9u0&_nc_oc=AdofL2uYulsYeop7IfnSvHBG31IzkXMMb9AEdbzI9GLOyYsTSxHHfgL8wr-qrZMZffI&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=gwAPn32BcWuFw6lXOYQ-1Q&_nc_ss=7b2a8&oh=00_Af6Z4hr7HdlMvKnzj-_pVK2CzL1rcMb9GR8Axk1au_ccGg&oe=6A0BBD8F" alt="Foto 10" />
+              <p> CAMPEONES GENERALES – CATEGORÍA VARONES
+              </p>
+            </div>
+            <div class="card-galeria">
+              <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/595264720_845745028207066_2362438356858668674_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_ohc=k6EuxxawuNEQ7kNvwEmWc2N&_nc_oc=AdojgYhfR_BF_R0YXw25OCA0oi3pez5lpXbxyiMa0y2mMe9tzqd1qviKT_s7FezngDc&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=Rrhy3zD0R6oetsVls3Clzw&_nc_ss=7b2a8&oh=00_Af7RZgO1KEXH9AZ9tFlAcBZvoSibM_D1-fPpsKfZlV96zA&oe=6A0BB601" alt="Foto 11" />
+              <p>🥇 Coronel Palacios Víctor Alejandro Stefano – Soubac Ajedrez</p>
+            </div>
+
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/576608598_823470003767902_1752945703006418551_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_ohc=31yajuGfTqUQ7kNvwEheEHA&_nc_oc=AdoB77IlKr8c7a8-vs-XrNzDbA_v9IY4mERWVR98oO0pwk3rqyYxsvKmQXjmnVB3Sqc&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=0t09hpK8OrLN4Jy4Eq-NjA&_nc_ss=7b2a8&oh=00_Af4gs5ruoJ92h4bnxH3ovkpDa8VIpw4fEo-9LRZ4OtBwtA&oe=6A0BE232" alt="Foto 12" />
+            <p>Liam</p>
+          </div>
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/567681534_811777544937148_7763293176729350131_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_ohc=0_CiiKqqVHQQ7kNvwGjHD85&_nc_oc=AdoShLoUL_dlRcAoI1JEk9V4Li6W0-jlrRdxqpioi_sT-qhQ-sYVxBqrhnxlDHB2UhE&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=SO2W5_p1ySAgfepFG9lG_w&_nc_ss=7b2a8&oh=00_Af5Fj1kqeUYEpXlty4tydO385MlEP9f8Dxf5aM3V1KvhlA&oe=6A0BB5D5" alt="Foto 13" />
+            <p>𝑺𝒂́𝒏𝒄𝒉𝒆𝒛 𝑹𝒂𝒎𝒐𝒔 𝑨𝒍𝒐𝒏𝒅𝒓𝒂 𝑺𝒐𝒇𝒊́𝒂 𝑠𝑒 𝑐𝑜𝑟𝑜𝑛𝑜́ 𝒄𝒂𝒎𝒑𝒆𝒐𝒏𝒂 𝑒𝑛 𝑒𝑙 𝑰𝑽 𝑻𝒐𝒓𝒏𝒆𝒐 𝑹𝒆𝒈𝒊𝒐𝒏𝒂𝒍 𝒅𝒆 𝑨𝒋𝒆𝒅𝒓𝒆𝒛 – 𝑰𝑬𝑷 𝑺𝒂𝒏𝒕𝒂 𝑻𝒆𝒓𝒆𝒔𝒊𝒕𝒂 (𝑴𝒐𝒏𝒔𝒆𝒇𝒖́, 𝑳𝒂𝒎𝒃𝒂𝒚𝒆𝒒𝒖𝒆)</p>
+          </div>
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/561415417_807832378664998_249298190553482639_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=127cfc&_nc_ohc=EVwxpWss0PkQ7kNvwE_-ITF&_nc_oc=AdqirpIlpmvGRGHwbgZlZ4FvcPlMOc1OhG0619eSLd8azjLxkMC3mH4b8yn3gMzKhCE&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=DoOB00UMJI2HCIU-qIvmog&_nc_ss=7b2a8&oh=00_Af6vVtHx2OALgMIZM9kWU2WG52sRhft2CJZAIR_uUJhbOw&oe=6A0BC006" alt="Foto 14" />
+            <p>𝐆𝐞𝐫𝐢𝐚́𝐧 𝐓𝐨𝐫𝐫𝐢𝐜𝐨 𝐅𝐥𝐨𝐫𝐞𝐬
+              1𝐞𝐫 𝐩𝐮𝐞𝐬𝐭𝐨🥇 𝐞𝐧 𝐞𝐥 𝐈𝐕 𝐓𝐨𝐫𝐧𝐞𝐨 𝐏𝐫𝐞𝐬𝐞𝐧𝐜𝐢𝐚𝐥 – 𝐄𝐬𝐜𝐮𝐞𝐥𝐚 𝐝𝐞 𝐀𝐣𝐞𝐝𝐫𝐞𝐳 𝐒𝐚𝐜𝐨 𝐎𝐥𝐢𝐯𝐞𝐫𝐨𝐬</p>
+          </div>
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/545072001_775725535209016_3411246313616464764_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_ohc=CawwfXGa0P0Q7kNvwFz0c8P&_nc_oc=Ado9uOJ5DdtxIuize5PEWrPhTzEv3JgKDPShJcaIk2jculqY3LnG6s1g37_wa--2Hkg&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=o5CecHByxcYUkmbU6I2hbA&_nc_ss=7b2a8&oh=00_Af7FiY8DZXgdlpDckZn9HBX3c_RsU8fWWV8KZTnho13ANQ&oe=6A0BD5B1" alt="Foto 15" />
+            <p>Liam</p>
+          </div>
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/545819854_775725495209020_2067093022412683755_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=zAR7fDpaFEcQ7kNvwH8QeOn&_nc_oc=AdriC1mBnFwJRZAURv83qSnxUgdPMq2QYKtbEgxEoRy9cnbGauX4mmGE4eCgCEI16j0&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=Qd1rsK-vh54W9P03L92V4g&_nc_ss=7b2a8&oh=00_Af4lRtcQPnVy8IlYrhAHClzV6BMmlhXJpF0dZ_oZF58XDA&oe=6A0BEA1E" alt="Foto 16" />
+            <p>Imagen 16</p>
+          </div>
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/510963661_714714414643462_3919924201616689463_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_ohc=0YuIgqroNuUQ7kNvwH0hslY&_nc_oc=Adpssk2WL0KWBKh4i9sQnZur3NyQbnFD04qUpg4WtsK1q2bSQ7wBy4dTY4ZZSpnkDF0&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=0w5f16wbhgTiKlLMMrVl4w&_nc_ss=7b2a8&oh=00_Af5xID5t_kBMNmmrakfIzpauABC4orw4wpXJNY60a21jRA&oe=6A0BE301" alt="Foto 17" />
+            <p>Imagen 17</p>
+          </div>
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/512043319_714714387976798_2586851239994422719_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_ohc=8VZfUzES-FMQ7kNvwF6ZU2B&_nc_oc=AdqvgpsoNlH2q0J8yYyW-6npZtr-8SpuyRZPc2z_rRCcADzOKgkV7t222Uy3r-Ea0GQ&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=VQRBtqaid2ewjiLaDTY2uw&_nc_ss=7b2a8&oh=00_Af4Ng78FY26yG6HBwVNcnTAsWUkqD2uycrzPGNHSLMT-VQ&oe=6A0BE40A" alt="Foto 18" />
+            <p>Imagen 18</p>
+          </div>
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/506079673_704797388968498_2612821318346722536_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_ohc=Ih8L8eNHw24Q7kNvwHOy87F&_nc_oc=AdpIsrY5TMhPGIKzyefvIATI0T_JkErceHZiiwgr2ivlsHxqUppmpjKaBFdpLBa_Kxc&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=921BYhCYyK1lT4Vn0lY7Tg&_nc_ss=7b2a8&oh=00_Af6d-ssPhOsZAhqhhTEpFjb6pcBgWJ3_AK3P_00IJjoOhA&oe=6A0BE7AC" alt="Foto 19" />
+            <p>Imagen 19</p>
+          </div>
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/505439667_704797352301835_5188362192260977189_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_ohc=bs66gYFXIEIQ7kNvwH-nM-Y&_nc_oc=AdpL2q3O3A7hascC52anMzsxBDqGwz2kZ3izet_G_m-boLGTFc51_Pb0uzVyGKQl8ck&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=T9ocJlqlijtx0HZ1axbZYw&_nc_ss=7b2a8&oh=00_Af6mlBWYlPgXvfqlv2-f1AhgfNzuMfn84PB7HyLbTBXPeA&oe=6A0BCA9F" alt="Foto 20" />
+            <p>Imagen 20</p>
+          </div>
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/487223429_649392574508980_5024746813469837213_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_ohc=VDaYQlXJIdwQ7kNvwHLgFKd&_nc_oc=AdrETNDl3PSZVOCDMVJhDC67YTYbEBn5XjL0P-BiLvk70oTnWacoZspxJuiYxPOfrhA&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=TX_lBSiCcdTpZaN8dpbS6Q&_nc_ss=7b2a8&oh=00_Af4pltga-wWe_6481UWcREwuOvmjsNUYFzx4UmWDH0uFdg&oe=6A0BEDF1" alt="Foto 21" />
+            <p>Imagen 21</p>
+          </div>
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/487210057_649392551175649_5669455848111812739_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_ohc=7cHkiPq5f1UQ7kNvwEHQI5W&_nc_oc=AdqTR8MqNQELgfbgUg6Y-hT7zkLlr9nSRp-J2qGCywLq1rEC3yJ1SpOY9SbUUkucXDA&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=LUPO1i_IeI2JHYgQAacI9Q&_nc_ss=7b2a8&oh=00_Af59dqFcTfPOice2wDUKHWEbDDg8_wP2CPKO-d4vKjwfYA&oe=6A0BEBBA" alt="Foto 22" />
+            <p>Imagen 22</p>
+          </div>
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/486710484_649392581175646_4450041231301355902_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_ohc=87S0BcyxPOMQ7kNvwHHomr9&_nc_oc=AdoglQ1zl41iNrxPERyqGeGie3TGyHmXpPMVw0Cihg9kYOMUieHxrHtWQ196vLct4mM&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=x2EWHjjl6Ws2EG8WsfRkiA&_nc_ss=7b2a8&oh=00_Af6ntSG4-KRwdbwBZnAlIIeg58S0nZXw6aFb-I_pQf11mA&oe=6A0BBCB1" alt="Foto 23" />
+            <p>Imagen 23</p>
+          </div>
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/486681168_649390857842485_5862854230573020058_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_ohc=LS2i98yxangQ7kNvwFuNWpH&_nc_oc=AdoUhOAPNyDpBkBHQkRfSL4xWiRXlySqqVk_5SjWqYjTXAtlyrOsPRPE0sA0v7Gafw0&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=BRW0oX1Epw6pHOy6N5joXw&_nc_ss=7b2a8&oh=00_Af4MozZNLzkGoNxTSBMBlgeEiqRt5KOVPRBeAWvywMGafw&oe=6A0BC9C2" alt="Foto 24" />
+            <p>Imagen 24</p>
+          </div>
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/486813402_649389924509245_5970487847110530436_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_ohc=NHqVBBkiHHgQ7kNvwFKV5RP&_nc_oc=Adp5Jttv0yfEOxoXG1bRYwowm9hT9qTFNepwGfIlkB6heVzLrSvTqJj_Kv5mzNl4xS0&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=gl7EJv4q7v6wscFwAQ-3jA&_nc_ss=7b2a8&oh=00_Af6RKDo5o0R6vvXC2JqbqSHbnjgXM9W3MLkXZ0vZI_qaAQ&oe=6A0BC8FF" alt="Foto 24" />
+            <p>Imagen 24</p>
+          </div>
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/487282747_649362894511948_4128860543789878253_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_ohc=rMEmF-WJZlYQ7kNvwFLvd25&_nc_oc=AdpMixgJCDLhvJdVhxNSLkHoClPPfdL9FRMi6gVX9EXsoQ-fGOndVddtAZf2OYFNFFQ&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=V_9VtwFrEQ3RCSkiLzzEhw&_nc_ss=7b2a8&oh=00_Af7pkfJmrMYqzJ2yWDRslhHI2JDpcoovh6tFjZxY6zTdBw&oe=6A0BC62D" alt="Foto 25" />
+            <p>Imagen 25</p>
+          </div>
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/486744306_649187914529446_656349559997653535_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=lfr7h255UvsQ7kNvwELh0iz&_nc_oc=Adou_AfXsG5_D_7pqvneyuLbNielfn8BgmpHL3QJwXPpTj2vmij82nfDiGcm7Bhd1wo&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=z34VNkVk-lSk-vP_QebZ1w&_nc_ss=7b2a8&oh=00_Af7JJ_0uq7bGVO8SDTKwiZl55XDxcPA10ZgvFE4d-Vr9GA&oe=6A0BC178" alt="Foto 26" />
+            <p>Imagen 26</p>
+          </div>
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/487356093_649181124530125_4028754581279990445_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_ohc=7nrU0bQZ6RcQ7kNvwFXGbYy&_nc_oc=AdopFFD9w2N09NCaMDPngvMQzLlcKU5PeLVYE3IP5IHmXhDRpLzh3I0NXPM14xe7jLk&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=uqm95MXlnq-A02ipgh9eiA&_nc_ss=7b2a8&oh=00_Af4Ts8Nu-PFMLNEPTdpo6TK29cpjSvGS7eM-zhBfN6n8_g&oe=6A0BD062" alt="Foto 27" />
+            <p>Imagen 27</p>
+          </div>
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/486991257_649181144530123_5261968063839021019_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_ohc=-wqPFaH3yfEQ7kNvwFlHvi5&_nc_oc=AdqSIMXTLl6hyLn8xBkujlrcRn_hvlqBkeaeuqjDjO126L4P_VWIbLaMvuhw5TmNZDc&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=eYxE0gQ6EE2q3ofcfIakzg&_nc_ss=7b2a8&oh=00_Af4mXKlCC0ERvBpHgv2YKsb2O9AU8SijL_Fjo71ok_aQfA&oe=6A0BD0D6" alt="Foto 28" />
+            <p>Imagen 28</p>
+          </div>
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/487114460_649181114530126_7774911651333171039_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_ohc=AaYQzGeH9YIQ7kNvwElursj&_nc_oc=AdpW9Ggh8_JETullfwu3-3En05m6CaGiewafSeWz5YhGK260IsqEdhDHMx-_MhXQBGI&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=pl8Z7yYygA5u6UqaK-0d8Q&_nc_ss=7b2a8&oh=00_Af43CWN7BxxvTEJRtb3jbI6yu_G9eIxpF0Ny3JCwnMa5Wg&oe=6A0BDC81" alt="Foto 29" />
+            <p>Imagen 29</p>
+          </div>
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/487307893_649176454530592_821641332811174564_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_ohc=_YLf6RNpQ-sQ7kNvwEflHTd&_nc_oc=AdpwHxgP4Q7bBnMia0_SQ5iWVVdiJh5L1e6X8GWDClKn7WWV8So5w0NADCCIUidsGMo&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=e2PbLxb90sWgrzdH0j4iNg&_nc_ss=7b2a8&oh=00_Af76O1p8KA61sdMOsNekAyrCFw0ucaJadQejBYbH5C_rkw&oe=6A0BDDD0" alt="Foto 30" />
+            <p>Imagen 30</p>
+          </div>
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/486323756_647969164651321_5697066110177180288_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=127cfc&_nc_ohc=3pyk9PuubT0Q7kNvwHG_SSJ&_nc_oc=Adov9n9dmE0xW88FC1nrVBCWij9ZVamOLP49z901xKdpv3eaagVIAl_kmh2xvaMS1_I&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=vYyzgOo6q9vu4DxOH0BDkA&_nc_ss=7b2a8&oh=00_Af7g3HWid5ZAjd3lHt7ReVe-mwbWr47QHI3_LXvgJByZKw&oe=6A0BE920" alt="Foto 31" />
+            <p>Imagen 31</p>
+          </div>
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/486769848_647958731319031_2469411551198462199_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_ohc=hZLcLxWcsqQQ7kNvwGRkmAc&_nc_oc=AdqvD7wasbfIA4xE3fUy6dWh_5ZXLEohwNRFauH5LZw2A83lmSaQO5FejCom1hHCmms&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=bh4FOkf3YS-zScwT7AC8qg&_nc_ss=7b2a8&oh=00_Af4_em2WHAGszlB-SDOlI5A_9aRcDm0tgs-d4EW7l3c6aA&oe=6A0BC2E4" alt="Foto 32" />
+            <p>Imagen 32</p>
+          </div>
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/486292872_646223744825863_4421349870764280159_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_ohc=13ks-JRocCQQ7kNvwFlmN6D&_nc_oc=AdoMWRMwR7wbibfJq2WS5qWi26-yGrkOVLh1WsEtHfpBUCfz4QQl3t9zi63ik673Qk8&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=_NQKBaDO9i9cvaQp9Tl8TQ&_nc_ss=7b2a8&oh=00_Af6-TaP2bRKXFOfB_HUtlK1R2Feuh9UAbMmZ9__SxFJ3nQ&oe=6A0BDC01" alt="Foto 33" />
+            <p>Imagen 33</p>
+          </div>
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/486447826_644242445023993_6731317280760175395_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_ohc=Cmp3n0peCyUQ7kNvwENRB-h&_nc_oc=AdpZ68rKWxlvynRDaw86DmJdhLwcees1LiYbsPHdHWfPbCmIU7Gw52f2RXbqoaY1OTc&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=NI4OkRkAUEYz-uuJFoNt0w&_nc_ss=7b2a8&oh=00_Af62rOTv1P0LzxJWSG0NCjwwBBsd984pieia2M7D-Ucazw&oe=6A0BE0B7" alt="Foto 34" />
+            <p>Imagen 34</p>
+          </div>
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/482058661_636097062505198_4832017152806764489_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_ohc=RZvm0mQfqC0Q7kNvwFrD6R7&_nc_oc=AdrZbUe7Oge0E2yOebjON0KkdxgGrjZOYJ6jc13oAwy55oBmeNte_t6tXh5n7YrAzFA&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=n8KIpwC4atqgvSxFQxaJkQ&_nc_ss=7b2a8&oh=00_Af47n8jmVX84xieBhwI_qJcr4TiOegfBnRsZH0OSucq4yw&oe=6A0BC0B7" alt="Foto 35" />
+            <p>Imagen 35</p>
+          </div>
+          <div class="card-galeria">
+            <img src="https://scontent.fcix2-1.fna.fbcdn.net/v/t39.30808-6/484483114_636096822505222_5861251664124144497_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_ohc=3WRM1oUZz3QQ7kNvwFPiGO5&_nc_oc=Adqyv_9mTDgrlN-8ljrxSBlDI4VC8Sesti3-sETfyMnb_zRhFZ6gkTMltCm6Nhkpoi8&_nc_zt=23&_nc_ht=scontent.fcix2-1.fna&_nc_gid=wpWmpwRSTu1EvQu3G0xhuQ&_nc_ss=7b2a8&oh=00_Af435kxxJaSgzprk_bjo2UUJ8AMlQ-GGJb1VxAItjW3R8A&oe=6A0BC0F8" alt="Foto 36" />
+            <p>Imagen 6</p>
+          </div>
+          <div class="card-galeria">
+            <img src="T1.jpeg" alt="Foto 6" />
+            <p>Imagen 6</p>
+          </div>
+        </div>
+      </section>
+      <section id="videos" class="seccion">
+        <h2>Videos promocionales</h2>
+      
+        <div class="videos-grid">
+          
+          <div class="card-video">
+            <video controls playsinline preload="metadata" poster="1V.jpeg">
+              <source src="FB_VID_4728383571924279652.mp4" type="video/mp4">
+            </video>
+            <p>Video promocional 1</p>
+          </div>
+      
+          <div class="card-video">
+            <video controls playsinline preload="metadata" poster="2V.jpeg">
+              <source src="V2.mp4" type="video/mp4">
+            </video>
+            <p>Video promocional 2</p>
+          </div>
+      
+          <div class="card-video">
+            <video controls playsinline preload="metadata" poster="3V.jpeg">
+              <source src="V3.mp4" type="video/mp4">
+            </video>
+            <p>Video promocional 3</p>
+          </div>
+          
+        </div>
+      </section>
+  <!-- PLATAFORMAS -->
+<section id="plataformas" class="seccion">
+  <h2 class="titulo-plataformas">Plataformas que utilizamos</h2>
+
+  <div class="plataformas-container">
+
+    <a href="https://lichess.org/team/academia-soubac-ajedrez" target="_blank" class="plataforma-card">
+      <img src="lichess.png" alt="Lichess">
+      <h3>Lichess.org</h3>
+      <p>Juega, analiza partidas y entrena totalmente gratis.</p>
+    </a>
+
+    <a href="https://zoom.us" target="_blank" class="plataforma-card">
+      <img src="zoom.jpg" alt="Zoom">
+      <h3>Zoom</h3>
+      <p>Realizamos clases virtuales en vivo para todo el Perú y el mundo.</p>
+    </a>
+
+  </div>
+</section>
+    </main>
+
+    <!-- WHATSAPP -->
+    <div class="whatsapp-container">
+      <div class="whatsapp-popup">
+        <div class="popup-header">
+          <span>WhatsApp</span>
+          <span>✕</span>
+        </div>
+    
+        <div class="popup-body">
+          <p>Le escribo desde la web, y requiero info.</p>
+        </div>
+    
+        <a
+          class="popup-btn"
+          href="https://api.whatsapp.com/send?phone=51973265025&text=Le%20escribo%20desde%20la%20web,%20y%20requiero%20info."
+          target="_blank"
+        >
+          Open chat
+        </a>
+      </div>
+    
+      <a
+        class="whatsapp-btn"
+        href="https://api.whatsapp.com/send?phone=51973265025&text=Le%20escribo%20desde%20la%20web,%20y%20requiero%20info."
+        target="_blank"
+      >
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+          alt="WhatsApp"
+        />
+      </a>
+    </div>
+    <!-- FACEBOOK -->
+<div class="facebook-container">
+  <a
+    class="facebook-btn"
+    href="https://www.facebook.com/academiasoubacajedrez/"
+    target="_blank"
+  >
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
+      alt="Facebook"
+    />
+  </a>
+
+  <div class="facebook-popup">
+    <div class="popup-header">
+      Facebook
+      <span>✕</span>
+    </div>
+
+    <div class="popup-body">
+      <p>Visita nuestra página oficial de Facebook 📘♟️</p>
+    </div>
+
+    <a href="https://www.facebook.com/academiasoubacajedrez/" target="_blank" class="popup-btn">
+      Ir a Facebook
+    </a>
+  </div>
+</div>
+<!-- INSTAGRAM -->
+<div class="instagram-container">
+  <a
+    class="instagram-btn"
+    href="https://www.instagram.com/academiasoubacajedrez?igsh=ZDFlN2NuZTZyMzYw&utm_source=qr"
+    target="_blank"
+  >
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+      alt="Instagram"
+    />
+  </a>
+
+  <div class="instagram-popup">
+    <div class="popup-header-instagram">
+      Instagram
+      <span>✕</span>
+    </div>
+
+    <div class="popup-body">
+      <p>
+        ¡Síguenos en Instagram! 📸<br />
+        Conoce nuestras clases, torneos y novedades de SOUBAC AJEDREZ ♟️
+      </p>
+    </div>
+
+    <a
+      href="https://www.instagram.com/academiasoubacajedrez?igsh=ZDFlN2NuZTZyMzYw&utm_source=qr"
+      target="_blank"
+      class="popup-btn-instagram"
+    >
+      Abrir Instagram
+    </a>
+  </div>
+</div>
+
+<!-- TIKTOK -->
+<div class="tiktok-container">
+  <a class="tiktok-btn" href="https://www.tiktok.com/@academia.soubac?is_from_webapp=1&sender_device=pc" target="_blank">
+    <img
+      src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png"
+      alt="TikTok"
+    />
+  </a>
+
+  <div class="tiktok-popup">
+    <div class="popup-header">
+      TikTok <span>✕</span>
+    </div>
+
+    <div class="popup-body">
+      <p>Mira nuestros videos en TikTok 🎥♟️</p>
+    </div>
+
+    <a href="https://www.tiktok.com/@academia.soubac?is_from_webapp=1&sender_device=pc" target="_blank" class="popup-btn">
+      Ir a TikTok
+    </a>
+  </div>
+</div>
+    <script src="script.js"></script>
+  </body>
+</html>
