@@ -974,84 +974,97 @@ header {
     opacity:1;
   }
 }
-/* PANTALLA DE CARGA */
+/* PROTECTOR DE CARGA */
 
 #pantalla-carga{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:white;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  z-index:999999;
-  transition:opacity 0.8s ease, visibility 0.8s;
+
+    position:fixed;
+    inset:0;
+
+    width:100vw;
+    height:100vh;
+
+    background:#ffffff;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    z-index:999999999;
+
+    transition:1s ease;
+
 }
 
+
+/* LOGO GIRANDO */
 
 #pantalla-carga img{
 
-  width:180px;
-  height:180px;
-  object-fit:contain;
+    width:220px;
+    height:220px;
 
-  animation:
-  girar 2s linear infinite;
+    object-fit:contain;
+
+    animation:giro 3s linear infinite;
 
 }
+
 
 
 #pantalla-carga h2{
 
-  margin-top:20px;
-  color:#8b0000;
-  font-size:30px;
+    margin-top:25px;
 
-}
+    font-size:35px;
 
-
-/* circulo de carga */
-
-.spinner{
-
- width:45px;
- height:45px;
-
- border:5px solid #ddd;
- border-top:5px solid #8b0000;
-
- border-radius:50%;
-
- margin-top:20px;
-
- animation:girar 1s linear infinite;
+    color:#8b0000;
 
 }
 
 
 
-@keyframes girar{
+/* circulo */
 
- from{
-  transform:rotate(0deg);
- }
+.cargando{
 
- to{
-  transform:rotate(360deg);
- }
+    width:55px;
+    height:55px;
+
+    border-radius:50%;
+
+    border:6px solid #ddd;
+
+    border-top-color:#8b0000;
+
+    margin-top:25px;
+
+    animation:giro 1s linear infinite;
+
+}
+
+
+
+@keyframes giro{
+
+    100%{
+
+        transform:rotate(360deg);
+
+    }
 
 }
 
 
 
-/* cuando desaparece */
+/* desaparecer */
 
-.ocultar-carga{
+#pantalla-carga.salir{
 
- opacity:0;
- visibility:hidden;
+    opacity:0;
+
+    visibility:hidden;
 
 }
+
