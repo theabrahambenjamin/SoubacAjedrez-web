@@ -14,14 +14,15 @@
 <meta name="google-site-verification" content="xU4LgSzYR88NxEy46ztZ1Nf-j2V60B0MEA2219jidS0">  </head>
 
   <body>
-    <div id="pantalla-carga">
+   <div id="pantalla-carga">
 
-  <img src="favicon.png" alt="Logo">
+    <img src="favicon.png" alt="Logo">
 
-  <h2>Cargando...</h2>
+    <h2>Cargando...</h2>
 
-  <div class="spinner"></div>
+    <div class="cargando"></div>
 
+</div>
 </div>
     <header>
       <div class="logo-container">
@@ -399,18 +400,20 @@ function cerrarImagen(){
   document.getElementById("visor").style.display="none";
   document.body.style.overflow="auto";
 }
-</script><div id="visor">
-  <span onclick="cerrarImagen()">✕</span>
-  <img id="imagenGrande">
-</div>
 <script>
 
-window.addEventListener("load",function(){
+window.onload=function(){
 
- document.getElementById("pantalla-carga")
- .classList.add("ocultar-carga");
+    setTimeout(()=>{
 
-});
+    document
+    .getElementById("pantalla-carga")
+    .classList.add("salir");
+
+
+    },800);
+
+}
 
 </script>
 </body>
