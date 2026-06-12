@@ -14,6 +14,15 @@
 <meta name="google-site-verification" content="xU4LgSzYR88NxEy46ztZ1Nf-j2V60B0MEA2219jidS0">  </head>
 
   <body>
+    <div id="pantalla-carga">
+
+  <img src="favicon.png" alt="Logo">
+
+  <h2>Cargando...</h2>
+
+  <div class="spinner"></div>
+
+</div>
     <header>
       <div class="logo-container">
         <img src="soubac.png" alt="Logo Academia" class="logo" />
@@ -394,5 +403,15 @@ function cerrarImagen(){
   <span onclick="cerrarImagen()">✕</span>
   <img id="imagenGrande">
 </div>
+<script>
 
-</body></html>
+window.addEventListener("load",function(){
+
+ document.getElementById("pantalla-carga")
+ .classList.add("ocultar-carga");
+
+});
+
+</script>
+</body>
+</html>
