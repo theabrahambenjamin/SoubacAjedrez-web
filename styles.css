@@ -91,8 +91,8 @@ h3 {
   color: black;
 }
 /* ================= BOTONES INFO PRO ================= */
-/* ================= BOTONES SOLO INFORMACION ================= */
-#informacion .botones-info {
+/* ================= BOTONES SOLO lIBROS ================= */
+#libros .botones-info {
   display: grid;
   grid-template-columns: repeat(3, minmax(250px, 1fr));
   gap: 22px;
@@ -101,7 +101,7 @@ h3 {
   padding: 10px;
 }
 
-#informacion .botones-info a {
+#libros .botones-info a {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -128,7 +128,7 @@ h3 {
   font-weight: 800;
 }
 
-#informacion .botones-info a::before {
+#libros .botones-info a::before {
   content: "";
   position: absolute;
   top: 0;
@@ -139,38 +139,38 @@ h3 {
 }
 
 /* Iconos diferentes para cada botón */
-#informacion .botones-info a:nth-child(1)::after {
+#libros .botones-info a:nth-child(1)::after {
   content: "♜"; /* torre */
 }
 
-#informacion .botones-info a:nth-child(2)::after {
+#libros .botones-info a:nth-child(2)::after {
   content: "♝"; /* alfil */
 }
 
-#informacion .botones-info a:nth-child(3)::after {
+#libros .botones-info a:nth-child(3)::after {
   content: "♛"; /* dama */
 }
 
-#informacion .botones-info a:nth-child(4)::after {
+#libros .botones-info a:nth-child(4)::after {
   content: "♚"; /* rey */
 }
 
-#informacion .botones-info a:nth-child(5)::after {
+#libros .botones-info a:nth-child(5)::after {
   content: "♞"; /* caballo */
 }
 
-#informacion .botones-info a:nth-child(6)::after {
+#libros .botones-info a:nth-child(6)::after {
   content: "♟"; /* peón */
 }
 
-#informacion .botones-info a span {
+#libros .botones-info a span {
   margin-top: 10px;
   font-size: 14px;
   font-weight: 500;
   color: #c8e6ff;
 }
 
-#informacion .botones-info a strong {
+#libros .botones-info a strong {
   margin-top: 18px;
   display: inline-block;
   background: rgba(0, 132, 255, 0.15);
@@ -182,25 +182,25 @@ h3 {
   transition: 0.3s;
 }
 
-#informacion .botones-info a:hover {
+#libros .botones-info a:hover {
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45), 0 0 20px rgba(0, 174, 255, 0.18);
 }
 
-#informacion .botones-info a:hover strong {
+#libros .botones-info a:hover strong {
   background: #008cff;
   color: white;
 }
 
-/* responsive solo informacion */
+/* responsive solo libros */
 @media (max-width: 900px) {
-  #informacion .botones-info {
+  #libros .botones-info {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 600px) {
-  #informacion .botones-info {
+  #libros .botones-info {
     grid-template-columns: 1fr;
   }
 }
