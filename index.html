@@ -342,13 +342,23 @@
 
 <script>
 function abrirImagen(src){
-  document.getElementById("visor").style.display="flex";
-  document.getElementById("imagenGrande").src=src;
+  const visor = document.getElementById("visor");
+  const img = document.getElementById("imagenGrande");
+
+  img.src = src;
+  visor.style.display = "flex";
+
+  document.body.style.overflow="hidden";
 }
+
 
 function cerrarImagen(){
   document.getElementById("visor").style.display="none";
+  document.body.style.overflow="auto";
 }
-</script>
-  </body>
-</html>
+</script><div id="visor">
+  <span onclick="cerrarImagen()">✕</span>
+  <img id="imagenGrande">
+</div>
+
+</body></html>
