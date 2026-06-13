@@ -599,11 +599,11 @@ header {
   }
 }
 /* WHATSAPP */
-.whatsapp-container {
+.whatsapp-container{
   position: fixed;
   right: 20px;
   bottom: 70px;
-  z-index: 999;
+  z-index: 100;
 }
 /* PLATAFORMAS */
 .titulo-plataformas {
@@ -1046,24 +1046,17 @@ header {
 /* VISOR DE IMAGEN GRANDE */
 
 #visor{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100vw;
+  height:100vh;
+  background:rgba(0,0,0,0.95);
+  justify-content:center;
+  align-items:center;
 
-display:none;
-
-position:fixed;
-
-top:0;
-left:0;
-
-width:100vw;
-height:100vh;
-
-background:rgba(0,0,0,0.95);
-
-justify-content:center;
-align-items:center;
-
-z-index:9999999;
-
+  z-index: 99999999; /* importante */
 }
 
 
