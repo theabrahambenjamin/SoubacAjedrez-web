@@ -264,7 +264,13 @@ header {
   font-weight:bold;
   box-shadow:0 8px 25px rgba(0,0,0,.35);
 }
-
+#libros .botones-info a::after{
+    position:absolute;
+    right:20px;
+    top:18px;
+    font-size:38px;
+    color:rgba(255,255,255,.15);
+}
 #libros .botones-info a span{
   margin-top:10px;
   font-size:14px;
@@ -275,7 +281,35 @@ header {
   margin-top:18px;
   color:#6fd3ff;
 }
+/* Aperturas */
+#libros .botones-info a:nth-child(1)::after{
+    content:"♜";
+}
 
+/* Temas tácticos */
+#libros .botones-info a:nth-child(2)::after{
+    content:"♞";
+}
+
+/* Defensas */
+#libros .botones-info a:nth-child(3)::after{
+    content:"♝";
+}
+
+/* Historia */
+#libros .botones-info a:nth-child(4)::after{
+    content:"♚";
+}
+
+/* Gambitos */
+#libros .botones-info a:nth-child(5)::after{
+    content:"♛";
+}
+
+/* Principiantes */
+#libros .botones-info a:nth-child(6)::after{
+    content:"♟";
+}
 /* ARREGLO HISTORIA */
 .historia-container{
   display:flex;
