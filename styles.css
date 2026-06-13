@@ -46,6 +46,102 @@ h3 {
   color: #8b0000;
   font-weight: bold;
 }
+/* BOTÓN MENU DERECHA */
+
+.menu{
+
+    position:absolute;
+
+    top:25px;
+
+    right:35px;
+
+    z-index:1000;
+
+}
+
+
+.boton-menu{
+
+    background:rgba(255,255,255,0.15);
+
+    color:white;
+
+    border:none;
+
+    padding:12px 25px;
+
+    border-radius:15px;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+
+/* OPCIONES QUE SALEN */
+
+.opciones-menu{
+
+    display:none;
+
+    position:absolute;
+
+    right:0;
+
+    top:55px;
+
+    background:#990101;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    gap:10px;
+
+    flex-direction:row;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.4);
+
+}
+
+
+.opciones-menu a{
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:12px 18px;
+
+    background:rgba(255,255,255,.15);
+
+    border-radius:12px;
+
+    white-space:nowrap;
+
+}
+
+
+.opciones-menu a:hover{
+
+    background:white;
+
+    color:#990101;
+
+}
+
+
+/* ABRIR */
+
+.opciones-menu.mostrar{
+
+    display:flex;
+
+}
 /* UBICACIONES */
 .ubicaciones {
   margin-top: 50px;
