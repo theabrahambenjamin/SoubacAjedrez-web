@@ -408,11 +408,14 @@ onclick="abrirImagen(this.src)">
           alt="WhatsApp"
         />
       </a>
-    </div>
-    <script src="script.js"></script>
-    <div id="visor">
+  <script src="script.js"></script>
 
-  <span onclick="cerrarImagen()">✕</span>
+
+<!-- VISOR DE IMAGEN -->
+
+<div id="visor">
+
+  <span id="cerrar">✕</span>
 
   <img id="imagenGrande">
 
@@ -420,20 +423,41 @@ onclick="abrirImagen(this.src)">
 
 
 <script>
+
 function abrirImagen(src){
 
-const visor = document.getElementById("visor");
+  const visor = document.getElementById("visor");
+  const img = document.getElementById("imagenGrande");
 
-const img = document.getElementById("imagenGrande");
+  img.src = src;
 
+  visor.style.display = "flex";
 
-img.src = src;
-
-visor.style.display="flex";
-
-document.body.style.overflow="hidden";
+  document.body.style.overflow = "hidden";
 
 }
+
+
+
+function cerrarImagen(){
+
+  const visor = document.getElementById("visor");
+
+  visor.style.display = "none";
+
+  document.body.style.overflow = "auto";
+
+}
+
+
+
+document.getElementById("cerrar").onclick = function(){
+
+  cerrarImagen();
+
+};
+
+
 </script>
 <script>
 
