@@ -403,17 +403,13 @@ function cerrarImagen(){
 
 <script>
 
-window.addEventListener("load", function(){
+setTimeout(function(){
 
-    setTimeout(function(){
+    document
+    .getElementById("pantalla-carga")
+    .classList.add("salir");
 
-        document
-        .getElementById("pantalla-carga")
-        .classList.add("salir");
-
-    },2200);
-
-});
+},800);
 
 </script>
 </body>
