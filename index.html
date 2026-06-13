@@ -400,20 +400,20 @@ function cerrarImagen(){
   document.getElementById("visor").style.display="none";
   document.body.style.overflow="auto";
 }
+
 <script>
 
-window.onload=function(){
+window.addEventListener("load", function(){
 
-    setTimeout(()=>{
+    setTimeout(function(){
 
-    document
-    .getElementById("pantalla-carga")
-    .classList.add("salir");
+        document
+        .getElementById("pantalla-carga")
+        .classList.add("salir");
 
+    },2200);
 
-    },800);
-
-}
+});
 
 </script>
 </body>
