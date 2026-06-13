@@ -412,8 +412,8 @@ onclick="abrirImagen(this.src)">
 </section>
     </main>
 
-    <!-- WHATSAPP -->
- <div class="whatsapp-container">
+ <!-- WHATSAPP -->
+<div class="whatsapp-container">
 
   <a class="whatsapp-btn"
      href="https://api.whatsapp.com/send?phone=51973265025&text=Le%20escribo%20desde%20la%20web,%20y%20requiero%20info."
@@ -436,63 +436,44 @@ onclick="abrirImagen(this.src)">
       Open chat
     </a>
   </div>
-<!-- VISOR IMAGEN -->
-
-<div id="visor">
-
-<button id="cerrar" onclick="cerrarImagen()">✕</button>
-
-    <img id="imagenGrande">
 
 </div>
 
 
+<!-- VISOR IMAGEN -->
+<div id="visor">
+  <button id="cerrar" onclick="cerrarImagen()">✕</button>
+  <img id="imagenGrande">
+</div>
+
+
 <script>
+
 function abrirImagen(src){
-
-    document.getElementById("imagenGrande").src = src;
-    document.getElementById("visor").style.display = "flex";
-
-    // Ocultar botón de WhatsApp
-    document.querySelector(".whatsapp-container").style.display = "none";
+  document.getElementById("imagenGrande").src = src;
+  document.getElementById("visor").style.display = "flex";
+  document.body.style.overflow = "hidden";
 }
-
 
 function cerrarImagen(){
-  document.getElementById("visor").style.display="none";
-  document.body.style.overflow="auto";
+  document.getElementById("visor").style.display = "none";
+  document.body.style.overflow = "auto";
 }
-</script>
-<script>
 
 function abrirMenu(){
-
-document
-.getElementById("opcionesMenu")
-.classList.toggle("mostrar");
-
+  document.getElementById("opcionesMenu").classList.toggle("mostrar");
 }
-
-
 
 function mostrar(seccion){
+  document.querySelectorAll(".seccion")
+  .forEach(s => s.classList.remove("activa"));
 
-// cambiar sección
-document.querySelectorAll(".seccion")
-.forEach(s => s.classList.remove("activa"));
+  document.getElementById(seccion).classList.add("activa");
 
-
-document
-.getElementById(seccion)
-.classList.add("activa");
-
-
-// cerrar menú automáticamente
-document
-.getElementById("opcionesMenu")
-.classList.remove("mostrar");
-
+  document.getElementById("opcionesMenu").classList.remove("mostrar");
 }
+
 </script>
+
 </body>
 </html>
