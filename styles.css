@@ -720,6 +720,22 @@ header {
   50%{ transform:translateX(6px); }
   100%{ transform:translateX(0); }
 }
+.send-icon svg{
+  width:18px;
+  height:18px;
+  fill:none;
+  stroke:white;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  animation:enviar 1.4s ease-in-out infinite;
+}
+
+@keyframes enviar{
+  0%{ transform:translateX(0) rotate(0); opacity:.8; }
+  50%{ transform:translateX(5px) rotate(8deg); opacity:1; }
+  100%{ transform:translateX(0) rotate(0); opacity:.8; }
+}
 /* ================= VISOR DE IMÁGENES ================= */
 
 #visor{
