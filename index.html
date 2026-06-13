@@ -72,28 +72,27 @@ document.addEventListener("DOMContentLoaded", function(){
 
      <nav class="menu">
 
-    <button class="boton-menu" onclick="abrirMenu()">
-        ☰ Menú
-    </button>
+    <div class="menu">
 
+<button class="boton-menu" onclick="abrirMenu()">
+☰ Menú
+</button>
 
-    <div class="opciones-menu" id="opcionesMenu">
+<div class="opciones-menu" id="opcionesMenu">
 
-        <a href="#inicio">⌂ Inicio</a>
+<a onclick="mostrar('inicio')">⌂ Inicio</a>
 
-        <a href="#libros">▣ Libros</a>
+<a onclick="mostrar('libros')">♟ Libros</a>
 
-        <a href="#historia">▣ Historia</a>
+<a onclick="mostrar('historia')">♜ Historia</a>
 
-        <a href="#fotos">▣ Fotos</a>
+<a onclick="mostrar('fotos')">🖼 Fotos</a>
 
-        <a href="#plataformas">▣ Plataformas</a>
+<a onclick="mostrar('plataformas')">▣ Plataformas</a>
 
-        <a href="#redes">● Redes Sociales</a>
+<a onclick="mostrar('redes')">● Redes Sociales</a>
 
-    </div>
-
-
+</div>
 </nav>
     </header>
 
@@ -426,21 +425,18 @@ function abrirImagen(src){
 }
 
 
-function cerrarImagen(){
-  document.getElementById("visor").style.display="none";
-  document.body.style.overflow="auto";
-}
-</script>
-    <script>
+function mostrar(seccion){
 
-function abrirMenu(){
+document.querySelectorAll(".seccion")
+.forEach(s => s.classList.remove("activa"));
+
 
 document
-.getElementById("opcionesMenu")
-.classList.toggle("mostrar");
+.getElementById(seccion)
+.classList.add("activa");
+
 
 }
-
 </script>
 </body>
 </html>
