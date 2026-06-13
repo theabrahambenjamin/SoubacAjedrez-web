@@ -440,7 +440,7 @@ onclick="abrirImagen(this.src)">
 
 <div id="visor">
 
-    <button id="cerrar">✕</button>
+<button id="cerrar" onclick="cerrarImagen()">✕</button>
 
     <img id="imagenGrande">
 
@@ -459,15 +459,9 @@ function abrirImagen(src){
 
 
 function cerrarImagen(){
-
-    // Cerrar visor
-    document.getElementById("visor").style.display = "none";
-
-    // Volver a mostrar WhatsApp
-    document.querySelector(".whatsapp-container").style.display = "block";
-
+  document.getElementById("visor").style.display="none";
+  document.body.style.overflow="auto";
 }
-
 </script>
 <script>
 
