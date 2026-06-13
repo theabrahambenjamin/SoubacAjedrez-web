@@ -720,21 +720,38 @@ header {
   50%{ transform:translateX(6px); }
   100%{ transform:translateX(0); }
 }
+.send-icon{
+  display:flex;
+  align-items:center;
+}
+
 .send-icon svg{
-  width:18px;
-  height:18px;
+  width:26px;
+  height:26px;
+
   fill:none;
   stroke:white;
-  stroke-width:2;
+  stroke-width:2.3;
   stroke-linecap:round;
   stroke-linejoin:round;
-  animation:enviar 1.4s ease-in-out infinite;
+
+  animation:enviar 1.5s ease-in-out infinite;
 }
 
 @keyframes enviar{
-  0%{ transform:translateX(0) rotate(0); opacity:.8; }
-  50%{ transform:translateX(5px) rotate(8deg); opacity:1; }
-  100%{ transform:translateX(0) rotate(0); opacity:.8; }
+
+  0%{
+    transform:translateX(0) rotate(0deg);
+  }
+
+  50%{
+    transform:translateX(8px) rotate(10deg);
+  }
+
+  100%{
+    transform:translateX(0) rotate(0deg);
+  }
+
 }
 /* ================= VISOR DE IMÁGENES ================= */
 
