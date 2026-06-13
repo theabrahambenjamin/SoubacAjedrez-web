@@ -1066,5 +1066,7 @@ header {
 
     visibility:hidden;
 
+    transition:0.5s;
+
 }
 
