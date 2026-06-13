@@ -40,6 +40,30 @@
     <div class="cargando"></div>
 
 </div>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    setTimeout(function(){
+
+        const carga = document.getElementById("pantalla-carga");
+
+        carga.style.opacity = "0";
+
+        setTimeout(function(){
+
+            carga.style.display = "none";
+
+        },300);
+
+
+    },500);
+
+});
+
+</script>
     <header>
       <div class="logo-container">
         <img src="soubac.png" alt="Logo Academia" class="logo" />
@@ -434,17 +458,6 @@ function cerrarImagen(){
   document.getElementById("visor").style.display="none";
   document.body.style.overflow="auto";
 }
-</script>
-<script>
-
-setTimeout(function(){
-
-    document
-    .getElementById("pantalla-carga")
-    .classList.add("salir");
-
-},700);
-
 </script>
 </body>
 </html>
