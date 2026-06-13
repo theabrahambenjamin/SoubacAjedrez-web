@@ -242,50 +242,100 @@ header {
   font-weight: bold;
   color: black;
 }
-/* ARREGLO LIBROS */
+
+/* ===== LIBROS PROFESIONAL ===== */
 
 #libros .botones-info{
-  grid-template-columns:repeat(3, minmax(300px, 1fr));
-  gap:28px;
-  max-width:1100px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:30px;
+    max-width:1150px;
+    margin:50px auto;
 }
-
 
 #libros .botones-info a{
-  min-height:155px;
-  padding:26px;
-  border-radius:22px;
-  background:linear-gradient(135deg,#061a33,#083b68);
-  box-shadow:0 12px 30px rgba(0,0,0,.38);
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+    min-height:180px;
+    padding:28px;
+
+    text-decoration:none;
+
+    background:linear-gradient(135deg,#061f3f,#0b4b77);
+    border-radius:25px;
+
+    box-shadow:
+    0 12px 30px rgba(0,0,0,.35);
+
+    overflow:hidden;
+
+    transition:.35s;
 }
+
 #libros .botones-info a:hover{
-  transform:translateY(-10px) scale(1.02);
-  box-shadow:0 18px 40px rgba(0,0,0,.5);
+    transform:translateY(-8px);
+    box-shadow:
+    0 18px 40px rgba(0,0,0,.45);
 }
+
 #libros .botones-info a::after{
-  font-size:55px;
-  color:#d4af37;
-  opacity:.20;
+    position:absolute;
+    top:18px;
+    right:25px;
+
+    font-size:58px;
+
+    color:#d4af37;
+
+    opacity:.18;
+}
+
+/* PIEZAS */
+
+#libros .botones-info a:nth-child(1)::after{
+    content:"♜";
+}
+
+#libros .botones-info a:nth-child(2)::after{
+    content:"♞";
+}
+
+#libros .botones-info a:nth-child(3)::after{
+    content:"♝";
+}
+
+#libros .botones-info a:nth-child(4)::after{
+    content:"♚";
+}
+
+#libros .botones-info a:nth-child(5)::after{
+    content:"♛";
+}
+
+#libros .botones-info a:nth-child(6)::after{
+    content:"♟";
+}
+
+#libros .botones-info a{
+    font-size:34px;
+    font-weight:800;
+    color:white;
 }
 
 #libros .botones-info a span{
-  margin-top:10px;
-  font-size:14px;
-  color:#c8e6ff;
+    margin-top:12px;
+    font-size:17px;
+    color:#dceeff;
 }
 
 #libros .botones-info a strong{
-  font-size:23px;
-  color:#5fd3ff;
+    margin-top:20px;
+    font-size:18px;
+    color:#5fd3ff;
 }
-
-
-#libros .botones-info a:nth-child(1)::after{content:"♜";}
-#libros .botones-info a:nth-child(2)::after{content:"♞";}
-#libros .botones-info a:nth-child(3)::after{content:"♝";}
-#libros .botones-info a:nth-child(4)::after{content:"♚";}
-#libros .botones-info a:nth-child(5)::after{content:"♛";}
-#libros .botones-info a:nth-child(6)::after{content:"♟";}
 /* ARREGLO HISTORIA */
 .historia-container{
   display:flex;
