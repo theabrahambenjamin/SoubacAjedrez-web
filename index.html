@@ -458,27 +458,23 @@ onclick="abrirImagen(this.src)">
 
 
 <script>
-
 function abrirImagen(src){
 
-    const visor = document.getElementById("visor");
-    const imagen = document.getElementById("imagenGrande");
+    document.getElementById("imagenGrande").src = src;
+    document.getElementById("visor").style.display = "flex";
 
-    imagen.src = src;
-
-    visor.style.display = "flex";
-
-    document.body.style.overflow="hidden";
-
+    // Ocultar botón de WhatsApp
+    document.querySelector(".whatsapp-container").style.display = "none";
 }
 
 
+function cerrarImagen(){
 
-document.getElementById("cerrar").onclick = function(){
+    // Cerrar visor
+    document.getElementById("visor").style.display = "none";
 
-    document.getElementById("visor").style.display="none";
-
-    document.body.style.overflow="auto";
+    // Volver a mostrar WhatsApp
+    document.querySelector(".whatsapp-container").style.display = "block";
 
 }
 
