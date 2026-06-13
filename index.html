@@ -462,6 +462,7 @@ document
 
 function mostrar(seccion){
 
+// cambiar sección
 document.querySelectorAll(".seccion")
 .forEach(s => s.classList.remove("activa"));
 
@@ -470,6 +471,11 @@ document
 .getElementById(seccion)
 .classList.add("activa");
 
+
+// cerrar menú automáticamente
+document
+.getElementById("opcionesMenu")
+.classList.remove("mostrar");
 
 }
 </script>
