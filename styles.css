@@ -1038,12 +1038,20 @@ header {
 
     margin-top:25px;
 
-    animation:giro 1s linear infinite;
+    animation:girar 1s linear infinite;
 
 }
 
-}
 
+@keyframes girar{
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
 
 
 /* desaparecer */
@@ -1051,9 +1059,11 @@ header {
 #pantalla-carga.salir{
 
     opacity:0;
+
     visibility:hidden;
+
     pointer-events:none;
 
+    transition:0.4s;
 
 }
-
