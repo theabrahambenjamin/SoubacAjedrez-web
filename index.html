@@ -411,13 +411,13 @@ onclick="abrirImagen(this.src)">
   <script src="script.js"></script>
 
 
-<!-- VISOR DE IMAGEN -->
+<!-- VISOR IMAGEN -->
 
 <div id="visor">
 
-  <span id="cerrar">✕</span>
+    <button id="cerrar">✕</button>
 
-  <img id="imagenGrande">
+    <img id="imagenGrande">
 
 </div>
 
@@ -426,26 +426,14 @@ onclick="abrirImagen(this.src)">
 
 function abrirImagen(src){
 
-  const visor = document.getElementById("visor");
-  const img = document.getElementById("imagenGrande");
+    const visor = document.getElementById("visor");
+    const imagen = document.getElementById("imagenGrande");
 
-  img.src = src;
+    imagen.src = src;
 
-  visor.style.display = "flex";
+    visor.style.display = "flex";
 
-  document.body.style.overflow = "hidden";
-
-}
-
-
-
-function cerrarImagen(){
-
-  const visor = document.getElementById("visor");
-
-  visor.style.display = "none";
-
-  document.body.style.overflow = "auto";
+    document.body.style.overflow="hidden";
 
 }
 
@@ -453,10 +441,11 @@ function cerrarImagen(){
 
 document.getElementById("cerrar").onclick = function(){
 
-  cerrarImagen();
+    document.getElementById("visor").style.display="none";
 
-};
+    document.body.style.overflow="auto";
 
+}
 
 </script>
 <script>
