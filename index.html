@@ -70,13 +70,12 @@ document.addEventListener("DOMContentLoaded", function(){
         <h1>ACADEMIA SOUBAC AJEDREZ</h1>
       </div>
 
-     <nav class="menu">
-
-    <div class="menu">
+    <nav class="menu">
 
 <button class="boton-menu" onclick="abrirMenu()">
 ☰ Menú
 </button>
+
 
 <div class="opciones-menu" id="opcionesMenu">
 
@@ -93,6 +92,7 @@ document.addEventListener("DOMContentLoaded", function(){
 <a onclick="mostrar('redes')">● Redes Sociales</a>
 
 </div>
+
 </nav>
     </header>
 
@@ -149,7 +149,6 @@ document.addEventListener("DOMContentLoaded", function(){
       </section>
 
       <!-- Libros -->
-      <div class="botones-info">
         <section id="libros" class="seccion">
           <center>
             <h2>Libros totalmente gratis para que puedas DESCARGAR</h2>
@@ -423,6 +422,17 @@ function abrirImagen(src){
 
   document.body.style.overflow="hidden";
 }
+</script>
+<script>
+
+function abrirMenu(){
+
+document
+.getElementById("opcionesMenu")
+.classList.toggle("mostrar");
+
+}
+
 
 
 function mostrar(seccion){
