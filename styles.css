@@ -703,7 +703,23 @@ header {
   border-radius:15px;
 }
 
+.popup-btn{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+}
 
+.chat-icon{
+  font-size:18px;
+  animation:moverIcono 1s infinite ease-in-out;
+}
+
+@keyframes moverIcono{
+  0%{ transform:translateX(0); }
+  50%{ transform:translateX(6px); }
+  100%{ transform:translateX(0); }
+}
 /* ================= VISOR DE IMÁGENES ================= */
 
 #visor{
