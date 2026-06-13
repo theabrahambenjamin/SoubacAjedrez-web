@@ -242,6 +242,83 @@ header {
   font-weight: bold;
   color: black;
 }
+/* ARREGLO LIBROS */
+#libros .botones-info{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+  max-width:1000px;
+  margin:40px auto;
+}
+
+#libros .botones-info a{
+  display:flex;
+  flex-direction:column;
+  text-decoration:none;
+  min-height:140px;
+  padding:22px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#071937,#052d5a);
+  color:white;
+  font-size:22px;
+  font-weight:bold;
+  box-shadow:0 8px 25px rgba(0,0,0,.35);
+}
+
+#libros .botones-info a span{
+  margin-top:10px;
+  font-size:14px;
+  color:#c8e6ff;
+}
+
+#libros .botones-info a strong{
+  margin-top:18px;
+  color:#6fd3ff;
+}
+
+/* ARREGLO HISTORIA */
+.historia-container{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:50px;
+  flex-wrap:wrap;
+}
+
+.historia-imagen img{
+  width:420px;
+  max-width:100%;
+  height:500px;
+  object-fit:cover;
+  border-radius:30px;
+}
+
+.historia-texto{
+  max-width:750px;
+  background:rgba(255,255,255,.9);
+  padding:35px;
+  border-radius:25px;
+}
+
+.historia-texto h2,
+.historia-texto p{
+  color:black;
+}
+
+.historia-texto p{
+  font-size:20px;
+  line-height:1.7;
+  text-align:justify;
+}
+
+.fundador{
+  background:white;
+  color:black;
+  padding:12px;
+  border-radius:15px;
+  text-align:center;
+  font-weight:bold;
+}
 
 /* GALERÍA */
 
