@@ -384,7 +384,55 @@ header {
 .red-card p{
   color:black;
 }
+/* ARREGLO PLATAFORMAS */
 
+.titulo-plataformas{
+  text-align:center;
+  font-size:40px;
+  color:#8b0000;
+  margin-bottom:35px;
+}
+
+.plataformas-container{
+  display:flex;
+  justify-content:center;
+  gap:35px;
+  flex-wrap:wrap;
+}
+
+.plataforma-card{
+  width:360px;
+  background:rgba(255,255,255,.93);
+  border-radius:25px;
+  padding:25px;
+  text-align:center;
+  text-decoration:none;
+  box-shadow:0 10px 28px rgba(0,0,0,.25);
+  transition:.3s;
+}
+
+.plataforma-card:hover{
+  transform:translateY(-8px);
+}
+
+.plataforma-card img{
+  width:280px;
+  height:220px;
+  object-fit:contain;
+  margin:0 auto 20px;
+}
+
+.plataforma-card h3{
+  font-size:28px;
+  color:black;
+  margin-bottom:12px;
+}
+
+.plataforma-card p{
+  font-size:18px;
+  color:#333;
+  line-height:1.6;
+}
 
 /* ================= WHATSAPP ================= */
 
