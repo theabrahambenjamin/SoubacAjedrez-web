@@ -550,6 +550,13 @@ header {
   color:#333;
   line-height:1.6;
 }
+.plataforma-card:nth-child(1){
+    border-top:7px solid #d4af37; /* Lichess */
+}
+
+.plataforma-card:nth-child(2){
+    border-top:7px solid #2d8cff; /* Zoom */
+}
 
 /* ================= WHATSAPP ================= */
 
