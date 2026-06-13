@@ -557,7 +557,68 @@ header {
 .plataforma-card:nth-child(2){
     border-top:7px solid #2d8cff; /* Zoom */
 }
+/* ===== REDES SOCIALES PRO ===== */
 
+.titulo-redes{
+  text-align:center;
+  font-size:42px;
+  color:#8b0000;
+  margin-bottom:45px;
+}
+
+.redes-container{
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  flex-wrap:wrap;
+}
+
+.red-card{
+  width:330px;
+  background:rgba(255,255,255,.95);
+  border-radius:28px;
+  padding:35px 25px;
+  text-align:center;
+  text-decoration:none;
+  box-shadow:0 12px 30px rgba(0,0,0,.22);
+  transition:.35s;
+  overflow:hidden;
+}
+
+.red-card:hover{
+  transform:translateY(-10px);
+}
+
+.red-card img{
+  width:90px !important;
+  height:90px !important;
+  object-fit:contain;
+  margin:0 auto 25px;
+}
+
+.red-card h3{
+  font-size:30px;
+  color:black;
+  margin-bottom:12px;
+}
+
+.red-card p{
+  font-size:18px;
+  color:#444;
+  line-height:1.6;
+}
+
+.instagram{
+  border-top:7px solid #e1306c;
+}
+
+.facebook{
+  border-top:7px solid #1877f2;
+}
+
+.tiktok{
+  border-top:7px solid #000;
+}
 /* ================= WHATSAPP ================= */
 
 .whatsapp-container{
