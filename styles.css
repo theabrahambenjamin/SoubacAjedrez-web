@@ -252,7 +252,7 @@ header {
 }
 
 #libros .botones-info a{
-  position:relative; /* IMPORTANTE */
+  position:relative;
   display:flex;
   flex-direction:column;
   text-decoration:none;
@@ -291,6 +291,8 @@ header {
 #libros .botones-info a strong{
   margin-top:18px;
   color:#6fd3ff;
+}
+
 #libros .botones-info a:nth-child(1)::after{content:"♜";}
 #libros .botones-info a:nth-child(2)::after{content:"♞";}
 #libros .botones-info a:nth-child(3)::after{content:"♝";}
