@@ -1075,3 +1075,102 @@ cursor:pointer;
   color:white;
   transform:scale(1.1);
 }
+#visorProducto{
+
+    display:none;
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100vw;
+    height:100vh;
+
+    background:rgba(0,0,0,.92);
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:999999;
+
+}
+
+#imagenProductoGrande{
+
+    max-width:90vw;
+    max-height:90vh;
+
+    border-radius:20px;
+
+    animation:zoomProducto .3s ease;
+
+}
+
+#visorProducto span{
+
+    position:absolute;
+
+    top:40px;
+    right:40px;
+
+    width:50px;
+    height:50px;
+
+    border-radius:50%;
+
+    background:#990101;
+
+    color:white;
+
+    font-size:28px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+#visorProducto span:hover{
+
+    transform:scale(1.1);
+
+    background:#c00000;
+
+}
+
+.img-producto{
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.img-producto:hover{
+
+    transform:scale(1.03);
+
+}
+
+@keyframes zoomProducto{
+
+    from{
+
+        transform:scale(.7);
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:scale(1);
+        opacity:1;
+
+    }
+
+}
