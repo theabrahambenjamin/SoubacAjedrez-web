@@ -478,37 +478,12 @@ Agregar al carrito
 
  <!-- WHATSAPP -->
 <div class="whatsapp-container">
-
   <a class="whatsapp-btn"
      href="https://api.whatsapp.com/send?phone=51973265025&text=Le%20escribo%20desde%20la%20web,%20y%20requiero%20info."
      target="_blank">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
   </a>
-
-  <div class="whatsapp-popup">
-    <div class="popup-header">
-      <span>WhatsApp</span>
-    </div>
-
-    <div class="popup-body">
-      <p>Le escribo desde la web, y requiero info.</p>
-    </div>
-
-<a class="popup-btn" href="https://api.whatsapp.com/send?phone=51973265025&text=Le%20escribo%20desde%20la%20web,%20y%20requiero%20info." target="_blank">
-  Open chat
-
-  <span class="send-icon">
-    <svg viewBox="0 0 24 24">
-      <path d="M22 2L11 13"></path>
-      <path d="M22 2L15 22L11 13L2 9L22 2Z"></path>
-    </svg>
-  </span>
-
-</a>
-  </div>
-
 </div>
-
 
 <!-- VISOR IMAGEN -->
 <div id="visor">
@@ -516,13 +491,42 @@ Agregar al carrito
   <img id="imagenGrande">
 </div>
 
+<!-- CARRITO FLOTANTE -->
+<button class="btn-carrito" onclick="abrirCarrito()">
+  🛒 <span id="contadorCarrito">0</span>
+</button>
+
+<div id="panelCarrito" class="panel-carrito">
+  <div class="carrito-header">
+    <h2>Mi carrito</h2>
+    <button onclick="cerrarCarrito()">✕</button>
+  </div>
+
+  <div id="listaCarrito"></div>
+
+  <h3>Total: S/ <span id="total">0</span></h3>
+
+  <button class="comprar" onclick="comprarWhatsApp()">
+    Comprar por WhatsApp
+  </button>
+</div>
 
 <script>
-    function abrirMenu(){
-  document
-  .getElementById("opcionesMenu")
-  .classList.toggle("mostrar");
+function abrirMenu(){
+  document.getElementById("opcionesMenu").classList.toggle("mostrar");
 }
+
+function abrirImagen(src){
+  document.getElementById("imagenGrande").src = src;
+  document.getElementById("visor").style.display = "flex";
+  document.body.style.overflow = "hidden";
+}
+
+function cerrarImagen(){
+  document.getElementById("visor").style.display = "none";
+  document.body.style.overflow = "auto";
+}
+
 let carrito = [];
 
 function agregarCarrito(nombre, precio){
@@ -541,11 +545,12 @@ function actualizarCarrito(){
 
   carrito.forEach((p, i) => {
     suma += p.precio;
+
     lista.innerHTML += `
       <div class="item-carrito">
         <span>${p.nombre}</span>
         <strong>S/ ${p.precio}</strong>
-        <button onclick="eliminarProducto(${i})">X</button>
+        <button onclick="eliminarProducto(${i})">✕</button>
       </div>
     `;
   });
@@ -584,24 +589,29 @@ function mostrar(seccion){
     cerrarCarrito();
   }
 }
-    <button class="btn-carrito" onclick="abrirCarrito()">
-  🛒 <span id="contadorCarrito">0</span>
-</button>
 
-<div id="panelCarrito" class="panel-carrito">
-  <div class="carrito-header">
-    <h2>Mi carrito</h2>
-    <button onclick="cerrarCarrito()">✕</button>
-  </div>
+function comprarWhatsApp(){
+  if(carrito.length === 0){
+    alert("Tu carrito está vacío");
+    return;
+  }
 
-  <div id="listaCarrito"></div>
+  let mensaje = "Hola, quiero comprar:%0A";
+  let suma = 0;
 
-  <h3>Total: S/ <span id="total">0</span></h3>
+  carrito.forEach(p => {
+    mensaje += `- ${p.nombre} S/ ${p.precio}%0A`;
+    suma += p.precio;
+  });
 
-  <button class="comprar" onclick="comprarWhatsApp()">
-    Comprar por WhatsApp
-  </button>
-</div>
+  mensaje += `%0ATotal: S/ ${suma}`;
+
+  window.open(
+    "https://api.whatsapp.com/send?phone=51973265025&text=" + mensaje,
+    "_blank"
+  );
+}
 </script>
+
 </body>
 </html>
