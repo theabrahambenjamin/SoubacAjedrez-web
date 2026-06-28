@@ -518,20 +518,48 @@ Agregar al carrito
 
 
 <script>
+let carrito = [];
 
-function abrirImagen(src){
-  document.getElementById("imagenGrande").src = src;
-  document.getElementById("visor").style.display = "flex";
-  document.body.style.overflow = "hidden";
+function agregarCarrito(nombre, precio){
+  carrito.push({nombre, precio});
+  actualizarCarrito();
+  abrirCarrito();
 }
 
-function cerrarImagen(){
-  document.getElementById("visor").style.display = "none";
-  document.body.style.overflow = "auto";
+function actualizarCarrito(){
+  const lista = document.getElementById("listaCarrito");
+  const total = document.getElementById("total");
+  const contador = document.getElementById("contadorCarrito");
+
+  lista.innerHTML = "";
+  let suma = 0;
+
+  carrito.forEach((p, i) => {
+    suma += p.precio;
+    lista.innerHTML += `
+      <div class="item-carrito">
+        <span>${p.nombre}</span>
+        <strong>S/ ${p.precio}</strong>
+        <button onclick="eliminarProducto(${i})">X</button>
+      </div>
+    `;
+  });
+
+  total.textContent = suma;
+  contador.textContent = carrito.length;
 }
 
-function abrirMenu(){
-  document.getElementById("opcionesMenu").classList.toggle("mostrar");
+function eliminarProducto(i){
+  carrito.splice(i, 1);
+  actualizarCarrito();
+}
+
+function abrirCarrito(){
+  document.getElementById("panelCarrito").classList.add("activo");
+}
+
+function cerrarCarrito(){
+  document.getElementById("panelCarrito").classList.remove("activo");
 }
 
 function mostrar(seccion){
@@ -541,26 +569,16 @@ function mostrar(seccion){
   document.getElementById(seccion).classList.add("activa");
 
   document.getElementById("opcionesMenu").classList.remove("mostrar");
+
+  const botonCarrito = document.querySelector(".btn-carrito");
+
+  if(seccion === "tienda"){
+    botonCarrito.style.display = "block";
+  }else{
+    botonCarrito.style.display = "none";
+    cerrarCarrito();
+  }
 }
-
 </script>
-<button class="btn-carrito" onclick="abrirCarrito()">
-🛒 <span id="contadorCarrito">0</span>
-</button>
-
-<div id="panelCarrito" class="panel-carrito">
-  <div class="carrito-header">
-    <h2>Mi carrito</h2>
-    <button onclick="cerrarCarrito()">✕</button>
-  </div>
-
-  <div id="listaCarrito"></div>
-
-  <h3>Total: S/ <span id="total">0</span></h3>
-
-  <button class="comprar" onclick="comprarWhatsApp()">
-    Comprar por WhatsApp
-  </button>
-</div>
 </body>
 </html>
