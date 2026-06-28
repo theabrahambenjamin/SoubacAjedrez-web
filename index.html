@@ -657,6 +657,29 @@ function comprarWhatsApp(){
     "_blank"
   );
 }
+    function abrirProducto(src){
+
+    document
+    .getElementById("imagenProductoGrande")
+    .src = src;
+
+    document
+    .getElementById("visorProducto")
+    .style.display = "flex";
+
+    document.body.style.overflow = "hidden";
+
+}
+
+function cerrarProducto(){
+
+    document
+    .getElementById("visorProducto")
+    .style.display = "none";
+
+    document.body.style.overflow = "auto";
+
+}
 </script>
 <div id="visorProducto">
 
