@@ -473,35 +473,6 @@ Agregar al carrito
 </div>
 
 
-<div class="carrito">
-
-
-<h2>
-🛒 Carrito
-</h2>
-
-
-<div id="listaCarrito">
-
-</div>
-
-
-<h3>
-Total: S/ <span id="total">0</span>
-</h3>
-
-
-<button class="comprar"
-onclick="comprarWhatsApp()">
-
-Comprar por WhatsApp
-
-</button>
-
-
-</div>
-
-
 </section>
     </main>
 
@@ -573,6 +544,23 @@ function mostrar(seccion){
 }
 
 </script>
+<button class="btn-carrito" onclick="abrirCarrito()">
+🛒 <span id="contadorCarrito">0</span>
+</button>
 
+<div id="panelCarrito" class="panel-carrito">
+  <div class="carrito-header">
+    <h2>Mi carrito</h2>
+    <button onclick="cerrarCarrito()">✕</button>
+  </div>
+
+  <div id="listaCarrito"></div>
+
+  <h3>Total: S/ <span id="total">0</span></h3>
+
+  <button class="comprar" onclick="comprarWhatsApp()">
+    Comprar por WhatsApp
+  </button>
+</div>
 </body>
 </html>
