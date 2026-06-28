@@ -127,6 +127,7 @@ Redes Sociales
 </a>
     <a onclick="mostrar('tienda')">🛒 Tienda</a>
 
+        <a onclick="mostrar('opiniones')">⭐ Opiniones</a>
 </div>
 
 </nav>
@@ -522,6 +523,57 @@ Agregar al carrito
 
 
 </section>
+        <section id="opiniones" class="seccion">
+
+<h2 class="titulo-opiniones">⭐ Tu opinión nos ayuda a mejorar</h2>
+
+<div class="opinion-card">
+
+<h3>Califica tu impresión general de Academia Soubac</h3>
+
+<div class="estrellas">
+  <input type="radio" name="rating" id="star5" value="5">
+  <label for="star5">★</label>
+
+  <input type="radio" name="rating" id="star4" value="4">
+  <label for="star4">★</label>
+
+  <input type="radio" name="rating" id="star3" value="3">
+  <label for="star3">★</label>
+
+  <input type="radio" name="rating" id="star2" value="2">
+  <label for="star2">★</label>
+
+  <input type="radio" name="rating" id="star1" value="1">
+  <label for="star1">★</label>
+</div>
+
+<input id="nombreOpinion" type="text" placeholder="Tu nombre">
+
+<select id="interesOpinion">
+  <option value="">¿Qué te interesa más?</option>
+  <option>Clases presenciales</option>
+  <option>Clases virtuales</option>
+  <option>Torneos</option>
+  <option>Mejorar mi nivel</option>
+</select>
+
+<select id="nivelOpinion">
+  <option value="">¿Cuál es tu nivel?</option>
+  <option>Principiante</option>
+  <option>Intermedio</option>
+  <option>Avanzado</option>
+</select>
+
+<textarea id="comentarioOpinion" placeholder="Déjanos un comentario o sugerencia"></textarea>
+
+<button onclick="enviarOpinion()">Enviar opinión</button>
+
+<p id="mensajeOpinion"></p>
+
+</div>
+
+</section>
     </main>
 
  <!-- WHATSAPP -->
@@ -682,6 +734,35 @@ function cerrarProducto(){
     document.body.style.overflow = "auto";
 
 }
+    function enviarOpinion(){
+  const rating = document.querySelector('input[name="rating"]:checked');
+  const nombre = document.getElementById("nombreOpinion").value;
+  const interes = document.getElementById("interesOpinion").value;
+  const nivel = document.getElementById("nivelOpinion").value;
+  const comentario = document.getElementById("comentarioOpinion").value;
+
+  if(!rating || nombre === "" || interes === "" || nivel === ""){
+    alert("Completa la calificación, nombre, interés y nivel.");
+    return;
+  }
+
+  console.log({
+    estrellas: rating.value,
+    nombre,
+    interes,
+    nivel,
+    comentario
+  });
+
+  document.getElementById("mensajeOpinion").innerHTML =
+  "✅ Gracias por dejarnos tu opinión.";
+
+  document.getElementById("nombreOpinion").value = "";
+  document.getElementById("interesOpinion").value = "";
+  document.getElementById("nivelOpinion").value = "";
+  document.getElementById("comentarioOpinion").value = "";
+  rating.checked = false;
+}
 </script>
 <div id="visorProducto">
 
@@ -690,5 +771,6 @@ function cerrarProducto(){
     <img id="imagenProductoGrande">
 
 </div>
+    
 </body>
 </html>
