@@ -548,7 +548,9 @@ function actualizarCarrito(){
       <div class="item-carrito">
         <span>${p.nombre}</span>
         <strong>S/ ${p.precio}</strong>
-        <button onclick="eliminarProducto(${i})">✕</button>
+        <button class="btn-eliminar" onclick="eliminarProducto(${i})">
+🗑
+</button>
       </div>
     `;
   });
