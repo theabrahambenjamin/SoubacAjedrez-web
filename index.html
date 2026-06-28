@@ -532,9 +532,7 @@ let carrito = [];
 function agregarCarrito(nombre, precio){
   carrito.push({nombre, precio});
   actualizarCarrito();
-  abrirCarrito();
 }
-
 function actualizarCarrito(){
   const lista = document.getElementById("listaCarrito");
   const total = document.getElementById("total");
