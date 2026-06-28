@@ -96,4 +96,29 @@ window.open(
 );
 
 
+
+  
+}
+function abrirProducto(src){
+
+    document
+    .getElementById("imagenProductoGrande")
+    .src = src;
+
+    document
+    .getElementById("visorProducto")
+    .style.display = "flex";
+
+    document.body.style.overflow = "hidden";
+
+}
+
+function cerrarProducto(){
+
+    document
+    .getElementById("visorProducto")
+    .style.display = "none";
+
+    document.body.style.overflow = "auto";
+
 }
