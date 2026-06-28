@@ -125,6 +125,7 @@ Plataformas
 </svg>
 Redes Sociales
 </a>
+    <a onclick="mostrar('tienda')">🛒 Tienda</a>
 
 </div>
 
@@ -408,6 +409,99 @@ onclick="abrirImagen(this.src)">
     </a>
 
   </div>
+</section>
+        <!-- TIENDA -->
+
+<section id="tienda" class="seccion">
+
+
+<h2 class="titulo-tienda">
+🛒 Tienda Soubac
+</h2>
+
+
+<div class="productos">
+
+
+<div class="producto">
+
+<img src="libro.jpg">
+
+<h3>Libro de Ajedrez</h3>
+
+<p>S/ 25.00</p>
+
+<button onclick="agregarCarrito('Libro de Ajedrez',25)">
+Agregar al carrito
+</button>
+
+</div>
+
+
+
+<div class="producto">
+
+<img src="tablero.jpg">
+
+<h3>Tablero de Ajedrez</h3>
+
+<p>S/ 60.00</p>
+
+<button onclick="agregarCarrito('Tablero de Ajedrez',60)">
+Agregar al carrito
+</button>
+
+</div>
+
+
+
+<div class="producto">
+
+<img src="curso.jpg">
+
+<h3>Curso de Ajedrez</h3>
+
+<p>S/ 100.00</p>
+
+<button onclick="agregarCarrito('Curso de Ajedrez',100)">
+Agregar al carrito
+</button>
+
+</div>
+
+
+</div>
+
+
+<div class="carrito">
+
+
+<h2>
+🛒 Carrito
+</h2>
+
+
+<div id="listaCarrito">
+
+</div>
+
+
+<h3>
+Total: S/ <span id="total">0</span>
+</h3>
+
+
+<button class="comprar"
+onclick="comprarWhatsApp()">
+
+Comprar por WhatsApp
+
+</button>
+
+
+</div>
+
+
 </section>
     </main>
 
