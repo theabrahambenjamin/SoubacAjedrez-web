@@ -1304,3 +1304,76 @@ cursor:pointer;
   }
 
 }
+/* ===== IPHONE Y MÓVILES ===== */
+
+@media screen and (max-width:768px){
+
+    /* Header */
+    header{
+        padding:20px 15px;
+        text-align:center;
+    }
+
+    .logo{
+        width:100px;
+        height:100px;
+    }
+
+    .logo-container h1{
+        font-size:42px;
+        line-height:1.1;
+    }
+
+    /* Imágenes principales */
+    .hero{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:20px;
+    }
+
+    .hero img{
+        width:90%;
+        max-width:350px;
+        border-radius:25px;
+    }
+
+    /* Bienvenida */
+    .bienvenida{
+        width:90% !important;
+        max-width:500px;
+        padding:30px;
+        margin:auto;
+    }
+
+    .bienvenida h2{
+        font-size:42px;
+        line-height:1.1;
+    }
+
+    .bienvenida p{
+        font-size:22px;
+        line-height:1.8;
+        text-align:center;
+    }
+
+    /* Sedes */
+    .sedes-container{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:15px;
+    }
+
+    .sede-card{
+        width:90%;
+        max-width:400px;
+    }
+
+    /* WhatsApp */
+    .whatsapp-container{
+        right:20px;
+        bottom:20px;
+    }
+
+}
