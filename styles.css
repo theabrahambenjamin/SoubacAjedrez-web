@@ -1174,3 +1174,64 @@ cursor:pointer;
     }
 
 }
+.titulo-clasificacion{
+    text-align:center;
+    font-size:42px;
+    color:#8b0000;
+    margin-bottom:35px;
+}
+
+.clasificacion-container{
+    max-width:1300px;
+    margin:auto;
+    display:flex;
+    gap:40px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.clasificacion-info{
+    width:350px;
+    background:rgba(255,255,255,.93);
+    color:black;
+    padding:35px;
+    border-radius:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+    text-align:center;
+}
+
+.clasificacion-info h3{
+    font-size:30px;
+    margin-bottom:20px;
+}
+
+.promedio{
+    font-size:45px;
+    color:#ffc107;
+    margin:20px 0;
+}
+
+.promedio span{
+    display:block;
+    font-size:28px;
+    color:black;
+    font-weight:bold;
+}
+
+.texto-promedio{
+    color:#666;
+}
+
+.formulario-google{
+    flex:1;
+    min-width:400px;
+    background:white;
+    border-radius:25px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+.formulario-google iframe{
+    width:100%;
+    border:none;
+}
