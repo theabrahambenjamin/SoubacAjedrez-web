@@ -523,55 +523,52 @@ Agregar al carrito
 
 
 </section>
-        <section id="opiniones" class="seccion">
+    <!-- CLASIFICACIÓN -->
+<section id="opiniones" class="seccion">
 
-<h2 class="titulo-opiniones">⭐ Tu opinión nos ayuda a mejorar</h2>
+    <h2 class="titulo-clasificacion">
+        ⭐ Clasificación y Opiniones
+    </h2>
 
-<div class="opinion-card">
+    <div class="clasificacion-container">
 
-<h3>Califica tu impresión general de Academia Soubac</h3>
+        <div class="clasificacion-info">
+            <h3>Tu opinión es importante</h3>
 
-<div class="estrellas">
-  <input type="radio" name="rating" id="star5" value="5">
-  <label for="star5">★</label>
+            <p>
+                Ayúdanos a mejorar nuestra academia calificando tu experiencia
+                y compartiendo tus comentarios.
+            </p>
 
-  <input type="radio" name="rating" id="star4" value="4">
-  <label for="star4">★</label>
+            <div class="promedio">
+                ★★★★★
+                <span>4.9/5</span>
+            </div>
 
-  <input type="radio" name="rating" id="star3" value="3">
-  <label for="star3">★</label>
+            <p class="texto-promedio">
+                Basado en las valoraciones de nuestra comunidad.
+            </p>
+        </div>
 
-  <input type="radio" name="rating" id="star2" value="2">
-  <label for="star2">★</label>
+        <div class="formulario-google">
 
-  <input type="radio" name="rating" id="star1" value="1">
-  <label for="star1">★</label>
-</div>
+            <!-- PEGA AQUÍ EL IFRAME DE GOOGLE FORMS -->
 
-<input id="nombreOpinion" type="text" placeholder="Tu nombre">
+            <iframe
+                src="https://forms.gle/e4REGXhMf8nxDnWZA"
+                width="100%"
+                height="850"
+                frameborder="0"
+                marginheight="0"
+                marginwidth="0">
 
-<select id="interesOpinion">
-  <option value="">¿Qué te interesa más?</option>
-  <option>Clases presenciales</option>
-  <option>Clases virtuales</option>
-  <option>Torneos</option>
-  <option>Mejorar mi nivel</option>
-</select>
+            Cargando formulario...
 
-<select id="nivelOpinion">
-  <option value="">¿Cuál es tu nivel?</option>
-  <option>Principiante</option>
-  <option>Intermedio</option>
-  <option>Avanzado</option>
-</select>
+            </iframe>
 
-<textarea id="comentarioOpinion" placeholder="Déjanos un comentario o sugerencia"></textarea>
+        </div>
 
-<button onclick="enviarOpinion()">Enviar opinión</button>
-
-<p id="mensajeOpinion"></p>
-
-</div>
+    </div>
 
 </section>
     </main>
