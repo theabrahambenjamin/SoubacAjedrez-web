@@ -981,21 +981,25 @@ box-shadow:0 8px 25px rgba(0,0,0,.25);
 
 
 
-.btn-carrito{
-position:fixed;
-right:25px;
-bottom:160px;
-z-index:9999;
-background:#990101;
-color:white;
-border:none;
-padding:16px 22px;
-border-radius:50px;
-font-size:22px;
-cursor:pointer;
-box-shadow:0 8px 25px rgba(0,0,0,.35);
-}
+/* ===== CARRITO ===== */
 
+.btn-carrito{
+    position:fixed;
+    right:25px;
+    bottom:160px;
+    z-index:9999;
+    background:#990101;
+    color:white;
+    border:none;
+    padding:16px 22px;
+    border-radius:50px;
+    font-size:22px;
+    cursor:pointer;
+    box-shadow:0 8px 25px rgba(0,0,0,.35);
+
+    /* oculto por defecto */
+    display:none;
+}
 #contadorCarrito{
 background:white;
 color:#990101;
@@ -1234,4 +1238,69 @@ cursor:pointer;
 .formulario-google iframe{
     width:100%;
     border:none;
+}
+@media screen and (max-width: 768px){
+
+  header{
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    padding:25px 15px;
+    gap:15px;
+  }
+
+  .logo-container{
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+  }
+
+  .logo{
+    width:120px;
+    height:120px;
+  }
+
+  .logo-container h1{
+    font-size:32px;
+    line-height:1.1;
+  }
+
+  .menu{
+    position:static;
+    margin-top:10px;
+  }
+
+  .boton-menu{
+    font-size:18px;
+    padding:12px 28px;
+  }
+
+  .opciones-menu{
+    right:auto;
+    left:50%;
+    transform:translateX(-50%);
+    top:100%;
+  }
+
+  .hero{
+    padding:25px 10px;
+  }
+
+  .hero img{
+    width:100%;
+    max-width:340px;
+    border-radius:25px;
+  }
+
+  .btn-carrito{
+    right:20px;
+    bottom:155px;
+    transform:scale(.85);
+  }
+
+  .whatsapp-container{
+    right:20px;
+    bottom:35px;
+  }
+
 }
