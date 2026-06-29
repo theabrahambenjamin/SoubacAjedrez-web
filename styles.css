@@ -1377,3 +1377,85 @@ cursor:pointer;
     }
 
 }
+@media screen and (max-width:768px){
+
+  body{
+    background:#f5f7fb;
+  }
+
+  header{
+    background:#b22222;
+    padding:25px 15px;
+    text-align:center;
+  }
+
+  .logo-container{
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .logo{
+    width:95px;
+    height:95px;
+  }
+
+  .logo-container h1{
+    font-size:28px;
+    line-height:1.15;
+  }
+
+  .boton-menu{
+    margin-top:10px;
+    font-size:17px;
+    padding:10px 24px;
+  }
+
+  .hero{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:25px;
+    padding:35px 0;
+  }
+
+  .hero div{
+    width:100%;
+    display:flex;
+    justify-content:center;
+  }
+
+  .hero img{
+    width:82%;
+    max-width:520px;
+    border-radius:18px;
+    box-shadow:0 8px 25px rgba(0,0,0,.18);
+  }
+
+  .bienvenida{
+    width:82%;
+    max-width:520px;
+    margin:35px auto;
+    padding:35px 25px;
+    border-radius:18px;
+  }
+
+  .bienvenida h2{
+    font-size:30px;
+    line-height:1.15;
+  }
+
+  .bienvenida p{
+    font-size:18px;
+    line-height:1.7;
+  }
+
+  .ubicaciones h2{
+    font-size:30px;
+  }
+
+  .sede-card{
+    width:82%;
+    max-width:520px;
+    padding:18px;
+  }
+}
