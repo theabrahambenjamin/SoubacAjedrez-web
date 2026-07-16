@@ -1386,14 +1386,20 @@ cursor:pointer;
 }
 
 .footer-container{
-    max-width:1200px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:repeat(3,1fr); /* antes 4 */
-    gap:45px; /* antes 70 */
-    padding:40px 50px; /* antes 60 */
-}
 
+    max-width:1150px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:40px;
+
+    padding:35px 40px;
+
+}
 .footer-box h3{
     font-size:20px;
     margin-bottom:18px;
