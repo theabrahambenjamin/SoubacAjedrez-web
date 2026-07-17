@@ -2070,6 +2070,54 @@
         );
 
     </script>
+<script>
+function mostrar(idSeccion) {
+    const seccionSeleccionada = document.getElementById(idSeccion);
 
+    if (!seccionSeleccionada) {
+        console.error("No existe la sección:", idSeccion);
+        return;
+    }
+
+    document.querySelectorAll(".seccion").forEach((seccion) => {
+        seccion.classList.remove("activa");
+    });
+
+    seccionSeleccionada.classList.add("activa");
+
+    const menu = document.getElementById("opcionesMenu");
+
+    if (menu) {
+        menu.classList.remove("mostrar");
+    }
+
+    const botonMenu = document.querySelector(".boton-menu");
+
+    if (botonMenu) {
+        botonMenu.setAttribute("aria-expanded", "false");
+    }
+
+    const botonCarrito = document.querySelector(".btn-carrito");
+
+    if (botonCarrito) {
+        botonCarrito.style.display =
+            idSeccion === "tienda" ? "flex" : "none";
+    }
+
+    if (idSeccion !== "tienda") {
+        const panelCarrito = document.getElementById("panelCarrito");
+        const overlayCarrito = document.querySelector(".overlay-carrito");
+
+        panelCarrito?.classList.remove("activo");
+        overlayCarrito?.classList.remove("activo");
+        document.body.classList.remove("carrito-abierto");
+    }
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+</script>
 </body>
 </html>
