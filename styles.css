@@ -2763,3 +2763,131 @@ font-size:22px;
     font-size: 250px;
   }
 }
+/*======================================
+      VISOR UNIVERSAL DE IMÁGENES
+======================================*/
+
+.visor-imagen{
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0,0,0,.95);
+    backdrop-filter: blur(6px);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: .3s;
+}
+
+.visor-imagen.activo{
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+
+/* Imagen ampliada */
+
+#imagen-grande{
+
+    max-width: 92%;
+    max-height: 90vh;
+
+    object-fit: contain;
+
+    border-radius: 12px;
+
+    box-shadow: 0 20px 60px rgba(0,0,0,.6);
+
+    transform: scale(.8);
+
+    transition: .35s;
+}
+
+.visor-imagen.activo #imagen-grande{
+
+    transform: scale(1);
+
+}
+
+
+/* Botón cerrar */
+
+.boton-cerrar-imagen{
+
+    position: absolute;
+
+    top: 20px;
+    right: 25px;
+
+    width: 50px;
+    height: 50px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.15);
+
+    color: white;
+
+    font-size: 34px;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.boton-cerrar-imagen:hover{
+
+    background: white;
+
+    color: #111;
+
+    transform: rotate(90deg);
+
+}
+
+
+/* Cursor para todas las imágenes */
+
+.card-galeria img,
+.producto img,
+.producto-card img,
+img{
+
+    cursor: zoom-in;
+
+}
+
+
+/* Responsive */
+
+@media(max-width:768px){
+
+    #imagen-grande{
+
+        max-width:95%;
+        max-height:85vh;
+
+    }
+
+    .boton-cerrar-imagen{
+
+        width:42px;
+        height:42px;
+
+        top:15px;
+        right:15px;
+
+        font-size:30px;
+
+    }
+
+}
