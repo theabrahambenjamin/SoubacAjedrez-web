@@ -1,3 +1,9 @@
+"use strict";
+
+/* ==================================================
+   CAMBIO DE SECCIONES
+================================================== */
+
 function mostrarSeccion(id) {
     const secciones = document.querySelectorAll(".seccion");
     const seccionSeleccionada = document.getElementById(id);
@@ -6,77 +12,203 @@ function mostrarSeccion(id) {
         seccion.classList.remove("activa");
     });
 
-    if (seccionSeleccionada) {
-        seccionSeleccionada.classList.add("activa");
+    if (!seccionSeleccionada) {
+        console.error(`No existe una sección con el id: ${id}`);
+        return;
     }
+
+    seccionSeleccionada.classList.add("activa");
+
+    /* Cierra el menú desplegable, en caso de estar abierto */
+    const menuOpciones = document.querySelector(".opciones-menu");
+    menuOpciones?.classList.remove("mostrar");
+
+    /* Lleva al usuario al inicio de la sección */
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 
-/* =========================
-   CARRITO
-========================= */
+
+/* ==================================================
+   CARRITO DE COMPRAS
+================================================== */
 
 let carrito = [];
 
+
+/* Agregar producto */
+
 function agregarCarrito(nombre, precio) {
+    const precioNumerico = Number(precio);
+
+    if (!nombre || Number.isNaN(precioNumerico)) {
+        console.error("Los datos del producto no son válidos.");
+        return;
+    }
+
     carrito.push({
         nombre: nombre,
-        precio: Number(precio)
+        precio: precioNumerico
     });
 
     mostrarCarrito();
 }
 
+
+/* Mostrar productos agregados */
+
 function mostrarCarrito() {
     const lista = document.getElementById("listaCarrito");
     const totalElemento = document.getElementById("total");
+    const contador = document.getElementById("contadorCarrito");
+    const botonCarrito = document.querySelector(".btn-carrito");
 
     if (!lista || !totalElemento) {
-        console.error("No se encontró listaCarrito o total.");
+        console.error("No se encontró #listaCarrito o #total.");
         return;
     }
 
-    let total = 0;
     lista.innerHTML = "";
 
-    carrito.forEach((producto) => {
-        lista.innerHTML += `
-            <p>
-                ${producto.nombre} - S/ ${producto.precio.toFixed(2)}
-            </p>
-        `;
+    let total = 0;
 
+    carrito.forEach((producto, indice) => {
         total += producto.precio;
+
+        const item = document.createElement("div");
+        item.className = "item-carrito";
+
+        const nombreProducto = document.createElement("span");
+        nombreProducto.textContent = producto.nombre;
+
+        const precioProducto = document.createElement("strong");
+        precioProducto.textContent =
+            producto.precio === 0
+                ? "Gratis"
+                : `S/ ${producto.precio.toFixed(2)}`;
+
+        const botonEliminar = document.createElement("button");
+        botonEliminar.type = "button";
+        botonEliminar.className = "btn-eliminar";
+        botonEliminar.setAttribute(
+            "aria-label",
+            `Eliminar ${producto.nombre}`
+        );
+        botonEliminar.textContent = "×";
+
+        botonEliminar.addEventListener("click", () => {
+            eliminarDelCarrito(indice);
+        });
+
+        item.append(
+            nombreProducto,
+            precioProducto,
+            botonEliminar
+        );
+
+        lista.appendChild(item);
     });
 
     totalElemento.textContent = total.toFixed(2);
+
+    if (contador) {
+        contador.textContent = carrito.length;
+    }
+
+    if (botonCarrito) {
+        botonCarrito.style.display =
+            carrito.length > 0 ? "flex" : "none";
+    }
 }
 
-function comprarWhatsApp() {
-    if (carrito.length === 0) {
-        alert("El carrito está vacío.");
+
+/* Eliminar producto */
+
+function eliminarDelCarrito(indice) {
+    if (indice < 0 || indice >= carrito.length) {
         return;
     }
 
-    let mensaje = "Hola, quiero comprar:\n";
+    carrito.splice(indice, 1);
+    mostrarCarrito();
+}
 
-    carrito.forEach((producto) => {
-        mensaje += `- ${producto.nombre} S/ ${producto.precio.toFixed(2)}\n`;
+
+/* Vaciar carrito */
+
+function vaciarCarrito() {
+    carrito = [];
+    mostrarCarrito();
+}
+
+
+/* Abrir panel del carrito */
+
+function abrirCarrito() {
+    const panel = document.querySelector(".panel-carrito");
+
+    if (!panel) {
+        console.error("No se encontró .panel-carrito.");
+        return;
+    }
+
+    panel.classList.add("activo");
+    document.body.classList.add("carrito-abierto");
+}
+
+
+/* Cerrar panel del carrito */
+
+function cerrarCarrito() {
+    const panel = document.querySelector(".panel-carrito");
+
+    if (!panel) return;
+
+    panel.classList.remove("activo");
+    document.body.classList.remove("carrito-abierto");
+}
+
+
+/* Comprar mediante WhatsApp */
+
+function comprarWhatsApp() {
+    if (carrito.length === 0) {
+        alert("Tu carrito está vacío.");
+        return;
+    }
+
+    let mensaje = "Hola, Academia Soubac Ajedrez. Quiero solicitar:\n\n";
+
+    carrito.forEach((producto, indice) => {
+        const precioTexto =
+            producto.precio === 0
+                ? "Gratis"
+                : `S/ ${producto.precio.toFixed(2)}`;
+
+        mensaje += `${indice + 1}. ${producto.nombre} — ${precioTexto}\n`;
     });
 
-    const total = document.getElementById("total")?.textContent || "0.00";
+    const total = carrito.reduce(
+        (acumulado, producto) => acumulado + producto.precio,
+        0
+    );
 
-    mensaje += `\nTotal: S/ ${total}`;
+    mensaje += `\nTotal: S/ ${total.toFixed(2)}`;
+    mensaje += "\n\nAgradeceré que me brinden más información.";
 
     const url =
         "https://wa.me/51973265025?text=" +
         encodeURIComponent(mensaje);
 
-    window.open(url, "_blank");
+    window.open(url, "_blank", "noopener,noreferrer");
 }
 
-/* ======================================
+
+/* ==================================================
    VISOR UNIVERSAL DE IMÁGENES
-====================================== */
+================================================== */
 
 function abrirImagen(src, alt = "Imagen ampliada") {
     const visor = document.getElementById("visor-imagen");
@@ -84,8 +216,13 @@ function abrirImagen(src, alt = "Imagen ampliada") {
 
     if (!visor || !imagenGrande) {
         console.error(
-            "No se encontró #visor-imagen o #imagen-grande."
+            "No se encontró #visor-imagen o #imagen-grande en el HTML."
         );
+        return;
+    }
+
+    if (!src) {
+        console.error("La imagen no tiene una ruta válida.");
         return;
     }
 
@@ -95,7 +232,13 @@ function abrirImagen(src, alt = "Imagen ampliada") {
     visor.classList.add("activo");
     visor.setAttribute("aria-hidden", "false");
 
-    document.body.style.overflow = "hidden";
+    document.body.classList.add("visor-abierto");
+
+    const botonCerrar = document.getElementById(
+        "boton-cerrar-imagen"
+    );
+
+    botonCerrar?.focus();
 }
 
 
@@ -103,67 +246,103 @@ function cerrarImagen() {
     const visor = document.getElementById("visor-imagen");
     const imagenGrande = document.getElementById("imagen-grande");
 
-    if (!visor) {
-        return;
-    }
+    if (!visor) return;
 
     visor.classList.remove("activo");
     visor.setAttribute("aria-hidden", "true");
 
-    document.body.style.overflow = "";
+    document.body.classList.remove("visor-abierto");
 
-    setTimeout(() => {
-        if (imagenGrande && !visor.classList.contains("activo")) {
+    window.setTimeout(() => {
+        if (
+            imagenGrande &&
+            !visor.classList.contains("activo")
+        ) {
             imagenGrande.src = "";
         }
     }, 280);
 }
 
 
-document.addEventListener("DOMContentLoaded", function () {
+/* ==================================================
+   CONFIGURACIÓN INICIAL
+================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
     const visor = document.getElementById("visor-imagen");
-    const botonCerrar = document.getElementById(
+    const imagenGrande = document.getElementById("imagen-grande");
+    const botonCerrarImagen = document.getElementById(
         "boton-cerrar-imagen"
     );
-    const imagenGrande = document.getElementById("imagen-grande");
 
-    if (!visor || !botonCerrar || !imagenGrande) {
-        console.error("El visor de imágenes no está completo.");
-        return;
-    }
+    /*
+     * Esta parte permite ampliar imágenes aunque olvides
+     * escribir onclick en una imagen nueva.
+     */
 
-    /* Cerrar con la X */
+    const imagenesAmpliables = document.querySelectorAll(
+        ".card-galeria img, .producto .img-producto, .imagen-ampliable"
+    );
 
-    botonCerrar.addEventListener("click", function (evento) {
+    imagenesAmpliables.forEach((imagen) => {
+        imagen.style.cursor = "zoom-in";
+
+        /*
+         * Solo agrega el evento automático cuando la imagen
+         * no tiene ya un onclick declarado.
+         */
+
+        if (!imagen.hasAttribute("onclick")) {
+            imagen.addEventListener("click", () => {
+                abrirImagen(imagen.currentSrc || imagen.src, imagen.alt);
+            });
+        }
+    });
+
+
+    /* Botón X */
+
+    botonCerrarImagen?.addEventListener("click", (evento) => {
+        evento.preventDefault();
         evento.stopPropagation();
+
         cerrarImagen();
     });
 
 
-    /* Cerrar haciendo clic en el fondo negro */
+    /* Cerrar al pulsar el fondo oscuro */
 
-    visor.addEventListener("click", function (evento) {
-        if (
+    visor?.addEventListener("click", (evento) => {
+        const hizoClicEnFondo =
             evento.target === visor ||
-            evento.target.classList.contains("visor-contenido")
-        ) {
+            evento.target.classList.contains("visor-contenido");
+
+        if (hizoClicEnFondo) {
             cerrarImagen();
         }
     });
 
 
-    /* No cerrar al hacer clic sobre la imagen */
+    /* Evitar que un clic en la foto la cierre */
 
-    imagenGrande.addEventListener("click", function (evento) {
+    imagenGrande?.addEventListener("click", (evento) => {
         evento.stopPropagation();
     });
+
+
+    /* Mostrar inicialmente el carrito */
+
+    mostrarCarrito();
 });
 
 
-/* Cerrar con Escape */
+/* ==================================================
+   EVENTOS DEL TECLADO
+================================================== */
 
-document.addEventListener("keydown", function (evento) {
+document.addEventListener("keydown", (evento) => {
     if (evento.key === "Escape") {
         cerrarImagen();
+        cerrarCarrito();
     }
 });
