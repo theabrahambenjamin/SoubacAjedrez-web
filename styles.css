@@ -846,7 +846,51 @@ main {
   transform: scale(1.07);
 }
 
+/* ====== LIGHTBOX ====== */
 
+.visor-imagen{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.92);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    cursor: zoom-out;
+}
+
+.visor-imagen img{
+    max-width: 95%;
+    max-height: 90vh;
+    border-radius: 12px;
+    box-shadow: 0 0 35px rgba(255,255,255,.25);
+    animation: zoom .3s ease;
+}
+
+.cerrar{
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: white;
+    font-size: 50px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.cerrar:hover{
+    color: #d4af37;
+}
+
+@keyframes zoom{
+    from{
+        transform: scale(.7);
+        opacity: 0;
+    }
+    to{
+        transform: scale(1);
+        opacity: 1;
+    }
+}
 /* ==================================================
    PLATAFORMAS
 ================================================== */
