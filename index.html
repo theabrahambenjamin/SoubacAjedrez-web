@@ -2,1006 +2,2074 @@
 <html lang="es">
 
 <head>
+    <meta charset="UTF-8">
 
-<meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academia Soubac Ajedrez</title>
 
-<title>Academia Soubac Ajedrez</title>
+    <meta
+        name="description"
+        content="Academia Soubac Ajedrez ofrece clases virtuales y presenciales para niños, jóvenes y adultos en el Perú."
+    >
 
-<meta name="description" content="Academia Soubac ofrece clases de ajedrez para niños y adultos. Aprende ajedrez desde nivel básico hasta avanzado en Perú.">
+    <meta
+        name="author"
+        content="Academia Soubac Ajedrez"
+    >
 
-<meta name="author" content="Academia Soubac Ajedrez">
+    <meta
+        name="theme-color"
+        content="#8b0000"
+    >
 
-<link rel="icon" type="image/png" href="favicon%20(2).png">
+    <meta
+        name="google-site-verification"
+        content="xU4LgSzYR88NxEy46ztZ1Nf-j2V60B0MEA2219jidS0"
+    >
 
-<link rel="stylesheet" href="styles.css">
-<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- Ícono de la página -->
+    <link
+        rel="icon"
+        type="image/png"
+        href="favicon%20(2).png"
+    >
 
-<meta name="google-site-verification" content="xU4LgSzYR88NxEy46ztZ1Nf-j2V60B0MEA2219jidS0">
+    <!-- Hoja de estilos principal -->
+    <link
+        rel="stylesheet"
+        href="styles.css"
+    >
 
+    <!-- Font Awesome -->
+    <link
+        rel="preconnect"
+        href="https://cdnjs.cloudflare.com"
+        crossorigin
+    >
 
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
 </head>
-
 
 <body>
 
+    <!-- ==========================================
+         PANTALLA DE CARGA
+    =========================================== -->
 
-<!-- PANTALLA DE CARGA -->
+    <div
+        id="pantalla-carga"
+        class="pantalla-carga"
+        aria-label="Cargando página"
+    >
+        <img
+            src="favicon%20(2).png"
+            alt="Logo de Academia Soubac Ajedrez"
+        >
 
-<div id="pantalla-carga">
+        <h2>Cargando...</h2>
 
-    <img src="favicon%20(2).png" alt="Logo de Academia Soubac Ajedrez">
-
-    <h2>Cargando...</h2>
-
-    <div class="cargando"></div>
-
-</div>
-
-
-<script>
-
-document.addEventListener("DOMContentLoaded", () => {
-  const carga = document.getElementById("pantalla-carga");
-  if (!carga) return;
-
-  setTimeout(() => {
-    carga.style.opacity = "0";
-    carga.addEventListener("transitionend", () => carga.remove(), { once: true });
-
-    // Respaldo por si el CSS no tiene transición.
-    setTimeout(() => carga.remove(), 1200);
-  }, 500);
-});
-
-</script>
-    <header>
-      <div class="logo-container">
-        <img src="soubac.png" alt="Logo Academia" class="logo" />
-        <h1>ACADEMIA SOUBAC AJEDREZ</h1>
-      </div>
-
-    <nav class="menu">
-
-<button type="button" class="boton-menu" onclick="abrirMenu()" aria-controls="opcionesMenu" aria-expanded="false">
-☰ Menú
-</button>
+        <div
+            class="cargando"
+            aria-hidden="true"
+        ></div>
+    </div>
 
 
-<div class="opciones-menu" id="opcionesMenu">
+    <!-- ==========================================
+         ENCABEZADO
+    =========================================== -->
 
-<button type="button" class="opcion-menu" onclick="mostrar('inicio')">
-<svg viewBox="0 0 24 24">
-<path d="M3 11L12 3l9 8v10a1 1 0 0 1-1 1h-6v-6H10v6H4a1 1 0 0 1-1-1V11z"/>
-</svg>
-Inicio
-</button>
+    <header class="encabezado-principal">
 
+        <div class="logo-container">
 
-<button type="button" class="opcion-menu" onclick="mostrar('libros')">
-<svg viewBox="0 0 24 24">
-<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H21V5a2 2 0 0 0-2-2H6.5A2.5 2.5 0 0 0 4 5.5v14zM6.5 5H19v10H6.5A4.5 4.5 0 0 0 4 15.8V5.5A.5.5 0 0 1 6.5 5z"/>
-</svg>
-Libros
-</button>
+            <img
+                src="soubac.png"
+                alt="Logo de Academia Soubac Ajedrez"
+                class="logo"
+            >
 
+            <h1>Academia Soubac Ajedrez</h1>
 
-<button type="button" class="opcion-menu" onclick="mostrar('historia')">
-<svg viewBox="0 0 24 24">
-<path d="M12 2L2 7v2h20V7L12 2zm-7 9v8h4v-8H5zm5 0v8h4v-8h-4zm6 0v8h4v-8h-4z"/>
-</svg>
-Historia
-</button>
+        </div>
 
 
-<button type="button" class="opcion-menu" onclick="mostrar('fotos')">
-<svg viewBox="0 0 24 24">
-<path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2zM8 11l2.5 3L14 9l5 7H5l3-5z"/>
-</svg>
-Fotos
-</button>
+        <!-- ======================================
+             MENÚ DE NAVEGACIÓN
+        ======================================= -->
+
+        <nav
+            class="menu"
+            aria-label="Navegación principal"
+        >
+
+            <button
+                type="button"
+                class="boton-menu"
+                onclick="abrirMenu()"
+                aria-controls="opcionesMenu"
+                aria-expanded="false"
+            >
+                <i
+                    class="fa-solid fa-bars"
+                    aria-hidden="true"
+                ></i>
+
+                Menú
+            </button>
 
 
-<button type="button" class="opcion-menu" onclick="mostrar('plataformas')">
-<svg viewBox="0 0 24 24">
-<path d="M20 3H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 16H4V5h16v14z"/>
-</svg>
-Plataformas
-</button>
+            <div
+                class="opciones-menu"
+                id="opcionesMenu"
+            >
+
+                <button
+                    type="button"
+                    class="opcion-menu"
+                    onclick="mostrar('inicio')"
+                >
+                    <i
+                        class="fa-solid fa-house"
+                        aria-hidden="true"
+                    ></i>
+
+                    Inicio
+                </button>
 
 
-<button type="button" class="opcion-menu" onclick="mostrar('redes')">
-<svg viewBox="0 0 24 24">
-<path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4z"/>
-</svg>
-Redes Sociales
-</button>
-    <button type="button" class="opcion-menu" onclick="mostrar('tienda')">🛒 Tienda</button>
+                <button
+                    type="button"
+                    class="opcion-menu"
+                    onclick="mostrar('libros')"
+                >
+                    <i
+                        class="fa-solid fa-book-open"
+                        aria-hidden="true"
+                    ></i>
 
-    <button type="button" class="opcion-menu" onclick="mostrar('opiniones')">⭐ Opiniones</button>
-</div>
+                    Libros
+                </button>
 
-</nav>
+
+                <button
+                    type="button"
+                    class="opcion-menu"
+                    onclick="mostrar('historia')"
+                >
+                    <i
+                        class="fa-solid fa-landmark"
+                        aria-hidden="true"
+                    ></i>
+
+                    Historia
+                </button>
+
+
+                <button
+                    type="button"
+                    class="opcion-menu"
+                    onclick="mostrar('fotos')"
+                >
+                    <i
+                        class="fa-solid fa-images"
+                        aria-hidden="true"
+                    ></i>
+
+                    Galería
+                </button>
+
+
+                <button
+                    type="button"
+                    class="opcion-menu"
+                    onclick="mostrar('plataformas')"
+                >
+                    <i
+                        class="fa-solid fa-laptop"
+                        aria-hidden="true"
+                    ></i>
+
+                    Plataformas
+                </button>
+
+
+                <button
+                    type="button"
+                    class="opcion-menu"
+                    onclick="mostrar('redes')"
+                >
+                    <i
+                        class="fa-solid fa-share-nodes"
+                        aria-hidden="true"
+                    ></i>
+
+                    Redes sociales
+                </button>
+
+
+                <button
+                    type="button"
+                    class="opcion-menu"
+                    onclick="mostrar('tienda')"
+                >
+                    <i
+                        class="fa-solid fa-cart-shopping"
+                        aria-hidden="true"
+                    ></i>
+
+                    Tienda
+                </button>
+
+
+                <button
+                    type="button"
+                    class="opcion-menu"
+                    onclick="mostrar('opiniones')"
+                >
+                    <i
+                        class="fa-solid fa-star"
+                        aria-hidden="true"
+                    ></i>
+
+                    Opiniones
+                </button>
+
+            </div>
+
+        </nav>
+
     </header>
 
+
+    <!-- ==========================================
+         CONTENIDO PRINCIPAL
+    =========================================== -->
+
     <main>
-      <!-- Inicio -->
-       <section id="inicio" class="seccion activa">
-        <div class="hero">
-          <div>
-            <img src="CLASE.png" alt="Clase" />
-          </div>
 
-          <div>
-            <img src="2VIRTUAL.png" alt="Virtual" />
-          </div>
 
-          <div>
-            <img src="REVICION.png" alt="Revisión" />
-          </div>
-        </div>
-        <div class="bienvenida">
-          <h2>¡Bienvenido a SOUBAC AJEDREZ! ♟️</h2>
-         
-        
-          <p>
-            Somos una academia dedicada a la formación integral de niños, jóvenes y adultos apasionados por el ajedrez.
-          </p>
-        
-          <p>
-            En <strong>SOUBAC AJEDREZ</strong> brindamos clases
-            <strong>presenciales</strong> y <strong>virtuales</strong>,
-            adaptándonos a cada estudiante para potenciar su concentración,
-            disciplina, estrategia y pensamiento lógico.
-          </p>
-        
-          <p>
-            Te invitamos a formar parte de nuestra comunidad y seguir creciendo
-            movimiento a movimiento.
-          </p>
-        </div>
-        <div class="ubicaciones">
-          <h2>Nuestras sedes</h2>
-        
-          <div class="sedes-container">
-            <div class="sede-card">
-              <p>📍 Calle 2 de Mayo 321, interior 302, Lambayeque</p>
+        <!-- ======================================
+             SECCIÓN INICIO
+        ======================================= -->
+
+        <section
+            id="inicio"
+            class="seccion activa"
+        >
+
+            <div class="hero">
+
+                <div class="hero-imagen">
+                    <img
+                        src="CLASE.png"
+                        alt="Clases de ajedrez en Academia Soubac"
+                    >
+                </div>
+
+                <div class="hero-imagen">
+                    <img
+                        src="2VIRTUAL.png"
+                        alt="Clases virtuales de ajedrez"
+                    >
+                </div>
+
+                <div class="hero-imagen">
+                    <img
+                        src="REVICION.png"
+                        alt="Evaluación y revisión de partidas"
+                    >
+                </div>
+
             </div>
-        
-            <div class="sede-card">
-              <p>📍 Urb. Sol de Pimentel</p>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <!-- Libros -->
-        <section id="libros" class="seccion">
-          <h2 class="titulo-seccion">Libros gratuitos para descargar</h2>
-        
-          <div class="botones-info">
-            <a href="https://drive.google.com/drive/folders/1s7tAnuWdynVDA54csrYfxV7MKj_L0i9k?usp=drive_link" target="_blank" rel="noopener noreferrer">
-              Aperturas
-              <span>Domina las bases del inicio.</span>
-              <strong>Libro de aperturas →</strong>
-            </a>
-        
-            <a href="https://drive.google.com/drive/folders/1s7tAnuWdynVDA54csrYfxV7MKj_L0i9k?usp=drive_link" target="_blank" rel="noopener noreferrer">
-              Temas tácticos
-              <span>Mejora cálculo y visión táctica.</span>
-              <strong>Libro táctico →</strong>
-            </a>
-        
-            <a href="https://drive.google.com/drive/u/0/folders/1nPCAhvg_FlbYNdUQX7f3SKEYF1a0eUvt" target="_blank" rel="noopener noreferrer">
-              Defensas
-              <span>Aprende a defenderte mejor.</span>
-              <strong>Libro de defensas →</strong>
-            </a>
-        
-            <a href="https://drive.google.com/drive/folders/1Rdlm2b3JLb_sGrIqVpJ2YJlT12IQUEFQ?usp=sharing" target="_blank" rel="noopener noreferrer">
-              Historia
-              <span>Conoce la evolución del ajedrez.</span>
-              <strong>Libro histórico →</strong>
-            </a>
-        
-            <a href="https://drive.google.com/drive/folders/1BMTeaEMbn0aLVgg1LiCSLGcdNyMWaonM?usp=sharing" target="_blank" rel="noopener noreferrer">
-              Gambitos
-              <span>Ataques agresivos y dinámicos.</span>
-              <strong>Libro de gambitos →</strong>
-            </a>
-        
-            <a href="https://drive.google.com/drive/u/0/folders/1_gXmSnxcj2Xetcw6QogtqDeLMVVEW6iB" target="_blank" rel="noopener noreferrer">
-              Principiantes
-              <span>Ideal para empezar desde cero.</span>
-              <strong>Libro básico →</strong>
-            </a>
-          </div>
+
+            <!-- Presentación de la academia -->
+
+            <div class="bienvenida">
+
+                <h2>
+                    ¡Bienvenido a Soubac Ajedrez! ♟️
+                </h2>
+
+                <p>
+                    Somos una academia dedicada a la formación integral
+                    de niños, jóvenes y adultos apasionados por el ajedrez.
+                </p>
+
+                <p>
+                    En <strong>Soubac Ajedrez</strong> brindamos clases
+                    <strong>presenciales</strong> y
+                    <strong>virtuales en vivo</strong>, adaptándonos al
+                    nivel de cada estudiante para potenciar su
+                    concentración, disciplina, estrategia y pensamiento
+                    lógico.
+                </p>
+
+                <p>
+                    Te invitamos a formar parte de nuestra comunidad y
+                    seguir creciendo movimiento a movimiento.
+                </p>
+
+            </div>
+
+
+            <!-- Sedes de la academia -->
+
+            <div class="ubicaciones">
+
+                <h2>Nuestras sedes</h2>
+
+                <div class="sedes-container">
+
+                    <article class="sede-card">
+
+                        <i
+                            class="fa-solid fa-location-dot"
+                            aria-hidden="true"
+                        ></i>
+
+                        <p>
+                            Calle 2 de Mayo 321, interior 302,
+                            Lambayeque
+                        </p>
+
+                    </article>
+
+
+                    <article class="sede-card">
+
+                        <i
+                            class="fa-solid fa-location-dot"
+                            aria-hidden="true"
+                        ></i>
+
+                        <p>
+                            Urbanización Sol de Pimentel
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+        <!-- ======================================
+             SECCIÓN LIBROS
+        ======================================= -->
+
+        <section
+            id="libros"
+            class="seccion"
+        >
+
+            <h2 class="titulo-seccion">
+                Libros gratuitos para descargar
+            </h2>
+
+            <div class="botones-info">
+
+                <a
+                    href="https://drive.google.com/drive/folders/1s7tAnuWdynVDA54csrYfxV7MKj_L0i9k?usp=drive_link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Aperturas
+
+                    <span>
+                        Domina las bases del inicio de la partida.
+                    </span>
+
+                    <strong>
+                        Libro de aperturas →
+                    </strong>
+                </a>
+
+
+                <a
+                    href="https://drive.google.com/drive/folders/1s7tAnuWdynVDA54csrYfxV7MKj_L0i9k?usp=drive_link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Temas tácticos
+
+                    <span>
+                        Mejora tu cálculo y visión táctica.
+                    </span>
+
+                    <strong>
+                        Libro de táctica →
+                    </strong>
+                </a>
+
+
+                <a
+                    href="https://drive.google.com/drive/u/0/folders/1nPCAhvg_FlbYNdUQX7f3SKEYF1a0eUvt"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Defensas
+
+                    <span>
+                        Aprende a defenderte de manera estratégica.
+                    </span>
+
+                    <strong>
+                        Libro de defensas →
+                    </strong>
+                </a>
+
+
+                <a
+                    href="https://drive.google.com/drive/folders/1Rdlm2b3JLb_sGrIqVpJ2YJlT12IQUEFQ?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Historia
+
+                    <span>
+                        Conoce la evolución y el origen del ajedrez.
+                    </span>
+
+                    <strong>
+                        Libro histórico →
+                    </strong>
+                </a>
+
+
+                <a
+                    href="https://drive.google.com/drive/folders/1BMTeaEMbn0aLVgg1LiCSLGcdNyMWaonM?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Gambitos
+
+                    <span>
+                        Descubre ataques agresivos y dinámicos.
+                    </span>
+
+                    <strong>
+                        Libro de gambitos →
+                    </strong>
+                </a>
+
+
+                <a
+                    href="https://drive.google.com/drive/u/0/folders/1_gXmSnxcj2Xetcw6QogtqDeLMVVEW6iB"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Principiantes
+
+                    <span>
+                        Material ideal para empezar desde cero.
+                    </span>
+
+                    <strong>
+                        Libro básico →
+                    </strong>
+                </a>
+
+            </div>
+
         </section>
 
-      <!-- Historias -->
-      <section id="historia" class="seccion">
-        <div class="historia-container">
-      
-          <div class="historia-imagen">
-            <img src="ROBERTO.jpeg" alt="Fundador">
 
-            <div class="fundador">
-              ROBERTO LEYVA VIDAURRE
-              <p>PROMOTOR</p>
+        <!-- ======================================
+             SECCIÓN HISTORIA
+        ======================================= -->
+
+        <section
+            id="historia"
+            class="seccion"
+        >
+
+            <div class="historia-container">
+
+                <div class="historia-imagen">
+
+                    <img
+                        src="ROBERTO.jpeg"
+                        alt="Roberto Leyva Vidaurre, promotor de Academia Soubac Ajedrez"
+                        loading="lazy"
+                    >
+
+                    <div class="fundador">
+                        Roberto Leyva Vidaurre
+                        <p>Promotor</p>
+                    </div>
+
+                </div>
+
+
+                <div class="historia-texto">
+
+                    <h2 class="titulo-seccion">
+                        Nuestra historia
+                    </h2>
+
+                    <p>
+                        La historia de
+                        <strong>Soubac Ajedrez</strong>
+                        comenzó el 3 de enero de 2019, en una pequeña
+                        sede ubicada en la calle 2 de Mayo 253, en el
+                        departamento de <strong>Lambayeque</strong>.
+                    </p>
+
+                    <p>
+                        Todo inició con cuatro alumnos, un tablero y un
+                        gran sueño: enseñar ajedrez con pasión,
+                        disciplina y cercanía. Poco a poco, las familias
+                        comenzaron a recomendarnos y nuestros
+                        estudiantes crecieron no solo en nivel, sino
+                        también en confianza, concentración y valores.
+                    </p>
+
+                    <p>
+                        Ese mismo año realizamos nuestro primer torneo
+                        interno. Uno de nuestros primeros grandes logros
+                        llegó cuando nuestra alumna Laura Fabiola, con
+                        apenas seis años, obtuvo el primer puesto en un
+                        torneo realizado en <strong>Chiclayo</strong>.
+                    </p>
+
+                    <p>
+                        Durante la pandemia nos reinventamos con clases
+                        virtuales mediante Zoom. Esto nos permitió
+                        llegar a diferentes departamentos del Perú y a
+                        estudiantes de otros países.
+                    </p>
+
+                    <p>
+                        Actualmente,
+                        <strong>Soubac Ajedrez</strong>
+                        continúa creciendo con sedes presenciales,
+                        clases virtuales y una comunidad que avanza
+                        movimiento a movimiento. Más que una academia,
+                        somos una familia nacida de un sueño.
+                    </p>
+
+                </div>
+
             </div>
-          </div>
 
-          <div class="historia-texto">
-            <h2 class="titulo-seccion">Nuestra historia</h2>
+        </section>
 
-            <p>
-              La historia de <strong>SOUBAC AJEDREZ</strong> comenzó el 3 de enero de 2019,
-              en una pequeña sede ubicada en la calle 2 de Mayo 253, en el departamento de
-              <strong>Lambayeque</strong>.
-            </p>
 
-            <p>
-              Todo inició con solo cuatro alumnos, un tablero y un gran sueño: enseñar ajedrez
-              con pasión, disciplina y cercanía. Poco a poco, las familias comenzaron a
-              recomendarnos y nuestros estudiantes crecieron no solo en nivel, sino también en
-              confianza, concentración y valores.
-            </p>
+        <!-- ======================================
+             SECCIÓN GALERÍA
+        ======================================= -->
 
-            <p>
-              Ese mismo año realizamos nuestro primer torneo interno. Uno de nuestros primeros
-              grandes logros llegó cuando nuestra alumna Laura Fabiola, con apenas seis años,
-              obtuvo el primer puesto en un torneo realizado en <strong>Chiclayo</strong>.
-            </p>
+        <section
+            id="fotos"
+            class="seccion"
+        >
 
-            <p>
-              Durante la pandemia nos reinventamos con clases virtuales por Zoom, lo que nos
-              permitió llegar a diferentes departamentos del Perú y a estudiantes de otros países.
-            </p>
+            <h2 class="titulo-seccion">
+                Galería
+            </h2>
 
-            <p>
-              Hoy, <strong>SOUBAC AJEDREZ</strong> continúa creciendo con sedes presenciales,
-              clases virtuales y una comunidad que avanza movimiento a movimiento. Más que una
-              academia, somos una familia nacida de un sueño.
-            </p>
-          </div>
-        </div>
-      </section>
+            <div class="galeria">
 
-<!-- Fotos -->
-<section id="fotos" class="seccion">
+                <div class="card-galeria">
+                    <img
+                        src="1.jpeg"
+                        alt="Actividad de Academia Soubac Ajedrez"
+                        loading="lazy"
+                    >
+                </div>
 
-    <h1>Galería</h1>
+                <div class="card-galeria">
+                    <img
+                        src="2.jpeg"
+                        alt="Estudiantes durante una actividad de ajedrez"
+                        loading="lazy"
+                    >
+                </div>
 
-    <div class="galeria">
+                <div class="card-galeria">
+                    <img
+                        src="3.jpeg"
+                        alt="Participación de estudiantes de Soubac Ajedrez"
+                        loading="lazy"
+                    >
+                </div>
 
-        <div class="card-galeria">
-            <img 
-                 src="1.jpeg"
-                 alt="Foto 1"
-                 loading="lazy"
-                 onclick="abrirImagen(this.src,this.alt)">
-        </div>
+                <div class="card-galeria">
+                    <img
+                        src="T4.jpeg"
+                        alt="Torneo de Academia Soubac Ajedrez"
+                        loading="lazy"
+                    >
+                </div>
 
-        <div class="card-galeria">
-            <img 
-                 src="2.jpeg"
-                 alt="Foto 2"
-                 loading="lazy"
-                 onclick="abrirImagen(this.src,this.alt)">
-        </div>
+                <div class="card-galeria">
+                    <img
+                        src="T2.jpeg"
+                        alt="Competencia de ajedrez"
+                        loading="lazy"
+                    >
+                </div>
 
-        <div class="card-galeria">
-            <img 
-                 src="3.jpeg"
-                 alt="Foto 3"
-                 loading="lazy"
-                 onclick="abrirImagen(this.src,this.alt)">
-        </div>
+                <div class="card-galeria">
+                    <img
+                        src="T1.jpeg"
+                        alt="Estudiantes participando en un torneo"
+                        loading="lazy"
+                    >
+                </div>
 
-        <div class="card-galeria">
-            <img 
-                 src="T4.jpeg"
-                 alt="Foto 4"
-                 loading="lazy"
-                 onclick="abrirImagen(this.src,this.alt)">
-        </div>
+                <div class="card-galeria">
+                    <img
+                        src="cop1.jpg"
+                        alt="Alumno de Academia Soubac Ajedrez"
+                        loading="lazy"
+                    >
+                </div>
 
-        <div class="card-galeria">
-            <img 
-                 src="T2.jpeg"
-                 alt="Foto 5"
-                 loading="lazy"
-                 onclick="abrirImagen(this.src,this.alt)">
-        </div>
+                <div class="card-galeria">
+                    <img
+                        src="alondra.jpg"
+                        alt="Reconocimiento obtenido por una estudiante"
+                        loading="lazy"
+                    >
+                </div>
 
-        <div class="card-galeria">
-            <img 
-                 src="T1.jpeg"
-                 alt="Foto 6"
-                 loading="lazy"
-                 onclick="abrirImagen(this.src,this.alt)">
-        </div>
+                <div class="card-galeria">
+                    <img
+                        src="Gerian.jpg"
+                        alt="Reconocimiento de estudiante de Soubac Ajedrez"
+                        loading="lazy"
+                    >
+                </div>
 
-        <div class="card-galeria">
-            <img 
-                 src="cop1.jpg"
-                 alt="Alumno de Academia Soubac Ajedrez"
-                 loading="lazy"
-                 onclick="abrirImagen(this.src,this.alt)">
-        </div>
+                <div class="card-galeria">
+                    <img
+                        src="ninos.jpg"
+                        alt="Niños participando en actividades de ajedrez"
+                        loading="lazy"
+                    >
+                </div>
 
-        <div class="card-galeria">
-            <img 
-                 src="alondra.jpg"
-                 alt="Reconocimiento"
-                 loading="lazy"
-                 onclick="abrirImagen(this.src,this.alt)">
-        </div>
+                <div class="card-galeria">
+                    <img
+                        src="liam.jpg"
+                        alt="Estudiante de Academia Soubac Ajedrez"
+                        loading="lazy"
+                    >
+                </div>
 
-        <div class="card-galeria">
-            <img 
-                 src="Gerián.jpg"
-                 alt="Reconocimiento"
-                 loading="lazy"
-                 onclick="abrirImagen(this.src,this.alt)">
-        </div>
+            </div>
 
-        <div class="card-galeria">
-            <img 
-                 src="niños.jpg"
-                 alt="Reconocimiento"
-                 loading="lazy"
-                 onclick="abrirImagen(this.src,this.alt)">
-        </div>
+        </section>
 
-        <div class="card-galeria">
-            <img 
-                 src="liam.jpg"
-                 alt="Reconocimiento"
-                 loading="lazy"
-                 onclick="abrirImagen(this.src,this.alt)">
-        </div>
+
+        <!-- ======================================
+             SECCIÓN PLATAFORMAS
+        ======================================= -->
+
+        <section
+            id="plataformas"
+            class="seccion"
+        >
+
+            <h2 class="titulo-plataformas">
+                Plataformas que utilizamos
+            </h2>
+
+            <div class="plataformas-container">
+
+                <a
+                    href="https://lichess.org/team/academia-soubac-ajedrez"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="plataforma-card"
+                >
+
+                    <img
+                        src="lichess.png"
+                        alt="Logotipo de Lichess"
+                        loading="lazy"
+                    >
+
+                    <h3>Lichess.org</h3>
+
+                    <p>
+                        Juega, analiza partidas y entrena de manera
+                        gratuita.
+                    </p>
+
+                </a>
+
+
+                <a
+                    href="https://zoom.us"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="plataforma-card"
+                >
+
+                    <img
+                        src="zoom.jpg"
+                        alt="Logotipo de Zoom"
+                        loading="lazy"
+                    >
+
+                    <h3>Zoom</h3>
+
+                    <p>
+                        Realizamos clases virtuales en vivo para
+                        estudiantes de todo el Perú.
+                    </p>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- ======================================
+             SECCIÓN REDES SOCIALES
+        ======================================= -->
+
+        <section
+            id="redes"
+            class="seccion"
+        >
+
+            <h2 class="titulo-redes">
+                Síguenos en nuestras redes sociales
+            </h2>
+
+            <div class="redes-container">
+
+                <a
+                    href="https://www.instagram.com/academiasoubacajedrez"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="red-card instagram"
+                >
+
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+                        alt="Instagram"
+                        loading="lazy"
+                    >
+
+                    <h3>Instagram</h3>
+
+                    <p>
+                        Contenido educativo, logros y novedades.
+                    </p>
+
+                </a>
+
+
+                <a
+                    href="https://www.facebook.com/academiasoubacajedrez/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="red-card facebook"
+                >
+
+                    <img
+                        src="https://cdn-icons-png.flaticon.com/512/20/20837.png"
+                        alt="Facebook"
+                        loading="lazy"
+                    >
+
+                    <h3>Facebook</h3>
+
+                    <p>
+                        Noticias, eventos y publicaciones oficiales.
+                    </p>
+
+                </a>
+
+
+                <a
+                    href="https://www.tiktok.com/@soubacajedrez_"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="red-card tiktok"
+                >
+
+                    <img
+                        src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png"
+                        alt="TikTok"
+                        loading="lazy"
+                    >
+
+                    <h3>TikTok</h3>
+
+                    <p>
+                        Videos, consejos y transmisiones en vivo.
+                    </p>
+
+                </a>
+
+            </div>
+
+        </section>
+                <!-- ======================================
+             SECCIÓN TIENDA
+        ======================================= -->
+
+        <section
+            id="tienda"
+            class="seccion"
+        >
+
+            <h2 class="titulo-tienda">
+                🛒 Tienda Soubac
+            </h2>
+
+            <div class="productos">
+
+
+                <!-- PRODUCTO 1 -->
+
+                <article class="producto">
+
+                    <div class="producto-imagen">
+
+                        <img
+                            src="clase-demostrativa.png"
+                            class="img-producto"
+                            alt="Clase demostrativa de ajedrez"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+                    <h3>
+                        Clase demostrativa de ajedrez
+                    </h3>
+
+                    <p>Gratis</p>
+
+                    <button
+                        type="button"
+                        onclick="agregarCarrito(
+                            'Clase demostrativa de ajedrez',
+                            0
+                        )"
+                    >
+                        Agregar al carrito
+                    </button>
+
+                </article>
+
+
+                <!-- PRODUCTO 2 -->
+
+                <article class="producto">
+
+                    <div class="producto-imagen">
+
+                        <img
+                            src="tablero-de-vinil.jpg"
+                            class="img-producto"
+                            alt="Tablero de ajedrez de vinil"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+                    <h3>
+                        Tablero de vinil
+                    </h3>
+
+                    <p>S/ 30.00</p>
+
+                    <button
+                        type="button"
+                        onclick="agregarCarrito(
+                            'Tablero de vinil',
+                            30
+                        )"
+                    >
+                        Agregar al carrito
+                    </button>
+
+                </article>
+
+
+                <!-- PRODUCTO 3 -->
+
+                <article class="producto">
+
+                    <div class="producto-imagen">
+
+                        <img
+                            src="piezas-de-plastico.jpg"
+                            class="img-producto"
+                            alt="Piezas de ajedrez de plástico"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+                    <h3>
+                        Piezas de plástico
+                    </h3>
+
+                    <p>S/ 25.00</p>
+
+                    <button
+                        type="button"
+                        onclick="agregarCarrito(
+                            'Piezas de plástico',
+                            25
+                        )"
+                    >
+                        Agregar al carrito
+                    </button>
+
+                </article>
+
+
+                <!-- PRODUCTO 4 -->
+
+                <article class="producto">
+
+                    <div class="producto-imagen">
+
+                        <img
+                            src="conjunto-de-ajedrez.avif"
+                            class="img-producto"
+                            alt="Juego de ajedrez compacto con bolsa"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+                    <h3>
+                        Juego de ajedrez compacto con bolsa
+                    </h3>
+
+                    <p>S/ 75.00</p>
+
+                    <button
+                        type="button"
+                        onclick="agregarCarrito(
+                            'Juego de ajedrez compacto con bolsa',
+                            75
+                        )"
+                    >
+                        Agregar al carrito
+                    </button>
+
+                </article>
+
+
+                <!-- PRODUCTO 5 -->
+
+                <article class="producto">
+
+                    <div class="producto-imagen">
+
+                        <img
+                            src="reloj-digital.png"
+                            class="img-producto"
+                            alt="Reloj digital profesional de ajedrez"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+                    <h3>
+                        Reloj de ajedrez digital profesional
+                    </h3>
+
+                    <p>S/ 55.00</p>
+
+                    <button
+                        type="button"
+                        onclick="agregarCarrito(
+                            'Reloj digital profesional',
+                            55
+                        )"
+                    >
+                        Agregar al carrito
+                    </button>
+
+                </article>
+
+
+                <!-- PRODUCTO 6 -->
+
+                <article class="producto">
+
+                    <div class="producto-imagen">
+
+                        <img
+                            src="polo-soubac.png"
+                            class="img-producto"
+                            alt="Polo oficial de Academia Soubac Ajedrez"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+                    <h3>
+                        Polo oficial Soubac Ajedrez
+                    </h3>
+
+                    <p>S/ 60.00</p>
+
+                    <button
+                        type="button"
+                        onclick="agregarCarrito(
+                            'Polo oficial Soubac Ajedrez',
+                            60
+                        )"
+                    >
+                        Agregar al carrito
+                    </button>
+
+                </article>
+
+
+                <!-- PRODUCTO 7 -->
+
+                <article class="producto">
+
+                    <div class="producto-imagen">
+
+                        <img
+                            src="personalizada.png"
+                            class="img-producto"
+                            alt="Clases personalizadas de ajedrez"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+                    <h3>
+                        Clases personalizadas
+                    </h3>
+
+                    <p>S/ 35.00</p>
+
+                    <button
+                        type="button"
+                        onclick="agregarCarrito(
+                            'Clase personalizada',
+                            35
+                        )"
+                    >
+                        Agregar al carrito
+                    </button>
+
+                </article>
+
+
+                <!-- PRODUCTO 8 -->
+
+                <article class="producto">
+
+                    <div class="producto-imagen">
+
+                        <img
+                            src="hotmart.png"
+                            class="img-producto"
+                            alt="Cursos virtuales de ajedrez en Hotmart"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+                    <h3>
+                        Cursos virtuales en Hotmart
+                    </h3>
+
+                    <p>US$ 55.00</p>
+
+                    <button
+                        type="button"
+                        onclick="agregarCarrito(
+                            'Curso virtual en Hotmart',
+                            55
+                        )"
+                    >
+                        Agregar al carrito
+                    </button>
+
+                </article>
+
+            </div>
+
+
+            <!-- BENEFICIOS DE LA TIENDA -->
+
+            <div class="beneficios-tienda">
+
+                <div>
+                    🛡️ Compra segura
+                </div>
+
+                <div>
+                    💬 Atención por WhatsApp
+                </div>
+
+                <div>
+                    🚚 Coordinación de entrega
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ======================================
+             SECCIÓN OPINIONES
+        ======================================= -->
+
+        <section
+            id="opiniones"
+            class="seccion"
+        >
+
+            <h2 class="titulo-clasificacion">
+                ⭐ Clasificación y opiniones
+            </h2>
+
+            <div class="clasificacion-container">
+
+                <div class="clasificacion-info">
+
+                    <h3>
+                        Tu opinión es importante
+                    </h3>
+
+                    <p>
+                        Ayúdanos a mejorar nuestra academia calificando
+                        tu experiencia y compartiendo tus comentarios.
+                    </p>
+
+                    <div class="promedio">
+
+                        ★★★★★
+
+                        <span>
+                            4.9/5
+                        </span>
+
+                    </div>
+
+                    <p class="texto-promedio">
+                        Basado en las valoraciones de nuestra comunidad.
+                    </p>
+
+                </div>
+
+
+                <div class="formulario-google">
+
+                    <iframe
+                        src="https://forms.gle/jCBd2BDiyr8msWov6"
+                        width="100%"
+                        height="850"
+                        frameborder="0"
+                        marginheight="0"
+                        marginwidth="0"
+                        title="Formulario de opiniones de Academia Soubac Ajedrez"
+                        loading="lazy"
+                    >
+                        Cargando formulario...
+                    </iframe>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+        <!-- ==========================================
+         BOTÓN FLOTANTE DE WHATSAPP
+    =========================================== -->
+
+    <div class="whatsapp-container">
+
+        <a
+            class="whatsapp-btn"
+            href="https://wa.me/51973265025?text=Hola%2C%20les%20escribo%20desde%20la%20web%20y%20deseo%20recibir%20informaci%C3%B3n."
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Contactar a Academia Soubac Ajedrez por WhatsApp"
+        >
+
+            <img
+                src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+                alt="WhatsApp"
+            >
+
+        </a>
 
     </div>
 
-</section>
-  <!-- Plataformas -->
-<section id="plataformas" class="seccion">
-  <h2 class="titulo-plataformas">Plataformas que utilizamos</h2>
 
-  <div class="plataformas-container">
+    <!-- ==========================================
+         BOTÓN FLOTANTE DEL CARRITO
+    =========================================== -->
 
-    <a href="https://lichess.org/team/academia-soubac-ajedrez" target="_blank" rel="noopener noreferrer" class="plataforma-card">
-      <img src="lichess.png" alt="Lichess">
-      <h3>Lichess.org</h3>
-      <p>Juega, analiza partidas y entrena totalmente gratis.</p>
-    </a>
+    <button
+        type="button"
+        class="btn-carrito"
+        aria-label="Abrir carrito de compras"
+        onclick="abrirCarrito()"
+    >
+        🛒
 
-    <a href="https://zoom.us" target="_blank" rel="noopener noreferrer" class="plataforma-card">
-      <img src="zoom.jpg" alt="Zoom">
-      <h3>Zoom</h3>
-      <p>Realizamos clases virtuales en vivo para todo el Perú y el mundo.</p>
-    </a>
+        <span id="contadorCarrito">
+            0
+        </span>
+    </button>
 
-  </div>
-</section>
-          <!-- Redes sociales -->
-        <section id="redes" class="seccion">
-  <h2 class="titulo-redes">Síguenos en nuestras redes sociales</h2>
 
-  <div class="redes-container">
+    <!-- Fondo oscuro del carrito -->
 
-    <a href="https://www.instagram.com/academiasoubacajedrez?igsh=ZDFlN2NuZTZyMzYw&utm_source=qr" target="_blank" rel="noopener noreferrer" class="red-card instagram">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
-      <h3>Instagram</h3>
-      <p>Contenido educativo y novedades.</p>
-    </a>
+    <div
+        id="fondoCarrito"
+        class="fondo-carrito"
+        onclick="cerrarCarrito()"
+        aria-hidden="true"
+    ></div>
 
-    <a href="https://www.facebook.com/academiasoubacajedrez/" target="_blank" rel="noopener noreferrer" class="red-card facebook">
-      <img src="https://cdn-icons-png.flaticon.com/512/20/20837.png" alt="Facebook">
-      <h3>Facebook</h3>
-      <p>Noticias, eventos y publicaciones oficiales.</p>
-    </a>
 
-    <a href="https://www.tiktok.com/@soubacajedrez_" data-unique-id="soubacajedrez_" target="_blank" rel="noopener noreferrer" class="red-card tiktok">
-      <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
-      <h3>TikTok</h3>
-      <p>Videos cortos, tips, contenido dinámico y transmisiones en vivo.</p>
-    </a>
+    <!-- ==========================================
+         PANEL DEL CARRITO
+    =========================================== -->
 
-  </div>
-</section>
-<!-- =========================
-     TIENDA
-========================= -->
+    <aside
+        id="panelCarrito"
+        class="panel-carrito"
+        aria-label="Carrito de compras"
+        aria-hidden="true"
+    >
 
-<section id="tienda" class="seccion">
+        <div class="carrito-header">
 
-    <h2 class="titulo-tienda">
-        🛒 Tienda Soubac
-    </h2>
-
-    <div class="productos">
-
-        <!-- Producto 1 -->
-        <div class="producto">
-
-            <div class="producto-imagen">
-                <img
-                    src="calse demostrativa.png"
-                    class="img-producto"
-                    alt="Clase demostrativa de ajedrez"
-                    loading="lazy"
-                >
-
-               
-            </div>
-
-            <h3>Clase demostrativa de ajedrez</h3>
-
-            <p>Gratis</p>
+            <h2>
+                Mi carrito
+            </h2>
 
             <button
                 type="button"
-                onclick="agregarCarrito('Clase demostrativa', 0)"
+                onclick="cerrarCarrito()"
+                aria-label="Cerrar carrito"
             >
-                Agregar al carrito
+                ✕
             </button>
 
         </div>
 
 
-        <!-- Producto 2 -->
-        <div class="producto">
-
-            <div class="producto-imagen">
-                <img
-                    src="tablero de vinil.jpg"
-                    class="img-producto"
-                    alt="Tablero de ajedrez de vinil"
-                    loading="lazy"
-                >
-            </div>
-
-            <h3>Tablero de vinil</h3>
-
-            <p>S/ 30.00</p>
-
-            <button
-                type="button"
-                onclick="agregarCarrito('Tablero de vinil', 30)"
-            >
-                Agregar al carrito
-            </button>
-
-        </div>
+        <div
+            id="listaCarrito"
+            class="lista-carrito"
+        ></div>
 
 
-        <!-- Producto 3 -->
-        <div class="producto">
-
-            <div class="producto-imagen">
-                <img
-                    src="piezas de plastico.jpg"
-                    class="img-producto"
-                    alt="Piezas de ajedrez de plástico"
-                    loading="lazy"
-                >
-
-      
-            </div>
-
-            <h3>Piezas de plástico</h3>
-
-            <p>S/ 25.00</p>
-
-            <button
-                type="button"
-                onclick="agregarCarrito('Piezas de plástico', 25)"
-            >
-                Agregar al carrito
-            </button>
-
-        </div>
-
-
-        <!-- Producto 4 -->
-        <div class="producto">
-
-            <div class="producto-imagen">
-                <img
-                    src="conjunto de ajedrez.avif"
-                    class="img-producto"
-                    alt="Juego de ajedrez compacto con bolsa"
-                    loading="lazy"
-                >
-
-              
-            </div>
+        <div class="carrito-total">
 
             <h3>
-                Juego de ajedrez compacto con bolsa de almacenamiento
+                Total:
+                S/
+                <span id="total">
+                    0.00
+                </span>
             </h3>
 
-            <p>S/ 75.00</p>
-
-            <button
-                type="button"
-                onclick="agregarCarrito('Juego de ajedrez compacto', 75)"
-            >
-                Agregar al carrito
-            </button>
-
         </div>
 
 
-        <!-- Producto 5 -->
-        <div class="producto">
-
-            <div class="producto-imagen">
-                <img
-                    src="reloj digital.png"
-                    class="img-producto"
-                    alt="Reloj digital profesional de ajedrez"
-                    loading="lazy"
-                >
-
-           
-            </div>
-
-            <h3>Reloj de ajedrez digital profesional</h3>
-
-            <p>S/ 55.00</p>
-
-            <button
-                type="button"
-                onclick="agregarCarrito('Reloj digital profesional', 55)"
-            >
-                Agregar al carrito
-            </button>
-
-        </div>
+        <button
+            type="button"
+            class="btn-vaciar-carrito"
+            onclick="vaciarCarrito()"
+        >
+            Vaciar carrito
+        </button>
 
 
-        <!-- Producto 6 -->
-        <div class="producto">
+        <button
+            type="button"
+            class="comprar"
+            onclick="comprarWhatsApp()"
+        >
+            Comprar por WhatsApp
+        </button>
 
-            <div class="producto-imagen">
-                <img
-                    src="polo soubac.png"
-                    class="img-producto"
-                    alt="Polo oficial de Academia Soubac Ajedrez"
-                    loading="lazy"
-                >
-
-           
-            </div>
-
-            <h3>Polo oficial Soubac Ajedrez</h3>
-
-            <p>S/ 60.00</p>
-
-            <button
-                type="button"
-                onclick="agregarCarrito('Polo oficial Soubac Ajedrez', 60)"
-            >
-                Agregar al carrito
-            </button>
-
-        </div>
+    </aside>
 
 
-        <!-- Producto 7 -->
-        <div class="producto">
+    <!-- ==========================================
+         FOOTER
+    =========================================== -->
 
-            <div class="producto-imagen">
-                <img
-                    src="personalizada.png"
-                    class="img-producto"
-                    alt="Clases personalizadas de ajedrez"
-                    loading="lazy"
-                >
+    <footer class="soubac-footer">
+
+        <div class="footer-container">
+
+
+            <!-- INFORMACIÓN PRINCIPAL -->
+
+            <div class="footer-column footer-brand">
+
+                <h2>
+
+                    <span
+                        class="chess-icon"
+                        aria-hidden="true"
+                    >
+                        ♟
+                    </span>
+
+                    Academia Soubac Ajedrez
+
+                </h2>
+
+                <p class="footer-slogan">
+                    “Formando campeones dentro y fuera del tablero.”
+                </p>
+
+                <p>
+                    Academia especializada en la enseñanza del ajedrez
+                    para niños, jóvenes y adultos, promoviendo el
+                    pensamiento estratégico, la disciplina y el
+                    desarrollo intelectual.
+                </p>
+
+                <p class="founded">
+                    <strong>Fundada en:</strong>
+                    2019
+                </p>
 
             </div>
 
-            <h3>Clases personalizadas</h3>
 
-            <p>S/ 35.00</p>
+            <!-- CONTACTO -->
 
-            <button
-                type="button"
-                onclick="agregarCarrito('Clase personalizada', 35)"
-            >
-                Agregar al carrito
-            </button>
+            <div class="footer-column">
 
-        </div>
+                <h3>
+                    Contacto
+                </h3>
+
+                <div class="footer-item">
+
+                    <span
+                        class="footer-icon"
+                        aria-hidden="true"
+                    >
+                        📍
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Sede Lambayeque
+                        </strong>
+
+                        <p>
+                            Calle 2 de Mayo 321, interior 302
+                        </p>
+
+                    </div>
+
+                </div>
 
 
-        <!-- Producto 8 -->
-        <div class="producto">
+                <div class="footer-item">
 
-            <div class="producto-imagen">
-                <img
-                    src="hotmart.png"
-                    class="img-producto"
-                    alt="Cursos virtuales de ajedrez en Hotmart"
-                    loading="lazy"
-                >
+                    <span
+                        class="footer-icon"
+                        aria-hidden="true"
+                    >
+                        📍
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Sede Pimentel
+                        </strong>
+
+                        <p>
+                            Urbanización Sol de Pimentel
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="footer-item">
+
+                    <span
+                        class="footer-icon"
+                        aria-hidden="true"
+                    >
+                        📱
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            WhatsApp
+                        </strong>
+
+                        <p>
+
+                            <a
+                                href="https://wa.me/51973265025"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                +51 973 265 025
+                            </a>
+
+                        </p>
+
+                    </div>
+
+                </div>
 
             </div>
 
-            <h3>Cursos virtuales en Hotmart</h3>
 
-            <p>US$ 55.00</p>
+            <!-- SOBRE LA ACADEMIA -->
 
-            <button
-                type="button"
-                onclick="agregarCarrito('Curso virtual en Hotmart', 55)"
-            >
-                Agregar al carrito
-            </button>
+            <div class="footer-column">
 
-        </div>
+                <h3>
+                    Sobre la academia
+                </h3>
 
-    </div>
-</section>
-    <!-- CLASIFICACIÓN -->
-<section id="opiniones" class="seccion">
+                <ul class="footer-list">
 
-    <h2 class="titulo-clasificacion">
-        ⭐ Clasificación y Opiniones
-    </h2>
+                    <li>
+                        Clases virtuales y presenciales
+                    </li>
 
-    <div class="clasificacion-container">
+                    <li>
+                        Formación para niños, jóvenes y adultos
+                    </li>
 
-        <div class="clasificacion-info">
-            <h3>Tu opinión es importante</h3>
+                    <li>
+                        Docentes especializados
+                    </li>
 
-            <p>
-                Ayúdanos a mejorar nuestra academia calificando tu experiencia
-                y compartiendo tus comentarios.
-            </p>
+                    <li>
+                        Metodología dinámica y progresiva
+                    </li>
 
-            <div class="promedio">
-                ★★★★★
-                <span>4.9/5</span>
+                    <li>
+                        Torneos y actividades formativas
+                    </li>
+
+                </ul>
+
             </div>
 
-            <p class="texto-promedio">
-                Basado en las valoraciones de nuestra comunidad.
-            </p>
+
+            <!-- DESARROLLO WEB -->
+
+            <div class="footer-column">
+
+                <h3>
+                    Desarrollo web
+                </h3>
+
+                <p>
+                    Sitio web diseñado y desarrollado por:
+                </p>
+
+                <p class="developer-name">
+                    Abraham Bobadilla
+                </p>
+
+                <p>
+                    Desarrollador web y fundador de la plataforma
+                    digital de Soubac Ajedrez.
+                </p>
+
+                <ul class="footer-details">
+
+                    <li>
+                        <span aria-hidden="true">🌐</span>
+                        Página web creada en 2026
+                    </li>
+
+                    <li>
+                        <span aria-hidden="true">🔄</span>
+                        Última actualización: julio de 2026
+                    </li>
+
+                    <li>
+                        <span aria-hidden="true">📱</span>
+                        Diseño adaptable para computadoras, tablets y
+                        celulares
+                    </li>
+
+                </ul>
+
+            </div>
+
         </div>
 
-        <div class="formulario-google">
 
-            <!-- PEGA AQUÍ EL IFRAME DE GOOGLE FORMS -->
+        <!-- BARRA INFERIOR -->
 
-            <iframe
-                src="https://forms.gle/jCBd2BDiyr8msWov6"
-                width="100%"
-                height="850"
-                frameborder="0"
-                marginheight="0"
-                marginwidth="0"
-                title="Formulario de opiniones de Academia Soubac Ajedrez"
-                loading="lazy">
+        <div class="footer-bottom">
 
-            Cargando formulario...
+            <div class="footer-bottom-container">
 
-            </iframe>
+                <p>
+                    © 2026 Academia Soubac Ajedrez.
+                    Todos los derechos reservados.
+                </p>
+
+                <p>
+                    Diseñado y desarrollado por
+                    <strong>Abraham Bobadilla</strong>.
+                </p>
+
+            </div>
 
         </div>
 
-    </div>
-
-</section>
-    </main>
-
- <!-- WHATSAPP -->
-<div class="whatsapp-container">
-  <a class="whatsapp-btn"
-     href="https://wa.me/51973265025?text=Hola%2C%20les%20escribo%20desde%20la%20web%20y%20deseo%20recibir%20informaci%C3%B3n."
-     target="_blank" rel="noopener noreferrer">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-  </a>
-</div>
-
-
-
-<!-- CARRITO FLOTANTE -->
-<button type="button" class="btn-carrito" aria-label="Abrir carrito" onclick="abrirCarrito()">
-  🛒 <span id="contadorCarrito">0</span>
-</button>
-
-<div id="panelCarrito" class="panel-carrito">
-  <div class="carrito-header">
-    <h2>Mi carrito</h2>
-    <button type="button" onclick="cerrarCarrito()" aria-label="Cerrar carrito">✕</button>
-  </div>
-
-  <div id="listaCarrito"></div>
-
-  <h3>Total: S/ <span id="total">0</span></h3>
-
-  <button type="button" class="comprar" onclick="comprarWhatsApp()">
-    Comprar por WhatsApp
-  </button>
-</div>
-
-<script>
-function abrirMenu(){
-  const menu = document.getElementById("opcionesMenu");
-  const boton = document.querySelector(".boton-menu");
-  const abierto = menu.classList.toggle("mostrar");
-  boton?.setAttribute("aria-expanded", String(abierto));
-}
-
-function abrirImagen(src){
-  document.getElementById("imagenGrande").src = src;
-  document.getElementById("visor").style.display = "flex";
-  document.body.style.overflow = "hidden";
-}
-
-function cerrarImagen(){
-  document.getElementById("visor").style.display = "none";
-  document.body.style.overflow = "auto";
-}
-
-let carrito = JSON.parse(localStorage.getItem("carritoSoubac") || "[]");
-
-function agregarCarrito(nombre, precio){
-  carrito.push({nombre, precio});
-  actualizarCarrito();
-}
-function actualizarCarrito(){
-  const lista = document.getElementById("listaCarrito");
-  const total = document.getElementById("total");
-  const contador = document.getElementById("contadorCarrito");
-
-  lista.innerHTML = "";
-  let suma = 0;
-
-  carrito.forEach((p, i) => {
-    suma += p.precio;
-
-    lista.innerHTML += `
-      <div class="item-carrito">
-        <span>${p.nombre}</span>
-        <strong>S/ ${p.precio}</strong>
-        <button class="btn-eliminar" onclick="eliminarProducto(${i})">
-🗑
-</button>
-      </div>
-    `;
-  });
-
-  total.textContent = suma;
-  contador.textContent = carrito.length;
-  localStorage.setItem("carritoSoubac", JSON.stringify(carrito));
-}
-
-function eliminarProducto(i){
-  carrito.splice(i, 1);
-  actualizarCarrito();
-}
-
-function abrirCarrito(){
-  document.getElementById("panelCarrito").classList.add("activo");
-}
-
-function cerrarCarrito(){
-  document.getElementById("panelCarrito").classList.remove("activo");
-}
-
-function mostrar(seccion){
-  document.querySelectorAll(".seccion")
-  .forEach(s => s.classList.remove("activa"));
+    </footer>
+        <!-- ==========================================
+         JAVASCRIPT PRINCIPAL
+    =========================================== -->
 
-  document.getElementById(seccion).classList.add("activa");
+    <script>
 
-  document.getElementById("opcionesMenu").classList.remove("mostrar");
+        /* =========================================
+           PANTALLA DE CARGA
+        ========================================== */
 
-  const botonCarrito = document.querySelector(".btn-carrito");
+        document.addEventListener("DOMContentLoaded", () => {
 
-  if(seccion === "tienda"){
-    botonCarrito.style.display = "block";
-  }else{
-    botonCarrito.style.display = "none";
-    cerrarCarrito();
-  }
-}
+            const pantallaCarga =
+                document.getElementById("pantalla-carga");
 
-function comprarWhatsApp(){
-  if(carrito.length === 0){
-    alert("Tu carrito está vacío");
-    return;
-  }
+            if (pantallaCarga) {
 
-  let mensaje = "Hola, deseo realizar el siguiente pedido:\n";
-  let suma = 0;
+                setTimeout(() => {
 
-  carrito.forEach(p => {
-    mensaje += `• ${p.nombre}: S/ ${p.precio.toFixed(2)}\n`;
-    suma += p.precio;
-  });
+                    pantallaCarga.style.opacity = "0";
 
-  mensaje += `\nTotal: S/ ${suma.toFixed(2)}`;
-  const url = `https://wa.me/51973265025?text=${encodeURIComponent(mensaje)}`;
-  window.open(url, "_blank", "noopener,noreferrer");
-}
-    function abrirProducto(src){
-
-    document
-    .getElementById("imagenProductoGrande")
-    .src = src;
-
-    document
-    .getElementById("visorProducto")
-    .style.display = "flex";
-
-    document.body.style.overflow = "hidden";
-
-}
-
-function cerrarProducto(){
-
-    document
-    .getElementById("visorProducto")
-    .style.display = "none";
-
-    document.body.style.overflow = "auto";
-
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  actualizarCarrito();
-  const botonCarrito = document.querySelector(".btn-carrito");
-  if (botonCarrito) botonCarrito.style.display = "none";
-});
-</script>
-<div id="visorProducto" role="dialog" aria-modal="true" aria-label="Vista ampliada del producto">
-
-    <button type="button" onclick="cerrarProducto()" aria-label="Cerrar producto">✕</button>
-
-    <img id="imagenProductoGrande" alt="Vista ampliada del producto">
-
-</div>
-    <!-- Vincular el archivo CSS -->
-<link rel="stylesheet" href="footer.css">
-
-<!-- FOOTER SOUBAC AJEDREZ -->
-<footer class="soubac-footer">
-  <div class="footer-container">
-
-    <!-- Información principal -->
-    <div class="footer-column footer-brand">
-      <h2>
-        <span class="chess-icon">♟</span>
-        Academia Soubac Ajedrez
-      </h2>
-
-      <p class="footer-slogan">
-        “Formando campeones dentro y fuera del tablero.”
-      </p>
-
-      <p>
-        Academia especializada en la enseñanza del ajedrez para niños,
-        jóvenes y adultos, promoviendo el pensamiento estratégico,
-        la disciplina y el desarrollo intelectual.
-      </p>
-
-      <p class="founded">
-        <strong>Fundada en:</strong> 2019
-      </p>
-    </div>
-
-    <!-- Contacto -->
-    <div class="footer-column">
-      <h3>Contacto</h3>
-
-      <div class="footer-item">
-        <span class="footer-icon">📍</span>
-
-        <div>
-          <strong>Sede Lambayeque</strong>
-          <p>Calle 2 de Mayo 321, Interior 302</p>
-        </div>
-      </div>
-
-      <div class="footer-item">
-        <span class="footer-icon">📍</span>
-
-        <div>
-          <strong>Sede Pimentel</strong>
-          <p>Urb. Sol de Pimentel</p>
-        </div>
-      </div>
-
-      <div class="footer-item">
-        <span class="footer-icon">📱</span>
-
-        <div>
-          <strong>WhatsApp</strong>
-
-          <p>
-            <a
-              href="https://wa.me/51973265025"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              +51 973 265 025
-            </a>
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Sobre la academia -->
-    <div class="footer-column">
-      <h3>Sobre la academia</h3>
-
-      <ul class="footer-list">
-        <li>Clases virtuales y presenciales</li>
-        <li>Formación para niños, jóvenes y adultos</li>
-        <li>Docentes especializados</li>
-        <li>Metodología dinámica y progresiva</li>
-        <li>Torneos y actividades formativas</li>
-      </ul>
-    </div>
-
-    <!-- Desarrollo web -->
-    <div class="footer-column">
-      <h3>Desarrollo web</h3>
-
-      <p>Sitio web diseñado y desarrollado por:</p>
-
-      <p class="developer-name">
-        Abraham Bobadilla
-      </p>
-
-      <p>
-        Desarrollador web y fundador de la plataforma digital de
-        Soubac Ajedrez.
-      </p>
-
-      <ul class="footer-details">
-        <li>
-          <span>🌐</span>
-          Página web creada en 2026
-        </li>
-
-        <li>
-          <span>🔄</span>
-          Última actualización: Julio 2026
-        </li>
-
-        <li>
-          <span>📱</span>
-          Diseño adaptable para computadoras, tablets y celulares
-        </li>
-      </ul>
-    </div>
-
-  </div>
-
-  <!-- Barra inferior -->
-  <div class="footer-bottom">
-    <div class="footer-bottom-container">
-      <p>
-        © 2026 Academia Soubac Ajedrez |
-        Todos los derechos reservados.
-      </p>
-
-      <p>
-        Diseñado y desarrollado por
-        <strong>Abraham Bobadilla</strong>.
-      </p>
-    </div>
-  </div>
-</footer>
+                    setTimeout(() => {
+                        pantallaCarga.remove();
+                    }, 700);
+
+                }, 500);
+
+            }
+
+            actualizarCarrito();
+            controlarBotonCarrito();
+
+        });
+
+
+        /* =========================================
+           MENÚ
+        ========================================== */
+
+        function abrirMenu() {
+
+            const menu =
+                document.getElementById("opcionesMenu");
+
+            const boton =
+                document.querySelector(".boton-menu");
+
+            if (!menu) return;
+
+            const abierto =
+                menu.classList.toggle("mostrar");
+
+            if (boton) {
+                boton.setAttribute(
+                    "aria-expanded",
+                    String(abierto)
+                );
+            }
+
+        }
+
+
+        function mostrar(idSeccion) {
+
+            const secciones =
+                document.querySelectorAll(".seccion");
+
+            secciones.forEach((seccion) => {
+                seccion.classList.remove("activa");
+            });
+
+
+            const seccionSeleccionada =
+                document.getElementById(idSeccion);
+
+            if (seccionSeleccionada) {
+
+                seccionSeleccionada.classList.add("activa");
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+            }
+
+
+            const menu =
+                document.getElementById("opcionesMenu");
+
+            const botonMenu =
+                document.querySelector(".boton-menu");
+
+            if (menu) {
+                menu.classList.remove("mostrar");
+            }
+
+            if (botonMenu) {
+                botonMenu.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+            }
+
+
+            controlarBotonCarrito(idSeccion);
+            cerrarCarrito();
+
+        }
+
+
+        /* =========================================
+           CARRITO
+        ========================================== */
+
+        let carrito = [];
+
+        try {
+
+            const carritoGuardado =
+                localStorage.getItem("carritoSoubac");
+
+            carrito =
+                carritoGuardado
+                    ? JSON.parse(carritoGuardado)
+                    : [];
+
+            if (!Array.isArray(carrito)) {
+                carrito = [];
+            }
+
+        } catch (error) {
+
+            carrito = [];
+
+            console.error(
+                "No se pudo recuperar el carrito:",
+                error
+            );
+
+        }
+
+
+        function agregarCarrito(nombre, precio) {
+
+            carrito.push({
+                nombre: nombre,
+                precio: Number(precio)
+            });
+
+            actualizarCarrito();
+            abrirCarrito();
+
+        }
+
+
+        function actualizarCarrito() {
+
+            const lista =
+                document.getElementById("listaCarrito");
+
+            const total =
+                document.getElementById("total");
+
+            const contador =
+                document.getElementById("contadorCarrito");
+
+            if (!lista || !total || !contador) return;
+
+
+            lista.innerHTML = "";
+
+            let suma = 0;
+
+
+            if (carrito.length === 0) {
+
+                lista.innerHTML = `
+                    <p class="carrito-vacio">
+                        Tu carrito está vacío.
+                    </p>
+                `;
+
+            } else {
+
+                carrito.forEach((producto, indice) => {
+
+                    const precio =
+                        Number(producto.precio) || 0;
+
+                    suma += precio;
+
+
+                    const item =
+                        document.createElement("div");
+
+                    item.className = "item-carrito";
+
+
+                    const informacion =
+                        document.createElement("div");
+
+                    informacion.className =
+                        "item-carrito-info";
+
+
+                    const nombre =
+                        document.createElement("span");
+
+                    nombre.textContent =
+                        producto.nombre;
+
+
+                    const precioProducto =
+                        document.createElement("strong");
+
+                    precioProducto.textContent =
+                        `S/ ${precio.toFixed(2)}`;
+
+
+                    const botonEliminar =
+                        document.createElement("button");
+
+                    botonEliminar.type = "button";
+
+                    botonEliminar.className =
+                        "btn-eliminar";
+
+                    botonEliminar.setAttribute(
+                        "aria-label",
+                        `Eliminar ${producto.nombre}`
+                    );
+
+                    botonEliminar.textContent = "🗑";
+
+                    botonEliminar.addEventListener(
+                        "click",
+                        () => eliminarProducto(indice)
+                    );
+
+
+                    informacion.appendChild(nombre);
+                    informacion.appendChild(precioProducto);
+
+                    item.appendChild(informacion);
+                    item.appendChild(botonEliminar);
+
+                    lista.appendChild(item);
+
+                });
+
+            }
+
+
+            total.textContent =
+                suma.toFixed(2);
+
+            contador.textContent =
+                carrito.length;
+
+
+            localStorage.setItem(
+                "carritoSoubac",
+                JSON.stringify(carrito)
+            );
+
+        }
+
+
+        function eliminarProducto(indice) {
+
+            if (
+                indice < 0 ||
+                indice >= carrito.length
+            ) {
+                return;
+            }
+
+            carrito.splice(indice, 1);
+
+            actualizarCarrito();
+
+        }
+
+
+        function vaciarCarrito() {
+
+            if (carrito.length === 0) return;
+
+            const confirmar =
+                window.confirm(
+                    "¿Deseas vaciar todo el carrito?"
+                );
+
+            if (!confirmar) return;
+
+            carrito = [];
+
+            actualizarCarrito();
+
+        }
+
+
+        function abrirCarrito() {
+
+            const panel =
+                document.getElementById("panelCarrito");
+
+            const fondo =
+                document.getElementById("fondoCarrito");
+
+            if (panel) {
+
+                panel.classList.add("activo");
+
+                panel.setAttribute(
+                    "aria-hidden",
+                    "false"
+                );
+
+            }
+
+            if (fondo) {
+                fondo.classList.add("activo");
+            }
+
+            document.body.style.overflow = "hidden";
+
+        }
+
+
+        function cerrarCarrito() {
+
+            const panel =
+                document.getElementById("panelCarrito");
+
+            const fondo =
+                document.getElementById("fondoCarrito");
+
+            if (panel) {
+
+                panel.classList.remove("activo");
+
+                panel.setAttribute(
+                    "aria-hidden",
+                    "true"
+                );
+
+            }
+
+            if (fondo) {
+                fondo.classList.remove("activo");
+            }
+
+            document.body.style.overflow = "";
+
+        }
+
+
+        function controlarBotonCarrito(
+            seccionActual = "inicio"
+        ) {
+
+            const botonCarrito =
+                document.querySelector(".btn-carrito");
+
+            if (!botonCarrito) return;
+
+            if (seccionActual === "tienda") {
+
+                botonCarrito.style.display = "flex";
+
+            } else {
+
+                botonCarrito.style.display = "none";
+
+            }
+
+        }
+
+
+        function comprarWhatsApp() {
+
+            if (carrito.length === 0) {
+
+                alert("Tu carrito está vacío.");
+
+                return;
+
+            }
+
+
+            let mensaje =
+                "Hola, deseo realizar el siguiente pedido:\n\n";
+
+            let suma = 0;
+
+
+            carrito.forEach((producto) => {
+
+                const precio =
+                    Number(producto.precio) || 0;
+
+                mensaje +=
+                    `• ${producto.nombre}: S/ ${precio.toFixed(2)}\n`;
+
+                suma += precio;
+
+            });
+
+
+            mensaje +=
+                `\nTotal: S/ ${suma.toFixed(2)}`;
+
+
+            const telefono =
+                "51973265025";
+
+            const enlace =
+                `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+
+
+            window.open(
+                enlace,
+                "_blank",
+                "noopener,noreferrer"
+            );
+
+        }
+
+
+        /* =========================================
+           CERRAR ELEMENTOS CON ESCAPE
+        ========================================== */
+
+        document.addEventListener(
+            "keydown",
+            (evento) => {
+
+                if (evento.key === "Escape") {
+
+                    cerrarCarrito();
+
+                    const menu =
+                        document.getElementById(
+                            "opcionesMenu"
+                        );
+
+                    const boton =
+                        document.querySelector(
+                            ".boton-menu"
+                        );
+
+                    if (menu) {
+                        menu.classList.remove(
+                            "mostrar"
+                        );
+                    }
+
+                    if (boton) {
+
+                        boton.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+                    }
+
+                }
+
+            }
+        );
+
+
+        /* =========================================
+           CERRAR MENÚ AL HACER CLIC FUERA
+        ========================================== */
+
+        document.addEventListener(
+            "click",
+            (evento) => {
+
+                const menu =
+                    document.getElementById(
+                        "opcionesMenu"
+                    );
+
+                const boton =
+                    document.querySelector(
+                        ".boton-menu"
+                    );
+
+                if (!menu || !boton) return;
+
+
+                const clicDentroDelMenu =
+                    menu.contains(evento.target);
+
+                const clicEnElBoton =
+                    boton.contains(evento.target);
+
+
+                if (
+                    !clicDentroDelMenu &&
+                    !clicEnElBoton
+                ) {
+
+                    menu.classList.remove("mostrar");
+
+                    boton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                }
+
+            }
+        );
+
+    </script>
 
 </body>
 </html>
