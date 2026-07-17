@@ -2480,3 +2480,262 @@ font-size:22px;
 }
 
 }
+:root {
+  --footer-bg: #111318;
+  --footer-bottom-bg: #08090c;
+  --footer-gold: #d4af37;
+  --footer-gold-light: #efd477;
+  --footer-text: #c9cbd1;
+  --footer-white: #ffffff;
+  --footer-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.soubac-footer {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(212, 175, 55, 0.08),
+      transparent 35%
+    ),
+    linear-gradient(135deg, #151820 0%, var(--footer-bg) 100%);
+  color: var(--footer-text);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.soubac-footer::before {
+  content: "♟";
+  position: absolute;
+  top: -95px;
+  right: -30px;
+  color: rgba(212, 175, 55, 0.035);
+  font-size: 350px;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.footer-container {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 70px 0 55px;
+  display: grid;
+  grid-template-columns: 1.35fr 1fr 1fr 1.2fr;
+  gap: 45px;
+}
+
+.footer-column h2,
+.footer-column h3 {
+  margin-top: 0;
+  color: var(--footer-white);
+}
+
+.footer-column h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  font-size: 25px;
+  line-height: 1.25;
+}
+
+.footer-column h3 {
+  position: relative;
+  margin-bottom: 25px;
+  padding-bottom: 12px;
+  font-size: 18px;
+}
+
+.footer-column h3::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 42px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--footer-gold),
+    var(--footer-gold-light)
+  );
+}
+
+.chess-icon {
+  color: var(--footer-gold);
+  font-size: 33px;
+}
+
+.footer-column p {
+  margin: 0 0 14px;
+  font-size: 14.5px;
+  line-height: 1.75;
+}
+
+.footer-slogan {
+  color: var(--footer-gold-light);
+  font-weight: 600;
+  font-style: italic;
+}
+
+.founded strong {
+  color: var(--footer-white);
+}
+
+.footer-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.footer-icon {
+  flex-shrink: 0;
+  width: 27px;
+  height: 27px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 7px;
+  background: rgba(212, 175, 55, 0.08);
+  font-size: 13px;
+}
+
+.footer-item strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--footer-white);
+  font-size: 14px;
+}
+
+.footer-item p {
+  margin: 0;
+  line-height: 1.55;
+}
+
+.footer-item a {
+  color: var(--footer-text);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.footer-item a:hover {
+  color: var(--footer-gold-light);
+}
+
+.footer-list,
+.footer-details {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-list li {
+  position: relative;
+  margin-bottom: 13px;
+  padding-left: 18px;
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+
+.footer-list li::before {
+  content: "♟";
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--footer-gold);
+  font-size: 12px;
+}
+
+.developer-name {
+  margin-bottom: 9px !important;
+  color: var(--footer-gold-light);
+  font-size: 17px !important;
+  font-weight: 700;
+}
+
+.footer-details {
+  margin-top: 20px;
+}
+
+.footer-details li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-bottom: 11px;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.footer-details span {
+  flex-shrink: 0;
+}
+
+.footer-bottom {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--footer-border);
+  background: var(--footer-bottom-bg);
+}
+
+.footer-bottom-container {
+  width: min(1180px, calc(100% - 40px));
+  min-height: 72px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.footer-bottom p {
+  margin: 0;
+  color: #9d9fa5;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.footer-bottom strong {
+  color: var(--footer-gold-light);
+}
+
+/* Tablets */
+@media (max-width: 1050px) {
+  .footer-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Celulares */
+@media (max-width: 650px) {
+  .footer-container {
+    width: min(100% - 32px, 1180px);
+    padding: 50px 0 40px;
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .footer-column h2 {
+    font-size: 22px;
+  }
+
+  .footer-bottom-container {
+    width: min(100% - 32px, 1180px);
+    min-height: auto;
+    padding: 22px 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .soubac-footer::before {
+    top: -45px;
+    right: -80px;
+    font-size: 250px;
+  }
+}
