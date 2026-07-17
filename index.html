@@ -868,9 +868,12 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
   </div>
 </footer>
-        <!-- Visor de imagen -->
-<div id="visor-imagen" class="visor-imagen" aria-hidden="true">
-
+ <!-- Visor universal para galería y tienda -->
+<div
+    id="visor-imagen"
+    class="visor-imagen"
+    aria-hidden="true"
+>
     <button
         id="boton-cerrar-imagen"
         class="boton-cerrar-imagen"
@@ -880,12 +883,15 @@ document.addEventListener("DOMContentLoaded", () => {
         &times;
     </button>
 
-    <img
-        id="imagen-grande"
-        src=""
-        alt="Imagen ampliada"
-    >
-
+    <div class="visor-contenido">
+        <img
+            id="imagen-grande"
+            src=""
+            alt="Imagen ampliada"
+        >
+    </div>
 </div>
+
+<script src="script.js"></script>
 </body>
 </html>
