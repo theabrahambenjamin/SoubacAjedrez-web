@@ -2874,4 +2874,7 @@ body.carrito-abierto {
     transform:translateY(-2px);
 
 }
-
+#visor-producto,
+#visor-imagen{
+    display:none !important;
+}
