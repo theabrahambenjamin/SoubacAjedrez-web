@@ -207,292 +207,140 @@ function comprarWhatsApp() {
 
 
 /* ==================================================
-   VISOR UNIVERSAL DE IMÁGENES
+   VISOR PROFESIONAL DE PRODUCTOS
 ================================================== */
 
-function abrirImagen(src, alt = "Imagen ampliada") {
-    const visor = document.getElementById("visor-imagen");
-    const imagenGrande = document.getElementById("imagen-grande");
+document.addEventListener("DOMContentLoaded", () => {
+    const visor = document.getElementById("visor-producto");
+    const imagenAmpliada = document.getElementById(
+        "imagen-producto-ampliada"
+    );
+    const nombreAmpliado = document.getElementById(
+        "nombre-producto-ampliado"
+    );
+    const precioAmpliado = document.getElementById(
+        "precio-producto-ampliado"
+    );
+    const botonCerrar = document.getElementById(
+        "cerrar-visor-producto"
+    );
 
-    if (!visor || !imagenGrande) {
+    if (
+        !visor ||
+        !imagenAmpliada ||
+        !nombreAmpliado ||
+        !precioAmpliado ||
+        !botonCerrar
+    ) {
         console.error(
-            "No se encontró #visor-imagen o #imagen-grande en el HTML."
+            "Faltan elementos del visor de productos en el HTML."
         );
         return;
     }
 
-    if (!src) {
-        console.error("La imagen no tiene una ruta válida.");
-        return;
+    function abrirProducto(producto) {
+        const imagen = producto.querySelector(".img-producto");
+        const nombre = producto.querySelector("h3");
+        const precio =
+            producto.querySelector(".precio-actual") ||
+            producto.querySelector("p");
+
+        if (!imagen) {
+            console.error("El producto no contiene una imagen.");
+            return;
+        }
+
+        imagenAmpliada.src =
+            imagen.currentSrc ||
+            imagen.src;
+
+        imagenAmpliada.alt =
+            imagen.alt ||
+            "Producto ampliado";
+
+        nombreAmpliado.textContent =
+            nombre?.textContent.trim() ||
+            imagen.alt ||
+            "Producto";
+
+        precioAmpliado.textContent =
+            precio?.textContent.trim() ||
+            "";
+
+        visor.classList.add("activo");
+        document.body.classList.add(
+            "visor-producto-abierto"
+        );
+
+        visor.setAttribute("aria-hidden", "false");
+
+        botonCerrar.focus();
     }
 
-    imagenGrande.src = src;
-    imagenGrande.alt = alt || "Imagen ampliada";
-
-    visor.classList.add("activo");
-    visor.setAttribute("aria-hidden", "false");
-
-    document.body.classList.add("visor-abierto");
-
-    const botonCerrar = document.getElementById(
-        "boton-cerrar-imagen"
-    );
-
-    botonCerrar?.focus();
-}
-
-
-function cerrarImagen() {
-    const visor = document.getElementById("visor-imagen");
-    const imagenGrande = document.getElementById("imagen-grande");
-
-    if (!visor) return;
-
-    visor.classList.remove("activo");
-    visor.setAttribute("aria-hidden", "true");
-
-    document.body.classList.remove("visor-abierto");
-
-    window.setTimeout(() => {
-        if (
-            imagenGrande &&
-            !visor.classList.contains("activo")
-        ) {
-            imagenGrande.src = "";
-        }
-    }, 280);
-}
-
-
-/* ==================================================
-   CONFIGURACIÓN INICIAL
-================================================== */
-
-document.addEventListener("DOMContentLoaded", () => {
-    const visor = document.getElementById("visor-imagen");
-    const imagenGrande = document.getElementById("imagen-grande");
-    const botonCerrarImagen = document.getElementById(
-        "boton-cerrar-imagen"
-    );
-
-    /*
-     * Esta parte permite ampliar imágenes aunque olvides
-     * escribir onclick en una imagen nueva.
-     */
-
-    const imagenesAmpliables = document.querySelectorAll(
-        ".card-galeria img, .producto .img-producto, .imagen-ampliable"
-    );
-
-    imagenesAmpliables.forEach((imagen) => {
-        imagen.style.cursor = "zoom-in";
-
-        /*
-         * Solo agrega el evento automático cuando la imagen
-         * no tiene ya un onclick declarado.
-         */
-
-        if (!imagen.hasAttribute("onclick")) {
-            imagen.addEventListener("click", () => {
-                abrirImagen(imagen.currentSrc || imagen.src, imagen.alt);
-            });
-        }
-    });
-
-
-    /* Botón X */
-
-    botonCerrarImagen?.addEventListener("click", (evento) => {
-        evento.preventDefault();
-        evento.stopPropagation();
-
-        cerrarImagen();
-    });
-
-
-    /* Cerrar al pulsar el fondo oscuro */
-
-    visor?.addEventListener("click", (evento) => {
-        const hizoClicEnFondo =
-            evento.target === visor ||
-            evento.target.classList.contains("visor-contenido");
-
-        if (hizoClicEnFondo) {
-            cerrarImagen();
-        }
-    });
-
-
-    /* Evitar que un clic en la foto la cierre */
-
-    imagenGrande?.addEventListener("click", (evento) => {
-        evento.stopPropagation();
-    });
-
-
-    /* Mostrar inicialmente el carrito */
-
-    mostrarCarrito();
-});
-
-
-/* ==================================================
-   EVENTOS DEL TECLADO
-================================================== */
-
-document.addEventListener("keydown", (evento) => {
-    if (evento.key === "Escape") {
-        cerrarImagen();
-        cerrarCarrito();
-    }
-});
-/* ==================================================
-   VISOR PROFESIONAL PARA PRODUCTOS
-================================================== */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    /* Crear el visor automáticamente */
-    const visor = document.createElement("div");
-    visor.id = "visor-producto";
-    visor.className = "visor-producto";
-    visor.setAttribute("aria-hidden", "true");
-
-    visor.innerHTML = `
-        <div class="visor-producto-contenido">
-
-            <button
-                type="button"
-                class="cerrar-visor-producto"
-                aria-label="Cerrar imagen"
-            >
-                &times;
-            </button>
-
-            <img
-                id="imagen-producto-ampliada"
-                src=""
-                alt="Producto ampliado"
-            >
-
-            <h3 id="nombre-producto-ampliado"></h3>
-
-        </div>
-    `;
-
-    document.body.appendChild(visor);
-
-    const imagenAmpliada = document.getElementById(
-        "imagen-producto-ampliada"
-    );
-
-    const nombreAmpliado = document.getElementById(
-        "nombre-producto-ampliado"
-    );
-
-    const botonCerrar = visor.querySelector(
-        ".cerrar-visor-producto"
-    );
-
-
-    /* Abrir al presionar una tarjeta de producto */
-    document.querySelectorAll(".producto").forEach(function (producto) {
-
-        producto.setAttribute("tabindex", "0");
-        producto.setAttribute("role", "button");
-
-        producto.addEventListener("click", function (evento) {
-
-            /*
-             * No abrir la imagen cuando se presiona
-             * el botón Agregar al carrito.
-             */
-            if (evento.target.closest("button")) {
-                return;
-            }
-
-            const imagen = producto.querySelector("img");
-            const titulo = producto.querySelector("h3");
-
-            if (!imagen) {
-                return;
-            }
-
-            imagenAmpliada.src =
-                imagen.currentSrc || imagen.src;
-
-            imagenAmpliada.alt =
-                imagen.alt || "Producto ampliado";
-
-            nombreAmpliado.textContent =
-                titulo?.textContent.trim() || "";
-
-            visor.classList.add("activo");
-            visor.setAttribute("aria-hidden", "false");
-
-            document.body.classList.add("visor-producto-abierto");
-        });
-
-
-        /* También abrir usando Enter */
-        producto.addEventListener("keydown", function (evento) {
-
-            if (
-                evento.key === "Enter" &&
-                !evento.target.closest("button")
-            ) {
-                evento.preventDefault();
-                producto.click();
-            }
-
-        });
-
-    });
-
-
-    function cerrarVisorProducto() {
+    function cerrarProducto() {
         visor.classList.remove("activo");
-        visor.setAttribute("aria-hidden", "true");
 
         document.body.classList.remove(
             "visor-producto-abierto"
         );
 
-        window.setTimeout(function () {
+        visor.setAttribute("aria-hidden", "true");
 
-            if (!visor.classList.contains("activo")) {
-                imagenAmpliada.src = "";
-                nombreAmpliado.textContent = "";
-            }
-
-        }, 250);
+        setTimeout(() => {
+            imagenAmpliada.src = "";
+            imagenAmpliada.alt = "";
+            nombreAmpliado.textContent = "";
+            precioAmpliado.textContent = "";
+        }, 300);
     }
 
+    document.querySelectorAll(".producto").forEach((producto) => {
+        const contenedorImagen =
+            producto.querySelector(".producto-imagen");
 
-    /* Cerrar con la X */
-    botonCerrar.addEventListener("click", function (evento) {
-        evento.stopPropagation();
-        cerrarVisorProducto();
+        if (!contenedorImagen) {
+            return;
+        }
+
+        contenedorImagen.setAttribute("role", "button");
+        contenedorImagen.setAttribute("tabindex", "0");
+        contenedorImagen.setAttribute(
+            "aria-label",
+            "Ver producto ampliado"
+        );
+
+        contenedorImagen.addEventListener("click", () => {
+            abrirProducto(producto);
+        });
+
+        contenedorImagen.addEventListener(
+            "keydown",
+            (evento) => {
+                if (
+                    evento.key === "Enter" ||
+                    evento.key === " "
+                ) {
+                    evento.preventDefault();
+                    abrirProducto(producto);
+                }
+            }
+        );
     });
 
+    botonCerrar.addEventListener("click", cerrarProducto);
 
-    /* Cerrar presionando el fondo oscuro */
-    visor.addEventListener("click", function (evento) {
-
+    visor.addEventListener("click", (evento) => {
         if (evento.target === visor) {
-            cerrarVisorProducto();
+            cerrarProducto();
         }
-
     });
 
-
-    /* Cerrar con Escape */
-    document.addEventListener("keydown", function (evento) {
-
-        if (evento.key === "Escape") {
-            cerrarVisorProducto();
+    document.addEventListener("keydown", (evento) => {
+        if (
+            evento.key === "Escape" &&
+            visor.classList.contains("activo")
+        ) {
+            cerrarProducto();
         }
-
     });
-
 });
