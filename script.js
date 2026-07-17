@@ -101,68 +101,79 @@ function cerrarProducto() {
     document.body.style.overflow = "";
 }
 
-/* =========================
-   VISOR DE GALERÍA
-========================= */
-
 function abrirImagen(src, alt = "Imagen ampliada") {
     const visor = document.getElementById("visor-imagen");
     const imagenGrande = document.getElementById("imagen-grande");
 
     if (!visor || !imagenGrande) {
-        console.error(
-            'No se encontró #visor-imagen o #imagen-grande en el HTML.'
-        );
+        console.error("No se encontró el visor de imágenes.");
         return;
     }
 
     imagenGrande.src = src;
     imagenGrande.alt = alt;
 
-    visor.classList.add("visible");
+    visor.classList.add("activo");
     visor.setAttribute("aria-hidden", "false");
 
     document.body.style.overflow = "hidden";
 }
 
+
 function cerrarImagen() {
     const visor = document.getElementById("visor-imagen");
     const imagenGrande = document.getElementById("imagen-grande");
 
-    if (!visor) return;
+    if (!visor) {
+        return;
+    }
 
-    visor.classList.remove("visible");
+    visor.classList.remove("activo");
     visor.setAttribute("aria-hidden", "true");
 
-    if (imagenGrande) {
-        imagenGrande.src = "";
-    }
-
     document.body.style.overflow = "";
+
+    setTimeout(() => {
+        if (imagenGrande) {
+            imagenGrande.src = "";
+        }
+    }, 250);
 }
 
-/* Cerrar únicamente al tocar el fondo oscuro */
-document.addEventListener("DOMContentLoaded", () => {
-    const visor = document.getElementById("visor-imagen");
 
-    if (visor) {
-        visor.addEventListener("click", (evento) => {
-            if (evento.target === visor) {
-                cerrarImagen();
-            }
-        });
-    }
+document.addEventListener("DOMContentLoaded", function () {
+    const visor = document.getElementById("visor-imagen");
+    const botonCerrar = document.getElementById("boton-cerrar-imagen");
+    const imagenGrande = document.getElementById("imagen-grande");
+
+    /* Cerrar al presionar la X */
+
+    botonCerrar?.addEventListener("click", function () {
+        cerrarImagen();
+    });
+
+
+    /* Cerrar al hacer clic en el fondo oscuro */
+
+    visor?.addEventListener("click", function (evento) {
+        if (evento.target === visor) {
+            cerrarImagen();
+        }
+    });
+
+
+    /* Evitar que se cierre al hacer clic sobre la imagen */
+
+    imagenGrande?.addEventListener("click", function (evento) {
+        evento.stopPropagation();
+    });
 });
+
 
 /* Cerrar con la tecla Escape */
-document.addEventListener("keydown", (evento) => {
+
+document.addEventListener("keydown", function (evento) {
     if (evento.key === "Escape") {
         cerrarImagen();
-        cerrarProducto();
     }
 });
-
-function cerrarImagen() {
-    document.getElementById("visor-imagen").style.display = "none";
-    document.body.style.overflow = "auto";
-}
