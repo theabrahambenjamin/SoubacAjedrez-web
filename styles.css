@@ -3260,3 +3260,13 @@ body.carrito-abierto {
         box-shadow: none;
     }
 }
+/* CORRECCIÓN PARA MOSTRAR LAS SECCIONES */
+
+.seccion {
+    display: none !important;
+    width: 100%;
+}
+
+.seccion.activa {
+    display: block !important;
+}
