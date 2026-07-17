@@ -2750,3 +2750,7 @@ font-size:22px;
         font-size: 32px;
     }
 }
+body.visor-abierto,
+body.carrito-abierto {
+    overflow: hidden;
+}
