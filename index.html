@@ -11,14 +11,13 @@
 
 <meta name="description" content="Academia Soubac ofrece clases de ajedrez para niños y adultos. Aprende ajedrez desde nivel básico hasta avanzado en Perú.">
 
-<meta name="keywords" content="ajedrez, academia de ajedrez, clases de ajedrez Perú, Soubac Ajedrez">
-
 <meta name="author" content="Academia Soubac Ajedrez">
 
-<link rel="icon" type="image/png" href="favicon (2).png">
+<link rel="icon" type="image/png" href="favicon%20(2).png">
 
 <link rel="stylesheet" href="estilos.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 <meta name="google-site-verification" content="xU4LgSzYR88NxEy46ztZ1Nf-j2V60B0MEA2219jidS0">
 
@@ -33,7 +32,7 @@
 
 <div id="pantalla-carga">
 
-    <img src="favicon (2).png" alt="Logo">
+    <img src="favicon%20(2).png" alt="Logo de Academia Soubac Ajedrez">
 
     <h2>Cargando...</h2>
 
@@ -44,23 +43,17 @@
 
 <script>
 
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", () => {
+  const carga = document.getElementById("pantalla-carga");
+  if (!carga) return;
 
-    setTimeout(function(){
+  setTimeout(() => {
+    carga.style.opacity = "0";
+    carga.addEventListener("transitionend", () => carga.remove(), { once: true });
 
-        const carga = document.getElementById("pantalla-carga");
-
-        carga.style.opacity = "0";
-
-        setTimeout(function(){
-
-            carga.style.display = "none";
-
-        },1000);
-
-
-    },500);
-
+    // Respaldo por si el CSS no tiene transición.
+    setTimeout(() => carga.remove(), 1200);
+  }, 500);
 });
 
 </script>
@@ -72,62 +65,62 @@ document.addEventListener("DOMContentLoaded", function(){
 
     <nav class="menu">
 
-<button class="boton-menu" onclick="abrirMenu()">
+<button type="button" class="boton-menu" onclick="abrirMenu()" aria-controls="opcionesMenu" aria-expanded="false">
 ☰ Menú
 </button>
 
 
 <div class="opciones-menu" id="opcionesMenu">
 
-<a onclick="mostrar('inicio')">
+<button type="button" class="opcion-menu" onclick="mostrar('inicio')">
 <svg viewBox="0 0 24 24">
 <path d="M3 11L12 3l9 8v10a1 1 0 0 1-1 1h-6v-6H10v6H4a1 1 0 0 1-1-1V11z"/>
 </svg>
 Inicio
-</a>
+</button>
 
 
-<a onclick="mostrar('libros')">
+<button type="button" class="opcion-menu" onclick="mostrar('libros')">
 <svg viewBox="0 0 24 24">
 <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H21V5a2 2 0 0 0-2-2H6.5A2.5 2.5 0 0 0 4 5.5v14zM6.5 5H19v10H6.5A4.5 4.5 0 0 0 4 15.8V5.5A.5.5 0 0 1 6.5 5z"/>
 </svg>
 Libros
-</a>
+</button>
 
 
-<a onclick="mostrar('historia')">
+<button type="button" class="opcion-menu" onclick="mostrar('historia')">
 <svg viewBox="0 0 24 24">
 <path d="M12 2L2 7v2h20V7L12 2zm-7 9v8h4v-8H5zm5 0v8h4v-8h-4zm6 0v8h4v-8h-4z"/>
 </svg>
 Historia
-</a>
+</button>
 
 
-<a onclick="mostrar('fotos')">
+<button type="button" class="opcion-menu" onclick="mostrar('fotos')">
 <svg viewBox="0 0 24 24">
 <path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2zM8 11l2.5 3L14 9l5 7H5l3-5z"/>
 </svg>
 Fotos
-</a>
+</button>
 
 
-<a onclick="mostrar('plataformas')">
+<button type="button" class="opcion-menu" onclick="mostrar('plataformas')">
 <svg viewBox="0 0 24 24">
 <path d="M20 3H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 16H4V5h16v14z"/>
 </svg>
 Plataformas
-</a>
+</button>
 
 
-<a onclick="mostrar('redes')">
+<button type="button" class="opcion-menu" onclick="mostrar('redes')">
 <svg viewBox="0 0 24 24">
 <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4z"/>
 </svg>
 Redes Sociales
-</a>
-    <a onclick="mostrar('tienda')">🛒 Tienda</a>
+</button>
+    <button type="button" class="opcion-menu" onclick="mostrar('tienda')">🛒 Tienda</button>
 
-        <a onclick="mostrar('opiniones')">⭐ Opiniones</a>
+    <button type="button" class="opcion-menu" onclick="mostrar('opiniones')">⭐ Opiniones</button>
 </div>
 
 </nav>
@@ -154,8 +147,7 @@ Redes Sociales
          
         
           <p>
-            Somos una academia dedicada a la formación integral de niños, jóvenes
-            apasionados por el ajedrez.
+            Somos una academia dedicada a la formación integral de niños, jóvenes y adultos apasionados por el ajedrez.
           </p>
         
           <p>
@@ -175,11 +167,11 @@ Redes Sociales
         
           <div class="sedes-container">
             <div class="sede-card">
-              <p>📍 Calle 2 de Mayo 321,interior 302 Lambayeque</p>
+              <p>📍 Calle 2 de Mayo 321, interior 302, Lambayeque</p>
             </div>
         
             <div class="sede-card">
-              <p>📍 Urb.Sol de Pimentel</p>
+              <p>📍 Urb. Sol de Pimentel</p>
             </div>
           </div>
         </div>
@@ -187,42 +179,40 @@ Redes Sociales
 
       <!-- Libros -->
         <section id="libros" class="seccion">
-          <center>
-            <h2>Libros totalmente gratis para que puedas DESCARGAR</h2>
-          </center>
+          <h2 class="titulo-seccion">Libros gratuitos para descargar</h2>
         
           <div class="botones-info">
-            <a href="https://drive.google.com/drive/folders/1s7tAnuWdynVDA54csrYfxV7MKj_L0i9k?usp=drive_link" target="_blank">
+            <a href="https://drive.google.com/drive/folders/1s7tAnuWdynVDA54csrYfxV7MKj_L0i9k?usp=drive_link" target="_blank" rel="noopener noreferrer">
               Aperturas
               <span>Domina las bases del inicio.</span>
               <strong>Libro de aperturas →</strong>
             </a>
         
-            <a href="https://drive.google.com/drive/folders/1s7tAnuWdynVDA54csrYfxV7MKj_L0i9k?usp=drive_link" target="_blank">
+            <a href="https://drive.google.com/drive/folders/1s7tAnuWdynVDA54csrYfxV7MKj_L0i9k?usp=drive_link" target="_blank" rel="noopener noreferrer">
               Temas tácticos
               <span>Mejora cálculo y visión táctica.</span>
               <strong>Libro táctico →</strong>
             </a>
         
-            <a href="https://drive.google.com/drive/u/0/folders/1nPCAhvg_FlbYNdUQX7f3SKEYF1a0eUvt" target="_blank">
+            <a href="https://drive.google.com/drive/u/0/folders/1nPCAhvg_FlbYNdUQX7f3SKEYF1a0eUvt" target="_blank" rel="noopener noreferrer">
               Defensas
               <span>Aprende a defenderte mejor.</span>
               <strong>Libro de defensas →</strong>
             </a>
         
-            <a href="https://drive.google.com/drive/folders/1Rdlm2b3JLb_sGrIqVpJ2YJlT12IQUEFQ?usp=sharing" target="_blank">
+            <a href="https://drive.google.com/drive/folders/1Rdlm2b3JLb_sGrIqVpJ2YJlT12IQUEFQ?usp=sharing" target="_blank" rel="noopener noreferrer">
               Historia
               <span>Conoce la evolución del ajedrez.</span>
               <strong>Libro histórico →</strong>
             </a>
         
-            <a href="https://drive.google.com/drive/folders/1BMTeaEMbn0aLVgg1LiCSLGcdNyMWaonM?usp=sharing" target="_blank">
+            <a href="https://drive.google.com/drive/folders/1BMTeaEMbn0aLVgg1LiCSLGcdNyMWaonM?usp=sharing" target="_blank" rel="noopener noreferrer">
               Gambitos
               <span>Ataques agresivos y dinámicos.</span>
               <strong>Libro de gambitos →</strong>
             </a>
         
-            <a href="https://drive.google.com/drive/u/0/folders/1_gXmSnxcj2Xetcw6QogtqDeLMVVEW6iB" target="_blank">
+            <a href="https://drive.google.com/drive/u/0/folders/1_gXmSnxcj2Xetcw6QogtqDeLMVVEW6iB" target="_blank" rel="noopener noreferrer">
               Principiantes
               <span>Ideal para empezar desde cero.</span>
               <strong>Libro básico →</strong>
@@ -244,37 +234,36 @@ Redes Sociales
           </div>
 
           <div class="historia-texto">
-            <center><h2>Historia</h2></center>
+            <h2 class="titulo-seccion">Nuestra historia</h2>
 
             <p>
-              <p>
-                La historia de <strong>SOUBAC AJEDREZ</strong> comenzó un 3 de enero del 2019, en
-                una pequeña sede ubicada en la calle 2 de Mayo 253, en departamento de
-                <strong>LAMBAYEQUE</strong>.
-              
-                Todo inició con solo 4 alumnos, un tablero y un sueño enorme:
-                enseñar ajedrez con pasión, disciplina y cariño.
-              
-                Poco a poco, los padres comenzaron a recomendarnos. Los alumnos crecían no solo en
-                nivel, sino también en confianza, concentración y valores.
-              
-                Ese mismo año realizamos nuestro primer torneo interno y vivimos uno
-                de nuestros primeros grandes logros cuando nuestra alumna Laura
-                Fabiola, con apenas 6 años, obtuvo el primer puesto en un torneo
-                realizado en <strong>CHICLAYO</strong>.
-              
-                Luego llegó la pandemia y nos reinventamos
-                con clases virtuales por Zoom, llegando a distintos departamentos
-                del Perú y otros países.
-              
-                Hoy <strong>SOUBAC AJEDREZ</strong> continúa creciendo con
-                sedes presenciales, clases virtuales y estudiantes en diferentes
-                partes del mundo.<p>
-                  <strong>SOUBAC AJEDREZ</strong> no es solo una academia.
-                  Es una familia que nació con un sueño y sigue creciendo
-                  movimiento a movimiento.
-                </p>
-              </p>
+              La historia de <strong>SOUBAC AJEDREZ</strong> comenzó el 3 de enero de 2019,
+              en una pequeña sede ubicada en la calle 2 de Mayo 253, en el departamento de
+              <strong>Lambayeque</strong>.
+            </p>
+
+            <p>
+              Todo inició con solo cuatro alumnos, un tablero y un gran sueño: enseñar ajedrez
+              con pasión, disciplina y cercanía. Poco a poco, las familias comenzaron a
+              recomendarnos y nuestros estudiantes crecieron no solo en nivel, sino también en
+              confianza, concentración y valores.
+            </p>
+
+            <p>
+              Ese mismo año realizamos nuestro primer torneo interno. Uno de nuestros primeros
+              grandes logros llegó cuando nuestra alumna Laura Fabiola, con apenas seis años,
+              obtuvo el primer puesto en un torneo realizado en <strong>Chiclayo</strong>.
+            </p>
+
+            <p>
+              Durante la pandemia nos reinventamos con clases virtuales por Zoom, lo que nos
+              permitió llegar a diferentes departamentos del Perú y a estudiantes de otros países.
+            </p>
+
+            <p>
+              Hoy, <strong>SOUBAC AJEDREZ</strong> continúa creciendo con sedes presenciales,
+              clases virtuales y una comunidad que avanza movimiento a movimiento. Más que una
+              academia, somos una familia nacida de un sueño.
             </p>
           </div>
         </div>
@@ -321,6 +310,7 @@ Redes Sociales
 <div class="card-galeria">
 <img 
 src="Gerián.jpg"
+alt="Alumno de Academia Soubac Ajedrez"
 loading="lazy"
 onclick="abrirImagen(this.src)">
 </div>
@@ -371,13 +361,13 @@ onclick="abrirImagen(this.src)">
 
   <div class="plataformas-container">
 
-    <a href="https://lichess.org/team/academia-soubac-ajedrez" target="_blank" class="plataforma-card">
+    <a href="https://lichess.org/team/academia-soubac-ajedrez" target="_blank" rel="noopener noreferrer" class="plataforma-card">
       <img src="lichess.png" alt="Lichess">
       <h3>Lichess.org</h3>
       <p>Juega, analiza partidas y entrena totalmente gratis.</p>
     </a>
 
-    <a href="https://zoom.us" target="_blank" class="plataforma-card">
+    <a href="https://zoom.us" target="_blank" rel="noopener noreferrer" class="plataforma-card">
       <img src="zoom.jpg" alt="Zoom">
       <h3>Zoom</h3>
       <p>Realizamos clases virtuales en vivo para todo el Perú y el mundo.</p>
@@ -391,22 +381,22 @@ onclick="abrirImagen(this.src)">
 
   <div class="redes-container">
 
-    <a href="https://www.instagram.com/academiasoubacajedrez?igsh=ZDFlN2NuZTZyMzYw&utm_source=qr" target="_blank" class="red-card instagram">
+    <a href="https://www.instagram.com/academiasoubacajedrez?igsh=ZDFlN2NuZTZyMzYw&utm_source=qr" target="_blank" rel="noopener noreferrer" class="red-card instagram">
       <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
       <h3>Instagram</h3>
       <p>Contenido educativo y novedades.</p>
     </a>
 
-    <a href="https://www.facebook.com/academiasoubacajedrez/" target="_blank" class="red-card facebook">
+    <a href="https://www.facebook.com/academiasoubacajedrez/" target="_blank" rel="noopener noreferrer" class="red-card facebook">
       <img src="https://cdn-icons-png.flaticon.com/512/20/20837.png" alt="Facebook">
       <h3>Facebook</h3>
       <p>Noticias, eventos y publicaciones oficiales.</p>
     </a>
 
-    <a href="https://www.tiktok.com/@soubacajedrez_" data-unique-id="soubacajedrez_" target="_blank" class="red-card tiktok">
+    <a href="https://www.tiktok.com/@soubacajedrez_" data-unique-id="soubacajedrez_" target="_blank" rel="noopener noreferrer" class="red-card tiktok">
       <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
       <h3>TikTok</h3>
-      <p>Videos cortos, tips,contenido dinámico y live .</p>
+      <p>Videos cortos, tips, contenido dinámico y transmisiones en vivo.</p>
     </a>
 
   </div>
@@ -426,15 +416,15 @@ onclick="abrirImagen(this.src)">
 
 <div class="producto">
 
-<img src="calse demostrativa.png"
+<img src="clase demostrativa.png"
     onclick="abrirProducto(this.src)"
-     class="img-producto">
+     class="img-producto" alt="Producto de Academia Soubac Ajedrez">
 
 <h3>Clase demostrativa de Ajedrez</h3>
 
 <p>Gratis</p>
 
-<button onclick="agregarCarrito('Clase demostrativa',0)">
+<button type="button" onclick="agregarCarrito('Clase demostrativa',0)">
 Agregar al carrito
 </button>
 
@@ -446,12 +436,12 @@ Agregar al carrito
 
 <img src="tablero de vinil.jpg"
    onclick="abrirProducto(this.src)"
-     class="img-producto">
+     class="img-producto" alt="Producto de Academia Soubac Ajedrez">
     <h3>Tablero de vinil</h3>
 
 <p>S/ 30.00</p>
 
-<button onclick="agregarCarrito('Tablero de Ajedrez',30)">
+<button type="button" onclick="agregarCarrito('Tablero de Ajedrez',30)">
 Agregar al carrito
 </button>
 
@@ -463,12 +453,12 @@ Agregar al carrito
 
 <img src="piezas de plastico.jpg"
    onclick="abrirProducto(this.src)"
-     class="img-producto">
+     class="img-producto" alt="Producto de Academia Soubac Ajedrez">
 <h3>Piezas de plástico</h3>
 
 <p>S/ 25.00</p>
 
-<button onclick="agregarCarrito('Piezas de plástico',25)">
+<button type="button" onclick="agregarCarrito('Piezas de plástico',25)">
 Agregar al carrito
 </button>
 
@@ -477,13 +467,13 @@ Agregar al carrito
 
 <img src="conjunto de ajedrez.avif"
        onclick="abrirProducto(this.src)"
-     class="img-producto">
+     class="img-producto" alt="Producto de Academia Soubac Ajedrez">
 
 <h3>Juego de Ajedrez Compacto con Bolsa de Almacenamiento </h3>
 
 <p>S/ 75.00</p>
 
-<button onclick="agregarCarrito('Juego de Ajedrez Compacto con Bolsa de Almacenamiento ',75)">
+<button type="button" onclick="agregarCarrito('Juego de Ajedrez Compacto con Bolsa de Almacenamiento ',75)">
 Agregar al carrito
 </button>
 
@@ -492,13 +482,13 @@ Agregar al carrito
 
 <img src="reloj digital.png"
        onclick="abrirProducto(this.src)"
-     class="img-producto">
+     class="img-producto" alt="Producto de Academia Soubac Ajedrez">
 
 <h3>Reloj de Ajedrez Digital Profesional</h3>
 
 <p>S/ 55.00</p>
 
-<button onclick="agregarCarrito('Reloj de Ajedrez Digital Profesional',55)">
+<button type="button" onclick="agregarCarrito('Reloj de Ajedrez Digital Profesional',55)">
 Agregar al carrito
 </button>
 
@@ -507,13 +497,13 @@ Agregar al carrito
 
 <img src="polo soubac.png"
        onclick="abrirProducto(this.src)"
-     class="img-producto">
+     class="img-producto" alt="Producto de Academia Soubac Ajedrez">
 
 <h3>Polo soubac Ajedrez</h3>
 
 <p>S/ 60.00</p>
 
-<button onclick="agregarCarrito('Polo De Soubac ajedrez',60)">
+<button type="button" onclick="agregarCarrito('Polo De Soubac ajedrez',60)">
 Agregar al carrito
 </button>
 
@@ -522,13 +512,13 @@ Agregar al carrito
 
 <img src="personalizada.png"
        onclick="abrirProducto(this.src)"
-     class="img-producto">
+     class="img-producto" alt="Producto de Academia Soubac Ajedrez">
 
 <h3>Clases Personalizadas</h3>
 
 <p>S/ 35.00</p>
 
-<button onclick="agregarCarrito('Clase Personalizada',35)">
+<button type="button" onclick="agregarCarrito('Clase Personalizada',35)">
 Agregar al carrito
 </button>
 
@@ -537,13 +527,13 @@ Agregar al carrito
 
 <img src="hotmart.png"
        onclick="abrirProducto(this.src)"
-     class="img-producto">
+     class="img-producto" alt="Producto de Academia Soubac Ajedrez">
 
 <h3>Cursos en Hotmart</h3>
 
 <p>$ 55.00</p>
 
-<button onclick="agregarCarrito('Cursos en Hotmart',35)">
+<button type="button" onclick="agregarCarrito('Cursos en Hotmart',55)">
 Agregar al carrito
 </button>
 
@@ -584,12 +574,14 @@ Agregar al carrito
             <!-- PEGA AQUÍ EL IFRAME DE GOOGLE FORMS -->
 
             <iframe
-                src="https://forms.gle/e4REGXhMf8nxDnWZA"
+                src="https://docs.google.com/forms/d/e/FORM_ID/viewform?embedded=true"
                 width="100%"
                 height="850"
                 frameborder="0"
                 marginheight="0"
-                marginwidth="0">
+                marginwidth="0"
+                title="Formulario de opiniones de Academia Soubac Ajedrez"
+                loading="lazy">
 
             Cargando formulario...
 
@@ -605,41 +597,44 @@ Agregar al carrito
  <!-- WHATSAPP -->
 <div class="whatsapp-container">
   <a class="whatsapp-btn"
-     href="https://api.whatsapp.com/send?phone=51973265025&text=Le%20escribo%20desde%20la%20web,%20y%20requiero%20info."
-     target="_blank">
+     href="https://wa.me/51973265025?text=Hola%2C%20les%20escribo%20desde%20la%20web%20y%20deseo%20recibir%20informaci%C3%B3n."
+     target="_blank" rel="noopener noreferrer">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
   </a>
 </div>
 
 <!-- VISOR IMAGEN -->
 <div id="visor">
-  <button id="cerrar" onclick="cerrarImagen()">✕</button>
+  <button type="button" id="cerrar" aria-label="Cerrar imagen" onclick="cerrarImagen()">✕</button>
   <img id="imagenGrande">
 </div>
 
 <!-- CARRITO FLOTANTE -->
-<button class="btn-carrito" onclick="abrirCarrito()">
+<button type="button" class="btn-carrito" aria-label="Abrir carrito" onclick="abrirCarrito()">
   🛒 <span id="contadorCarrito">0</span>
 </button>
 
 <div id="panelCarrito" class="panel-carrito">
   <div class="carrito-header">
     <h2>Mi carrito</h2>
-    <button onclick="cerrarCarrito()">✕</button>
+    <button type="button" onclick="cerrarCarrito()" aria-label="Cerrar carrito">✕</button>
   </div>
 
   <div id="listaCarrito"></div>
 
   <h3>Total: S/ <span id="total">0</span></h3>
 
-  <button class="comprar" onclick="comprarWhatsApp()">
+  <button type="button" class="comprar" onclick="comprarWhatsApp()">
     Comprar por WhatsApp
   </button>
 </div>
 
 <script>
 function abrirMenu(){
-  document.getElementById("opcionesMenu").classList.toggle("mostrar");
+  const menu = document.getElementById("opcionesMenu");
+  const boton = document.querySelector(".boton-menu");
+  const abierto = menu.classList.toggle("mostrar");
+  boton?.setAttribute("aria-expanded", String(abierto));
 }
 
 function abrirImagen(src){
@@ -653,7 +648,7 @@ function cerrarImagen(){
   document.body.style.overflow = "auto";
 }
 
-let carrito = [];
+let carrito = JSON.parse(localStorage.getItem("carritoSoubac") || "[]");
 
 function agregarCarrito(nombre, precio){
   carrito.push({nombre, precio});
@@ -683,6 +678,7 @@ function actualizarCarrito(){
 
   total.textContent = suma;
   contador.textContent = carrito.length;
+  localStorage.setItem("carritoSoubac", JSON.stringify(carrito));
 }
 
 function eliminarProducto(i){
@@ -722,20 +718,17 @@ function comprarWhatsApp(){
     return;
   }
 
-  let mensaje = "Hola, quiero comprar:%0A";
+  let mensaje = "Hola, deseo realizar el siguiente pedido:\n";
   let suma = 0;
 
   carrito.forEach(p => {
-    mensaje += `- ${p.nombre} S/ ${p.precio}%0A`;
+    mensaje += `• ${p.nombre}: S/ ${p.precio.toFixed(2)}\n`;
     suma += p.precio;
   });
 
-  mensaje += `%0ATotal: S/ ${suma}`;
-
-  window.open(
-    "https://api.whatsapp.com/send?phone=51973265025&text=" + mensaje,
-    "_blank"
-  );
+  mensaje += `\nTotal: S/ ${suma.toFixed(2)}`;
+  const url = `https://wa.me/51973265025?text=${encodeURIComponent(mensaje)}`;
+  window.open(url, "_blank", "noopener,noreferrer");
 }
     function abrirProducto(src){
 
@@ -760,41 +753,18 @@ function cerrarProducto(){
     document.body.style.overflow = "auto";
 
 }
-    function enviarOpinion(){
-  const rating = document.querySelector('input[name="rating"]:checked');
-  const nombre = document.getElementById("nombreOpinion").value;
-  const interes = document.getElementById("interesOpinion").value;
-  const nivel = document.getElementById("nivelOpinion").value;
-  const comentario = document.getElementById("comentarioOpinion").value;
 
-  if(!rating || nombre === "" || interes === "" || nivel === ""){
-    alert("Completa la calificación, nombre, interés y nivel.");
-    return;
-  }
-
-  console.log({
-    estrellas: rating.value,
-    nombre,
-    interes,
-    nivel,
-    comentario
-  });
-
-  document.getElementById("mensajeOpinion").innerHTML =
-  "✅ Gracias por dejarnos tu opinión.";
-
-  document.getElementById("nombreOpinion").value = "";
-  document.getElementById("interesOpinion").value = "";
-  document.getElementById("nivelOpinion").value = "";
-  document.getElementById("comentarioOpinion").value = "";
-  rating.checked = false;
-}
+document.addEventListener("DOMContentLoaded", () => {
+  actualizarCarrito();
+  const botonCarrito = document.querySelector(".btn-carrito");
+  if (botonCarrito) botonCarrito.style.display = "none";
+});
 </script>
-<div id="visorProducto">
+<div id="visorProducto" role="dialog" aria-modal="true" aria-label="Vista ampliada del producto">
 
-    <span onclick="cerrarProducto()">✕</span>
+    <button type="button" onclick="cerrarProducto()" aria-label="Cerrar producto">✕</button>
 
-    <img id="imagenProductoGrande">
+    <img id="imagenProductoGrande" alt="Vista ampliada del producto">
 
 </div>
 </body>
