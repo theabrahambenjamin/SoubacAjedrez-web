@@ -346,3 +346,153 @@ document.addEventListener("keydown", (evento) => {
         cerrarCarrito();
     }
 });
+/* ==================================================
+   VISOR PROFESIONAL PARA PRODUCTOS
+================================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* Crear el visor automáticamente */
+    const visor = document.createElement("div");
+    visor.id = "visor-producto";
+    visor.className = "visor-producto";
+    visor.setAttribute("aria-hidden", "true");
+
+    visor.innerHTML = `
+        <div class="visor-producto-contenido">
+
+            <button
+                type="button"
+                class="cerrar-visor-producto"
+                aria-label="Cerrar imagen"
+            >
+                &times;
+            </button>
+
+            <img
+                id="imagen-producto-ampliada"
+                src=""
+                alt="Producto ampliado"
+            >
+
+            <h3 id="nombre-producto-ampliado"></h3>
+
+        </div>
+    `;
+
+    document.body.appendChild(visor);
+
+    const imagenAmpliada = document.getElementById(
+        "imagen-producto-ampliada"
+    );
+
+    const nombreAmpliado = document.getElementById(
+        "nombre-producto-ampliado"
+    );
+
+    const botonCerrar = visor.querySelector(
+        ".cerrar-visor-producto"
+    );
+
+
+    /* Abrir al presionar una tarjeta de producto */
+    document.querySelectorAll(".producto").forEach(function (producto) {
+
+        producto.setAttribute("tabindex", "0");
+        producto.setAttribute("role", "button");
+
+        producto.addEventListener("click", function (evento) {
+
+            /*
+             * No abrir la imagen cuando se presiona
+             * el botón Agregar al carrito.
+             */
+            if (evento.target.closest("button")) {
+                return;
+            }
+
+            const imagen = producto.querySelector("img");
+            const titulo = producto.querySelector("h3");
+
+            if (!imagen) {
+                return;
+            }
+
+            imagenAmpliada.src =
+                imagen.currentSrc || imagen.src;
+
+            imagenAmpliada.alt =
+                imagen.alt || "Producto ampliado";
+
+            nombreAmpliado.textContent =
+                titulo?.textContent.trim() || "";
+
+            visor.classList.add("activo");
+            visor.setAttribute("aria-hidden", "false");
+
+            document.body.classList.add("visor-producto-abierto");
+        });
+
+
+        /* También abrir usando Enter */
+        producto.addEventListener("keydown", function (evento) {
+
+            if (
+                evento.key === "Enter" &&
+                !evento.target.closest("button")
+            ) {
+                evento.preventDefault();
+                producto.click();
+            }
+
+        });
+
+    });
+
+
+    function cerrarVisorProducto() {
+        visor.classList.remove("activo");
+        visor.setAttribute("aria-hidden", "true");
+
+        document.body.classList.remove(
+            "visor-producto-abierto"
+        );
+
+        window.setTimeout(function () {
+
+            if (!visor.classList.contains("activo")) {
+                imagenAmpliada.src = "";
+                nombreAmpliado.textContent = "";
+            }
+
+        }, 250);
+    }
+
+
+    /* Cerrar con la X */
+    botonCerrar.addEventListener("click", function (evento) {
+        evento.stopPropagation();
+        cerrarVisorProducto();
+    });
+
+
+    /* Cerrar presionando el fondo oscuro */
+    visor.addEventListener("click", function (evento) {
+
+        if (evento.target === visor) {
+            cerrarVisorProducto();
+        }
+
+    });
+
+
+    /* Cerrar con Escape */
+    document.addEventListener("keydown", function (evento) {
+
+        if (evento.key === "Escape") {
+            cerrarVisorProducto();
+        }
+
+    });
+
+});
