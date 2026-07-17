@@ -74,106 +74,75 @@ function comprarWhatsApp() {
     window.open(url, "_blank");
 }
 
-/* =========================
-   VISOR DE PRODUCTOS
-========================= */
+/* ===========================
+   VISOR UNIVERSAL DE IMÁGENES
+=========================== */
 
-function abrirProducto(src) {
-    const visorProducto = document.getElementById("visorProducto");
-    const imagenProducto = document.getElementById("imagenProductoGrande");
+function abrirImagen(src, alt = "") {
 
-    if (!visorProducto || !imagenProducto) {
-        console.error("No se encontró el visor del producto.");
-        return;
-    }
-
-    imagenProducto.src = src;
-    visorProducto.classList.add("visible");
-    document.body.style.overflow = "hidden";
-}
-
-function cerrarProducto() {
-    const visorProducto = document.getElementById("visorProducto");
-
-    if (!visorProducto) return;
-
-    visorProducto.classList.remove("visible");
-    document.body.style.overflow = "";
-}
-
-function abrirImagen(src, alt = "Imagen ampliada") {
     const visor = document.getElementById("visor-imagen");
-    const imagenGrande = document.getElementById("imagen-grande");
+    const imagen = document.getElementById("imagen-grande");
 
-    if (!visor || !imagenGrande) {
-        console.error("No se encontró el visor de imágenes.");
-        return;
-    }
-
-    imagenGrande.src = src;
-    imagenGrande.alt = alt;
+    imagen.src = src;
+    imagen.alt = alt;
 
     visor.classList.add("activo");
-    visor.setAttribute("aria-hidden", "false");
 
     document.body.style.overflow = "hidden";
 }
 
 
 function cerrarImagen() {
-    const visor = document.getElementById("visor-imagen");
-    const imagenGrande = document.getElementById("imagen-grande");
 
-    if (!visor) {
-        return;
-    }
+    const visor = document.getElementById("visor-imagen");
 
     visor.classList.remove("activo");
-    visor.setAttribute("aria-hidden", "true");
 
-    document.body.style.overflow = "";
-
-    setTimeout(() => {
-        if (imagenGrande) {
-            imagenGrande.src = "";
-        }
-    }, 250);
+    document.body.style.overflow = "auto";
 }
 
 
-document.addEventListener("DOMContentLoaded", function () {
-    const visor = document.getElementById("visor-imagen");
-    const botonCerrar = document.getElementById("boton-cerrar-imagen");
-    const imagenGrande = document.getElementById("imagen-grande");
+/* Cerrar haciendo clic en el fondo */
 
-    /* Cerrar al presionar la X */
+document.getElementById("visor-imagen").addEventListener("click", function(e){
 
-    botonCerrar?.addEventListener("click", function () {
+    if(e.target.id === "visor-imagen"){
+
         cerrarImagen();
-    });
 
+    }
 
-    /* Cerrar al hacer clic en el fondo oscuro */
-
-    visor?.addEventListener("click", function (evento) {
-        if (evento.target === visor) {
-            cerrarImagen();
-        }
-    });
-
-
-    /* Evitar que se cierre al hacer clic sobre la imagen */
-
-    imagenGrande?.addEventListener("click", function (evento) {
-        evento.stopPropagation();
-    });
 });
 
 
-/* Cerrar con la tecla Escape */
+/* Evita cerrar al hacer clic sobre la imagen */
 
-document.addEventListener("keydown", function (evento) {
-    if (evento.key === "Escape") {
+document.getElementById("imagen-grande").addEventListener("click", function(e){
+
+    e.stopPropagation();
+
+});
+
+
+/* Botón X */
+
+document.getElementById("boton-cerrar-imagen").addEventListener("click", function(e){
+
+    e.stopPropagation();
+
+    cerrarImagen();
+
+});
+
+
+/* Tecla ESC */
+
+document.addEventListener("keydown", function(e){
+
+    if(e.key === "Escape"){
+
         cerrarImagen();
+
     }
+
 });
