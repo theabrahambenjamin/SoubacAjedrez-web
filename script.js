@@ -1,136 +1,166 @@
 function mostrarSeccion(id) {
-  let secciones = document.querySelectorAll(".seccion");
+    const secciones = document.querySelectorAll(".seccion");
+    const seccionSeleccionada = document.getElementById(id);
 
-  secciones.forEach((sec) => {
-    sec.classList.remove("activa");
-  });
+    secciones.forEach((seccion) => {
+        seccion.classList.remove("activa");
+    });
 
-  document.getElementById(id).classList.add("activa");
-}
-let carrito=[];
-
-
-function agregarCarrito(nombre,precio){
-
-
-carrito.push({
-
-nombre:nombre,
-
-precio:precio
-
-});
-
-
-mostrarCarrito();
-
-
+    if (seccionSeleccionada) {
+        seccionSeleccionada.classList.add("activa");
+    }
 }
 
+/* =========================
+   CARRITO
+========================= */
 
+let carrito = [];
 
-function mostrarCarrito(){
+function agregarCarrito(nombre, precio) {
+    carrito.push({
+        nombre: nombre,
+        precio: Number(precio)
+    });
 
-
-let lista=document.getElementById("listaCarrito");
-
-let total=0;
-
-
-lista.innerHTML="";
-
-
-carrito.forEach(producto=>{
-
-
-lista.innerHTML += 
-`
-<p>
-${producto.nombre} - S/ ${producto.precio}
-</p>
-`;
-
-
-total += producto.precio;
-
-
-});
-
-
-document.getElementById("total").innerHTML=total;
-
-
+    mostrarCarrito();
 }
 
+function mostrarCarrito() {
+    const lista = document.getElementById("listaCarrito");
+    const totalElemento = document.getElementById("total");
 
+    if (!lista || !totalElemento) {
+        console.error("No se encontró listaCarrito o total.");
+        return;
+    }
 
-function comprarWhatsApp(){
+    let total = 0;
+    lista.innerHTML = "";
 
+    carrito.forEach((producto) => {
+        lista.innerHTML += `
+            <p>
+                ${producto.nombre} - S/ ${producto.precio.toFixed(2)}
+            </p>
+        `;
 
-let mensaje="Hola, quiero comprar:%0A";
+        total += producto.precio;
+    });
 
-
-carrito.forEach(producto=>{
-
-
-mensaje += 
-"- "+producto.nombre+
-" S/"+producto.precio+
-"%0A";
-
-
-});
-
-
-mensaje += 
-"Total: S/"+document.getElementById("total").innerHTML;
-
-
-
-window.open(
-
-"https://api.whatsapp.com/send?phone=51973265025&text="+mensaje,
-
-"_blank"
-
-);
-
-
-
-  
+    totalElemento.textContent = total.toFixed(2);
 }
-function abrirProducto(src){
 
-    document
-    .getElementById("imagenProductoGrande")
-    .src = src;
+function comprarWhatsApp() {
+    if (carrito.length === 0) {
+        alert("El carrito está vacío.");
+        return;
+    }
 
-    document
-    .getElementById("visorProducto")
-    .style.display = "flex";
+    let mensaje = "Hola, quiero comprar:\n";
+
+    carrito.forEach((producto) => {
+        mensaje += `- ${producto.nombre} S/ ${producto.precio.toFixed(2)}\n`;
+    });
+
+    const total = document.getElementById("total")?.textContent || "0.00";
+
+    mensaje += `\nTotal: S/ ${total}`;
+
+    const url =
+        "https://wa.me/51973265025?text=" +
+        encodeURIComponent(mensaje);
+
+    window.open(url, "_blank");
+}
+
+/* =========================
+   VISOR DE PRODUCTOS
+========================= */
+
+function abrirProducto(src) {
+    const visorProducto = document.getElementById("visorProducto");
+    const imagenProducto = document.getElementById("imagenProductoGrande");
+
+    if (!visorProducto || !imagenProducto) {
+        console.error("No se encontró el visor del producto.");
+        return;
+    }
+
+    imagenProducto.src = src;
+    visorProducto.classList.add("visible");
+    document.body.style.overflow = "hidden";
+}
+
+function cerrarProducto() {
+    const visorProducto = document.getElementById("visorProducto");
+
+    if (!visorProducto) return;
+
+    visorProducto.classList.remove("visible");
+    document.body.style.overflow = "";
+}
+
+/* =========================
+   VISOR DE GALERÍA
+========================= */
+
+function abrirImagen(src, alt = "Imagen ampliada") {
+    const visor = document.getElementById("visor-imagen");
+    const imagenGrande = document.getElementById("imagen-grande");
+
+    if (!visor || !imagenGrande) {
+        console.error(
+            'No se encontró #visor-imagen o #imagen-grande en el HTML.'
+        );
+        return;
+    }
+
+    imagenGrande.src = src;
+    imagenGrande.alt = alt;
+
+    visor.classList.add("visible");
+    visor.setAttribute("aria-hidden", "false");
 
     document.body.style.overflow = "hidden";
-
 }
 
-function cerrarProducto(){
-
-    document
-    .getElementById("visorProducto")
-    .style.display = "none";
-
-    document.body.style.overflow = "auto";
-
-}
-function abrirImagen(src) {
+function cerrarImagen() {
     const visor = document.getElementById("visor-imagen");
-    const imagen = document.getElementById("imagen-grande");
+    const imagenGrande = document.getElementById("imagen-grande");
 
-    imagen.src = src;
-    visor.style.display = "flex";
+    if (!visor) return;
 
-    document.body.style.overflow = "hidden"; // Evita el scroll
+    visor.classList.remove("visible");
+    visor.setAttribute("aria-hidden", "true");
+
+    if (imagenGrande) {
+        imagenGrande.src = "";
+    }
+
+    document.body.style.overflow = "";
 }
+
+/* Cerrar únicamente al tocar el fondo oscuro */
+document.addEventListener("DOMContentLoaded", () => {
+    const visor = document.getElementById("visor-imagen");
+
+    if (visor) {
+        visor.addEventListener("click", (evento) => {
+            if (evento.target === visor) {
+                cerrarImagen();
+            }
+        });
+    }
+});
+
+/* Cerrar con la tecla Escape */
+document.addEventListener("keydown", (evento) => {
+    if (evento.key === "Escape") {
+        cerrarImagen();
+        cerrarProducto();
+    }
+});
 
 function cerrarImagen() {
     document.getElementById("visor-imagen").style.display = "none";
