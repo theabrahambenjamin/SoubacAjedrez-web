@@ -2567,27 +2567,76 @@ font-size:22px;
     font-size: 250px;
   }
 }
-/* ======================================
-   VISOR UNIVERSAL DE IMÁGENES
-====================================== */
+/* ==================================================
+   TARJETAS DE PRODUCTOS INTERACTIVAS
+================================================== */
 
-.visor-imagen {
+.producto {
+    cursor: pointer;
+}
+
+.producto:focus-visible {
+    outline: 4px solid var(--dorado);
+    outline-offset: 5px;
+}
+
+.producto img {
+    cursor: zoom-in;
+}
+
+.producto::after {
+    content: "🔍 Ver producto";
+
+    position: absolute;
+    top: 190px;
+    left: 50%;
+
+    padding: 10px 18px;
+
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.78);
+    border-radius: 30px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transform: translate(-50%, 15px);
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+.producto:hover::after {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+
+/* ==================================================
+   VISOR PROFESIONAL DE PRODUCTOS
+================================================== */
+
+.visor-producto {
     position: fixed;
     inset: 0;
-    z-index: 9999999;
-
-    width: 100vw;
-    height: 100vh;
+    z-index: 99999999;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    padding: 70px 30px 30px;
+    width: 100%;
+    min-height: 100vh;
+    padding: 30px;
 
     background: rgba(0, 0, 0, 0.92);
-    backdrop-filter: blur(7px);
-    -webkit-backdrop-filter: blur(7px);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 
     opacity: 0;
     visibility: hidden;
@@ -2598,55 +2647,31 @@ font-size:22px;
         visibility 0.25s ease;
 }
 
-
-/* Mostrar visor */
-
-.visor-imagen.activo {
+.visor-producto.activo {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
 }
 
-
-/* Contenedor de la imagen */
-
-.visor-contenido {
+.visor-producto-contenido {
     position: relative;
 
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    width: 100%;
-    height: 100%;
+    width: min(900px, 100%);
+    max-height: 92vh;
+    padding: 25px;
 
-    overflow: hidden;
-}
+    background: rgba(18, 18, 18, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 24px;
 
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.75);
 
-/* Imagen grande */
-
-#imagen-grande {
-    display: block;
-
-    width: auto;
-    height: auto;
-
-    max-width: 95%;
-    max-height: 88vh;
-
-    object-fit: contain;
-
-    border: none;
-    border-radius: 12px;
-
-    background: transparent;
-
-    box-shadow:
-        0 25px 80px rgba(0, 0, 0, 0.75),
-        0 0 0 1px rgba(255, 255, 255, 0.14);
-
-    transform: scale(0.88);
+    transform: scale(0.88) translateY(25px);
     opacity: 0;
 
     transition:
@@ -2654,103 +2679,121 @@ font-size:22px;
         opacity 0.28s ease;
 }
 
-
-/* Animación al abrir */
-
-.visor-imagen.activo #imagen-grande {
-    transform: scale(1);
+.visor-producto.activo .visor-producto-contenido {
+    transform: scale(1) translateY(0);
     opacity: 1;
 }
 
+#imagen-producto-ampliada {
+    display: block;
 
-/* Botón X */
+    width: auto !important;
+    height: auto !important;
 
-.boton-cerrar-imagen {
+    max-width: 100% !important;
+    max-height: 72vh !important;
+
+    margin: 0 !important;
+
+    object-fit: contain !important;
+
+    background: transparent !important;
+    border: none !important;
+    border-radius: 15px !important;
+
+    box-shadow: none !important;
+
+    transform: none !important;
+    filter: none !important;
+}
+
+#nombre-producto-ampliado {
+    margin: 18px 60px 0;
+
+    color: #ffffff;
+    font-size: clamp(18px, 3vw, 25px);
+    line-height: 1.35;
+    text-align: center;
+}
+
+.cerrar-visor-producto {
     position: absolute;
-    top: 18px;
-    right: 25px;
-    z-index: 10000000;
-
-    width: 52px;
-    height: 52px;
+    top: 13px;
+    right: 13px;
+    z-index: 10;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
+    width: 48px;
+    height: 48px;
     padding: 0;
 
+    color: #ffffff;
+    background: rgba(139, 0, 0, 0.9);
     border: 2px solid rgba(255, 255, 255, 0.75);
     border-radius: 50%;
 
-    background: rgba(15, 15, 15, 0.75);
-    color: #ffffff;
-
     font-family: Arial, sans-serif;
-    font-size: 38px;
-    font-weight: 300;
+    font-size: 35px;
     line-height: 1;
 
     cursor: pointer;
 
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-
     transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+.cerrar-visor-producto:hover {
+    background: #b50000;
+    transform: rotate(90deg) scale(1.06);
+}
+
+body.visor-producto-abierto {
+    overflow: hidden;
 }
 
 
-.boton-cerrar-imagen:hover {
-    background: #ffffff;
-    color: #111111;
-    transform: rotate(90deg);
-}
-
-
-.boton-cerrar-imagen:focus-visible {
-    outline: 3px solid #d4af37;
-    outline-offset: 3px;
-}
-
-
-/* Cursor para imágenes ampliables */
-
-.card-galeria img,
-.card-producto img,
-.producto img,
-.producto-card img,
-.imagen-producto {
-    cursor: zoom-in;
-}
-
-
-/* Celulares */
+/* ==================================================
+   VISOR EN CELULARES
+================================================== */
 
 @media (max-width: 700px) {
 
-    .visor-imagen {
-        padding: 65px 12px 20px;
+    .visor-producto {
+        padding: 15px;
     }
 
-    #imagen-grande {
-        max-width: 100%;
-        max-height: 82vh;
-        border-radius: 8px;
+    .visor-producto-contenido {
+        width: 100%;
+        max-height: 90vh;
+        padding: 60px 15px 20px;
+        border-radius: 18px;
     }
 
-    .boton-cerrar-imagen {
-        top: 12px;
-        right: 12px;
-
-        width: 44px;
-        height: 44px;
-
-        font-size: 32px;
+    #imagen-producto-ampliada {
+        max-height: 65vh !important;
     }
-}
-body.visor-abierto,
-body.carrito-abierto {
-    overflow: hidden;
+
+    #nombre-producto-ampliado {
+        margin: 16px 10px 0;
+        font-size: 18px;
+    }
+
+    .cerrar-visor-producto {
+        top: 10px;
+        right: 10px;
+
+        width: 42px;
+        height: 42px;
+
+        font-size: 30px;
+    }
+
+    .producto::after {
+        display: none;
+    }
+
 }
