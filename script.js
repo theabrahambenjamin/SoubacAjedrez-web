@@ -122,3 +122,17 @@ function cerrarProducto(){
     document.body.style.overflow = "auto";
 
 }
+function abrirImagen(src) {
+    const visor = document.getElementById("visor-imagen");
+    const imagen = document.getElementById("imagen-grande");
+
+    imagen.src = src;
+    visor.style.display = "flex";
+
+    document.body.style.overflow = "hidden"; // Evita el scroll
+}
+
+function cerrarImagen() {
+    document.getElementById("visor-imagen").style.display = "none";
+    document.body.style.overflow = "auto";
+}
