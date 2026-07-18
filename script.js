@@ -47,7 +47,6 @@ function agregarCarrito(nombre, precio) {
         precio: Number(precio)
     });
 
-    actualizarCarrito();
 
     // Guarda el carrito sin abrir el panel
     localStorage.setItem(
