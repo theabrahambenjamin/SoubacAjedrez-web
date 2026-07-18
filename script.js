@@ -114,3 +114,46 @@ function cerrarCarrito() {
         "carrito-abierto"
     );
 }
+function abrirProducto(src){
+
+    document.getElementById(
+        "imagenProductoGrande"
+    ).src = src;
+
+    document
+        .getElementById("visorProducto")
+        .classList.add("activo");
+
+    document.body.style.overflow="hidden";
+
+}
+
+function cerrarProducto(){
+
+    document
+        .getElementById("visorProducto")
+        .classList.remove("activo");
+
+    document.body.style.overflow="auto";
+
+}
+document
+.getElementById("visorProducto")
+.addEventListener("click",function(e){
+
+    if(e.target===this){
+
+        cerrarProducto();
+
+    }
+
+});
+document.addEventListener("keydown",function(e){
+
+    if(e.key==="Escape"){
+
+        cerrarProducto();
+
+    }
+
+});
