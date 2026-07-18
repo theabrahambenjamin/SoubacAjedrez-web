@@ -938,6 +938,8 @@
                             class="img-producto"
                             alt="Clase demostrativa de ajedrez"
                             loading="lazy"
+                                onclick="abrirProducto(this.src)"
+
                         >
 
                     </div>
@@ -971,6 +973,8 @@
                             class="img-producto"
                             alt="Tablero de ajedrez de vinil"
                             loading="lazy"
+                                onclick="abrirProducto(this.src)"
+
                         >
 
                     </div>
@@ -1004,6 +1008,8 @@
                             class="img-producto"
                             alt="Piezas de ajedrez de plástico"
                             loading="lazy"
+                                onclick="abrirProducto(this.src)"
+
                         >
 
                     </div>
@@ -1037,6 +1043,8 @@
                             class="img-producto"
                             alt="Juego de ajedrez compacto con bolsa"
                             loading="lazy"
+                                onclick="abrirProducto(this.src)"
+
                         >
 
                     </div>
@@ -1070,6 +1078,8 @@
                             class="img-producto"
                             alt="Reloj digital profesional de ajedrez"
                             loading="lazy"
+                                onclick="abrirProducto(this.src)"
+
                         >
 
                     </div>
@@ -1103,6 +1113,8 @@
                             class="img-producto"
                             alt="Polo oficial de Academia Soubac Ajedrez"
                             loading="lazy"
+                                onclick="abrirProducto(this.src)"
+
                         >
 
                     </div>
@@ -1136,6 +1148,8 @@
                             class="img-producto"
                             alt="Clases personalizadas de ajedrez"
                             loading="lazy"
+                                onclick="abrirProducto(this.src)"
+
                         >
 
                     </div>
@@ -1169,6 +1183,8 @@
                             class="img-producto"
                             alt="Cursos virtuales de ajedrez en Hotmart"
                             loading="lazy"
+                                onclick="abrirProducto(this.src)"
+
                         >
 
                     </div>
@@ -2175,6 +2191,24 @@
         );
 
     </script>
+<!-- Visor de imágenes -->
 
+<div id="visorProducto" class="visor-producto">
+
+    <button
+        class="cerrar-producto"
+        onclick="cerrarProducto()"
+        aria-label="Cerrar"
+    >
+        ✕
+    </button>
+
+    <img
+        id="imagenProductoGrande"
+        src=""
+        alt="Producto"
+    >
+
+</div>
 </body>
 </html>
