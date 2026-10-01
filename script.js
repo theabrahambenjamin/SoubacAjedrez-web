@@ -5,45 +5,27 @@
 
 
 /* ==================================================
-   FIREBASE
+   FIREBASE — CONFIGURACIÓN
 ================================================== */
 
 const firebaseConfig = {
-
-    apiKey:
-        "AIzaSyCOmb0ZFxGPCz9h7ZYwBhdI1TpZrzZT4jN8",
-
-    authDomain:
-        "soubac-ajedrez.firebaseapp.com",
-
-    projectId:
-        "soubac-ajedrez",
-
-    storageBucket:
-        "soubac-ajedrez.firebasestorage.app",
-
-    messagingSenderId:
-        "795119435641",
-
-    appId:
-        "1:795119435641:web:5f2174e3e80a19e97079a8",
-
-    measurementId:
-        "G-C6SKT2392Q"
+    apiKey: "AIzaSyCOmb0ZFxGPCz9h7ZYwBhdI1TpZrzZT4jN8",
+    authDomain: "soubac-ajedrez.firebaseapp.com",
+    projectId: "soubac-ajedrez",
+    storageBucket: "soubac-ajedrez.firebasestorage.app",
+    messagingSenderId: "795119435641",
+    appId: "1:795119435641:web:5f2174e3e80a19e97079a8",
+    measurementId: "G-C6SKT2392Q"
 };
 
 
-/* Inicializar Firebase */
+/* ==================================================
+   INICIALIZAR FIREBASE
+================================================== */
 
-firebase.initializeApp(
-    firebaseConfig
-);
+firebase.initializeApp(firebaseConfig);
 
-
-/* Authentication */
-
-const auth =
-    firebase.auth();
+const auth = firebase.auth();
 
 
 /* ==================================================
@@ -52,8 +34,7 @@ const auth =
 
 auth.setPersistence(
     firebase.auth.Auth.Persistence.LOCAL
-)
-.catch((error) => {
+).catch((error) => {
 
     console.error(
         "No se pudo configurar la persistencia de sesión:",
@@ -80,6 +61,7 @@ let libroPendiente = null;
  * AbrahamBobadilla
  *        ↓
  * abrahambobadilla@usuarios.soubac.com
+ *
  */
 
 const DOMINIO_USUARIOS =
@@ -93,8 +75,7 @@ function usuarioAFirebaseEmail(usuario) {
             .trim()
             .toLowerCase()
             .replace(/\s+/g, "")
-        +
-        DOMINIO_USUARIOS
+        + DOMINIO_USUARIOS
     );
 
 }
@@ -383,15 +364,7 @@ function abrirLoginBiblioteca() {
         );
 
 
-    if (!modal) {
-
-        console.error(
-            "No se encontró el modal de Biblioteca."
-        );
-
-        return;
-
-    }
+    if (!modal) return;
 
 
     if (error) {
@@ -560,14 +533,6 @@ async function iniciarSesionBiblioteca(
          * Convertimos el usuario
          * a la dirección interna
          * utilizada por Firebase.
-         *
-         * Ejemplo:
-         *
-         * AbrahamBobadilla
-         *
-         * se convierte en:
-         *
-         * abrahambobadilla@usuarios.soubac.com
          */
 
         const emailFirebase =
@@ -1690,10 +1655,6 @@ window.mostrar =
 
 window.abrirLibro =
     abrirLibro;
-
-
-window.abrirLoginBiblioteca =
-    abrirLoginBiblioteca;
 
 
 window.cerrarLoginBiblioteca =
