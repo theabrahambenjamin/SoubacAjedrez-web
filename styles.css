@@ -3600,120 +3600,96 @@ body.carrito-abierto {
 
 }\n\n/* ==================================================\n   BIBLIOTECA — ACCESO Y SESIÓN\n================================================== */\n\n.subtitulo-biblioteca {\n    width: 100%;\n    max-width: 720px;\n    margin: -8px auto 0;\n    color: rgba(255, 255, 255, 0.88);\n    font-size: 17px;\n    line-height: 1.6;\n    text-align: center;\n}\n\n.estado-biblioteca {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    gap: 12px;\n    flex-wrap: wrap;\n    width: fit-content;\n    max-width: 100%;\n    margin: 18px auto 0;\n    padding: 9px 14px;\n    color: var(--blanco);\n    background: rgba(6, 31, 63, 0.76);\n    border: 1px solid rgba(212, 175, 55, 0.34);\n    border-radius: 999px;\n    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);\n    font-size: 14px;\n    font-weight: 600;\n}\n\n.btn-cerrar-sesion {\n    padding: 6px 11px;\n    color: var(--azul-oscuro);\n    background: var(--blanco);\n    border-radius: 999px;\n    font-size: 12px;\n    font-weight: 800;\n    cursor: pointer;\n    transition: transform var(--transicion), background var(--transicion);\n}\n\n.btn-cerrar-sesion:hover {\n    background: #f2f2f2;\n    transform: translateY(-1px);\n}\n\n/* ==================================================\n   MODAL LOGIN BIBLIOTECA\n================================================== */\n\n.modal-biblioteca {\n    position: fixed;\n    inset: 0;\n    z-index: 999998;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    padding: 20px;\n    background: rgba(3, 18, 37, 0.78);\n    backdrop-filter: blur(8px);\n    opacity: 0;\n    visibility: hidden;\n    pointer-events: none;\n    transition: opacity 0.25s ease, visibility 0.25s ease;\n}\n\n.modal-biblioteca.activo {\n    opacity: 1;\n    visibility: visible;\n    pointer-events: auto;\n}\n\n.login-biblioteca {\n    position: relative;\n    width: min(100%, 430px);\n    padding: 38px 34px 28px;\n    color: var(--negro);\n    background: var(--blanco);\n    border-top: 5px solid var(--dorado);\n    border-radius: 24px;\n    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.42);\n    transform: translateY(20px) scale(0.97);\n    transition: transform 0.3s ease;\n}\n\n.modal-biblioteca.activo .login-biblioteca {\n    transform: translateY(0) scale(1);\n}\n\n.cerrar-login {\n    position: absolute;\n    top: 13px;\n    right: 15px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    width: 36px;\n    height: 36px;\n    color: #777;\n    background: transparent;\n    border-radius: 50%;\n    font-size: 27px;\n    line-height: 1;\n    cursor: pointer;\n    transition: background var(--transicion), color var(--transicion);\n}\n\n.cerrar-login:hover {\n    color: var(--rojo-principal);\n    background: #f2f2f2;\n}\n\n.icono-login {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    width: 66px;\n    height: 66px;\n    margin: 0 auto 17px;\n    color: var(--dorado);\n    background: linear-gradient(135deg, var(--azul-oscuro), var(--azul-medio));\n    border-radius: 50%;\n    box-shadow: 0 9px 24px rgba(6, 31, 63, 0.22);\n    font-size: 31px;\n}\n\n.login-biblioteca h2 {\n    margin: 0 0 9px;\n    color: var(--azul-oscuro);\n    font-size: 28px;\n    line-height: 1.2;\n    text-align: center;\n}\n\n.texto-login {\n    margin: 0 auto 25px;\n    color: #666;\n    font-size: 15px;\n    line-height: 1.55;\n    text-align: center;\n}\n\n.texto-login strong {\n    color: var(--azul-medio);\n}\n\n.campo-login {\n    margin-bottom: 17px;\n}\n\n.campo-login label {\n    display: block;\n    margin-bottom: 7px;\n    color: var(--azul-oscuro);\n    font-size: 14px;\n    font-weight: 700;\n}\n\n.campo-login input {\n    width: 100%;\n    padding: 13px 14px;\n    color: var(--negro);\n    background: #fafafa;\n    border: 1px solid #d6dce2;\n    border-radius: 10px;\n    outline: none;\n    font-size: 15px;\n    transition: border-color var(--transicion), box-shadow var(--transicion), background var(--transicion);\n}\n\n.campo-login input:focus {\n    background: var(--blanco);\n    border-color: var(--azul-medio);\n    box-shadow: 0 0 0 3px rgba(11, 75, 119, 0.11);\n}\n\n.error-login {\n    min-height: 20px;\n    margin: 0 0 9px;\n    color: #b00020;\n    font-size: 13px;\n    line-height: 1.4;\n    text-align: center;\n}\n\n.boton-login {\n    width: 100%;\n    padding: 14px 18px;\n    color: var(--blanco);\n    background: linear-gradient(135deg, var(--azul-oscuro), var(--azul-medio));\n    border-radius: 10px;\n    font-size: 15px;\n    font-weight: 800;\n    cursor: pointer;\n    transition: transform var(--transicion), box-shadow var(--transicion), opacity var(--transicion);\n}\n\n.boton-login:hover:not(:disabled) {\n    transform: translateY(-2px);\n    box-shadow: 0 9px 22px rgba(6, 31, 63, 0.25);\n}\n\n.boton-login:disabled {\n    opacity: 0.65;\n    cursor: wait;\n}\n\n.seguridad-login {\n    margin-top: 19px;\n    padding-top: 14px;\n    color: #777;\n    border-top: 1px solid #eeeeee;\n    font-size: 12px;\n    text-align: center;\n}\n\n@media (max-width: 480px) {\n    .subtitulo-biblioteca {\n        font-size: 15px;\n    }\n\n    .login-biblioteca {\n        padding: 34px 22px 25px;\n        border-radius: 19px;\n    }\n\n    .login-biblioteca h2 {\n        font-size: 24px;\n    }\n\n    .estado-biblioteca {\n        font-size: 12px;\n    }\n}\n
 /* ==================================================
-   BIBLIOTECA — MODAL DE INICIO DE SESIÓN
+   MODAL — ACCESO A LA BIBLIOTECA
 ================================================== */
 
 .modal-biblioteca {
-
     position: fixed;
-
     inset: 0;
 
-    z-index: 999999;
+    z-index: 99999;
 
     display: flex;
-
+    align-items: center;
     justify-content: center;
 
-    align-items: center;
+    width: 100%;
+    height: 100%;
 
     padding: 20px;
 
     background:
-        rgba(0, 0, 0, 0.72);
+        rgba(5, 22, 40, 0.78);
 
-    backdrop-filter: blur(6px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 
     opacity: 0;
-
     visibility: hidden;
 
     pointer-events: none;
 
     transition:
-        opacity 0.3s ease,
-        visibility 0.3s ease;
-
+        opacity 0.25s ease,
+        visibility 0.25s ease;
 }
 
 
-/* ==================================================
-   MODAL ACTIVO
-================================================== */
+/* MODAL ACTIVO */
 
 .modal-biblioteca.activo {
-
     opacity: 1;
-
     visibility: visible;
-
     pointer-events: auto;
-
 }
 
 
 /* ==================================================
-   CONTENEDOR DEL LOGIN
+   CAJA PRINCIPAL DEL LOGIN
 ================================================== */
 
-.modal-biblioteca-contenido {
-
+.login-biblioteca {
     position: relative;
 
-    width: min(
-        430px,
-        calc(100% - 30px)
-    );
+    width: 100%;
+    max-width: 460px;
 
-    padding: 38px 32px 32px;
-
-    color: var(--negro);
+    padding: 38px 35px 30px;
 
     background:
         linear-gradient(
             145deg,
-            #ffffff,
-            #f7f9fc
+            #ffffff 0%,
+            #f5f8fc 100%
         );
 
     border:
+        2px solid rgba(212, 175, 55, 0.65);
 
-        1px solid
-        rgba(212, 175, 55, 0.55);
-
-    border-top:
-
-        6px solid
-        var(--dorado);
-
-    border-radius: 25px;
+    border-radius: 22px;
 
     box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(255, 255, 255, 0.5);
 
-        0 25px 70px
-        rgba(0, 0, 0, 0.5);
+    text-align: center;
 
     transform:
-        translateY(20px)
+        translateY(25px)
         scale(0.96);
 
     transition:
         transform 0.3s ease;
-
 }
 
 
-/* ==================================================
-   ANIMACIÓN AL ABRIR
-================================================== */
+/* ANIMACIÓN AL ABRIR */
 
 .modal-biblioteca.activo
-.modal-biblioteca-contenido {
-
+.login-biblioteca {
     transform:
         translateY(0)
         scale(1);
-
 }
 
 
@@ -3721,95 +3697,84 @@ body.carrito-abierto {
    BOTÓN CERRAR
 ================================================== */
 
-.modal-biblioteca-cerrar {
-
+.cerrar-login {
     position: absolute;
 
-    top: 14px;
-
+    top: 12px;
     right: 14px;
 
     display: flex;
-
+    align-items: center;
     justify-content: center;
 
-    align-items: center;
+    width: 36px;
+    height: 36px;
 
-    width: 38px;
+    padding: 0;
 
-    height: 38px;
-
-    color: var(--blanco);
+    color: #ffffff;
 
     background:
-        var(--rojo-principal);
+        #8b0000;
 
     border: none;
-
     border-radius: 50%;
 
-    font-size: 20px;
-
+    font-size: 24px;
     font-weight: 700;
+    line-height: 1;
 
     cursor: pointer;
 
     transition:
-
-        background 0.25s ease,
-
-        transform 0.25s ease;
-
+        background 0.2s ease,
+        transform 0.2s ease;
 }
 
-
-.modal-biblioteca-cerrar:hover {
-
+.cerrar-login:hover {
     background:
-        var(--rojo-hover);
+        #a90000;
 
     transform:
-        rotate(90deg);
-
+        rotate(90deg)
+        scale(1.05);
 }
 
 
 /* ==================================================
-   ICONO DEL MODAL
+   ÍCONO
 ================================================== */
 
-.modal-biblioteca-icono {
-
+.icono-login {
     display: flex;
 
+    align-items: center;
     justify-content: center;
 
-    align-items: center;
-
     width: 72px;
-
     height: 72px;
 
-    margin: 0 auto 18px;
+    margin:
+        0 auto 18px;
 
-    color: var(--dorado);
+    color: #ffffff;
 
     background:
-        var(--azul-oscuro);
+        linear-gradient(
+            135deg,
+            #0b3a63,
+            #062744
+        );
 
     border:
-        3px solid
-        rgba(212, 175, 55, 0.55);
+        3px solid #d4af37;
 
     border-radius: 50%;
 
     font-size: 34px;
 
     box-shadow:
-
-        0 8px 22px
-        rgba(0, 0, 0, 0.22);
-
+        0 8px 22px rgba(0, 0, 0, 0.20);
 }
 
 
@@ -3817,22 +3782,24 @@ body.carrito-abierto {
    TÍTULO
 ================================================== */
 
-.modal-biblioteca h2 {
-
-    margin: 0 0 10px;
+.login-biblioteca h2 {
+    margin:
+        0 0 12px;
 
     color:
-        var(--azul-oscuro);
+        #082f52;
+
+    font-family:
+        inherit;
 
     font-size:
-        clamp(25px, 5vw, 31px);
+        clamp(25px, 5vw, 32px);
 
-    font-weight: 800;
+    font-weight:
+        800;
 
-    line-height: 1.2;
-
-    text-align: center;
-
+    line-height:
+        1.2;
 }
 
 
@@ -3840,60 +3807,26 @@ body.carrito-abierto {
    DESCRIPCIÓN
 ================================================== */
 
-.modal-biblioteca-descripcion {
+.texto-login {
+    margin:
+        0 auto 25px;
 
-    margin: 0 auto 25px;
+    max-width:
+        370px;
 
     color:
-        var(--gris-texto);
+        #4b5563;
 
-    font-size: 15px;
+    font-size:
+        15px;
 
-    line-height: 1.6;
-
-    text-align: center;
-
+    line-height:
+        1.55;
 }
 
-
-/* ==================================================
-   MENSAJE PARA LICHESS
-================================================== */
-
-.modal-biblioteca-nota {
-
-    margin-bottom: 22px;
-
-    padding: 13px 15px;
-
+.texto-login strong {
     color:
-        #17324d;
-
-    background:
-        rgba(95, 211, 255, 0.12);
-
-    border:
-        1px solid
-        rgba(95, 211, 255, 0.35);
-
-    border-left:
-        4px solid
-        var(--azul-medio);
-
-    border-radius: 12px;
-
-    font-size: 14px;
-
-    line-height: 1.5;
-
-}
-
-
-.modal-biblioteca-nota strong {
-
-    color:
-        var(--azul-medio);
-
+        #0b3a63;
 }
 
 
@@ -3902,92 +3835,106 @@ body.carrito-abierto {
 ================================================== */
 
 #formLoginBiblioteca {
+    display:
+        flex;
 
-    width: 100%;
+    flex-direction:
+        column;
 
+    gap:
+        16px;
+
+    width:
+        100%;
 }
 
 
 /* ==================================================
-   GRUPOS DE CAMPOS
+   CAMPOS
 ================================================== */
 
-.campo-biblioteca {
+.campo-login {
+    width:
+        100%;
 
-    margin-bottom: 18px;
+    text-align:
+        left;
+}
 
+.campo-login label {
+    display:
+        block;
+
+    margin:
+        0 0 7px;
+
+    color:
+        #17324d;
+
+    font-size:
+        14px;
+
+    font-weight:
+        700;
 }
 
 
-.campo-biblioteca label {
+.campo-login input {
+    display:
+        block;
 
-    display: block;
+    box-sizing:
+        border-box;
 
-    margin-bottom: 7px;
+    width:
+        100%;
 
-    color:
-        var(--azul-oscuro);
+    height:
+        48px;
 
-    font-size: 14px;
-
-    font-weight: 700;
-
-}
-
-
-/* ==================================================
-   INPUTS
-================================================== */
-
-.campo-biblioteca input {
-
-    width: 100%;
-
-    padding: 14px 15px;
+    padding:
+        0 14px;
 
     color:
-        var(--negro);
+        #1f2937;
 
     background:
         #ffffff;
 
     border:
-        1px solid
-        #d1d7df;
+        1.5px solid #cbd5e1;
 
-    border-radius: 12px;
+    border-radius:
+        10px;
 
-    outline: none;
+    outline:
+        none;
 
-    font-size: 16px;
+    font-family:
+        inherit;
+
+    font-size:
+        15px;
 
     transition:
-
-        border-color 0.25s ease,
-
-        box-shadow 0.25s ease;
-
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 
-.campo-biblioteca input::placeholder {
-
+.campo-login input::placeholder {
     color:
-        #9299a3;
-
+        #9ca3af;
 }
 
 
-.campo-biblioteca input:focus {
-
+.campo-login input:focus {
     border-color:
-        var(--azul-medio);
+        #0b3a63;
 
     box-shadow:
-
         0 0 0 3px
-        rgba(11, 75, 119, 0.13);
-
+        rgba(11, 58, 99, 0.12);
 }
 
 
@@ -3995,24 +3942,24 @@ body.carrito-abierto {
    MENSAJE DE ERROR
 ================================================== */
 
-#errorLoginBiblioteca {
-
-    min-height: 20px;
+.error-login {
+    min-height:
+        20px;
 
     margin:
-        4px 0 13px;
+        -4px 0 0;
 
     color:
-        #b00000;
+        #b91c1c;
 
-    font-size: 14px;
+    font-size:
+        13px;
 
-    font-weight: 600;
+    font-weight:
+        600;
 
-    line-height: 1.4;
-
-    text-align: center;
-
+    line-height:
+        1.4;
 }
 
 
@@ -4020,298 +3967,174 @@ body.carrito-abierto {
    BOTÓN INICIAR SESIÓN
 ================================================== */
 
-#btnLoginBiblioteca {
+.boton-login {
+    display:
+        flex;
 
-    display: flex;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    align-items: center;
+    width:
+        100%;
 
-    width: 100%;
+    min-height:
+        50px;
 
-    padding: 14px 20px;
+    padding:
+        12px 20px;
 
     color:
-        var(--blanco);
+        #ffffff;
 
     background:
-
         linear-gradient(
             135deg,
-            var(--azul-oscuro),
-            var(--azul-medio)
+            #0b3a63,
+            #062744
         );
 
-    border: none;
+    border:
+        none;
 
-    border-radius: 13px;
+    border-radius:
+        11px;
 
-    font-size: 16px;
+    font-family:
+        inherit;
 
-    font-weight: 800;
+    font-size:
+        16px;
 
-    cursor: pointer;
+    font-weight:
+        800;
+
+    cursor:
+        pointer;
 
     box-shadow:
-
-        0 8px 20px
-        rgba(6, 31, 63, 0.28);
+        0 7px 18px
+        rgba(6, 39, 68, 0.25);
 
     transition:
-
-        transform 0.25s ease,
-
-        box-shadow 0.25s ease,
-
-        background 0.25s ease;
-
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
 }
 
 
-#btnLoginBiblioteca:hover {
-
+.boton-login:hover {
     background:
-
         linear-gradient(
             135deg,
-            var(--azul-medio),
-            #08639c
+            #0d4778,
+            #073354
         );
 
     transform:
         translateY(-2px);
 
     box-shadow:
-
-        0 11px 25px
-        rgba(6, 31, 63, 0.35);
-
+        0 10px 24px
+        rgba(6, 39, 68, 0.32);
 }
 
 
-#btnLoginBiblioteca:active {
+.boton-login:active {
+    transform:
+        translateY(0);
+}
+
+
+.boton-login:disabled {
+    opacity:
+        0.65;
+
+    cursor:
+        wait;
 
     transform:
-        scale(0.98);
-
-}
-
-
-#btnLoginBiblioteca:disabled {
-
-    opacity: 0.65;
-
-    cursor: not-allowed;
-
-    transform: none;
-
+        none;
 }
 
 
 /* ==================================================
-   ESTADO DE LA BIBLIOTECA
+   MENSAJE DE SEGURIDAD
 ================================================== */
 
-.estado-biblioteca {
+.seguridad-login {
+    margin:
+        22px -35px -30px;
 
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    flex-wrap: wrap;
-
-    gap: 12px;
-
-    width: 100%;
-
-    max-width: 1150px;
-
-    margin: 25px auto 0;
-
-    padding: 14px 18px;
+    padding:
+        13px 20px;
 
     color:
-        var(--azul-oscuro);
+        #ffffff;
 
     background:
+        #0b3a63;
 
-        rgba(
-            255,
-            255,
-            255,
-            0.90
-        );
+    border-radius:
+        0 0 20px 20px;
 
-    border:
+    font-size:
+        13px;
 
-        1px solid
-        rgba(
-            212,
-            175,
-            55,
-            0.35
-        );
+    font-weight:
+        600;
 
-    border-radius: 14px;
-
-    box-shadow:
-
-        0 7px 20px
-        rgba(0, 0, 0, 0.12);
-
-    font-size: 14px;
-
-    font-weight: 700;
-
+    line-height:
+        1.4;
 }
 
 
 /* ==================================================
-   BOTÓN CERRAR SESIÓN
+   RESPONSIVE
 ================================================== */
 
-#btnCerrarSesionBiblioteca {
-
-    padding: 8px 13px;
-
-    color:
-        var(--blanco);
-
-    background:
-        var(--rojo-principal);
-
-    border: none;
-
-    border-radius: 9px;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition:
-
-        background 0.25s ease,
-
-        transform 0.25s ease;
-
-}
-
-
-#btnCerrarSesionBiblioteca:hover {
-
-    background:
-        var(--rojo-hover);
-
-    transform:
-        translateY(-1px);
-
-}
-
-
-/* ==================================================
-   RESPONSIVE — CELULARES
-================================================== */
-
-@media (max-width: 650px) {
+@media (max-width: 600px) {
 
     .modal-biblioteca {
-
-        padding: 15px;
-
+        padding:
+            15px;
     }
 
-
-    .modal-biblioteca-contenido {
-
-        width: 100%;
+    .login-biblioteca {
+        max-width:
+            100%;
 
         padding:
             34px 22px 25px;
 
-        border-radius: 21px;
-
+        border-radius:
+            18px;
     }
 
-
-    .modal-biblioteca-icono {
-
-        width: 64px;
-
-        height: 64px;
-
-        font-size: 29px;
-
+    .login-biblioteca h2 {
+        font-size:
+            25px;
     }
 
+    .icono-login {
+        width:
+            62px;
 
-    .modal-biblioteca h2 {
+        height:
+            62px;
 
-        font-size: 25px;
-
+        font-size:
+            29px;
     }
 
+    .seguridad-login {
+        margin:
+            20px -22px -25px;
 
-    .modal-biblioteca-descripcion {
-
-        font-size: 14px;
-
-    }
-
-
-    .modal-biblioteca-nota {
-
-        font-size: 13px;
-
-    }
-
-
-    .campo-biblioteca input {
-
-        padding:
-            13px 14px;
-
-        font-size: 16px;
-
-    }
-
-
-    #btnLoginBiblioteca {
-
-        padding:
-            14px 16px;
-
-    }
-
-
-    .estado-biblioteca {
-
-        flex-direction: column;
-
-        text-align: center;
-
-    }
-
-}
-
-
-/* ==================================================
-   ACCESIBILIDAD
-================================================== */
-
-@media (prefers-reduced-motion: reduce) {
-
-    .modal-biblioteca,
-    .modal-biblioteca-contenido,
-    .modal-biblioteca-cerrar,
-    #btnLoginBiblioteca {
-
-        transition: none;
-
+        border-radius:
+            0 0 16px 16px;
     }
 
 }
