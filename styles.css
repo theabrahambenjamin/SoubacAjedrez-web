@@ -2237,6 +2237,22 @@ main {
 
 
 /* =========================================================
+   LOGO DEL LOGIN
+   ========================================================= */
+
+.icono-login .logo-login {
+    width: 56px;
+    height: 56px;
+    max-width: 56px;
+    max-height: 56px;
+    object-fit: contain;
+    display: block;
+    mix-blend-mode: multiply;
+    filter: contrast(1.05);
+}
+
+
+/* =========================================================
    TÍTULO DEL LOGIN
    ========================================================= */
 
@@ -2862,6 +2878,13 @@ main {
 
         font-size:
             29px;
+    }
+
+    .icono-login .logo-login {
+        width: 48px;
+        height: 48px;
+        max-width: 48px;
+        max-height: 48px;
     }
 
     .login-biblioteca h2 {
