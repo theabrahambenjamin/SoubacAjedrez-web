@@ -50,19 +50,29 @@ auth.setPersistence(
 
 let libroPendiente = null;
 
+
+/*
+   Firebase Authentication utiliza internamente
+   un identificador de correo.
+
+   El alumno NO verá ni escribirá ese correo.
+
+   Ejemplo:
+
+   Usuario:
+   AbrahamBobadilla
+
+   Internamente:
+   abrahambobadilla@usuarios.soubac.com
+
+   IMPORTANTE:
+   Esto NO significa que el alumno tenga que
+   conocer o utilizar un correo electrónico.
+*/
+
 const DOMINIO_USUARIOS =
     "@usuarios.soubac.com";
 
-
-/*
-   Convierte:
-
-   AbrahamBobadilla
-
-   en:
-
-   abrahambobadilla@usuarios.soubac.com
-*/
 
 function usuarioAFirebaseEmail(usuario) {
 
@@ -284,9 +294,6 @@ function mostrar(idSeccion) {
 
 /* ==================================================
    BIBLIOTECA
-   IMPORTANTE:
-   EL LOGIN SOLO APARECE AL HACER CLIC
-   EN UNA TARJETA.
 ================================================== */
 
 function abrirLibro(evento, url) {
@@ -332,8 +339,8 @@ function abrirLibro(evento, url) {
 
 
     /*
-       Si NO existe sesión,
-       recién aquí aparece el modal.
+       Si no existe sesión,
+       mostramos el login.
     */
 
     abrirLoginBiblioteca();
@@ -418,14 +425,6 @@ function abrirLoginBiblioteca() {
     }
 
 
-    /*
-       MUY IMPORTANTE:
-
-       El modal inicia oculto mediante CSS.
-
-       Solo aquí agregamos .activo.
-    */
-
     modal.classList.add(
         "activo"
     );
@@ -483,11 +482,6 @@ function cerrarLoginBiblioteca() {
         "true"
     );
 
-
-    /*
-       Si no hay otro elemento modal abierto,
-       recuperamos el scroll.
-    */
 
     const carritoAbierto =
         document
@@ -603,8 +597,8 @@ async function iniciarSesionBiblioteca(
     try {
 
         /*
-           Convertimos el usuario al correo
-           interno utilizado por Firebase.
+           Convertimos el usuario ingresado
+           al identificador interno de Firebase.
         */
 
         const emailFirebase =
@@ -631,8 +625,7 @@ async function iniciarSesionBiblioteca(
 
 
         /*
-           Abrimos exactamente el libro
-           que el alumno seleccionó.
+           Abrimos el libro seleccionado.
         */
 
         if (libroPendiente) {
@@ -684,6 +677,14 @@ async function iniciarSesionBiblioteca(
 
                     error.textContent =
                         "Demasiados intentos. Espera unos minutos e inténtalo nuevamente.";
+
+                    break;
+
+
+                case "auth/network-request-failed":
+
+                    error.textContent =
+                        "No hay conexión con el servidor. Verifica tu conexión a Internet.";
 
                     break;
 
@@ -778,7 +779,8 @@ function configurarBiblioteca() {
 
 
     /*
-       Firebase mantiene la sesión.
+       Firebase comprueba automáticamente
+       si existe una sesión activa.
     */
 
     auth.onAuthStateChanged(
