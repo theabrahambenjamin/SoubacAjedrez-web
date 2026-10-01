@@ -57,6 +57,10 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     >
 
+    <!-- Firebase Authentication -->
+    <script src="https://www.gstatic.com/firebasejs/11.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.6.1/firebase-auth-compat.js"></script>
+
 </head>
 
 
@@ -406,30 +410,8 @@
         >
 
             <h2 class="titulo-seccion">
-                Biblioteca Soubac
+                Libros gratuitos para descargar
             </h2>
-
-            <p class="subtitulo-biblioteca">
-                Material de estudio exclusivo para nuestros estudiantes.
-            </p>
-
-            <div
-                id="estadoBiblioteca"
-                class="estado-biblioteca"
-                aria-live="polite"
-            >
-                <span id="textoEstadoBiblioteca">🔒 Acceso protegido</span>
-
-                <button
-                    type="button"
-                    id="btnCerrarSesionBiblioteca"
-                    class="btn-cerrar-sesion"
-                    onclick="cerrarSesionBiblioteca()"
-                    hidden
-                >
-                    Cerrar sesión
-                </button>
-            </div>
 
             <div class="botones-info">
 
@@ -437,6 +419,7 @@
                     href="#"
                     onclick="abrirLibro(event, 'https://drive.google.com/drive/folders/1s7tAnuWdynVDA54csrYfxV7MKj_L0i9k?usp=drive_link')"
                 >
+
                     Aperturas
 
                     <span>
@@ -444,15 +427,17 @@
                     </span>
 
                     <strong>
-                        Acceder al libro →
+                        Libro de aperturas →
                     </strong>
 
                 </a>
+
 
                 <a
                     href="#"
                     onclick="abrirLibro(event, 'https://drive.google.com/drive/folders/1s7tAnuWdynVDA54csrYfxV7MKj_L0i9k?usp=drive_link')"
                 >
+
                     Temas tácticos
 
                     <span>
@@ -460,15 +445,17 @@
                     </span>
 
                     <strong>
-                        Acceder al libro →
+                        Libro de táctica →
                     </strong>
 
                 </a>
+
 
                 <a
                     href="#"
                     onclick="abrirLibro(event, 'https://drive.google.com/drive/u/0/folders/1nPCAhvg_FlbYNdUQX7f3SKEYF1a0eUvt')"
                 >
+
                     Defensas
 
                     <span>
@@ -476,15 +463,17 @@
                     </span>
 
                     <strong>
-                        Acceder al libro →
+                        Libro de defensas →
                     </strong>
 
                 </a>
+
 
                 <a
                     href="#"
                     onclick="abrirLibro(event, 'https://drive.google.com/drive/folders/1Rdlm2b3JLb_sGrIqVpJ2YJlT12IQUEFQ?usp=sharing')"
                 >
+
                     Historia
 
                     <span>
@@ -492,15 +481,17 @@
                     </span>
 
                     <strong>
-                        Acceder al libro →
+                        Libro histórico →
                     </strong>
 
                 </a>
+
 
                 <a
                     href="#"
                     onclick="abrirLibro(event, 'https://drive.google.com/drive/folders/1BMTeaEMbn0aLVgg1LiCSLGcdNyMWaonM?usp=sharing')"
                 >
+
                     Gambitos
 
                     <span>
@@ -508,15 +499,17 @@
                     </span>
 
                     <strong>
-                        Acceder al libro →
+                        Libro de gambitos →
                     </strong>
 
                 </a>
+
 
                 <a
                     href="#"
                     onclick="abrirLibro(event, 'https://drive.google.com/drive/u/0/folders/1_gXmSnxcj2Xetcw6QogtqDeLMVVEW6iB')"
                 >
+
                     Principiantes
 
                     <span>
@@ -524,7 +517,7 @@
                     </span>
 
                     <strong>
-                        Acceder al libro →
+                        Libro básico →
                     </strong>
 
                 </a>
@@ -532,8 +525,7 @@
             </div>
 
         </section>
-
-        <!-- ======================================
+                <!-- ======================================
              SECCIÓN HISTORIA
         ======================================= -->
 
@@ -1630,11 +1622,80 @@
     </footer>
 
 
-    <!-- ==========================================
-         JAVASCRIPT PRINCIPAL
-    =========================================== -->
+    <!-- JavaScript principal + Firebase Authentication -->
+    <script src="script.js"></script>
 
-    <script type="module" src="script.js"></script>
+<!-- ======================================
+     MODAL ACCESO BIBLIOTECA
+======================================= -->
+
+<div
+    id="modalLoginBiblioteca"
+    class="modal-biblioteca"
+    aria-hidden="true"
+>
+    <div class="login-biblioteca">
+
+        <button
+            type="button"
+            class="cerrar-login"
+            onclick="cerrarLoginBiblioteca()"
+            aria-label="Cerrar"
+        >
+            ×
+        </button>
+
+        <div class="icono-login">♟️</div>
+
+        <h2>Acceso a la Biblioteca</h2>
+
+        <p class="texto-login">
+            Utiliza los mismos datos que utilizas en <strong>Lichess.org</strong>.
+        </p>
+
+        <form id="formLoginBiblioteca">
+
+            <div class="campo-login">
+                <label for="usuarioBiblioteca">Usuario</label>
+                <input
+                    type="text"
+                    id="usuarioBiblioteca"
+                    placeholder="Ingresa tu usuario"
+                    autocomplete="username"
+                    required
+                >
+            </div>
+
+            <div class="campo-login">
+                <label for="passwordBiblioteca">Contraseña</label>
+                <input
+                    type="password"
+                    id="passwordBiblioteca"
+                    placeholder="Ingresa tu contraseña"
+                    autocomplete="current-password"
+                    required
+                >
+            </div>
+
+            <p id="errorLoginBiblioteca" class="error-login"></p>
+
+            <button
+                type="submit"
+                id="btnLoginBiblioteca"
+                class="boton-login"
+            >
+                Iniciar sesión
+            </button>
+
+        </form>
+
+        <div class="seguridad-login">
+            🔒 Acceso exclusivo para estudiantes Soubac
+        </div>
+
+    </div>
+</div>
+
 <!-- Visor de imágenes -->
 
 <div id="visorProducto" class="visor-producto">
