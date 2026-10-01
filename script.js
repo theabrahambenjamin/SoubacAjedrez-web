@@ -1,5 +1,6 @@
 /* ==================================================
-   SOUBAC AJEDREZ — JAVASCRIPT PRINCIPAL
+   SOUBAC AJEDREZ
+   JAVASCRIPT PRINCIPAL
    Firebase Authentication + Biblioteca protegida
 ================================================== */
 
@@ -9,13 +10,28 @@
 ================================================== */
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCOmb0ZFxGPCz9h7ZYwBhdI1TpZrzZT4jN8",
-    authDomain: "soubac-ajedrez.firebaseapp.com",
-    projectId: "soubac-ajedrez",
-    storageBucket: "soubac-ajedrez.firebasestorage.app",
-    messagingSenderId: "795119435641",
-    appId: "1:795119435641:web:5f2174e3e80a19e97079a8",
-    measurementId: "G-C6SKT2392Q"
+
+    apiKey:
+        "AIzaSyCOmb0ZFxGPCz9h7ZYwBhdI1TpZrzZT4jN8",
+
+    authDomain:
+        "soubac-ajedrez.firebaseapp.com",
+
+    projectId:
+        "soubac-ajedrez",
+
+    storageBucket:
+        "soubac-ajedrez.firebasestorage.app",
+
+    messagingSenderId:
+        "795119435641",
+
+    appId:
+        "1:795119435641:web:5f2174e3e80a19e97079a8",
+
+    measurementId:
+        "G-C6SKT2392Q"
+
 };
 
 
@@ -23,9 +39,33 @@ const firebaseConfig = {
    INICIALIZAR FIREBASE
 ================================================== */
 
-firebase.initializeApp(firebaseConfig);
+if (
+    typeof firebase === "undefined"
+) {
 
-const auth = firebase.auth();
+    console.error(
+        "Firebase no fue cargado. Verifica las librerías Firebase en el HTML."
+    );
+
+} else {
+
+    if (!firebase.apps.length) {
+
+        firebase.initializeApp(
+            firebaseConfig
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+   FIREBASE AUTH
+================================================== */
+
+const auth =
+    firebase.auth();
 
 
 /* ==================================================
@@ -34,60 +74,1021 @@ const auth = firebase.auth();
 
 auth.setPersistence(
     firebase.auth.Auth.Persistence.LOCAL
-).catch((error) => {
+).catch(
+    (error) => {
 
-    console.error(
-        "Error al configurar la sesión:",
-        error
-    );
+        console.error(
+            "Error configurando la persistencia:",
+            error
+        );
 
-});
+    }
+);
 
 
 /* ==================================================
    BIBLIOTECA
 ================================================== */
 
-let libroPendiente = null;
+let libroPendiente =
+    null;
 
 
 /*
-   Firebase Authentication utiliza internamente
-   un identificador de correo.
+   IMPORTANTE
 
-   El alumno NO verá ni escribirá ese correo.
+   El estudiante NO escribe un correo.
 
-   Ejemplo:
+   Escribe:
 
-   Usuario:
-   AbrahamBobadilla
+   AbrahamBobadillaa
 
-   Internamente:
-   abrahambobadilla@usuarios.soubac.com
+   El sistema internamente lo convierte en:
 
-   IMPORTANTE:
-   Esto NO significa que el alumno tenga que
-   conocer o utilizar un correo electrónico.
+   abrahambobadillaa@usuarios.soubac.com
+
+   Ese es el identificador que existe
+   dentro de Firebase Authentication.
 */
 
 const DOMINIO_USUARIOS =
     "@usuarios.soubac.com";
 
 
-function usuarioAFirebaseEmail(usuario) {
+/* ==================================================
+   CONVERTIR USUARIO A IDENTIFICADOR FIREBASE
+================================================== */
+
+function usuarioAFirebaseEmail(
+    usuario
+) {
+
+    let valor =
+        String(
+            usuario || ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    /*
+       Eliminamos espacios.
+
+       Ejemplo:
+
+       Abraham Bobadilla
+       ↓
+       abrahambobadilla
+    */
+
+    valor =
+        valor.replace(
+            /\s+/g,
+            ""
+        );
+
+
+    /*
+       Si el usuario ya contiene @,
+       lo dejamos como está.
+
+       Esto sirve para pruebas administrativas.
+    */
+
+    if (
+        valor.includes("@")
+    ) {
+
+        return valor;
+
+    }
+
 
     return (
-        usuario
-            .trim()
-            .toLowerCase()
-            .replace(/\s+/g, "")
-        +
+        valor +
         DOMINIO_USUARIOS
     );
 
 }
 
 
+/* ==================================================
+   INICIO DE LA PÁGINA
+================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+
+        /* ==========================================
+           PANTALLA DE CARGA
+        ========================================== */
+
+        const pantallaCarga =
+            document.getElementById(
+                "pantalla-carga"
+            );
+
+
+        if (
+            pantallaCarga
+        ) {
+
+            setTimeout(
+                () => {
+
+                    pantallaCarga.style.opacity =
+                        "0";
+
+
+                    setTimeout(
+                        () => {
+
+                            pantallaCarga.remove();
+
+                        },
+                        700
+                    );
+
+                },
+                500
+            );
+
+        }
+
+
+        /* ==========================================
+           CARRITO
+        ========================================== */
+
+        actualizarCarrito();
+
+
+        /* ==========================================
+           BOTÓN DEL CARRITO
+        ========================================== */
+
+        const seccionActiva =
+            document.querySelector(
+                ".seccion.activa"
+            );
+
+
+        controlarBotonCarrito(
+
+            seccionActiva
+                ? seccionActiva.id
+                : "inicio"
+
+        );
+
+
+        /* ==========================================
+           BIBLIOTECA
+        ========================================== */
+
+        configurarBiblioteca();
+
+
+        /* ==========================================
+           VISOR DE PRODUCTOS
+        ========================================== */
+
+        configurarVisorProducto();
+
+    }
+);
+
+
+/* ==================================================
+   MENÚ
+================================================== */
+
+function abrirMenu() {
+
+    const menu =
+        document.getElementById(
+            "opcionesMenu"
+        );
+
+
+    const boton =
+        document.querySelector(
+            ".boton-menu"
+        );
+
+
+    if (!menu) {
+
+        return;
+
+    }
+
+
+    const abierto =
+        menu.classList.toggle(
+            "mostrar"
+        );
+
+
+    if (boton) {
+
+        boton.setAttribute(
+            "aria-expanded",
+            String(
+                abierto
+            )
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+   MOSTRAR SECCIONES
+================================================== */
+
+function mostrar(
+    idSeccion
+) {
+
+    const seccion =
+        document.getElementById(
+            idSeccion
+        );
+
+
+    if (!seccion) {
+
+        console.error(
+            "No existe la sección:",
+            idSeccion
+        );
+
+        return;
+
+    }
+
+
+    const secciones =
+        document.querySelectorAll(
+            ".seccion"
+        );
+
+
+    secciones.forEach(
+        (elemento) => {
+
+            elemento.classList.remove(
+                "activa"
+            );
+
+        }
+    );
+
+
+    seccion.classList.add(
+        "activa"
+    );
+
+
+    const menu =
+        document.getElementById(
+            "opcionesMenu"
+        );
+
+
+    const botonMenu =
+        document.querySelector(
+            ".boton-menu"
+        );
+
+
+    if (menu) {
+
+        menu.classList.remove(
+            "mostrar"
+        );
+
+    }
+
+
+    if (botonMenu) {
+
+        botonMenu.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+    }
+
+
+    controlarBotonCarrito(
+        idSeccion
+    );
+
+
+    cerrarCarrito();
+
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+/* ==================================================
+   ABRIR LIBRO
+================================================== */
+
+function abrirLibro(
+    evento,
+    url
+) {
+
+    if (evento) {
+
+        evento.preventDefault();
+
+    }
+
+
+    if (!url) {
+
+        return;
+
+    }
+
+
+    /*
+       Guardamos temporalmente
+       el libro que quiere abrir
+       el estudiante.
+    */
+
+    libroPendiente =
+        url;
+
+
+    /*
+       Si ya inició sesión,
+       abrimos directamente.
+    */
+
+    if (
+        auth.currentUser
+    ) {
+
+        abrirLibroEnNuevaPestana(
+            url
+        );
+
+
+        libroPendiente =
+            null;
+
+
+        return;
+
+    }
+
+
+    /*
+       Si no hay sesión,
+       mostramos el login.
+    */
+
+    abrirLoginBiblioteca();
+
+}
+
+
+/* ==================================================
+   ABRIR LIBRO EN NUEVA PESTAÑA
+================================================== */
+
+function abrirLibroEnNuevaPestana(
+    url,
+    ventana = null
+) {
+
+    if (!url) {
+
+        return null;
+
+    }
+
+
+    /*
+       Si ya tenemos una ventana
+       abierta por la acción del usuario,
+       reutilizamos esa ventana.
+    */
+
+    if (
+        ventana &&
+        !ventana.closed
+    ) {
+
+        ventana.location.href =
+            url;
+
+
+        return ventana;
+
+    }
+
+
+    const nuevaVentana =
+        window.open(
+
+            url,
+
+            "_blank",
+
+            "noopener,noreferrer"
+
+        );
+
+
+    return nuevaVentana;
+
+}
+
+
+/* ==================================================
+   ABRIR LOGIN
+================================================== */
+
+function abrirLoginBiblioteca() {
+
+    const modal =
+        document.getElementById(
+            "modalLoginBiblioteca"
+        );
+
+
+    const usuario =
+        document.getElementById(
+            "usuarioBiblioteca"
+        );
+
+
+    const password =
+        document.getElementById(
+            "passwordBiblioteca"
+        );
+
+
+    const error =
+        document.getElementById(
+            "errorLoginBiblioteca"
+        );
+
+
+    if (!modal) {
+
+        console.error(
+            "No existe el modal de Biblioteca."
+        );
+
+        return;
+
+    }
+
+
+    if (error) {
+
+        error.textContent =
+            "";
+
+    }
+
+
+    if (password) {
+
+        password.value =
+            "";
+
+    }
+
+
+    modal.classList.add(
+        "activo"
+    );
+
+
+    modal.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    document.body.style.overflow =
+        "hidden";
+
+
+    setTimeout(
+        () => {
+
+            if (usuario) {
+
+                usuario.focus();
+
+            }
+
+        },
+        150
+    );
+
+}
+
+
+/* ==================================================
+   CERRAR LOGIN
+================================================== */
+
+function cerrarLoginBiblioteca() {
+
+    const modal =
+        document.getElementById(
+            "modalLoginBiblioteca"
+        );
+
+
+    if (!modal) {
+
+        return;
+
+    }
+
+
+    modal.classList.remove(
+        "activo"
+    );
+
+
+    modal.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    const carritoAbierto =
+        document
+            .getElementById(
+                "panelCarrito"
+            )
+            ?.classList.contains(
+                "activo"
+            );
+
+
+    const visorAbierto =
+        document
+            .getElementById(
+                "visorProducto"
+            )
+            ?.classList.contains(
+                "activo"
+            );
+
+
+    if (
+        !carritoAbierto &&
+        !visorAbierto
+    ) {
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+}
+
+
+/* ==================================================
+   INICIAR SESIÓN
+================================================== */
+
+async function iniciarSesionBiblioteca(
+    evento
+) {
+
+    evento.preventDefault();
+
+
+    const usuarioInput =
+        document.getElementById(
+            "usuarioBiblioteca"
+        );
+
+
+    const passwordInput =
+        document.getElementById(
+            "passwordBiblioteca"
+        );
+
+
+    const error =
+        document.getElementById(
+            "errorLoginBiblioteca"
+        );
+
+
+    const boton =
+        document.getElementById(
+            "btnLoginBiblioteca"
+        );
+
+
+    const usuario =
+        usuarioInput
+            ? usuarioInput.value.trim()
+            : "";
+
+
+    const password =
+        passwordInput
+            ? passwordInput.value
+            : "";
+
+
+    if (error) {
+
+        error.textContent =
+            "";
+
+    }
+
+
+    if (
+        !usuario ||
+        !password
+    ) {
+
+        if (error) {
+
+            error.textContent =
+                "Completa tu usuario y contraseña.";
+
+        }
+
+        return;
+
+    }
+
+
+    if (boton) {
+
+        boton.disabled =
+            true;
+
+        boton.textContent =
+            "Verificando...";
+
+    }
+
+
+    try {
+
+        /*
+           Convertimos el usuario
+           al identificador interno
+           de Firebase.
+        */
+
+        const emailFirebase =
+            usuarioAFirebaseEmail(
+                usuario
+            );
+
+
+        console.log(
+            "Usuario ingresado:",
+            usuario
+        );
+
+
+        console.log(
+            "Identificador Firebase:",
+            emailFirebase
+        );
+
+
+        /*
+           AUTENTICACIÓN REAL
+        */
+
+        await auth.signInWithEmailAndPassword(
+
+            emailFirebase,
+
+            password
+
+        );
+
+
+        console.log(
+            "Inicio de sesión correcto."
+        );
+
+
+        /*
+           Cerramos el login.
+        */
+
+        cerrarLoginBiblioteca();
+
+
+        /*
+           Abrimos el libro seleccionado.
+        */
+
+        if (
+            libroPendiente
+        ) {
+
+            const url =
+                libroPendiente;
+
+
+            libroPendiente =
+                null;
+
+
+            abrirLibroEnNuevaPestana(
+                url
+            );
+
+        }
+
+    }
+
+    catch (
+        errorFirebase
+    ) {
+
+        console.error(
+            "ERROR REAL DE FIREBASE:",
+            errorFirebase
+        );
+
+
+        /*
+           Mostramos errores
+           específicos para poder
+           detectar el problema.
+        */
+
+        if (error) {
+
+            switch (
+                errorFirebase.code
+            ) {
+
+
+                case "auth/invalid-credential":
+
+                case "auth/invalid-login-credentials":
+
+                case "auth/user-not-found":
+
+                case "auth/wrong-password":
+
+                    error.textContent =
+                        "Usuario o contraseña incorrectos.";
+
+                    break;
+
+
+                case "auth/invalid-email":
+
+                    error.textContent =
+                        "El usuario ingresado no es válido.";
+
+                    break;
+
+
+                case "auth/user-disabled":
+
+                    error.textContent =
+                        "Esta cuenta está deshabilitada.";
+
+                    break;
+
+
+                case "auth/operation-not-allowed":
+
+                    error.textContent =
+                        "El acceso con correo y contraseña no está habilitado en Firebase.";
+
+                    break;
+
+
+                case "auth/too-many-requests":
+
+                    error.textContent =
+                        "Demasiados intentos. Espera unos minutos e inténtalo nuevamente.";
+
+                    break;
+
+
+                case "auth/network-request-failed":
+
+                    error.textContent =
+                        "No hay conexión con Firebase. Revisa tu conexión a Internet.";
+
+                    break;
+
+
+                default:
+
+                    /*
+                       Durante las pruebas mostramos
+                       el código real.
+                    */
+
+                    error.textContent =
+                        "Error Firebase: " +
+                        (
+                            errorFirebase.code ||
+                            "desconocido"
+                        );
+
+                    break;
+
+            }
+
+        }
+
+    }
+
+    finally {
+
+        if (boton) {
+
+            boton.disabled =
+                false;
+
+
+            boton.textContent =
+                "Iniciar sesión";
+
+        }
+
+    }
+
+}
+
+
+/* ==================================================
+   CONFIGURAR BIBLIOTECA
+================================================== */
+
+function configurarBiblioteca() {
+
+    const formulario =
+        document.getElementById(
+            "formLoginBiblioteca"
+        );
+
+
+    const modal =
+        document.getElementById(
+            "modalLoginBiblioteca"
+        );
+
+
+    /*
+       Formulario de inicio de sesión.
+    */
+
+    if (formulario) {
+
+        /*
+           Evitamos registrar
+           dos veces el evento.
+        */
+
+        if (
+            !formulario.dataset.firebaseConfigurado
+        ) {
+
+            formulario.addEventListener(
+                "submit",
+                iniciarSesionBiblioteca
+            );
+
+
+            formulario.dataset.firebaseConfigurado =
+                "true";
+
+        }
+
+    }
+
+
+    /*
+       Clic fuera de la tarjeta
+       para cerrar.
+    */
+
+    if (modal) {
+
+        if (
+            !modal.dataset.clickConfigurado
+        ) {
+
+            modal.addEventListener(
+                "click",
+                (evento) => {
+
+                    if (
+                        evento.target ===
+                        modal
+                    ) {
+
+                        cerrarLoginBiblioteca();
+
+                    }
+
+                }
+            );
+
+
+            modal.dataset.clickConfigurado =
+                "true";
+
+        }
+
+    }
+
+
+    /*
+       Estado de autenticación.
+    */
+
+    auth.onAuthStateChanged(
+        (usuario) => {
+
+            if (usuario) {
+
+                console.log(
+                    "Sesión de Biblioteca activa:",
+                    usuario.email
+                );
+
+            }
+
+            else {
+
+                console.log(
+                    "No hay sesión activa en Biblioteca."
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* ==================================================
+   CERRAR SESIÓN
+================================================== */
+
+async function cerrarSesionBiblioteca() {
+
+    try {
+
+        await auth.signOut();
+
+
+        console.log(
+            "Sesión cerrada correctamente."
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "No se pudo cerrar la sesión:",
+            error
+        );
+
+    }
+
+}
 /* ==================================================
    INICIO
 ================================================== */
