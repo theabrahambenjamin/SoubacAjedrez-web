@@ -4,21 +4,52 @@
    Firebase Authentication + Biblioteca + Tienda
 ========================================================= */
 
-"use strict";
+
+/* =========================================================
+   FIREBASE MODULAR
+========================================================= */
+
+import { initializeApp } from
+    "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+
+import {
+    getAuth,
+    setPersistence,
+    browserLocalPersistence,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut
+} from
+    "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
 
 /* =========================================================
-   FIREBASE
+   CONFIGURACIÓN FIREBASE
 ========================================================= */
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCOmb0ZFxGPCz9h7ZYwBhdI1TpZrzZT4jN8",
-    authDomain: "soubac-ajedrez.firebaseapp.com",
-    projectId: "soubac-ajedrez",
-    storageBucket: "soubac-ajedrez.firebasestorage.app",
-    messagingSenderId: "795119435641",
-    appId: "1:795119435641:web:5f2174e3e80a19e97079a8",
-    measurementId: "G-C6SKT2392Q"
+
+    apiKey:
+        "AIzaSyCOmb0ZFxGPCz9h7ZYwBhdI1TpZrzZT4jN8",
+
+    authDomain:
+        "soubac-ajedrez.firebaseapp.com",
+
+    projectId:
+        "soubac-ajedrez",
+
+    storageBucket:
+        "soubac-ajedrez.firebasestorage.app",
+
+    messagingSenderId:
+        "795119435641",
+
+    appId:
+        "1:795119435641:web:5f2174e3e80a19e97079a8",
+
+    measurementId:
+        "G-C6SKT2392Q"
+
 };
 
 
@@ -26,46 +57,38 @@ const firebaseConfig = {
    INICIALIZAR FIREBASE
 ========================================================= */
 
-if (typeof firebase === "undefined") {
-
-    console.error(
-        "ERROR: Firebase no fue cargado."
+const app =
+    initializeApp(
+        firebaseConfig
     );
-
-} else {
-
-    if (!firebase.apps.length) {
-
-        firebase.initializeApp(
-            firebaseConfig
-        );
-
-    }
-
-}
 
 
 /* =========================================================
    FIREBASE AUTH
 ========================================================= */
 
-const auth = firebase.auth();
+const auth =
+    getAuth(app);
 
 
 /* =========================================================
-   PERSISTENCIA
+   PERSISTENCIA DE SESIÓN
 ========================================================= */
 
-auth.setPersistence(
-    firebase.auth.Auth.Persistence.LOCAL
-).catch((error) => {
+setPersistence(
+    auth,
+    browserLocalPersistence
+)
+.catch(
+    (error) => {
 
-    console.error(
-        "Error configurando persistencia:",
-        error
-    );
+        console.error(
+            "Error configurando la persistencia:",
+            error
+        );
 
-});
+    }
+);
 
 
 /* =========================================================
@@ -73,13 +96,16 @@ auth.setPersistence(
 ========================================================= */
 
 /*
-   El alumno escribe solamente:
+   El estudiante escribe:
 
    AbrahamBobadillaa
 
-   Firebase recibe internamente:
+   El sistema convierte internamente:
 
    abrahambobadillaa@usuarios.soubac.com
+
+   El estudiante NUNCA necesita escribir
+   el correo interno.
 */
 
 const DOMINIO_USUARIOS =
@@ -87,15 +113,10 @@ const DOMINIO_USUARIOS =
 
 
 /* =========================================================
-   LIBRO PENDIENTE
+   VARIABLES GLOBALES
 ========================================================= */
 
 let libroPendiente = null;
-
-
-/* =========================================================
-   CARRITO
-========================================================= */
 
 let carrito = [];
 
@@ -120,15 +141,19 @@ try {
             );
 
 
-        if (Array.isArray(datos)) {
+        if (
+            Array.isArray(datos)
+        ) {
 
-            carrito = datos;
+            carrito =
+                datos;
 
         }
 
     }
 
-} catch (error) {
+}
+catch (error) {
 
     console.error(
         "No se pudo recuperar el carrito:",
@@ -141,7 +166,7 @@ try {
 
 
 /* =========================================================
-   CONVERTIR USUARIO A EMAIL INTERNO
+   CONVERTIR USUARIO A IDENTIFICADOR FIREBASE
 ========================================================= */
 
 function usuarioAFirebaseEmail(
@@ -157,7 +182,7 @@ function usuarioAFirebaseEmail(
 
 
     /*
-       Eliminamos espacios.
+       Eliminar espacios.
     */
 
     valor =
@@ -168,9 +193,8 @@ function usuarioAFirebaseEmail(
 
 
     /*
-       Si se escribe directamente
-       un identificador con @,
-       lo respetamos.
+       Si ya contiene @,
+       se respeta.
     */
 
     if (
@@ -210,9 +234,9 @@ document.addEventListener(
 
 function iniciarPagina() {
 
-    /*
+    /* -----------------------------------------------
        Pantalla de carga
-    */
+    ----------------------------------------------- */
 
     const pantallaCarga =
         document.getElementById(
@@ -222,40 +246,46 @@ function iniciarPagina() {
 
     if (pantallaCarga) {
 
-        setTimeout(() => {
+        setTimeout(
+            () => {
 
-            pantallaCarga.style.opacity =
-                "0";
+                pantallaCarga.style.opacity =
+                    "0";
 
 
-            setTimeout(() => {
+                setTimeout(
+                    () => {
 
-                if (
-                    pantallaCarga &&
-                    pantallaCarga.parentNode
-                ) {
+                        if (
+                            pantallaCarga &&
+                            pantallaCarga.parentNode
+                        ) {
 
-                    pantallaCarga.remove();
+                            pantallaCarga.remove();
 
-                }
+                        }
 
-            }, 700);
+                    },
+                    700
+                );
 
-        }, 500);
+            },
+            500
+        );
 
     }
 
 
-    /*
+    /* -----------------------------------------------
        Carrito
-    */
+    ----------------------------------------------- */
 
     actualizarCarrito();
 
 
-    /*
-       Sección actual
-    */
+    /* -----------------------------------------------
+       Sección activa
+    ----------------------------------------------- */
 
     const seccionActiva =
         document.querySelector(
@@ -272,16 +302,16 @@ function iniciarPagina() {
     );
 
 
-    /*
+    /* -----------------------------------------------
        Biblioteca
-    */
+    ----------------------------------------------- */
 
     configurarBiblioteca();
 
 
-    /*
+    /* -----------------------------------------------
        Visor
-    */
+    ----------------------------------------------- */
 
     configurarVisorProducto();
 
@@ -463,13 +493,11 @@ function abrirLibro(
 
 
     /*
-       Si ya existe una sesión,
+       Si ya existe sesión,
        abrimos directamente.
     */
 
-    if (
-        auth.currentUser
-    ) {
+    if (auth.currentUser) {
 
         abrirLibroEnNuevaPestana(
             url
@@ -486,8 +514,8 @@ function abrirLibro(
 
 
     /*
-       Si no hay sesión,
-       mostramos login.
+       Si no existe sesión,
+       mostramos el login.
     */
 
     abrirLoginBiblioteca();
@@ -510,11 +538,6 @@ function abrirLibroEnNuevaPestana(
 
     }
 
-
-    /*
-       Si tenemos una ventana
-       previamente creada, usamos esa.
-    */
 
     if (
         ventana &&
@@ -624,15 +647,18 @@ function abrirLoginBiblioteca() {
         "hidden";
 
 
-    setTimeout(() => {
+    setTimeout(
+        () => {
 
-        if (usuario) {
+            if (usuario) {
 
-            usuario.focus();
+                usuario.focus();
 
-        }
+            }
 
-    }, 100);
+        },
+        100
+    );
 
 }
 
@@ -723,7 +749,7 @@ function restaurarScroll() {
 
 
 /* =========================================================
-   INICIAR SESIÓN BIBLIOTECA
+   INICIAR SESIÓN EN BIBLIOTECA
 ========================================================= */
 
 async function iniciarSesionBiblioteca(
@@ -773,9 +799,9 @@ async function iniciarSesionBiblioteca(
             : "";
 
 
-    /*
-       Limpiar mensaje
-    */
+    /* -----------------------------------------------
+       Limpiar error
+    ----------------------------------------------- */
 
     if (error) {
 
@@ -785,9 +811,9 @@ async function iniciarSesionBiblioteca(
     }
 
 
-    /*
+    /* -----------------------------------------------
        Validación
-    */
+    ----------------------------------------------- */
 
     if (
         !usuario ||
@@ -806,9 +832,9 @@ async function iniciarSesionBiblioteca(
     }
 
 
-    /*
+    /* -----------------------------------------------
        Estado del botón
-    */
+    ----------------------------------------------- */
 
     if (boton) {
 
@@ -824,8 +850,13 @@ async function iniciarSesionBiblioteca(
     try {
 
         /*
-           Convertir usuario
-           a identificador Firebase.
+           Convertimos:
+
+           AbrahamBobadillaa
+
+           en:
+
+           abrahambobadillaa@usuarios.soubac.com
         */
 
         const emailFirebase =
@@ -835,11 +866,11 @@ async function iniciarSesionBiblioteca(
 
 
         console.log(
-            "================================"
+            "===================================="
         );
 
         console.log(
-            "SOUBAC FIREBASE LOGIN"
+            "SOUBAC AJEDREZ - FIREBASE LOGIN"
         );
 
         console.log(
@@ -854,11 +885,12 @@ async function iniciarSesionBiblioteca(
 
 
         /*
-           LOGIN REAL
+           AUTENTICACIÓN MODULAR
         */
 
         const resultado =
-            await auth.signInWithEmailAndPassword(
+            await signInWithEmailAndPassword(
+                auth,
                 emailFirebase,
                 password
             );
@@ -868,15 +900,13 @@ async function iniciarSesionBiblioteca(
             "LOGIN CORRECTO"
         );
 
-
         console.log(
             "UID:",
             resultado.user.uid
         );
 
-
         console.log(
-            "Email interno:",
+            "Usuario Firebase:",
             resultado.user.email
         );
 
@@ -902,13 +932,16 @@ async function iniciarSesionBiblioteca(
                 null;
 
 
-            setTimeout(() => {
+            setTimeout(
+                () => {
 
-                abrirLibroEnNuevaPestana(
-                    url
-                );
+                    abrirLibroEnNuevaPestana(
+                        url
+                    );
 
-            }, 100);
+                },
+                100
+            );
 
         }
 
@@ -919,11 +952,11 @@ async function iniciarSesionBiblioteca(
     ) {
 
         console.error(
-            "================================"
+            "===================================="
         );
 
         console.error(
-            "ERROR FIREBASE"
+            "ERROR REAL DE FIREBASE"
         );
 
         console.error(
@@ -936,10 +969,6 @@ async function iniciarSesionBiblioteca(
             errorFirebase.message
         );
 
-
-        /*
-           Mostrar error exacto.
-        */
 
         if (error) {
 
@@ -972,7 +1001,7 @@ async function iniciarSesionBiblioteca(
                 case "auth/operation-not-allowed":
 
                     error.textContent =
-                        "El acceso con correo y contraseña no está habilitado en Firebase.";
+                        "El acceso con usuario y contraseña no está habilitado en Firebase.";
 
                     break;
 
@@ -1001,7 +1030,23 @@ async function iniciarSesionBiblioteca(
                     break;
 
 
+                case "auth/api-key-not-valid":
+
+                case "auth/api-key-not-valid.-please-pass-a-valid-api-key.":
+
+                    error.textContent =
+                        "La configuración de Firebase no es válida. Verifica la API Key.";
+
+                    break;
+
+
                 default:
+
+                    /*
+                       Durante la configuración mostramos
+                       el código real para poder localizar
+                       cualquier problema.
+                    */
 
                     error.textContent =
                         "Error Firebase: " +
@@ -1059,10 +1104,6 @@ function configurarBiblioteca() {
 
     if (formulario) {
 
-        /*
-           Evitar doble evento.
-        */
-
         if (
             formulario.dataset.configurado !==
             "true"
@@ -1083,7 +1124,7 @@ function configurarBiblioteca() {
 
 
     /*
-       Cerrar haciendo clic
+       Cerrar al hacer clic
        fuera de la tarjeta.
     */
 
@@ -1120,19 +1161,22 @@ function configurarBiblioteca() {
 
 
     /*
-       Detectar sesión Firebase.
+       Estado de autenticación.
     */
 
-    auth.onAuthStateChanged(
+    onAuthStateChanged(
+        auth,
         (usuario) => {
 
             if (usuario) {
 
                 console.log(
-                    "Sesión activa en Biblioteca."
+                    "Sesión activa en Biblioteca:",
+                    usuario.email
                 );
 
-            } else {
+            }
+            else {
 
                 console.log(
                     "No existe sesión activa."
@@ -1154,7 +1198,9 @@ async function cerrarSesionBiblioteca() {
 
     try {
 
-        await auth.signOut();
+        await signOut(
+            auth
+        );
 
 
         console.log(
@@ -1184,7 +1230,7 @@ function agregarCarrito(
     precio
 ) {
 
-    const producto = {
+    carrito.push({
 
         nombre:
             String(
@@ -1196,12 +1242,7 @@ function agregarCarrito(
                 precio
             ) || 0
 
-    };
-
-
-    carrito.push(
-        producto
-    );
+    });
 
 
     actualizarCarrito();
@@ -1237,9 +1278,8 @@ function actualizarCarrito() {
 
 
     /*
-       Si la tienda todavía
-       no existe en la sección actual,
-       no hacemos nada.
+       Si estos elementos no existen
+       todavía, simplemente guardamos.
     */
 
     if (
@@ -1278,11 +1318,6 @@ function actualizarCarrito() {
         `;
 
     }
-
-
-    /*
-       Productos
-    */
 
     else {
 
@@ -1698,7 +1733,6 @@ function comprarWhatsApp() {
                     `• ${producto.nombre}: Gratis\n`;
 
             }
-
             else {
 
                 mensaje +=
@@ -1879,7 +1913,7 @@ function configurarVisorProducto() {
 
 
 /* =========================================================
-   ESCAPE
+   TECLA ESCAPE
 ========================================================= */
 
 document.addEventListener(
@@ -2063,9 +2097,13 @@ window.cerrarProducto =
 
 
 /* =========================================================
-   FIN DEL SCRIPT
+   MENSAJE DE CONTROL
 ========================================================= */
 
 console.log(
-    "♟️ Soubac Ajedrez — JavaScript cargado correctamente."
+    "♟️ SOUBAC AJEDREZ: JavaScript cargado correctamente."
+);
+
+console.log(
+    "♟️ Firebase Authentication modular activo."
 );
