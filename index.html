@@ -1,1754 +1,2998 @@
-<!DOCTYPE html>
-<html lang="es">
+/* =========================================================
+   SOUBAC AJEDREZ — STYLES.CSS COMPLETO
+   ========================================================= */
 
-<head>
 
-    <meta charset="UTF-8">
+/* =========================================================
+   VARIABLES
+   ========================================================= */
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+:root {
+    --rojo-principal: #8b0000;
+    --rojo-secundario: #990101;
+    --rojo-hover: #b50000;
+
+    --dorado: #d4af37;
+
+    --azul-oscuro: #061f3f;
+    --azul-medio: #0b4b77;
+    --azul-claro: #5fd3ff;
 
-    <title>Academia Soubac Ajedrez</title>
+    --blanco: #ffffff;
+    --negro: #111111;
 
-    <meta
-        name="description"
-        content="Academia Soubac Ajedrez ofrece clases virtuales y presenciales para niños, jóvenes y adultos en el Perú."
-    >
+    --gris-claro: #eeeeee;
+    --gris-texto: #444444;
+
+    --sombra-suave:
+        0 8px 25px rgba(0, 0, 0, 0.25);
 
-    <meta
-        name="author"
-        content="Academia Soubac Ajedrez"
-    >
+    --sombra-media:
+        0 12px 30px rgba(0, 0, 0, 0.35);
+
+    --radio-pequeno: 12px;
+    --radio-medio: 20px;
+    --radio-grande: 28px;
 
-    <meta
-        name="theme-color"
-        content="#8b0000"
-    >
+    --transicion: 0.3s ease;
+}
 
-    <meta
-        name="google-site-verification"
-        content="xU4LgSzYR88NxEy46ztZ1Nf-j2V60B0MEA2219jidS0"
-    >
 
-    <link
-        rel="icon"
-        type="image/png"
-        href="favicon%20(2).png"
-    >
+/* =========================================================
+   RESET
+   ========================================================= */
 
-    <link
-        rel="stylesheet"
-        href="styles.css"
-    >
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    <link
-        rel="preconnect"
-        href="https://cdnjs.cloudflare.com"
-        crossorigin
-    >
+html {
+    width: 100%;
+    min-height: 100%;
 
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    >
+    scroll-behavior: smooth;
+}
 
-</head>
+body {
+    width: 100%;
+    min-height: 100vh;
 
+    color: var(--blanco);
 
-<body>
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
 
-    <!-- ==========================================
-         PANTALLA DE CARGA
-    =========================================== -->
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0.12),
+            rgba(0, 0, 0, 0.12)
+        ),
+        url("fondoPG.jpeg");
 
-    <div
-        id="pantalla-carga"
-        class="pantalla-carga"
-        aria-label="Cargando página"
-    >
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 
-        <img
-            src="favicon%20(2).png"
-            alt="Logo de Academia Soubac Ajedrez"
-        >
+    overflow-x: hidden;
+}
 
-        <h2>Cargando...</h2>
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
 
-        <div
-            class="cargando"
-            aria-hidden="true"
-        ></div>
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
 
-    </div>
+button {
+    border: none;
+}
 
+a {
+    color: inherit;
+}
 
-    <!-- ==========================================
-         ENCABEZADO
-    =========================================== -->
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid var(--dorado);
+    outline-offset: 3px;
+}
 
-    <header class="encabezado-principal">
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
 
-        <div class="logo-container">
 
-            <img
-                src="soubac.png"
-                alt="Logo de Academia Soubac Ajedrez"
-                class="logo"
-            >
+/* =========================================================
+   PANTALLA DE CARGA
+   ========================================================= */
 
-            <h1>Academia Soubac Ajedrez</h1>
+#pantalla-carga {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
 
-        </div>
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
+    padding: 20px;
 
-        <nav
-            class="menu"
-            aria-label="Navegación principal"
-        >
+    background: var(--blanco);
 
-            <button
-                type="button"
-                class="boton-menu"
-                onclick="abrirMenu()"
-                aria-controls="opcionesMenu"
-                aria-expanded="false"
-            >
+    opacity: 1;
+    visibility: visible;
 
-                <i
-                    class="fa-solid fa-bars"
-                    aria-hidden="true"
-                ></i>
+    transition:
+        opacity 0.7s ease,
+        visibility 0.7s ease;
+}
 
-                Menú
+#pantalla-carga img {
+    width: 190px;
+    height: 190px;
 
-            </button>
+    object-fit: contain;
+}
 
+#pantalla-carga h2 {
+    margin-top: 20px;
 
-            <div
-                class="opciones-menu"
-                id="opcionesMenu"
-            >
+    color: var(--rojo-principal);
 
-                <button
-                    type="button"
-                    class="opcion-menu"
-                    onclick="mostrar('inicio')"
-                >
+    font-size: 30px;
+    text-align: center;
+}
 
-                    <i
-                        class="fa-solid fa-house"
-                        aria-hidden="true"
-                    ></i>
+.cargando {
+    width: 50px;
+    height: 50px;
 
-                    Inicio
+    margin-top: 20px;
 
-                </button>
+    border:
+        5px solid #dddddd;
 
+    border-top-color:
+        var(--rojo-principal);
 
-                <button
-                    type="button"
-                    class="opcion-menu"
-                    onclick="mostrar('libros')"
-                >
+    border-radius: 50%;
 
-                    <i
-                        class="fa-solid fa-book-open"
-                        aria-hidden="true"
-                    ></i>
+    animation:
+        girar 0.9s linear infinite;
+}
 
-                    Libros
+@keyframes girar {
+    to {
+        transform: rotate(360deg);
+    }
+}
 
-                </button>
 
+/* =========================================================
+   ENCABEZADO
+   ========================================================= */
 
-                <button
-                    type="button"
-                    class="opcion-menu"
-                    onclick="mostrar('historia')"
-                >
+header {
+    position: relative;
+    z-index: 100;
 
-                    <i
-                        class="fa-solid fa-landmark"
-                        aria-hidden="true"
-                    ></i>
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-                    Historia
+    width: 100%;
+    min-height: 150px;
 
-                </button>
+    padding: 20px 40px;
 
+    background:
+        linear-gradient(
+            135deg,
+            rgba(125, 0, 0, 0.97),
+            rgba(153, 1, 1, 0.92)
+        );
 
-                <button
-                    type="button"
-                    class="opcion-menu"
-                    onclick="mostrar('fotos')"
-                >
+    border-bottom:
+        4px solid rgba(212, 175, 55, 0.75);
 
-                    <i
-                        class="fa-solid fa-images"
-                        aria-hidden="true"
-                    ></i>
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.28);
+}
 
-                    Galería
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 18px;
 
-                </button>
+    padding-right: 150px;
+}
 
+.logo {
+    flex-shrink: 0;
 
-                <button
-                    type="button"
-                    class="opcion-menu"
-                    onclick="mostrar('plataformas')"
-                >
+    width: 115px;
+    height: 115px;
 
-                    <i
-                        class="fa-solid fa-laptop"
-                        aria-hidden="true"
-                    ></i>
+    padding: 7px;
 
-                    Plataformas
+    object-fit: cover;
 
-                </button>
+    background: var(--blanco);
 
+    border:
+        3px solid rgba(212, 175, 55, 0.75);
 
-                <button
-                    type="button"
-                    class="opcion-menu"
-                    onclick="mostrar('redes')"
-                >
+    border-radius: 50%;
 
-                    <i
-                        class="fa-solid fa-share-nodes"
-                        aria-hidden="true"
-                    ></i>
+    box-shadow:
+        var(--sombra-suave);
+}
 
-                    Redes sociales
+.logo-container h1 {
+    max-width: 650px;
 
-                </button>
+    color: var(--blanco);
 
+    font-size:
+        clamp(24px, 3vw, 42px);
 
-                <button
-                    type="button"
-                    class="opcion-menu"
-                    onclick="mostrar('tienda')"
-                >
+    line-height: 1.1;
 
-                    <i
-                        class="fa-solid fa-cart-shopping"
-                        aria-hidden="true"
-                    ></i>
+    text-shadow:
+        0 3px 8px rgba(0, 0, 0, 0.35);
+}
 
-                    Tienda
 
-                </button>
+/* =========================================================
+   MENÚ
+   ========================================================= */
 
+.menu {
+    position: absolute;
+    top: 50%;
+    right: 35px;
+    z-index: 1000;
 
-                <button
-                    type="button"
-                    class="opcion-menu"
-                    onclick="mostrar('opiniones')"
-                >
+    transform: translateY(-50%);
+}
 
-                    <i
-                        class="fa-solid fa-star"
-                        aria-hidden="true"
-                    ></i>
+.boton-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 
-                    Opiniones
+    min-width: 120px;
 
-                </button>
+    padding: 12px 22px;
 
-            </div>
+    color: var(--blanco);
 
-        </nav>
+    background:
+        rgba(255, 255, 255, 0.14);
 
-    </header>
+    border:
+        1px solid rgba(255, 255, 255, 0.25);
 
+    border-radius: 15px;
 
-    <!-- ==========================================
-         CONTENIDO PRINCIPAL
-    =========================================== -->
+    font-size: 17px;
+    font-weight: 700;
 
-    <main>
+    cursor: pointer;
 
+    transition:
+        background var(--transicion),
+        color var(--transicion),
+        transform var(--transicion);
+}
 
-        <!-- ======================================
-             SECCIÓN INICIO
-        ======================================= -->
+.boton-menu:hover {
+    color: var(--rojo-secundario);
+    background: var(--blanco);
+}
 
-        <section
-            id="inicio"
-            class="seccion activa"
-        >
+.opciones-menu {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
 
-            <div class="hero">
+    display: none;
+    flex-direction: column;
+    gap: 6px;
 
-                <div class="hero-imagen">
+    min-width: 230px;
 
-                    <img
-                        src="CLASE.png"
-                        alt="Clases de ajedrez en Academia Soubac"
-                    >
+    padding: 13px;
 
-                </div>
+    background:
+        rgba(126, 0, 0, 0.98);
 
+    border-radius: 17px;
 
-                <div class="hero-imagen">
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.42);
+}
 
-                    <img
-                        src="2VIRTUAL.png"
-                        alt="Clases virtuales de ajedrez"
-                    >
+.opciones-menu.mostrar {
+    display: flex;
+}
 
-                </div>
+.opciones-menu a,
+.opciones-menu button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 
+    width: 100%;
 
-                <div class="hero-imagen">
+    padding: 11px 14px;
 
-                    <img
-                        src="REVICION.png"
-                        alt="Evaluación y revisión de partidas"
-                    >
+    color: var(--blanco);
 
-                </div>
+    background: transparent;
 
-            </div>
+    border-radius: 11px;
 
+    font-size: 16px;
 
-            <div class="bienvenida">
+    text-align: left;
+    text-decoration: none;
 
-                <h2>
-                    ¡Bienvenido a Soubac Ajedrez! ♟️
-                </h2>
+    cursor: pointer;
 
-                <p>
-                    Somos una academia dedicada a la formación integral
-                    de niños, jóvenes y adultos apasionados por el ajedrez.
-                </p>
+    transition:
+        color var(--transicion),
+        background var(--transicion);
+}
 
-                <p>
-                    En <strong>Soubac Ajedrez</strong> brindamos clases
-                    <strong>presenciales</strong> y
-                    <strong>virtuales en vivo</strong>, adaptándonos al
-                    nivel de cada estudiante para potenciar su
-                    concentración, disciplina, estrategia y pensamiento
-                    lógico.
-                </p>
+.opciones-menu a:hover,
+.opciones-menu button:hover {
+    color: var(--rojo-secundario);
 
-                <p>
-                    Te invitamos a formar parte de nuestra comunidad y
-                    seguir creciendo movimiento a movimiento.
-                </p>
+    background: var(--blanco);
+}
 
-            </div>
+.opciones-menu i {
+    width: 20px;
+    text-align: center;
+}
 
 
-            <div class="ubicaciones">
+/* =========================================================
+   SECCIONES
+   ========================================================= */
 
-                <h2>Nuestras sedes</h2>
+main {
+    min-height: 70vh;
+}
 
-                <div class="sedes-container">
+.seccion {
+    display: none;
 
-                    <article class="sede-card">
+    width: 100%;
 
-                        <i
-                            class="fa-solid fa-location-dot"
-                            aria-hidden="true"
-                        ></i>
+    padding: 50px 35px;
 
-                        <p>
-                            Calle 2 de Mayo 321, interior 302,
-                            Lambayeque
-                        </p>
+    animation:
+        aparecerSeccion 0.4s ease;
+}
 
-                    </article>
+.seccion.activa {
+    display: block;
+}
 
+@keyframes aparecerSeccion {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
 
-                    <article class="sede-card">
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-                        <i
-                            class="fa-solid fa-location-dot"
-                            aria-hidden="true"
-                        ></i>
 
-                        <p>
-                            Urbanización Sol de Pimentel
-                        </p>
+/* =========================================================
+   INICIO
+   ========================================================= */
 
-                    </article>
+.hero {
+    display: grid;
 
-                </div>
+    grid-template-columns:
+        repeat(3, minmax(240px, 320px));
 
-            </div>
+    justify-content: center;
 
-        </section>
+    gap: 25px;
 
+    width: 100%;
+    max-width: 1100px;
 
-        <!-- ======================================
-             SECCIÓN LIBROS
-        ======================================= -->
+    margin: 0 auto;
+}
 
-        <section
-            id="libros"
-            class="seccion"
-        >
+.hero img {
+    width: 100%;
+    height: 220px;
 
-            <h2 class="titulo-seccion">
-                Libros gratuitos para descargar
-            </h2>
+    object-fit: cover;
 
-            <div class="botones-info">
+    border:
+        3px solid rgba(255, 255, 255, 0.35);
 
-                <a
-                    href="https://drive.google.com/drive/folders/1s7tAnuWdynVDA54csrYfxV7MKj_L0i9k?usp=drive_link"
-                    onclick="abrirLibro(event, this.href)"
-                >
+    border-radius:
+        var(--radio-medio);
 
-                    Aperturas
+    box-shadow:
+        var(--sombra-media);
 
-                    <span>
-                        Domina las bases del inicio de la partida.
-                    </span>
+    transition:
+        transform var(--transicion);
+}
 
-                    <strong>
-                        Libro de aperturas →
-                    </strong>
+.hero img:hover {
+    transform:
+        translateY(-6px)
+        scale(1.02);
+}
 
-                </a>
+.bienvenida {
+    width: 95%;
+    max-width: 1000px;
 
+    margin: 38px auto 0;
 
-                <a
-                    href="https://drive.google.com/drive/folders/1s7tAnuWdynVDA54csrYfxV7MKj_L0i9k?usp=drive_link"
-                    onclick="abrirLibro(event, this.href)"
-                >
+    padding: 38px;
 
-                    Temas tácticos
+    color: var(--negro);
 
-                    <span>
-                        Mejora tu cálculo y visión táctica.
-                    </span>
+    text-align: center;
 
-                    <strong>
-                        Libro de táctica →
-                    </strong>
+    background:
+        rgba(255, 255, 255, 0.94);
 
-                </a>
+    border-radius: 26px;
 
+    box-shadow:
+        var(--sombra-suave);
+}
 
-                <a
-                    href="https://drive.google.com/drive/u/0/folders/1nPCAhvg_FlbYNdUQX7f3SKEYF1a0eUvt"
-                    onclick="abrirLibro(event, this.href)"
-                >
+.bienvenida h2 {
+    margin-bottom: 22px;
 
-                    Defensas
+    color: var(--negro);
 
-                    <span>
-                        Aprende a defenderte de manera estratégica.
-                    </span>
+    font-size:
+        clamp(28px, 4vw, 40px);
+}
 
-                    <strong>
-                        Libro de defensas →
-                    </strong>
+.bienvenida p {
+    margin-bottom: 15px;
 
-                </a>
+    color: #202020;
 
+    font-size:
+        clamp(17px, 2vw, 21px);
 
-                <a
-                    href="https://drive.google.com/drive/folders/1Rdlm2b3JLb_sGrIqVpJ2YJlT12IQUEFQ?usp=sharing"
-                    onclick="abrirLibro(event, this.href)"
-                >
+    line-height: 1.7;
+}
 
-                    Historia
+.bienvenida strong {
+    color: var(--rojo-principal);
+}
 
-                    <span>
-                        Conoce la evolución y el origen del ajedrez.
-                    </span>
 
-                    <strong>
-                        Libro histórico →
-                    </strong>
+/* =========================================================
+   SEDES
+   ========================================================= */
 
-                </a>
+.ubicaciones {
+    width: 100%;
+    max-width: 1000px;
 
+    margin: 55px auto 0;
 
-                <a
-                    href="https://drive.google.com/drive/folders/1BMTeaEMbn0aLVgg1LiCSLGcdNyMWaonM?usp=sharing"
-                    onclick="abrirLibro(event, this.href)"
-                >
+    text-align: center;
+}
 
-                    Gambitos
+.ubicaciones h2 {
+    margin-bottom: 30px;
 
-                    <span>
-                        Descubre ataques agresivos y dinámicos.
-                    </span>
+    color: var(--rojo-principal);
 
-                    <strong>
-                        Libro de gambitos →
-                    </strong>
+    font-size:
+        clamp(29px, 4vw, 38px);
+}
 
-                </a>
+.sedes-container {
+    display: grid;
 
+    grid-template-columns:
+        repeat(2, minmax(250px, 360px));
 
-                <a
-                    href="https://drive.google.com/drive/u/0/folders/1_gXmSnxcj2Xetcw6QogtqDeLMVVEW6iB"
-                    onclick="abrirLibro(event, this.href)"
-                >
+    justify-content: center;
 
-                    Principiantes
+    gap: 25px;
+}
 
-                    <span>
-                        Material ideal para empezar desde cero.
-                    </span>
+.sede-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-                    <strong>
-                        Libro básico →
-                    </strong>
+    min-height: 105px;
 
-                </a>
+    padding: 22px;
 
-            </div>
+    color: var(--negro);
 
-        </section>
+    background:
+        rgba(255, 255, 255, 0.94);
 
+    border-top:
+        5px solid var(--dorado);
 
-        <!-- ======================================
-             SECCIÓN HISTORIA
-        ======================================= -->
+    border-radius: 21px;
 
-        <section
-            id="historia"
-            class="seccion"
-        >
+    box-shadow:
+        var(--sombra-suave);
 
-            <div class="historia-container">
+    transition:
+        transform var(--transicion);
+}
 
-                <div class="historia-imagen">
+.sede-card:hover {
+    transform: translateY(-6px);
+}
 
-                    <img
-                        src="ROBERTO.jpeg"
-                        alt="Roberto Leyva Vidaurre, promotor de Academia Soubac Ajedrez"
-                        loading="lazy"
-                    >
+.sede-card p {
+    color: var(--negro);
 
-                    <div class="fundador">
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.5;
+}
 
-                        Roberto Leyva Vidaurre
 
-                        <p>
-                            Promotor
-                        </p>
+/* =========================================================
+   BIBLIOTECA
+   ========================================================= */
 
-                    </div>
+#libros > h2 {
+    margin-bottom: 40px;
 
-                </div>
+    color: var(--rojo-principal);
 
+    font-size:
+        clamp(28px, 4vw, 40px);
 
-                <div class="historia-texto">
+    text-align: center;
+}
 
-                    <h2 class="titulo-seccion">
-                        Nuestra historia
-                    </h2>
+#libros .botones-info {
+    display: grid;
 
-                    <p>
-                        La historia de
-                        <strong>Soubac Ajedrez</strong>
-                        comenzó el 3 de enero de 2019, en una pequeña
-                        sede ubicada en la calle 2 de Mayo 253, en el
-                        departamento de <strong>Lambayeque</strong>.
-                    </p>
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(285px, 1fr)
+        );
 
-                    <p>
-                        Todo inició con cuatro alumnos, un tablero y un
-                        gran sueño: enseñar ajedrez con pasión,
-                        disciplina y cercanía. Poco a poco, las familias
-                        comenzaron a recomendarnos y nuestros
-                        estudiantes crecieron no solo en nivel, sino
-                        también en confianza, concentración y valores.
-                    </p>
+    gap: 28px;
 
-                    <p>
-                        Ese mismo año realizamos nuestro primer torneo
-                        interno. Uno de nuestros primeros grandes logros
-                        llegó cuando nuestra alumna Laura Fabiola, con
-                        apenas seis años, obtuvo el primer puesto en un
-                        torneo realizado en <strong>Chiclayo</strong>.
-                    </p>
+    width: 100%;
+    max-width: 1150px;
 
-                    <p>
-                        Durante la pandemia nos reinventamos con clases
-                        virtuales mediante Zoom. Esto nos permitió
-                        llegar a diferentes departamentos del Perú y a
-                        estudiantes de otros países.
-                    </p>
+    margin: 0 auto;
+}
 
-                    <p>
-                        Actualmente,
-                        <strong>Soubac Ajedrez</strong>
-                        continúa creciendo con sedes presenciales,
-                        clases virtuales y una comunidad que avanza
-                        movimiento a movimiento. Más que una academia,
-                        somos una familia nacida de un sueño.
-                    </p>
+#libros .botones-info a {
+    position: relative;
 
-                </div>
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
-            </div>
+    min-height: 185px;
 
-        </section>
+    padding: 29px;
 
+    color: var(--blanco);
 
-        <!-- ======================================
-             SECCIÓN GALERÍA
-        ======================================= -->
+    text-decoration: none;
 
-        <section
-            id="fotos"
-            class="seccion"
-        >
+    background:
+        linear-gradient(
+            135deg,
+            var(--azul-oscuro),
+            #082f55,
+            var(--azul-medio)
+        );
 
-            <h2 class="titulo-seccion">
-                Galería
-            </h2>
+    border:
+        1px solid rgba(212, 175, 55, 0.4);
 
-            <div class="galeria">
+    border-radius: 24px;
 
-                <div class="card-galeria">
-                    <img
-                        src="1.jpeg"
-                        alt="Actividad de Academia Soubac Ajedrez"
-                        loading="lazy"
-                    >
-                </div>
+    box-shadow:
+        var(--sombra-media);
 
-                <div class="card-galeria">
-                    <img
-                        src="2.jpeg"
-                        alt="Estudiantes durante una actividad de ajedrez"
-                        loading="lazy"
-                    >
-                </div>
+    overflow: hidden;
 
-                <div class="card-galeria">
-                    <img
-                        src="3.jpeg"
-                        alt="Participación de estudiantes de Soubac Ajedrez"
-                        loading="lazy"
-                    >
-                </div>
+    font-size: 30px;
+    font-weight: 800;
 
-                <div class="card-galeria">
-                    <img
-                        src="T4.jpeg"
-                        alt="Torneo de Academia Soubac Ajedrez"
-                        loading="lazy"
-                    >
-                </div>
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
 
-                <div class="card-galeria">
-                    <img
-                        src="T2.jpeg"
-                        alt="Competencia de ajedrez"
-                        loading="lazy"
-                    >
-                </div>
+#libros .botones-info a::before {
+    content: "";
 
-                <div class="card-galeria">
-                    <img
-                        src="T1.jpeg"
-                        alt="Estudiantes participando en un torneo"
-                        loading="lazy"
-                    >
-                </div>
+    position: absolute;
 
-                <div class="card-galeria">
-                    <img
-                        src="cop1.jpg"
-                        alt="Alumno de Academia Soubac Ajedrez"
-                        loading="lazy"
-                    >
-                </div>
+    top: 0;
+    left: 0;
 
-                <div class="card-galeria">
-                    <img
-                        src="alondra.jpg"
-                        alt="Reconocimiento obtenido por una estudiante"
-                        loading="lazy"
-                    >
-                </div>
+    width: 100%;
+    height: 6px;
 
-                <div class="card-galeria">
-                    <img
-                        src="Gerian.jpg"
-                        alt="Reconocimiento de estudiante de Soubac Ajedrez"
-                        loading="lazy"
-                    >
-                </div>
+    background:
+        linear-gradient(
+            90deg,
+            var(--dorado),
+            var(--azul-claro)
+        );
+}
 
-                <div class="card-galeria">
-                    <img
-                        src="ninos.jpg"
-                        alt="Niños participando en actividades de ajedrez"
-                        loading="lazy"
-                    >
-                </div>
+#libros .botones-info a:hover {
+    transform:
+        translateY(-8px);
 
-                <div class="card-galeria">
-                    <img
-                        src="liam.jpg"
-                        alt="Estudiante de Academia Soubac Ajedrez"
-                        loading="lazy"
-                    >
-                </div>
+    box-shadow:
+        0 18px 40px
+        rgba(0, 0, 0, 0.45);
+}
 
-            </div>
+#libros .botones-info span {
+    margin-top: 12px;
 
-        </section>
+    color: #dceeff;
 
+    font-size: 17px;
+    font-weight: 400;
 
-        <!-- ======================================
-             SECCIÓN PLATAFORMAS
-        ======================================= -->
+    line-height: 1.5;
+}
 
-        <section
-            id="plataformas"
-            class="seccion"
-        >
+#libros .botones-info strong {
+    margin-top: 20px;
 
-            <h2 class="titulo-plataformas">
-                Plataformas que utilizamos
-            </h2>
+    color: var(--azul-claro);
 
-            <div class="plataformas-container">
+    font-size: 18px;
+}
 
-                <a
-                    href="https://lichess.org/team/academia-soubac-ajedrez"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="plataforma-card"
-                >
 
-                    <img
-                        src="lichess.png"
-                        alt="Logotipo de Lichess"
-                        loading="lazy"
-                    >
+/* =========================================================
+   HISTORIA
+   ========================================================= */
 
-                    <h3>
-                        Lichess.org
-                    </h3>
+.historia-container {
+    display: grid;
 
-                    <p>
-                        Juega, analiza partidas y entrena de manera
-                        gratuita.
-                    </p>
+    grid-template-columns:
+        minmax(280px, 420px)
+        minmax(350px, 750px);
 
-                </a>
+    align-items: center;
+    justify-content: center;
 
+    gap: 45px;
 
-                <a
-                    href="https://zoom.us"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="plataforma-card"
-                >
+    width: 100%;
+    max-width: 1250px;
 
-                    <img
-                        src="zoom.jpg"
-                        alt="Logotipo de Zoom"
-                        loading="lazy"
-                    >
+    margin: 0 auto;
+}
 
-                    <h3>
-                        Zoom
-                    </h3>
+.historia-imagen img {
+    width: 100%;
+    height: 500px;
 
-                    <p>
-                        Realizamos clases virtuales en vivo para
-                        estudiantes de todo el Perú.
-                    </p>
+    object-fit: cover;
 
-                </a>
+    border:
+        4px solid rgba(255, 255, 255, 0.48);
 
-            </div>
+    border-radius:
+        28px 28px 0 0;
 
-        </section>
+    box-shadow:
+        var(--sombra-media);
+}
 
+.fundador {
+    padding: 16px 12px;
 
-        <!-- ======================================
-             SECCIÓN REDES SOCIALES
-        ======================================= -->
+    color: var(--negro);
 
-        <section
-            id="redes"
-            class="seccion"
-        >
+    text-align: center;
 
-            <h2 class="titulo-redes">
-                Síguenos en nuestras redes sociales
-            </h2>
+    background: var(--blanco);
 
-            <div class="redes-container">
+    border-top:
+        4px solid var(--dorado);
 
-                <a
-                    href="https://www.instagram.com/academiasoubacajedrez"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="red-card instagram"
-                >
+    border-radius:
+        0 0 18px 18px;
 
-                    <img
-                        src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
-                        alt="Instagram"
-                        loading="lazy"
-                    >
+    box-shadow:
+        var(--sombra-suave);
 
-                    <h3>
-                        Instagram
-                    </h3>
+    font-weight: 800;
+}
 
-                    <p>
-                        Contenido educativo, logros y novedades.
-                    </p>
+.fundador p {
+    margin-top: 4px;
 
-                </a>
+    color: var(--rojo-principal);
 
+    font-size: 14px;
+}
 
-                <a
-                    href="https://www.facebook.com/academiasoubacajedrez/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="red-card facebook"
-                >
+.historia-texto {
+    padding: 37px;
 
-                    <img
-                        src="https://cdn-icons-png.flaticon.com/512/20/20837.png"
-                        alt="Facebook"
-                        loading="lazy"
-                    >
+    color: var(--negro);
 
-                    <h3>
-                        Facebook
-                    </h3>
+    background:
+        rgba(255, 255, 255, 0.94);
 
-                    <p>
-                        Noticias, eventos y publicaciones oficiales.
-                    </p>
+    border-radius: 25px;
 
-                </a>
+    box-shadow:
+        var(--sombra-suave);
+}
 
+.historia-texto h2 {
+    margin-bottom: 23px;
 
-                <a
-                    href="https://www.tiktok.com/@soubacajedrez_"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="red-card tiktok"
-                >
+    color: var(--rojo-principal);
 
-                    <img
-                        src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png"
-                        alt="TikTok"
-                        loading="lazy"
-                    >
+    font-size:
+        clamp(30px, 4vw, 40px);
 
-                    <h3>
-                        TikTok
-                    </h3>
+    text-align: center;
+}
 
-                    <p>
-                        Videos, consejos y transmisiones en vivo.
-                    </p>
+.historia-texto p {
+    margin-bottom: 16px;
 
-                </a>
+    color: #222222;
 
-            </div>
+    font-size:
+        clamp(17px, 2vw, 20px);
 
-        </section>
+    line-height: 1.7;
 
+    text-align: justify;
+}
 
-        <!-- ======================================
-             SECCIÓN TIENDA
-        ======================================= -->
 
-        <section
-            id="tienda"
-            class="seccion"
-        >
+/* =========================================================
+   GALERÍA
+   ========================================================= */
 
-            <h2 class="titulo-tienda">
-                🛒 Tienda Soubac
-            </h2>
+#fotos > h1,
+#fotos > h2 {
+    margin-bottom: 35px;
 
-            <div class="productos">
+    color: var(--rojo-principal);
 
+    font-size:
+        clamp(32px, 5vw, 45px);
 
-                <!-- PRODUCTO 1 -->
+    text-align: center;
+}
 
-                <article class="producto">
+.galeria {
+    display: grid;
 
-                    <div class="producto-imagen">
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(250px, 1fr)
+        );
 
-                        <img
-                            src="calse demostrativa.png"
-                            class="img-producto"
-                            alt="Clase demostrativa de ajedrez"
-                            loading="lazy"
-                            onclick="abrirProducto(this.src)"
-                        >
+    gap: 26px;
 
-                    </div>
+    width: 100%;
+    max-width: 1250px;
 
-                    <h3>
-                        Clase demostrativa de ajedrez
-                    </h3>
+    margin: 0 auto;
+}
 
-                    <p>
-                        Gratis
-                    </p>
+.card-galeria {
+    width: 100%;
 
-                    <button
-                        type="button"
-                        onclick="agregarCarrito('Clase demostrativa de ajedrez', 0)"
-                    >
-                        Agregar al carrito
-                    </button>
+    background: var(--blanco);
 
-                </article>
+    border-radius: 20px;
 
+    box-shadow:
+        var(--sombra-media);
 
-                <!-- PRODUCTO 2 -->
+    overflow: hidden;
 
-                <article class="producto">
+    transition:
+        transform 0.3s ease;
+}
 
-                    <div class="producto-imagen">
+.card-galeria:hover {
+    transform:
+        translateY(-8px);
+}
 
-                        <img
-                            src="tablero de vinil.jpg"
-                            class="img-producto"
-                            alt="Tablero de ajedrez de vinil"
-                            loading="lazy"
-                            onclick="abrirProducto(this.src)"
-                        >
+.card-galeria img {
+    width: 100%;
+    height: 245px;
 
-                    </div>
+    object-fit: cover;
 
-                    <h3>
-                        Tablero de vinil
-                    </h3>
+    transition:
+        transform 0.4s ease;
+}
 
-                    <p>
-                        S/ 30.00
-                    </p>
+.card-galeria:hover img {
+    transform:
+        scale(1.06);
+}
 
-                    <button
-                        type="button"
-                        onclick="agregarCarrito('Tablero de vinil', 30)"
-                    >
-                        Agregar al carrito
-                    </button>
 
-                </article>
+/* =========================================================
+   PLATAFORMAS
+   ========================================================= */
 
+.titulo-plataformas {
+    margin-bottom: 45px;
 
-                <!-- PRODUCTO 3 -->
+    color: var(--rojo-principal);
 
-                <article class="producto">
+    font-size:
+        clamp(31px, 5vw, 43px);
 
-                    <div class="producto-imagen">
+    text-align: center;
+}
 
-                        <img
-                            src="piezas de plastico.jpg"
-                            class="img-producto"
-                            alt="Piezas de ajedrez de plástico"
-                            loading="lazy"
-                            onclick="abrirProducto(this.src)"
-                        >
+.plataformas-container {
+    display: grid;
 
-                    </div>
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(280px, 380px)
+        );
 
-                    <h3>
-                        Piezas de plástico
-                    </h3>
+    justify-content: center;
 
-                    <p>
-                        S/ 25.00
-                    </p>
+    gap: 40px;
 
-                    <button
-                        type="button"
-                        onclick="agregarCarrito('Piezas de plástico', 25)"
-                    >
-                        Agregar al carrito
-                    </button>
+    width: 100%;
+    max-width: 950px;
 
-                </article>
+    margin: 0 auto;
+}
 
+.plataforma-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-                <!-- PRODUCTO 4 -->
+    width: 100%;
 
-                <article class="producto">
+    padding: 32px 28px;
 
-                    <div class="producto-imagen">
+    color: var(--negro);
 
-                        <img
-                            src="conjunto de ajedrez.avif"
-                            class="img-producto"
-                            alt="Juego de ajedrez compacto con bolsa"
-                            loading="lazy"
-                            onclick="abrirProducto(this.src)"
-                        >
+    text-align: center;
+    text-decoration: none;
 
-                    </div>
+    background:
+        rgba(255, 255, 255, 0.95);
 
-                    <h3>
-                        Juego de ajedrez compacto con bolsa
-                    </h3>
+    border-top:
+        7px solid var(--dorado);
 
-                    <p>
-                        S/ 75.00
-                    </p>
+    border-radius: 27px;
 
-                    <button
-                        type="button"
-                        onclick="agregarCarrito('Juego de ajedrez compacto con bolsa', 75)"
-                    >
-                        Agregar al carrito
-                    </button>
+    box-shadow:
+        var(--sombra-media);
 
-                </article>
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
 
+.plataforma-card:nth-child(2) {
+    border-top-color:
+        #2d8cff;
+}
 
-                <!-- PRODUCTO 5 -->
+.plataforma-card:hover {
+    transform:
+        translateY(-10px);
 
-                <article class="producto">
+    box-shadow:
+        0 22px 48px
+        rgba(0, 0, 0, 0.32);
+}
 
-                    <div class="producto-imagen">
+.plataforma-card img {
+    width: 100%;
+    max-width: 270px;
+    height: 180px;
 
-                        <img
-                            src="reloj digital.png"
-                            class="img-producto"
-                            alt="Reloj digital profesional de ajedrez"
-                            loading="lazy"
-                            onclick="abrirProducto(this.src)"
-                        >
+    margin-bottom: 24px;
 
-                    </div>
+    object-fit: contain;
+}
 
-                    <h3>
-                        Reloj de ajedrez digital profesional
-                    </h3>
+.plataforma-card h3 {
+    margin-bottom: 14px;
 
-                    <p>
-                        S/ 55.00
-                    </p>
+    color: var(--negro);
 
-                    <button
-                        type="button"
-                        onclick="agregarCarrito('Reloj digital profesional', 55)"
-                    >
-                        Agregar al carrito
-                    </button>
+    font-size:
+        clamp(26px, 4vw, 33px);
+}
 
-                </article>
+.plataforma-card p {
+    color: var(--gris-texto);
 
+    font-size: 18px;
+    line-height: 1.6;
+}
 
-                <!-- PRODUCTO 6 -->
 
-                <article class="producto">
+/* =========================================================
+   REDES SOCIALES
+   ========================================================= */
 
-                    <div class="producto-imagen">
+.titulo-redes {
+    margin-bottom: 45px;
 
-                        <img
-                            src="polo soubac.png"
-                            class="img-producto"
-                            alt="Polo oficial de Academia Soubac Ajedrez"
-                            loading="lazy"
-                            onclick="abrirProducto(this.src)"
-                        >
+    color: var(--rojo-principal);
 
-                    </div>
+    font-size:
+        clamp(31px, 5vw, 43px);
 
-                    <h3>
-                        Polo oficial Soubac Ajedrez
-                    </h3>
+    text-align: center;
+}
 
-                    <p>
-                        S/ 60.00
-                    </p>
+.redes-container {
+    display: grid;
 
-                    <button
-                        type="button"
-                        onclick="agregarCarrito('Polo oficial Soubac Ajedrez', 60)"
-                    >
-                        Agregar al carrito
-                    </button>
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(230px, 330px)
+        );
 
-                </article>
+    justify-content: center;
 
+    gap: 34px;
 
-                <!-- PRODUCTO 7 -->
+    width: 100%;
+    max-width: 1100px;
 
-                <article class="producto">
+    margin: 0 auto;
+}
 
-                    <div class="producto-imagen">
+.red-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-                        <img
-                            src="personalizada.png"
-                            class="img-producto"
-                            alt="Clases personalizadas de ajedrez"
-                            loading="lazy"
-                            onclick="abrirProducto(this.src)"
-                        >
+    min-height: 320px;
 
-                    </div>
+    padding: 35px 25px;
 
-                    <h3>
-                        Clases personalizadas
-                    </h3>
+    color: var(--negro);
 
-                    <p>
-                        S/ 35.00
-                    </p>
+    text-align: center;
+    text-decoration: none;
 
-                    <button
-                        type="button"
-                        onclick="agregarCarrito('Clase personalizada', 35)"
-                    >
-                        Agregar al carrito
-                    </button>
+    background:
+        rgba(255, 255, 255, 0.96);
 
-                </article>
+    border-radius: 26px;
 
+    box-shadow:
+        var(--sombra-media);
 
-                <!-- PRODUCTO 8 -->
+    overflow: hidden;
 
-                <article class="producto">
+    transition:
+        transform 0.3s ease;
+}
 
-                    <div class="producto-imagen">
+.red-card:hover {
+    transform:
+        translateY(-10px);
+}
 
-                        <img
-                            src="hotmart.png"
-                            class="img-producto"
-                            alt="Cursos virtuales de ajedrez en Hotmart"
-                            loading="lazy"
-                            onclick="abrirProducto(this.src)"
-                        >
+.red-card img {
+    width: 92px;
+    height: 92px;
 
-                    </div>
+    margin-bottom: 25px;
 
-                    <h3>
-                        Cursos virtuales en Hotmart
-                    </h3>
+    object-fit: contain;
+}
 
-                    <p>
-                        US$ 55.00
-                    </p>
+.red-card h3 {
+    margin-bottom: 13px;
 
-                    <button
-                        type="button"
-                        onclick="agregarCarrito('Curso virtual en Hotmart', 55)"
-                    >
-                        Agregar al carrito
-                    </button>
+    color: var(--negro);
 
-                </article>
+    font-size: 29px;
+}
 
-            </div>
+.red-card p {
+    color: var(--gris-texto);
 
-        </section>
+    font-size: 18px;
 
+    line-height: 1.6;
+}
 
-        <!-- ======================================
-             SECCIÓN OPINIONES
-        ======================================= -->
 
-        <section
-            id="opiniones"
-            class="seccion"
-        >
+/* =========================================================
+   TIENDA
+   ========================================================= */
 
-            <div class="clasificacion-contenedor">
+.titulo-tienda {
+    margin-bottom: 45px;
 
-                <div class="clasificacion-encabezado">
+    color: var(--rojo-principal);
 
-                    <span class="clasificacion-etiqueta">
-                        Opiniones de nuestra comunidad
-                    </span>
+    font-size:
+        clamp(32px, 5vw, 44px);
 
-                    <h2>
-                        <i class="fas fa-star"></i>
-                        Clasificación Soubac
-                    </h2>
+    text-align: center;
+}
 
-                    <p>
-                        Tu opinión nos ayuda a mejorar y a continuar
-                        brindando una mejor experiencia a nuestros
-                        estudiantes y familias.
-                    </p>
+.productos {
+    display: grid;
 
-                    <div class="resumen-valoracion">
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(260px, 1fr)
+        );
 
-                        <div class="valoracion-numero">
-                            4.9
-                        </div>
+    gap: 30px;
 
-                        <div class="valoracion-detalle">
+    width: 100%;
+    max-width: 1250px;
 
-                            <div class="valoracion-estrellas">
-                                ★★★★★
-                            </div>
+    margin: 0 auto;
+}
 
-                            <span>
-                                Basado en las valoraciones de nuestra comunidad
-                            </span>
+.producto {
+    position: relative;
 
-                        </div>
+    display: flex;
+    flex-direction: column;
 
-                    </div>
+    color: var(--negro);
 
-                </div>
+    background:
+        var(--blanco);
 
-                <div class="formulario-opiniones">
+    border-radius: 22px;
 
-                    <iframe
-                        src="https://forms.gle/jWedZfLvoHuz55zw5"
-                        title="Clasificación y opiniones de Academia Soubac Ajedrez"
-                        loading="lazy"
-                    >
-                    </iframe>
+    box-shadow:
+        0 12px 28px
+        rgba(0, 0, 0, 0.18);
 
-                </div>
+    overflow: hidden;
 
-            </div>
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
 
-        </section>
+.producto:hover {
+    transform:
+        translateY(-8px);
 
-    </main>
+    box-shadow:
+        0 20px 40px
+        rgba(0, 0, 0, 0.28);
+}
 
+.producto-imagen {
+    width: 100%;
+    height: 240px;
 
-    <!-- ==========================================
-         BOTÓN FLOTANTE DE WHATSAPP
-    =========================================== -->
+    background:
+        #eeeeee;
 
-    <div class="whatsapp-container">
+    overflow: hidden;
+}
 
-        <a
-            class="whatsapp-btn"
-            href="https://wa.me/51973265025?text=Hola%2C%20les%20escribo%20desde%20la%20web%20y%20deseo%20recibir%20informaci%C3%B3n."
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Contactar a Academia Soubac Ajedrez por WhatsApp"
-        >
+.producto-imagen img {
+    width: 100%;
+    height: 100%;
 
-            <img
-                src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
-                alt="WhatsApp"
-            >
+    object-fit: cover;
 
-        </a>
+    cursor: pointer;
 
-    </div>
+    transition:
+        transform 0.4s ease;
+}
 
+.producto:hover .producto-imagen img {
+    transform:
+        scale(1.06);
+}
 
-    <!-- ==========================================
-         BOTÓN FLOTANTE DEL CARRITO
-    =========================================== -->
+.producto h3 {
+    min-height: 78px;
 
-    <button
-        type="button"
-        class="btn-carrito"
-        onclick="abrirCarrito()"
-        aria-label="Abrir carrito de compras"
-    >
-        🛒
+    padding:
+        22px 18px 10px;
 
-        <span id="contadorCarrito">
-            0
-        </span>
+    color: #222222;
 
-    </button>
+    font-size: 21px;
+    line-height: 1.4;
+}
 
+.producto p {
+    margin-top: auto;
 
-    <div
-        id="fondoCarrito"
-        class="fondo-carrito"
-        onclick="cerrarCarrito()"
-        aria-hidden="true"
-    ></div>
+    padding:
+        0 18px 18px;
 
+    color:
+        var(--rojo-principal);
 
-    <!-- ==========================================
-         PANEL DEL CARRITO
-    =========================================== -->
+    font-size: 24px;
+    font-weight: 800;
+}
 
-    <aside
-        id="panelCarrito"
-        class="panel-carrito"
-        aria-label="Carrito de compras"
-        aria-hidden="true"
-    >
+.producto button {
+    width:
+        calc(100% - 36px);
 
-        <div class="carrito-header">
+    margin:
+        0 18px 20px;
 
-            <h2>
-                Mi carrito
-            </h2>
+    padding:
+        14px 18px;
 
-            <button
-                type="button"
-                onclick="cerrarCarrito()"
-                aria-label="Cerrar carrito"
-            >
-                ✕
-            </button>
+    color:
+        var(--blanco);
 
-        </div>
+    background:
+        linear-gradient(
+            135deg,
+            var(--rojo-principal),
+            #b00000
+        );
 
+    border-radius:
+        12px;
 
-        <div
-            id="listaCarrito"
-            class="lista-carrito"
-        ></div>
+    font-weight:
+        700;
 
+    cursor:
+        pointer;
 
-        <div class="carrito-total">
+    transition:
+        transform var(--transicion),
+        background var(--transicion);
+}
 
-            <h3>
-                Total: S/
+.producto button:hover {
+    background:
+        #700000;
 
-                <span id="total">
-                    0.00
-                </span>
+    transform:
+        translateY(-2px);
+}
 
-            </h3>
 
-        </div>
+/* =========================================================
+   CARRITO
+   ========================================================= */
 
+.btn-carrito {
+    position: fixed;
 
-        <button
-            type="button"
-            class="btn-vaciar-carrito"
-            onclick="vaciarCarrito()"
-        >
-            Vaciar carrito
-        </button>
+    right: 25px;
+    bottom: 120px;
 
+    z-index: 50000;
 
-        <button
-            type="button"
-            class="comprar"
-            onclick="comprarWhatsApp()"
-        >
-            Comprar por WhatsApp
-        </button>
+    display: none;
 
-    </aside>
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 
+    min-width: 76px;
+    min-height: 58px;
 
-    <!-- ==========================================
-         FOOTER
-    =========================================== -->
+    padding:
+        14px 20px;
 
-    <footer class="soubac-footer">
+    color:
+        var(--blanco);
 
-        <div class="footer-container">
+    background:
+        var(--rojo-principal);
 
+    border:
+        3px solid var(--blanco);
 
-            <div class="footer-column footer-brand">
+    border-radius:
+        50px;
 
-                <h2>
+    box-shadow:
+        0 10px 28px
+        rgba(0, 0, 0, 0.4);
 
-                    <span
-                        class="chess-icon"
-                        aria-hidden="true"
-                    >
-                        ♟
-                    </span>
+    font-size: 21px;
 
-                    Academia Soubac Ajedrez
+    cursor: pointer;
+}
 
-                </h2>
+#contadorCarrito {
+    display: flex;
 
-                <p class="footer-slogan">
-                    “Formando campeones dentro y fuera del tablero.”
-                </p>
+    align-items: center;
+    justify-content: center;
 
-                <p>
-                    Academia especializada en la enseñanza del ajedrez
-                    para niños, jóvenes y adultos, promoviendo el
-                    pensamiento estratégico, la disciplina y el
-                    desarrollo intelectual.
-                </p>
+    min-width: 27px;
+    height: 27px;
 
-                <p class="founded">
+    padding: 3px 7px;
 
-                    <strong>
-                        Fundada en:
-                    </strong>
+    color:
+        var(--rojo-principal);
 
-                    2019
+    background:
+        var(--blanco);
 
-                </p>
+    border-radius: 50%;
 
-            </div>
+    font-size: 14px;
+    font-weight: 800;
+}
 
 
-            <div class="footer-column">
+/* =========================================================
+   FONDO DEL CARRITO
+   ========================================================= */
 
-                <h3>
-                    Contacto
-                </h3>
+#fondoCarrito,
+.overlay-carrito {
+    position: fixed;
 
+    inset: 0;
 
-                <div class="footer-item">
+    z-index: 999998;
 
-                    <span
-                        class="footer-icon"
-                        aria-hidden="true"
-                    >
-                        📍
-                    </span>
+    background:
+        rgba(0, 0, 0, 0.58);
 
-                    <div>
+    opacity: 0;
 
-                        <strong>
-                            Sede Lambayeque
-                        </strong>
+    visibility: hidden;
 
-                        <p>
-                            Calle 2 de Mayo 321, interior 302
-                        </p>
+    pointer-events: none;
 
-                    </div>
+    backdrop-filter:
+        blur(2px);
 
-                </div>
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+}
 
+#fondoCarrito.activo,
+.overlay-carrito.activo {
+    opacity: 1;
 
-                <div class="footer-item">
+    visibility: visible;
 
-                    <span
-                        class="footer-icon"
-                        aria-hidden="true"
-                    >
-                        📍
-                    </span>
+    pointer-events: auto;
+}
 
-                    <div>
 
-                        <strong>
-                            Sede Pimentel
-                        </strong>
+/* =========================================================
+   PANEL CARRITO
+   ========================================================= */
 
-                        <p>
-                            Urbanización Sol de Pimentel
-                        </p>
+.panel-carrito {
+    position: fixed;
 
-                    </div>
+    top: 0;
+    right: -440px;
 
-                </div>
+    z-index: 999999;
 
+    width:
+        min(410px, 100%);
 
-                <div class="footer-item">
+    height: 100vh;
+    height: 100dvh;
 
-                    <span
-                        class="footer-icon"
-                        aria-hidden="true"
-                    >
-                        📱
-                    </span>
+    padding: 25px;
 
-                    <div>
+    color:
+        var(--negro);
 
-                        <strong>
-                            WhatsApp
-                        </strong>
+    background:
+        var(--blanco);
 
-                        <p>
+    box-shadow:
+        -12px 0 38px
+        rgba(0, 0, 0, 0.4);
 
-                            <a
-                                href="https://wa.me/51973265025"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                +51 973 265 025
-                            </a>
+    overflow-y: auto;
 
-                        </p>
+    transition:
+        right 0.4s ease;
+}
 
-                    </div>
+.panel-carrito.activo {
+    right: 0;
+}
 
-                </div>
+.carrito-header {
+    display: flex;
 
-            </div>
+    justify-content: space-between;
+    align-items: center;
 
+    margin-bottom: 15px;
 
-            <div class="footer-column">
+    padding-bottom: 18px;
 
-                <h3>
-                    Sobre la academia
-                </h3>
+    border-bottom:
+        2px solid #eeeeee;
+}
 
-                <ul class="footer-list">
+.carrito-header h2 {
+    color:
+        var(--negro);
 
-                    <li>
-                        Clases virtuales y presenciales
-                    </li>
+    font-size: 28px;
+}
 
-                    <li>
-                        Formación para niños, jóvenes y adultos
-                    </li>
+.carrito-header button {
+    display: flex;
 
-                    <li>
-                        Docentes especializados
-                    </li>
+    align-items: center;
+    justify-content: center;
 
-                    <li>
-                        Metodología dinámica y progresiva
-                    </li>
+    width: 42px;
+    height: 42px;
 
-                    <li>
-                        Torneos y actividades formativas
-                    </li>
+    color:
+        var(--blanco);
 
-                </ul>
+    background:
+        var(--rojo-principal);
 
-            </div>
+    border-radius:
+        50%;
 
+    font-size: 22px;
 
-            <div class="footer-column">
+    cursor: pointer;
+}
 
-                <h3>
-                    Desarrollo web
-                </h3>
+.item-carrito {
+    display: grid;
 
-                <p>
-                    Sitio web diseñado y desarrollado por:
-                </p>
+    grid-template-columns:
+        minmax(0, 1fr)
+        auto
+        auto;
 
-                <p class="developer-name">
-                    Abraham Bobadilla
-                </p>
+    align-items: center;
 
-                <p>
-                    Desarrollador web y fundador de la plataforma
-                    digital de Soubac Ajedrez.
-                </p>
+    gap: 10px;
 
-                <ul class="footer-details">
+    padding: 15px 0;
 
-                    <li>
-                        <span aria-hidden="true">🌐</span>
-                        Página web creada en 2026
-                    </li>
+    border-bottom:
+        1px solid #dddddd;
+}
 
-                    <li>
-                        <span aria-hidden="true">🔄</span>
-                        Última actualización: octubre de 2026
-                    </li>
+.item-carrito-info {
+    display: flex;
 
-                    <li>
-                        <span aria-hidden="true">📱</span>
-                        Diseño adaptable para computadoras, tablets y
-                        celulares
-                    </li>
+    flex-direction: column;
 
-                </ul>
+    gap: 5px;
+}
 
-            </div>
+.item-carrito-info span {
+    color:
+        #222222;
 
-        </div>
+    font-size:
+        15px;
+}
 
+.item-carrito-info strong {
+    color:
+        var(--rojo-principal);
+}
 
-        <div class="footer-bottom">
+.btn-eliminar {
+    display: flex;
 
-            <div class="footer-bottom-container">
+    align-items: center;
+    justify-content: center;
 
-                <p>
-                    © 2026 Academia Soubac Ajedrez.
-                    Todos los derechos reservados.
-                </p>
+    width: 35px;
+    height: 35px;
 
-                <p>
-                    Diseñado y desarrollado por
-                    <strong>Abraham Bobadilla</strong>.
-                </p>
+    color:
+        #b00000;
 
-            </div>
+    background:
+        #ffe5e5;
 
-        </div>
+    border-radius:
+        50%;
 
-    </footer>
+    cursor:
+        pointer;
+}
 
+.panel-carrito > h3,
+.carrito-total h3 {
+    margin:
+        24px 0;
 
-    <!-- ==========================================
-         MODAL ACCESO A LA BIBLIOTECA
-    =========================================== -->
+    color:
+        var(--negro);
 
-    <div
-        id="modalLoginBiblioteca"
-        class="modal-biblioteca"
-        aria-hidden="true"
-    >
+    text-align:
+        right;
+}
 
-        <div
-            class="login-biblioteca"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="tituloLoginBiblioteca"
-        >
+.btn-vaciar-carrito {
+    width: 100%;
 
-            <button
-                type="button"
-                class="cerrar-login"
-                onclick="cerrarLoginBiblioteca()"
-                aria-label="Cerrar ventana de inicio de sesión"
-            >
-                ×
-            </button>
+    margin-bottom: 12px;
 
+    padding: 13px;
 
-            <div class="icono-login">
+    color:
+        #555555;
 
-                <img
-                    src="soubac.png"
-                    alt="Academia Soubac Ajedrez"
-                    class="logo-login"
-                >
+    background:
+        #eeeeee;
 
-            </div>
+    border-radius:
+        12px;
 
+    cursor:
+        pointer;
+}
 
-            <h2 id="tituloLoginBiblioteca">
-                Acceso a la Biblioteca
-            </h2>
+.comprar {
+    width: 100%;
 
+    padding: 15px;
 
-            <p class="texto-login">
+    color:
+        var(--blanco);
 
-                Ingresa con tu
-                <strong>usuario y contraseña de estudiante Soubac</strong>.
+    background:
+        #25d366;
 
-            </p>
+    border-radius:
+        14px;
 
+    font-size:
+        17px;
 
-            <form
-                id="formLoginBiblioteca"
-                autocomplete="on"
-            >
+    font-weight:
+        800;
 
-                <div class="campo-login">
+    cursor:
+        pointer;
+}
 
-                    <label
-                        for="usuarioBiblioteca"
-                    >
-                        Usuario
-                    </label>
 
-                    <input
-                        type="text"
-                        id="usuarioBiblioteca"
-                        name="username"
-                        placeholder="Ingresa tu usuario"
-                        autocomplete="username"
-                        autocapitalize="none"
-                        spellcheck="false"
-                        required
-                    >
+/* =========================================================
+   WHATSAPP
+   ========================================================= */
 
-                </div>
+.whatsapp-container {
+    position: fixed;
 
+    right: 25px;
+    bottom: 25px;
 
-                <div class="campo-login">
+    z-index: 50000;
+}
 
-                    <label
-                        for="passwordBiblioteca"
-                    >
-                        Contraseña
-                    </label>
+.whatsapp-btn {
+    display: flex;
 
-                    <input
-                        type="password"
-                        id="passwordBiblioteca"
-                        name="password"
-                        placeholder="Ingresa tu contraseña"
-                        autocomplete="current-password"
-                        required
-                    >
+    align-items: center;
+    justify-content: center;
 
-                </div>
+    width: 70px;
+    height: 70px;
 
+    background:
+        #25d366;
 
-                <p
-                    id="errorLoginBiblioteca"
-                    class="error-login"
-                    aria-live="polite"
-                    role="alert"
-                ></p>
+    border:
+        3px solid var(--blanco);
 
+    border-radius:
+        50%;
 
-                <button
-                    type="submit"
-                    id="btnLoginBiblioteca"
-                    class="boton-login"
-                >
-                    Iniciar sesión
-                </button>
+    box-shadow:
+        0 9px 28px
+        rgba(0, 0, 0, 0.38);
+}
 
-            </form>
+.whatsapp-btn img {
+    width: 40px;
+    height: 40px;
 
+    object-fit:
+        contain;
+}
 
-            <div class="seguridad-login">
 
-                🔒 Acceso exclusivo para estudiantes Soubac
+/* =========================================================
+   FOOTER
+   ========================================================= */
 
-            </div>
+.soubac-footer {
+    position: relative;
 
-        </div>
+    margin-top: 50px;
 
-    </div>
+    color:
+        var(--blanco);
 
+    background:
+        linear-gradient(
+            135deg,
+            #061f3f,
+            #082f55,
+            #0b4b77
+        );
 
-    <!-- ==========================================
-         FIREBASE
-    =========================================== -->
+    border-top:
+        5px solid var(--dorado);
 
-    <script src="https://www.gstatic.com/firebasejs/11.6.1/firebase-app-compat.js"></script>
+    overflow:
+        hidden;
+}
 
-    <script src="https://www.gstatic.com/firebasejs/11.6.1/firebase-auth-compat.js"></script>
+.footer-container {
+    display: grid;
 
+    grid-template-columns:
+        repeat(4, 1fr);
 
-    <!-- JAVASCRIPT PRINCIPAL -->
+    gap: 35px;
 
-    <script src="script.js"></script>
+    width:
+        min(1180px, calc(100% - 60px));
 
+    margin:
+        0 auto;
 
-    <!-- ==========================================
-         VISOR DE IMÁGENES
-    =========================================== -->
+    padding:
+        60px 0 45px;
+}
 
-    <div
-        id="visorProducto"
-        class="visor-producto"
-        aria-hidden="true"
-    >
+.footer-column h2,
+.footer-column h3 {
+    color:
+        var(--blanco);
+}
 
-        <button
-            type="button"
-            class="cerrar-producto"
-            onclick="cerrarProducto()"
-            aria-label="Cerrar visor de producto"
-        >
-            ✕
-        </button>
+.footer-column h2 {
+    margin-bottom: 18px;
 
-        <img
-            id="imagenProductoGrande"
-            src=""
-            alt="Producto"
-        >
+    font-size: 25px;
+}
 
-    </div>
+.footer-column h3 {
+    margin-bottom: 22px;
 
+    font-size: 20px;
+}
 
-</body>
+.footer-column p {
+    margin-bottom: 12px;
 
-</html>
+    color:
+        #dceeff;
+
+    line-height:
+        1.6;
+}
+
+.footer-column a {
+    color:
+        #ffffff;
+
+    text-decoration:
+        none;
+}
+
+.footer-column a:hover {
+    color:
+        var(--dorado);
+}
+
+.footer-slogan {
+    color:
+        var(--dorado) !important;
+
+    font-weight:
+        700;
+}
+
+.developer-name {
+    color:
+        var(--dorado) !important;
+
+    font-size:
+        18px;
+
+    font-weight:
+        800;
+}
+
+.footer-list,
+.footer-details {
+    padding-left:
+        20px;
+
+    color:
+        #dceeff;
+
+    line-height:
+        1.8;
+}
+
+.footer-item {
+    display: flex;
+
+    gap: 12px;
+
+    margin-bottom:
+        18px;
+}
+
+.footer-icon {
+    font-size:
+        22px;
+}
+
+.footer-bottom {
+    padding:
+        20px;
+
+    background:
+        rgba(0, 0, 0, 0.25);
+}
+
+.footer-bottom-container {
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    gap: 20px;
+
+    width:
+        min(1180px, calc(100% - 60px));
+
+    margin:
+        0 auto;
+}
+
+.footer-bottom p {
+    color:
+        #dceeff;
+
+    font-size:
+        14px;
+}
+
+
+/* =========================================================
+   VISOR DE PRODUCTOS
+   ========================================================= */
+
+.visor-producto {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 999999;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        rgba(0, 0, 0, 0.85);
+}
+
+.visor-producto.activo {
+    display: flex;
+}
+
+.visor-producto img {
+    max-width: 90%;
+    max-height: 85vh;
+
+    border-radius:
+        18px;
+
+    background:
+        var(--blanco);
+
+    box-shadow:
+        0 20px 60px
+        rgba(0, 0, 0, 0.45);
+}
+
+.cerrar-producto {
+    position: absolute;
+
+    top: 25px;
+    right: 35px;
+
+    width: 50px;
+    height: 50px;
+
+    color:
+        var(--blanco);
+
+    background:
+        #b30000;
+
+    border-radius:
+        50%;
+
+    font-size:
+        26px;
+
+    cursor:
+        pointer;
+}
+
+
+/* =========================================================
+   OPINIONES
+   ========================================================= */
+
+#opiniones {
+    min-height: 100vh;
+
+    padding:
+        60px 30px 90px;
+}
+
+.clasificacion-contenedor {
+    width:
+        min(1120px, 100%);
+
+    margin:
+        0 auto;
+
+    padding:
+        45px;
+
+    color:
+        var(--negro);
+
+    background:
+        rgba(255, 255, 255, 0.97);
+
+    border:
+        1px solid rgba(212, 175, 55, 0.45);
+
+    border-top:
+        7px solid var(--dorado);
+
+    border-radius:
+        30px;
+
+    box-shadow:
+        0 22px 55px
+        rgba(0, 0, 0, 0.32);
+}
+
+.clasificacion-encabezado {
+    max-width:
+        820px;
+
+    margin:
+        0 auto 38px;
+
+    text-align:
+        center;
+}
+
+.clasificacion-etiqueta {
+    display:
+        inline-block;
+
+    margin-bottom:
+        15px;
+
+    padding:
+        8px 18px;
+
+    color:
+        var(--rojo-principal);
+
+    background:
+        rgba(139, 0, 0, 0.08);
+
+    border-radius:
+        50px;
+
+    font-size:
+        14px;
+
+    font-weight:
+        800;
+}
+
+.clasificacion-encabezado h2 {
+    margin-bottom:
+        17px;
+
+    color:
+        var(--rojo-principal);
+
+    font-size:
+        clamp(31px, 5vw, 45px);
+
+    text-align:
+        center;
+}
+
+.clasificacion-encabezado p {
+    color:
+        #444444;
+
+    font-size:
+        18px;
+
+    line-height:
+        1.7;
+
+    text-align:
+        center;
+}
+
+.resumen-valoracion {
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        20px;
+
+    margin-top:
+        27px;
+
+    padding:
+        18px 25px;
+
+    background:
+        var(--blanco);
+
+    border:
+        1px solid rgba(212, 175, 55, 0.38);
+
+    border-radius:
+        18px;
+}
+
+.valoracion-numero {
+    color:
+        var(--rojo-principal);
+
+    font-size:
+        42px;
+
+    font-weight:
+        900;
+}
+
+.valoracion-estrellas {
+    color:
+        var(--dorado);
+
+    font-size:
+        23px;
+}
+
+.formulario-opiniones {
+    width:
+        100%;
+
+    max-width:
+        920px;
+
+    margin:
+        0 auto;
+
+    background:
+        var(--blanco);
+
+    border-radius:
+        23px;
+
+    overflow:
+        hidden;
+}
+
+.formulario-opiniones iframe {
+    display:
+        block;
+
+    width:
+        100%;
+
+    min-height:
+        900px;
+
+    border:
+        0;
+}
+
+
+/* =========================================================
+   🔐 MODAL DE BIBLIOTECA
+   ========================================================= */
+
+/*
+   IMPORTANTE:
+
+   El modal está COMPLETAMENTE OCULTO
+   cuando la página carga.
+
+   Solo JavaScript agrega .activo
+   después de hacer clic en un libro.
+*/
+
+.modal-biblioteca {
+    position: fixed !important;
+
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+
+    z-index: 2000000 !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+
+    margin: 0 !important;
+    padding: 20px !important;
+
+    box-sizing: border-box !important;
+
+    background:
+        rgba(4, 19, 35, 0.76) !important;
+
+    backdrop-filter:
+        blur(7px);
+
+    -webkit-backdrop-filter:
+        blur(7px);
+
+    opacity: 0 !important;
+
+    visibility: hidden !important;
+
+    pointer-events: none !important;
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
+}
+
+
+/*
+   ESTA ES LA ÚNICA CONDICIÓN
+   QUE LO HACE VISIBLE.
+*/
+
+.modal-biblioteca.activo {
+    opacity: 1 !important;
+
+    visibility: visible !important;
+
+    pointer-events: auto !important;
+}
+
+
+/* =========================================================
+   TARJETA DEL LOGIN
+   ========================================================= */
+
+.login-biblioteca {
+    position: relative;
+
+    width:
+        min(460px, 100%);
+
+    max-height:
+        calc(100vh - 40px);
+
+    max-height:
+        calc(100dvh - 40px);
+
+    margin:
+        0 auto !important;
+
+    padding:
+        38px 35px 30px;
+
+    box-sizing:
+        border-box;
+
+    color:
+        var(--negro);
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff 0%,
+            #f5f8fc 100%
+        );
+
+    border:
+        2px solid
+        rgba(212, 175, 55, 0.72);
+
+    border-radius:
+        22px;
+
+    box-shadow:
+        0 25px 70px
+        rgba(0, 0, 0, 0.45);
+
+    text-align:
+        center;
+
+    overflow-y:
+        auto;
+
+    transform:
+        translateY(20px)
+        scale(0.97);
+
+    transition:
+        transform 0.3s ease;
+}
+
+.modal-biblioteca.activo
+.login-biblioteca {
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+/* =========================================================
+   BOTÓN CERRAR LOGIN
+   ========================================================= */
+
+.cerrar-login {
+    position: absolute;
+
+    top: 12px;
+    right: 14px;
+
+    z-index: 5;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+
+    padding: 0;
+
+    color:
+        var(--blanco);
+
+    background:
+        #990000;
+
+    border:
+        none;
+
+    border-radius:
+        50%;
+
+    font-size:
+        24px;
+
+    font-weight:
+        700;
+
+    line-height:
+        1;
+
+    cursor:
+        pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.cerrar-login:hover {
+    background:
+        #b00000;
+
+    transform:
+        rotate(90deg);
+}
+
+
+/* =========================================================
+   ICONO DEL LOGIN
+   ========================================================= */
+
+.icono-login {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 72px;
+    height: 72px;
+
+    margin:
+        0 auto 18px;
+
+    color:
+        var(--blanco);
+
+    background:
+        #0b3a63;
+
+    border:
+        3px solid
+        var(--dorado);
+
+    border-radius:
+        50%;
+
+    font-size:
+        35px;
+
+    box-shadow:
+        0 8px 22px
+        rgba(0, 0, 0, 0.20);
+}
+
+
+/* =========================================================
+   LOGO DEL LOGIN
+   ========================================================= */
+
+.icono-login .logo-login {
+    width: 56px;
+    height: 56px;
+    max-width: 56px;
+    max-height: 56px;
+    object-fit: contain;
+    display: block;
+    mix-blend-mode: multiply;
+    filter: contrast(1.05);
+}
+
+
+/* =========================================================
+   TÍTULO DEL LOGIN
+   ========================================================= */
+
+.login-biblioteca h2 {
+    margin:
+        0 0 12px;
+
+    color:
+        #082f52;
+
+    font-size:
+        clamp(26px, 5vw, 32px);
+
+    font-weight:
+        800;
+
+    line-height:
+        1.2;
+}
+
+
+/* =========================================================
+   DESCRIPCIÓN
+   ========================================================= */
+
+.texto-login {
+    max-width:
+        390px;
+
+    margin:
+        0 auto 25px;
+
+    color:
+        #4b5563;
+
+    font-size:
+        15px;
+
+    line-height:
+        1.55;
+}
+
+.texto-login strong {
+    color:
+        #0b3a63;
+}
+
+
+/* =========================================================
+   FORMULARIO LOGIN
+   ========================================================= */
+
+#formLoginBiblioteca {
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        15px;
+
+    width:
+        100%;
+}
+
+
+/* =========================================================
+   CAMPOS
+   ========================================================= */
+
+.campo-login {
+    width:
+        100%;
+
+    text-align:
+        left;
+}
+
+.campo-login label {
+    display:
+        block;
+
+    margin:
+        0 0 7px;
+
+    color:
+        #17324d;
+
+    font-size:
+        14px;
+
+    font-weight:
+        700;
+}
+
+.campo-login input {
+    display:
+        block;
+
+    width:
+        100%;
+
+    height:
+        48px;
+
+    padding:
+        0 14px;
+
+    box-sizing:
+        border-box;
+
+    color:
+        #1f2937;
+
+    background:
+        #ffffff;
+
+    border:
+        1.5px solid
+        #cbd5e1;
+
+    border-radius:
+        10px;
+
+    outline:
+        none;
+
+    font-family:
+        inherit;
+
+    font-size:
+        15px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.campo-login input::placeholder {
+    color:
+        #9ca3af;
+}
+
+.campo-login input:focus {
+    border-color:
+        #0b3a63;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(11, 58, 99, 0.12);
+}
+
+
+/* =========================================================
+   ERROR LOGIN
+   ========================================================= */
+
+.error-login {
+    min-height:
+        20px;
+
+    margin:
+        -2px 0 0;
+
+    color:
+        #b91c1c;
+
+    font-size:
+        13px;
+
+    font-weight:
+        600;
+
+    line-height:
+        1.4;
+}
+
+
+/* =========================================================
+   BOTÓN LOGIN
+   ========================================================= */
+
+.boton-login {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    width:
+        100%;
+
+    min-height:
+        50px;
+
+    padding:
+        12px 20px;
+
+    color:
+        var(--blanco);
+
+    background:
+        linear-gradient(
+            135deg,
+            #0b3a63,
+            #062744
+        );
+
+    border:
+        none;
+
+    border-radius:
+        11px;
+
+    font-family:
+        inherit;
+
+    font-size:
+        16px;
+
+    font-weight:
+        800;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 7px 18px
+        rgba(6, 39, 68, 0.25);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.boton-login:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #0d4778,
+            #073354
+        );
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 10px 24px
+        rgba(6, 39, 68, 0.32);
+}
+
+.boton-login:disabled {
+    opacity:
+        0.65;
+
+    cursor:
+        wait;
+
+    transform:
+        none;
+}
+
+
+/* =========================================================
+   PIE DEL LOGIN
+   ========================================================= */
+
+.seguridad-login {
+    margin:
+        22px -35px -30px;
+
+    padding:
+        13px 20px;
+
+    color:
+        var(--blanco);
+
+    background:
+        #0b3a63;
+
+    border-radius:
+        0 0 20px 20px;
+
+    font-size:
+        13px;
+
+    font-weight:
+        600;
+
+    line-height:
+        1.4;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    header {
+        padding:
+            18px 30px;
+    }
+
+    .logo-container {
+        padding-right:
+            130px;
+    }
+
+    .hero {
+        grid-template-columns:
+            repeat(
+                3,
+                minmax(210px, 1fr)
+            );
+    }
+
+    .footer-container {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+
+@media (max-width: 850px) {
+
+    header {
+        flex-direction:
+            column;
+
+        justify-content:
+            center;
+
+        padding:
+            22px 20px 82px;
+
+        text-align:
+            center;
+    }
+
+    .logo-container {
+        flex-direction:
+            column;
+
+        padding-right:
+            0;
+    }
+
+    .logo {
+        width:
+            95px;
+
+        height:
+            95px;
+    }
+
+    .menu {
+        top:
+            auto;
+
+        right:
+            50%;
+
+        bottom:
+            18px;
+
+        transform:
+            translateX(50%);
+    }
+
+    .opciones-menu {
+        right:
+            50%;
+
+        transform:
+            translateX(50%);
+    }
+
+    .hero {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(240px, 1fr)
+            );
+    }
+
+    .historia-container {
+        grid-template-columns:
+            1fr;
+    }
+
+    .historia-imagen {
+        max-width:
+            430px;
+
+        margin:
+            0 auto;
+    }
+
+    .plataformas-container {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(240px, 1fr)
+            );
+    }
+
+    .redes-container {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(240px, 1fr)
+            );
+    }
+
+    .productos {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(240px, 1fr)
+            );
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    body {
+        background-attachment:
+            scroll;
+    }
+
+    header {
+        padding:
+            20px 15px 78px;
+    }
+
+    .logo {
+        width:
+            86px;
+
+        height:
+            86px;
+    }
+
+    .logo-container h1 {
+        font-size:
+            clamp(
+                22px,
+                7vw,
+                30px
+            );
+    }
+
+    .seccion {
+        padding:
+            35px 16px;
+    }
+
+    .hero {
+        grid-template-columns:
+            1fr;
+    }
+
+    .hero img {
+        height:
+            230px;
+    }
+
+    .bienvenida {
+        width:
+            100%;
+
+        padding:
+            25px 20px;
+    }
+
+    .sedes-container {
+        grid-template-columns:
+            1fr;
+    }
+
+    #libros .botones-info {
+        grid-template-columns:
+            1fr;
+    }
+
+    #libros .botones-info a {
+        min-height:
+            165px;
+
+        padding:
+            24px;
+
+        font-size:
+            26px;
+    }
+
+    .galeria {
+        grid-template-columns:
+            1fr;
+    }
+
+    .plataformas-container {
+        grid-template-columns:
+            1fr;
+    }
+
+    .redes-container {
+        grid-template-columns:
+            1fr;
+    }
+
+    .productos {
+        grid-template-columns:
+            1fr;
+    }
+
+    .producto-imagen {
+        height:
+            255px;
+    }
+
+    .btn-carrito {
+        right:
+            16px;
+
+        bottom:
+            92px;
+    }
+
+    .whatsapp-container {
+        right:
+            16px;
+
+        bottom:
+            16px;
+    }
+
+    .whatsapp-btn {
+        width:
+            61px;
+
+        height:
+            61px;
+    }
+
+    .panel-carrito {
+        right:
+            -100%;
+
+        width:
+            100%;
+
+        padding:
+            20px 17px;
+    }
+
+    .panel-carrito.activo {
+        right:
+            0;
+    }
+
+    .footer-container {
+        grid-template-columns:
+            1fr;
+
+        width:
+            calc(100% - 32px);
+
+        padding:
+            45px 0 35px;
+    }
+
+    .footer-bottom-container {
+        flex-direction:
+            column;
+
+        width:
+            calc(100% - 32px);
+    }
+
+
+    /* LOGIN EN CELULAR */
+
+    .modal-biblioteca {
+        padding:
+            12px !important;
+    }
+
+    .login-biblioteca {
+        width:
+            100%;
+
+        max-height:
+            calc(100vh - 24px);
+
+        max-height:
+            calc(100dvh - 24px);
+
+        padding:
+            34px 22px 25px;
+
+        border-radius:
+            18px;
+    }
+
+    .icono-login {
+        width:
+            62px;
+
+        height:
+            62px;
+
+        margin-bottom:
+            15px;
+
+        font-size:
+            29px;
+    }
+
+    .icono-login .logo-login {
+        width: 48px;
+        height: 48px;
+        max-width: 48px;
+        max-height: 48px;
+    }
+
+    .login-biblioteca h2 {
+        font-size:
+            26px;
+    }
+
+    .texto-login {
+        font-size:
+            14px;
+    }
+
+    .seguridad-login {
+        margin:
+            20px -22px -25px;
+
+        border-radius:
+            0 0 16px 16px;
+
+        font-size:
+            12px;
+    }
+
+    #opiniones {
+        padding:
+            35px 15px 70px;
+    }
+
+    .clasificacion-contenedor {
+        padding:
+            30px 18px;
+
+        border-radius:
+            22px;
+    }
+
+    .resumen-valoracion {
+        flex-direction:
+            column;
+
+        width:
+            100%;
+    }
+
+    .formulario-opiniones iframe {
+        min-height:
+            950px;
+    }
+}
+
+
+@media (max-width: 390px) {
+
+    .seccion {
+        padding:
+            30px 12px;
+    }
+
+    .hero img {
+        height:
+            205px;
+    }
+
+    .historia-imagen img {
+        height:
+            355px;
+    }
+
+    .card-galeria img {
+        height:
+            225px;
+    }
+
+    .producto-imagen {
+        height:
+            225px;
+    }
+
+    .producto button {
+        width:
+            calc(100% - 28px);
+
+        margin:
+            0 14px 17px;
+    }
+}
+
+
+/* =========================================================
+   ACCESIBILIDAD
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        scroll-behavior:
+            auto !important;
+
+        animation-duration:
+            0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            0.01ms !important;
+    }
+}
