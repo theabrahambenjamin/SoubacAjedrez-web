@@ -72,8 +72,6 @@ function usuarioAFirebaseEmail(usuario) {
         .trim()
         .toLowerCase();
 
-    // El alumno normalmente escribe solo su usuario.
-    // Si por error pega el correo interno, también lo aceptamos.
     if (valor.includes("@")) {
         return valor;
     }
@@ -82,7 +80,6 @@ function usuarioAFirebaseEmail(usuario) {
         valor.replace(/\s+/g, "") +
         DOMINIO_USUARIOS
     );
-
 }
 
 
@@ -94,42 +91,48 @@ document.addEventListener(
     "DOMContentLoaded",
     () => {
 
-        /* Pantalla de carga */
+        /* ==============================
+           PANTALLA DE CARGA
+        ============================== */
 
         const pantallaCarga =
             document.getElementById(
                 "pantalla-carga"
             );
 
-
         if (pantallaCarga) {
 
-            /* Ocultar la pantalla de carga inmediatamente
-               al estar listo el DOM. No bloquear la web. */
             pantallaCarga.style.opacity = "0";
             pantallaCarga.style.pointerEvents = "none";
 
             setTimeout(() => {
-                if (pantallaCarga && pantallaCarga.parentNode) {
+
+                if (
+                    pantallaCarga &&
+                    pantallaCarga.parentNode
+                ) {
                     pantallaCarga.remove();
                 }
-            }, 300);
 
+            }, 300);
         }
 
 
-        /* Carrito */
+        /* ==============================
+           CARRITO
+        ============================== */
 
         actualizarCarrito();
 
 
-        /* Botón carrito */
+        /* ==============================
+           BOTÓN CARRITO
+        ============================== */
 
         const seccionActiva =
             document.querySelector(
                 ".seccion.activa"
             );
-
 
         controlarBotonCarrito(
             seccionActiva
@@ -138,12 +141,16 @@ document.addEventListener(
         );
 
 
-        /* Biblioteca */
+        /* ==============================
+           BIBLIOTECA
+        ============================== */
 
         configurarBiblioteca();
 
 
-        /* Visor */
+        /* ==============================
+           VISOR
+        ============================== */
 
         configurarVisorProducto();
 
@@ -162,25 +169,19 @@ function abrirMenu() {
             "opcionesMenu"
         );
 
-
     const boton =
         document.querySelector(
             ".boton-menu"
         );
 
-
     if (!menu) {
-
         return;
-
     }
-
 
     const abierto =
         menu.classList.toggle(
             "mostrar"
         );
-
 
     if (boton) {
 
@@ -190,7 +191,6 @@ function abrirMenu() {
         );
 
     }
-
 }
 
 
@@ -205,7 +205,6 @@ function mostrar(idSeccion) {
             idSeccion
         );
 
-
     if (!seccion) {
 
         console.error(
@@ -214,15 +213,12 @@ function mostrar(idSeccion) {
         );
 
         return;
-
     }
-
 
     const secciones =
         document.querySelectorAll(
             ".seccion"
         );
-
 
     secciones.forEach(
         (elemento) => {
@@ -234,7 +230,6 @@ function mostrar(idSeccion) {
         }
     );
 
-
     seccion.classList.add(
         "activa"
     );
@@ -245,12 +240,10 @@ function mostrar(idSeccion) {
             "opcionesMenu"
         );
 
-
     const botonMenu =
         document.querySelector(
             ".boton-menu"
         );
-
 
     if (menu) {
 
@@ -259,7 +252,6 @@ function mostrar(idSeccion) {
         );
 
     }
-
 
     if (botonMenu) {
 
@@ -275,7 +267,6 @@ function mostrar(idSeccion) {
         idSeccion
     );
 
-
     cerrarCarrito();
 
 
@@ -289,24 +280,16 @@ function mostrar(idSeccion) {
 
 /* ==================================================
    BIBLIOTECA
-   IMPORTANTE:
-   EL LOGIN SOLO APARECE AL HACER CLIC
-   EN UNA TARJETA.
 ================================================== */
 
 function abrirLibro(evento, url) {
 
     if (evento) {
-
         evento.preventDefault();
-
     }
 
-
     if (!url) {
-
         return;
-
     }
 
 
@@ -328,17 +311,15 @@ function abrirLibro(evento, url) {
             url
         );
 
-
         libroPendiente = null;
 
         return;
-
     }
 
 
     /*
-       Si NO existe sesión,
-       recién aquí aparece el modal.
+       Si no existe sesión,
+       mostramos el login.
     */
 
     abrirLoginBiblioteca();
@@ -350,28 +331,39 @@ function abrirLibro(evento, url) {
    ABRIR LIBRO
 ================================================== */
 
-function abrirLibroEnNuevaPestana(url, ventana = null) {
+function abrirLibroEnNuevaPestana(
+    url,
+    ventana = null
+) {
 
     if (!url) {
-
         return null;
-
     }
 
-    // Si ya tenemos una pestaña abierta por el gesto del usuario,
-    // reutilizamos esa pestaña para evitar bloqueadores de ventanas.
-    if (ventana && !ventana.closed) {
 
-        ventana.location.href = url;
+    /*
+       Si ya tenemos una pestaña abierta,
+       reutilizamos esa pestaña.
+    */
+
+    if (
+        ventana &&
+        !ventana.closed
+    ) {
+
+        ventana.location.href =
+            url;
+
         return ventana;
-
     }
 
-    const nuevaVentana = window.open(
-        url,
-        "_blank",
-        "noopener,noreferrer"
-    );
+
+    const nuevaVentana =
+        window.open(
+            url,
+            "_blank",
+            "noopener,noreferrer"
+        );
 
     return nuevaVentana;
 }
@@ -388,18 +380,15 @@ function abrirLoginBiblioteca() {
             "modalLoginBiblioteca"
         );
 
-
     const usuario =
         document.getElementById(
             "usuarioBiblioteca"
         );
 
-
     const password =
         document.getElementById(
             "passwordBiblioteca"
         );
-
 
     const error =
         document.getElementById(
@@ -414,36 +403,22 @@ function abrirLoginBiblioteca() {
         );
 
         return;
-
     }
 
 
     if (error) {
-
         error.textContent = "";
-
     }
 
 
     if (password) {
-
         password.value = "";
-
     }
 
-
-    /*
-       MUY IMPORTANTE:
-
-       El modal inicia oculto mediante CSS.
-
-       Solo aquí agregamos .activo.
-    */
 
     modal.classList.add(
         "activo"
     );
-
 
     modal.setAttribute(
         "aria-hidden",
@@ -458,9 +433,7 @@ function abrirLoginBiblioteca() {
     setTimeout(() => {
 
         if (usuario) {
-
             usuario.focus();
-
         }
 
     }, 150);
@@ -479,11 +452,8 @@ function cerrarLoginBiblioteca() {
             "modalLoginBiblioteca"
         );
 
-
     if (!modal) {
-
         return;
-
     }
 
 
@@ -491,17 +461,11 @@ function cerrarLoginBiblioteca() {
         "activo"
     );
 
-
     modal.setAttribute(
         "aria-hidden",
         "true"
     );
 
-
-    /*
-       Si no hay otro elemento modal abierto,
-       recuperamos el scroll.
-    */
 
     const carritoAbierto =
         document
@@ -552,18 +516,15 @@ async function iniciarSesionBiblioteca(
             "usuarioBiblioteca"
         );
 
-
     const passwordInput =
         document.getElementById(
             "passwordBiblioteca"
         );
 
-
     const error =
         document.getElementById(
             "errorLoginBiblioteca"
         );
-
 
     const boton =
         document.getElementById(
@@ -571,7 +532,11 @@ async function iniciarSesionBiblioteca(
         );
 
 
-    // Se abre durante el gesto del usuario para evitar bloqueadores de popups.
+    /*
+       Variable para controlar la pestaña
+       del libro seleccionado.
+    */
+
     let ventanaLibro = null;
 
 
@@ -580,8 +545,11 @@ async function iniciarSesionBiblioteca(
             ? usuarioInput.value.trim()
             : "";
 
+
     const usuarioNormalizado =
-        usuario.toLowerCase().replace(/\s+/g, "");
+        usuario
+            .toLowerCase()
+            .replace(/\s+/g, "");
 
 
     const password =
@@ -591,13 +559,14 @@ async function iniciarSesionBiblioteca(
 
 
     if (error) {
-
         error.textContent = "";
-
     }
 
 
-    if (!usuarioNormalizado || !password) {
+    if (
+        !usuarioNormalizado ||
+        !password
+    ) {
 
         if (error) {
 
@@ -607,7 +576,6 @@ async function iniciarSesionBiblioteca(
         }
 
         return;
-
     }
 
 
@@ -624,16 +592,21 @@ async function iniciarSesionBiblioteca(
     try {
 
         /*
-           Abrimos una pestaña vacía mientras todavía existe
-           el gesto del usuario. Así el navegador no bloqueará
-           la apertura del libro después de autenticar.
+           Abrimos una pestaña vacía durante
+           la acción del usuario para evitar
+           bloqueadores de ventanas.
         */
+
         if (libroPendiente) {
-            ventanaLibro = window.open(
-                "about:blank",
-                "_blank"
-            );
+
+            ventanaLibro =
+                window.open(
+                    "about:blank",
+                    "_blank"
+                );
+
         }
+
 
         /*
            Convertimos el usuario al correo
@@ -646,13 +619,24 @@ async function iniciarSesionBiblioteca(
             );
 
 
+        console.log(
+            "Intentando iniciar sesión con:",
+            emailFirebase
+        );
+
+
         /*
-           AUTENTICACIÓN
+           AUTENTICACIÓN FIREBASE
         */
 
         await auth.signInWithEmailAndPassword(
             emailFirebase,
             password
+        );
+
+
+        console.log(
+            "Inicio de sesión correcto."
         );
 
 
@@ -664,8 +648,7 @@ async function iniciarSesionBiblioteca(
 
 
         /*
-           Abrimos exactamente el libro
-           que el alumno seleccionó.
+           Abrimos el libro seleccionado.
         */
 
         if (libroPendiente) {
@@ -673,19 +656,25 @@ async function iniciarSesionBiblioteca(
             const url =
                 libroPendiente;
 
-
             libroPendiente = null;
 
 
-            if (ventanaLibro && !ventanaLibro.closed) {
+            if (
+                ventanaLibro &&
+                !ventanaLibro.closed
+            ) {
+
                 abrirLibroEnNuevaPestana(
                     url,
                     ventanaLibro
                 );
+
             } else {
+
                 abrirLibroEnNuevaPestana(
                     url
                 );
+
             }
 
         }
@@ -694,65 +683,161 @@ async function iniciarSesionBiblioteca(
 
     catch (errorFirebase) {
 
+        /*
+           MOSTRAR EL ERROR REAL DE FIREBASE
+        */
+
         console.error(
-            "Error de autenticación:",
-            errorFirebase.code,
-            errorFirebase.message,
+            "ERROR COMPLETO DE FIREBASE:",
             errorFirebase
         );
 
-        if (ventanaLibro && !ventanaLibro.closed) {
+        console.error(
+            "Código Firebase:",
+            errorFirebase.code
+        );
+
+        console.error(
+            "Mensaje Firebase:",
+            errorFirebase.message
+        );
+
+
+        if (
+            ventanaLibro &&
+            !ventanaLibro.closed
+        ) {
+
             ventanaLibro.close();
+
             ventanaLibro = null;
+
         }
 
 
         if (error) {
 
-            switch (errorFirebase.code) {
+            switch (
+                errorFirebase.code
+            ) {
+
+                /*
+                   USUARIO / CONTRASEÑA
+                */
 
                 case "auth/invalid-credential":
+
                 case "auth/invalid-login-credentials":
+
                 case "auth/user-not-found":
+
                 case "auth/wrong-password":
+
                     error.textContent =
                         "Usuario o contraseña incorrectos.";
+
                     break;
+
+
+                /*
+                   CORREO INTERNO INVÁLIDO
+                */
 
                 case "auth/invalid-email":
+
                     error.textContent =
                         "El usuario no tiene un formato válido.";
+
                     break;
+
+
+                /*
+                   PROVIDER DESACTIVADO
+                */
 
                 case "auth/operation-not-allowed":
+
                     error.textContent =
-                        "El acceso con correo y contraseña no está habilitado en Firebase.";
+                        "El acceso con usuario y contraseña no está habilitado en Firebase.";
+
                     break;
+
+
+                /*
+                   DOMINIO NO AUTORIZADO
+                */
 
                 case "auth/unauthorized-domain":
+
                     error.textContent =
                         "Este dominio no está autorizado en Firebase Authentication.";
+
                     break;
+
+
+                /*
+                   API KEY
+                */
+
+                case "auth/api-key-not-valid":
+
+                    error.textContent =
+                        "La API Key de Firebase no es válida o está restringida.";
+
+                    break;
+
+
+                /*
+                   RED
+                */
 
                 case "auth/network-request-failed":
+
                     error.textContent =
-                        "No se pudo conectar con Firebase. Revisa tu conexión.";
+                        "No se pudo conectar con Firebase. Revisa tu conexión a Internet.";
+
                     break;
+
+
+                /*
+                   MUCHOS INTENTOS
+                */
 
                 case "auth/too-many-requests":
+
                     error.textContent =
                         "Demasiados intentos. Espera unos minutos e inténtalo nuevamente.";
+
                     break;
+
+
+                /*
+                   USUARIO DESHABILITADO
+                */
 
                 case "auth/user-disabled":
+
                     error.textContent =
                         "Esta cuenta está deshabilitada. Comunícate con Soubac.";
+
                     break;
 
+
+                /*
+                   CUALQUIER OTRO ERROR
+                */
+
                 default:
+
                     error.textContent =
-                        "No se pudo iniciar sesión. Revisa la consola del navegador para ver el código de Firebase.";
+                        "Error de Firebase: " +
+                        (
+                            errorFirebase.code ||
+                            "código desconocido"
+                        );
+
                     break;
+
             }
 
         }
@@ -765,7 +850,6 @@ async function iniciarSesionBiblioteca(
 
             boton.disabled =
                 false;
-
 
             boton.textContent =
                 "Iniciar sesión";
@@ -796,24 +880,30 @@ function configurarBiblioteca() {
 
 
     /*
-       Formulario de login.
+       Evitamos registrar el evento
+       más de una vez.
     */
 
-    if (formulario && !formulario.dataset.firebaseConfigured) {
+    if (
+        formulario &&
+        !formulario.dataset.firebaseConfigured
+    ) {
 
         formulario.addEventListener(
             "submit",
             iniciarSesionBiblioteca
         );
 
-        formulario.dataset.firebaseConfigured = "true";
+
+        formulario.dataset.firebaseConfigured =
+            "true";
 
     }
 
 
     /*
-       Clic fuera de la tarjeta
-       para cerrar el modal.
+       Cerrar haciendo clic fuera
+       del cuadro.
     */
 
     if (modal) {
@@ -838,7 +928,7 @@ function configurarBiblioteca() {
 
 
     /*
-       Firebase mantiene la sesión.
+       Mantener la sesión Firebase.
     */
 
     auth.onAuthStateChanged(
@@ -847,7 +937,14 @@ function configurarBiblioteca() {
             if (usuario) {
 
                 console.log(
-                    "Sesión de Biblioteca activa."
+                    "Sesión de Biblioteca activa:",
+                    usuario.email
+                );
+
+            } else {
+
+                console.log(
+                    "No hay sesión activa en Biblioteca."
                 );
 
             }
@@ -922,7 +1019,6 @@ try {
 catch (error) {
 
     carrito = [];
-
 
     console.error(
         "No se pudo recuperar el carrito:",
