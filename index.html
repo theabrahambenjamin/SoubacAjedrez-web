@@ -406,17 +406,37 @@
         >
 
             <h2 class="titulo-seccion">
-                Libros gratuitos para descargar
+                Biblioteca Soubac
             </h2>
+
+            <p class="subtitulo-biblioteca">
+                Material de estudio exclusivo para nuestros estudiantes.
+            </p>
+
+            <div
+                id="estadoBiblioteca"
+                class="estado-biblioteca"
+                aria-live="polite"
+            >
+                <span id="textoEstadoBiblioteca">🔒 Acceso protegido</span>
+
+                <button
+                    type="button"
+                    id="btnCerrarSesionBiblioteca"
+                    class="btn-cerrar-sesion"
+                    onclick="cerrarSesionBiblioteca()"
+                    hidden
+                >
+                    Cerrar sesión
+                </button>
+            </div>
 
             <div class="botones-info">
 
                 <a
-                    href="https://drive.google.com/drive/folders/1s7tAnuWdynVDA54csrYfxV7MKj_L0i9k?usp=drive_link"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="#"
+                    onclick="abrirLibro(event, 'https://drive.google.com/drive/folders/1s7tAnuWdynVDA54csrYfxV7MKj_L0i9k?usp=drive_link')"
                 >
-
                     Aperturas
 
                     <span>
@@ -424,18 +444,15 @@
                     </span>
 
                     <strong>
-                        Libro de aperturas →
+                        Acceder al libro →
                     </strong>
 
                 </a>
 
-
                 <a
-                    href="https://drive.google.com/drive/folders/1s7tAnuWdynVDA54csrYfxV7MKj_L0i9k?usp=drive_link"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="#"
+                    onclick="abrirLibro(event, 'https://drive.google.com/drive/folders/1s7tAnuWdynVDA54csrYfxV7MKj_L0i9k?usp=drive_link')"
                 >
-
                     Temas tácticos
 
                     <span>
@@ -443,18 +460,15 @@
                     </span>
 
                     <strong>
-                        Libro de táctica →
+                        Acceder al libro →
                     </strong>
 
                 </a>
 
-
                 <a
-                    href="https://drive.google.com/drive/u/0/folders/1nPCAhvg_FlbYNdUQX7f3SKEYF1a0eUvt"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="#"
+                    onclick="abrirLibro(event, 'https://drive.google.com/drive/u/0/folders/1nPCAhvg_FlbYNdUQX7f3SKEYF1a0eUvt')"
                 >
-
                     Defensas
 
                     <span>
@@ -462,18 +476,15 @@
                     </span>
 
                     <strong>
-                        Libro de defensas →
+                        Acceder al libro →
                     </strong>
 
                 </a>
 
-
                 <a
-                    href="https://drive.google.com/drive/folders/1Rdlm2b3JLb_sGrIqVpJ2YJlT12IQUEFQ?usp=sharing"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="#"
+                    onclick="abrirLibro(event, 'https://drive.google.com/drive/folders/1Rdlm2b3JLb_sGrIqVpJ2YJlT12IQUEFQ?usp=sharing')"
                 >
-
                     Historia
 
                     <span>
@@ -481,18 +492,15 @@
                     </span>
 
                     <strong>
-                        Libro histórico →
+                        Acceder al libro →
                     </strong>
 
                 </a>
 
-
                 <a
-                    href="https://drive.google.com/drive/folders/1BMTeaEMbn0aLVgg1LiCSLGcdNyMWaonM?usp=sharing"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="#"
+                    onclick="abrirLibro(event, 'https://drive.google.com/drive/folders/1BMTeaEMbn0aLVgg1LiCSLGcdNyMWaonM?usp=sharing')"
                 >
-
                     Gambitos
 
                     <span>
@@ -500,18 +508,15 @@
                     </span>
 
                     <strong>
-                        Libro de gambitos →
+                        Acceder al libro →
                     </strong>
 
                 </a>
 
-
                 <a
-                    href="https://drive.google.com/drive/u/0/folders/1_gXmSnxcj2Xetcw6QogtqDeLMVVEW6iB"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="#"
+                    onclick="abrirLibro(event, 'https://drive.google.com/drive/u/0/folders/1_gXmSnxcj2Xetcw6QogtqDeLMVVEW6iB')"
                 >
-
                     Principiantes
 
                     <span>
@@ -519,7 +524,7 @@
                     </span>
 
                     <strong>
-                        Libro básico →
+                        Acceder al libro →
                     </strong>
 
                 </a>
@@ -527,7 +532,8 @@
             </div>
 
         </section>
-                <!-- ======================================
+
+        <!-- ======================================
              SECCIÓN HISTORIA
         ======================================= -->
 
@@ -1628,569 +1634,7 @@
          JAVASCRIPT PRINCIPAL
     =========================================== -->
 
-    <script>
-
-        /* =========================================
-           PANTALLA DE CARGA
-        ========================================== */
-
-        document.addEventListener("DOMContentLoaded", () => {
-
-            const pantallaCarga =
-                document.getElementById("pantalla-carga");
-
-            if (pantallaCarga) {
-
-                setTimeout(() => {
-
-                    pantallaCarga.style.opacity = "0";
-
-                    setTimeout(() => {
-                        pantallaCarga.remove();
-                    }, 700);
-
-                }, 500);
-
-            }
-
-            actualizarCarrito();
-
-            const seccionActiva =
-                document.querySelector(".seccion.activa");
-
-            controlarBotonCarrito(
-                seccionActiva ? seccionActiva.id : "inicio"
-            );
-
-        });
-
-
-        /* =========================================
-           MENÚ
-        ========================================== */
-
-        function abrirMenu() {
-
-            const menu =
-                document.getElementById("opcionesMenu");
-
-            const boton =
-                document.querySelector(".boton-menu");
-
-            if (!menu) return;
-
-            const abierto =
-                menu.classList.toggle("mostrar");
-
-            if (boton) {
-
-                boton.setAttribute(
-                    "aria-expanded",
-                    String(abierto)
-                );
-
-            }
-
-        }
-
-
-        /* =========================================
-           MOSTRAR SECCIONES
-        ========================================== */
-
-        function mostrar(idSeccion) {
-
-            const seccionSeleccionada =
-                document.getElementById(idSeccion);
-
-            if (!seccionSeleccionada) {
-
-                console.error(
-                    "No existe la sección:",
-                    idSeccion
-                );
-
-                return;
-
-            }
-
-            const secciones =
-                document.querySelectorAll(".seccion");
-
-            secciones.forEach((seccion) => {
-                seccion.classList.remove("activa");
-            });
-
-            seccionSeleccionada.classList.add("activa");
-
-
-            const menu =
-                document.getElementById("opcionesMenu");
-
-            const botonMenu =
-                document.querySelector(".boton-menu");
-
-            if (menu) {
-                menu.classList.remove("mostrar");
-            }
-
-            if (botonMenu) {
-
-                botonMenu.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-
-            }
-
-
-            controlarBotonCarrito(idSeccion);
-
-            cerrarCarrito();
-
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-
-        }
-
-
-        /* =========================================
-           INICIO DEL CARRITO
-        ========================================== */
-
-        let carrito = [];
-
-        try {
-
-            const carritoGuardado =
-                localStorage.getItem("carritoSoubac");
-
-            carrito =
-                carritoGuardado
-                    ? JSON.parse(carritoGuardado)
-                    : [];
-
-            if (!Array.isArray(carrito)) {
-                carrito = [];
-            }
-
-        } catch (error) {
-
-            carrito = [];
-
-            console.error(
-                "No se pudo recuperar el carrito:",
-                error
-            );
-
-        }
-                function agregarCarrito(nombre, precio) {
-
-            carrito.push({
-                nombre: nombre,
-                precio: Number(precio)
-            });
-
-            actualizarCarrito();
-            abrirCarrito();
-
-        }
-
-
-        function actualizarCarrito() {
-
-            const lista =
-                document.getElementById("listaCarrito");
-
-            const total =
-                document.getElementById("total");
-
-            const contador =
-                document.getElementById("contadorCarrito");
-
-            if (!lista || !total || !contador) return;
-
-
-            lista.innerHTML = "";
-
-            let suma = 0;
-
-
-            if (carrito.length === 0) {
-
-                lista.innerHTML = `
-                    <p class="carrito-vacio">
-                        Tu carrito está vacío.
-                    </p>
-                `;
-
-            } else {
-
-                carrito.forEach((producto, indice) => {
-
-                    const precio =
-                        Number(producto.precio) || 0;
-
-                    suma += precio;
-
-
-                    const item =
-                        document.createElement("div");
-
-                    item.className = "item-carrito";
-
-
-                    const informacion =
-                        document.createElement("div");
-
-                    informacion.className =
-                        "item-carrito-info";
-
-
-                    const nombre =
-                        document.createElement("span");
-
-                    nombre.textContent =
-                        producto.nombre;
-
-
-                    const precioProducto =
-                        document.createElement("strong");
-
-                    precioProducto.textContent =
-                        precio === 0
-                            ? "Gratis"
-                            : `S/ ${precio.toFixed(2)}`;
-
-
-                    const botonEliminar =
-                        document.createElement("button");
-
-                    botonEliminar.type = "button";
-
-                    botonEliminar.className =
-                        "btn-eliminar";
-
-                    botonEliminar.setAttribute(
-                        "aria-label",
-                        `Eliminar ${producto.nombre}`
-                    );
-
-                    botonEliminar.textContent = "🗑";
-
-                    botonEliminar.addEventListener(
-                        "click",
-                        () => eliminarProducto(indice)
-                    );
-
-
-                    informacion.appendChild(nombre);
-                    informacion.appendChild(precioProducto);
-
-                    item.appendChild(informacion);
-                    item.appendChild(botonEliminar);
-
-                    lista.appendChild(item);
-
-                });
-
-            }
-
-
-            total.textContent =
-                suma.toFixed(2);
-
-            contador.textContent =
-                carrito.length;
-
-
-            try {
-
-                localStorage.setItem(
-                    "carritoSoubac",
-                    JSON.stringify(carrito)
-                );
-
-            } catch (error) {
-
-                console.error(
-                    "No se pudo guardar el carrito:",
-                    error
-                );
-
-            }
-
-        }
-
-
-        function eliminarProducto(indice) {
-
-            if (
-                indice < 0 ||
-                indice >= carrito.length
-            ) {
-                return;
-            }
-
-            carrito.splice(indice, 1);
-
-            actualizarCarrito();
-
-        }
-
-
-        function vaciarCarrito() {
-
-            if (carrito.length === 0) return;
-
-            const confirmar =
-                window.confirm(
-                    "¿Deseas vaciar todo el carrito?"
-                );
-
-            if (!confirmar) return;
-
-            carrito = [];
-
-            actualizarCarrito();
-
-        }
-
-
-        function abrirCarrito() {
-
-            const panel =
-                document.getElementById("panelCarrito");
-
-            const fondo =
-                document.getElementById("fondoCarrito");
-
-            if (panel) {
-
-                panel.classList.add("activo");
-
-                panel.setAttribute(
-                    "aria-hidden",
-                    "false"
-                );
-
-            }
-
-            if (fondo) {
-
-                fondo.classList.add("activo");
-
-                fondo.setAttribute(
-                    "aria-hidden",
-                    "false"
-                );
-
-            }
-
-            document.body.style.overflow = "hidden";
-
-        }
-
-
-        function cerrarCarrito() {
-
-            const panel =
-                document.getElementById("panelCarrito");
-
-            const fondo =
-                document.getElementById("fondoCarrito");
-
-            if (panel) {
-
-                panel.classList.remove("activo");
-
-                panel.setAttribute(
-                    "aria-hidden",
-                    "true"
-                );
-
-            }
-
-            if (fondo) {
-
-                fondo.classList.remove("activo");
-
-                fondo.setAttribute(
-                    "aria-hidden",
-                    "true"
-                );
-
-            }
-
-            document.body.style.overflow = "";
-
-        }
-
-
-        function controlarBotonCarrito(
-            seccionActual = "inicio"
-        ) {
-
-            const botonCarrito =
-                document.querySelector(".btn-carrito");
-
-            if (!botonCarrito) return;
-
-            botonCarrito.style.display =
-                seccionActual === "tienda"
-                    ? "flex"
-                    : "none";
-
-        }
-
-
-        function comprarWhatsApp() {
-
-            if (carrito.length === 0) {
-
-                alert("Tu carrito está vacío.");
-
-                return;
-
-            }
-
-
-            let mensaje =
-                "Hola, deseo realizar el siguiente pedido:\n\n";
-
-            let suma = 0;
-
-
-            carrito.forEach((producto) => {
-
-                const precio =
-                    Number(producto.precio) || 0;
-
-                if (precio === 0) {
-
-                    mensaje +=
-                        `• ${producto.nombre}: Gratis\n`;
-
-                } else {
-
-                    mensaje +=
-                        `• ${producto.nombre}: S/ ${precio.toFixed(2)}\n`;
-
-                }
-
-                suma += precio;
-
-            });
-
-
-            mensaje +=
-                `\nTotal: S/ ${suma.toFixed(2)}`;
-
-
-            const telefono =
-                "51973265025";
-
-            const enlace =
-                `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
-
-
-            window.open(
-                enlace,
-                "_blank",
-                "noopener,noreferrer"
-            );
-
-        }
-
-
-        /* =========================================
-           CERRAR ELEMENTOS CON ESCAPE
-        ========================================== */
-
-        document.addEventListener(
-            "keydown",
-            (evento) => {
-
-                if (evento.key !== "Escape") return;
-
-                cerrarCarrito();
-
-                const menu =
-                    document.getElementById(
-                        "opcionesMenu"
-                    );
-
-                const boton =
-                    document.querySelector(
-                        ".boton-menu"
-                    );
-
-                if (menu) {
-                    menu.classList.remove("mostrar");
-                }
-
-                if (boton) {
-
-                    boton.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-
-                }
-
-            }
-        );
-
-
-        /* =========================================
-           CERRAR MENÚ AL HACER CLIC FUERA
-        ========================================== */
-
-        document.addEventListener(
-            "click",
-            (evento) => {
-
-                const menu =
-                    document.getElementById(
-                        "opcionesMenu"
-                    );
-
-                const boton =
-                    document.querySelector(
-                        ".boton-menu"
-                    );
-
-                if (!menu || !boton) return;
-
-
-                const clicDentroDelMenu =
-                    menu.contains(evento.target);
-
-                const clicEnElBoton =
-                    boton.contains(evento.target);
-
-
-                if (
-                    !clicDentroDelMenu &&
-                    !clicEnElBoton
-                ) {
-
-                    menu.classList.remove("mostrar");
-
-                    boton.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-
-                }
-
-            }
-        );
-
-    </script>
+    <script type="module" src="script.js"></script>
 <!-- Visor de imágenes -->
 
 <div id="visorProducto" class="visor-producto">
