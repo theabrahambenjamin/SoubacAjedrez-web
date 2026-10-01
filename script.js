@@ -1,11 +1,11 @@
 /* ==================================================
    SOUBAC AJEDREZ — JAVASCRIPT PRINCIPAL
-   Biblioteca protegida con Firebase Authentication
+   Firebase Authentication + Biblioteca protegida
 ================================================== */
 
 
 /* ==================================================
-   FIREBASE — CONFIGURACIÓN
+   FIREBASE
 ================================================== */
 
 const firebaseConfig = {
@@ -29,7 +29,7 @@ const auth = firebase.auth();
 
 
 /* ==================================================
-   MANTENER SESIÓN
+   PERSISTENCIA DE SESIÓN
 ================================================== */
 
 auth.setPersistence(
@@ -37,7 +37,7 @@ auth.setPersistence(
 ).catch((error) => {
 
     console.error(
-        "No se pudo configurar la persistencia de sesión:",
+        "Error al configurar la sesión:",
         error
     );
 
@@ -45,28 +45,24 @@ auth.setPersistence(
 
 
 /* ==================================================
-   VARIABLES BIBLIOTECA
+   BIBLIOTECA
 ================================================== */
 
 let libroPendiente = null;
 
-
-/*
- * Firebase utiliza internamente un correo.
- *
- * El alumno NO tendrá que escribir este correo.
- *
- * Ejemplo:
- *
- * AbrahamBobadilla
- *        ↓
- * abrahambobadilla@usuarios.soubac.com
- *
- */
-
 const DOMINIO_USUARIOS =
     "@usuarios.soubac.com";
 
+
+/*
+   Convierte:
+
+   AbrahamBobadilla
+
+   en:
+
+   abrahambobadilla@usuarios.soubac.com
+*/
 
 function usuarioAFirebaseEmail(usuario) {
 
@@ -75,19 +71,22 @@ function usuarioAFirebaseEmail(usuario) {
             .trim()
             .toLowerCase()
             .replace(/\s+/g, "")
-        + DOMINIO_USUARIOS
+        +
+        DOMINIO_USUARIOS
     );
 
 }
 
 
 /* ==================================================
-   PANTALLA DE CARGA
+   INICIO
 ================================================== */
 
 document.addEventListener(
     "DOMContentLoaded",
     () => {
+
+        /* Pantalla de carga */
 
         const pantallaCarga =
             document.getElementById(
@@ -114,8 +113,12 @@ document.addEventListener(
         }
 
 
+        /* Carrito */
+
         actualizarCarrito();
 
+
+        /* Botón carrito */
 
         const seccionActiva =
             document.querySelector(
@@ -130,7 +133,12 @@ document.addEventListener(
         );
 
 
+        /* Biblioteca */
+
         configurarBiblioteca();
+
+
+        /* Visor */
 
         configurarVisorProducto();
 
@@ -156,7 +164,11 @@ function abrirMenu() {
         );
 
 
-    if (!menu) return;
+    if (!menu) {
+
+        return;
+
+    }
 
 
     const abierto =
@@ -183,13 +195,13 @@ function abrirMenu() {
 
 function mostrar(idSeccion) {
 
-    const seccionSeleccionada =
+    const seccion =
         document.getElementById(
             idSeccion
         );
 
 
-    if (!seccionSeleccionada) {
+    if (!seccion) {
 
         console.error(
             "No existe la sección:",
@@ -208,9 +220,9 @@ function mostrar(idSeccion) {
 
 
     secciones.forEach(
-        (seccion) => {
+        (elemento) => {
 
-            seccion.classList.remove(
+            elemento.classList.remove(
                 "activa"
             );
 
@@ -218,7 +230,7 @@ function mostrar(idSeccion) {
     );
 
 
-    seccionSeleccionada.classList.add(
+    seccion.classList.add(
         "activa"
     );
 
@@ -271,13 +283,13 @@ function mostrar(idSeccion) {
 
 
 /* ==================================================
-   BIBLIOTECA — ABRIR LIBRO
+   BIBLIOTECA
+   IMPORTANTE:
+   EL LOGIN SOLO APARECE AL HACER CLIC
+   EN UNA TARJETA.
 ================================================== */
 
-function abrirLibro(
-    evento,
-    url
-) {
+function abrirLibro(evento, url) {
 
     if (evento) {
 
@@ -286,19 +298,31 @@ function abrirLibro(
     }
 
 
+    if (!url) {
+
+        return;
+
+    }
+
+
+    /*
+       Guardamos el libro seleccionado.
+    */
+
     libroPendiente = url;
 
 
     /*
-     * Si el alumno ya inició sesión,
-     * abre directamente el libro.
-     */
+       Si ya existe una sesión,
+       abrimos directamente el libro.
+    */
 
     if (auth.currentUser) {
 
         abrirLibroEnNuevaPestana(
             url
         );
+
 
         libroPendiente = null;
 
@@ -308,9 +332,9 @@ function abrirLibro(
 
 
     /*
-     * Si no inició sesión,
-     * mostramos el login.
-     */
+       Si NO existe sesión,
+       recién aquí aparece el modal.
+    */
 
     abrirLoginBiblioteca();
 
@@ -318,12 +342,17 @@ function abrirLibro(
 
 
 /* ==================================================
-   ABRIR LIBRO EN NUEVA PESTAÑA
+   ABRIR LIBRO
 ================================================== */
 
-function abrirLibroEnNuevaPestana(
-    url
-) {
+function abrirLibroEnNuevaPestana(url) {
+
+    if (!url) {
+
+        return;
+
+    }
+
 
     window.open(
         url,
@@ -364,7 +393,15 @@ function abrirLoginBiblioteca() {
         );
 
 
-    if (!modal) return;
+    if (!modal) {
+
+        console.error(
+            "No existe el modal de Biblioteca."
+        );
+
+        return;
+
+    }
 
 
     if (error) {
@@ -380,6 +417,14 @@ function abrirLoginBiblioteca() {
 
     }
 
+
+    /*
+       MUY IMPORTANTE:
+
+       El modal inicia oculto mediante CSS.
+
+       Solo aquí agregamos .activo.
+    */
 
     modal.classList.add(
         "activo"
@@ -404,7 +449,7 @@ function abrirLoginBiblioteca() {
 
         }
 
-    }, 250);
+    }, 150);
 
 }
 
@@ -421,7 +466,11 @@ function cerrarLoginBiblioteca() {
         );
 
 
-    if (!modal) return;
+    if (!modal) {
+
+        return;
+
+    }
 
 
     modal.classList.remove(
@@ -435,14 +484,34 @@ function cerrarLoginBiblioteca() {
     );
 
 
-    if (
-        !document
+    /*
+       Si no hay otro elemento modal abierto,
+       recuperamos el scroll.
+    */
+
+    const carritoAbierto =
+        document
             .getElementById(
                 "panelCarrito"
             )
             ?.classList.contains(
                 "activo"
+            );
+
+
+    const visorAbierto =
+        document
+            .getElementById(
+                "visorProducto"
             )
+            ?.classList.contains(
+                "activo"
+            );
+
+
+    if (
+        !carritoAbierto &&
+        !visorAbierto
     ) {
 
         document.body.style.overflow =
@@ -489,11 +558,15 @@ async function iniciarSesionBiblioteca(
 
 
     const usuario =
-        usuarioInput?.value.trim() || "";
+        usuarioInput
+            ? usuarioInput.value.trim()
+            : "";
 
 
     const password =
-        passwordInput?.value || "";
+        passwordInput
+            ? passwordInput.value
+            : "";
 
 
     if (error) {
@@ -530,10 +603,9 @@ async function iniciarSesionBiblioteca(
     try {
 
         /*
-         * Convertimos el usuario
-         * a la dirección interna
-         * utilizada por Firebase.
-         */
+           Convertimos el usuario al correo
+           interno utilizado por Firebase.
+        */
 
         const emailFirebase =
             usuarioAFirebaseEmail(
@@ -542,8 +614,8 @@ async function iniciarSesionBiblioteca(
 
 
         /*
-         * Autenticación con Firebase.
-         */
+           AUTENTICACIÓN
+        */
 
         await auth.signInWithEmailAndPassword(
             emailFirebase,
@@ -552,17 +624,16 @@ async function iniciarSesionBiblioteca(
 
 
         /*
-         * Login correcto.
-         */
+           Cerramos el modal.
+        */
 
         cerrarLoginBiblioteca();
 
 
         /*
-         * Abrimos automáticamente
-         * el libro que el alumno
-         * había seleccionado.
-         */
+           Abrimos exactamente el libro
+           que el alumno seleccionó.
+        */
 
         if (libroPendiente) {
 
@@ -570,8 +641,7 @@ async function iniciarSesionBiblioteca(
                 libroPendiente;
 
 
-            libroPendiente =
-                null;
+            libroPendiente = null;
 
 
             abrirLibroEnNuevaPestana(
@@ -580,9 +650,9 @@ async function iniciarSesionBiblioteca(
 
         }
 
-    } catch (
-        errorFirebase
-    ) {
+    }
+
+    catch (errorFirebase) {
 
         console.error(
             "Error de autenticación:",
@@ -592,55 +662,46 @@ async function iniciarSesionBiblioteca(
 
         if (error) {
 
-            if (
-
-                errorFirebase.code ===
-                    "auth/invalid-credential"
-
-                ||
-
-                errorFirebase.code ===
-                    "auth/invalid-login-credentials"
-
-                ||
-
-                errorFirebase.code ===
-                    "auth/user-not-found"
-
-                ||
-
-                errorFirebase.code ===
-                    "auth/wrong-password"
-
+            switch (
+                errorFirebase.code
             ) {
 
-                error.textContent =
-                    "Usuario o contraseña incorrectos.";
+                case "auth/invalid-credential":
 
-            }
+                case "auth/invalid-login-credentials":
 
-            else if (
+                case "auth/user-not-found":
 
-                errorFirebase.code ===
-                    "auth/too-many-requests"
+                case "auth/wrong-password":
 
-            ) {
+                    error.textContent =
+                        "Usuario o contraseña incorrectos.";
 
-                error.textContent =
-                    "Demasiados intentos. Espera unos minutos e inténtalo nuevamente.";
+                    break;
 
-            }
 
-            else {
+                case "auth/too-many-requests":
 
-                error.textContent =
-                    "No se pudo iniciar sesión. Inténtalo nuevamente.";
+                    error.textContent =
+                        "Demasiados intentos. Espera unos minutos e inténtalo nuevamente.";
+
+                    break;
+
+
+                default:
+
+                    error.textContent =
+                        "No se pudo iniciar sesión. Inténtalo nuevamente.";
+
+                    break;
 
             }
 
         }
 
-    } finally {
+    }
+
+    finally {
 
         if (boton) {
 
@@ -652,82 +713,6 @@ async function iniciarSesionBiblioteca(
                 "Iniciar sesión";
 
         }
-
-    }
-
-}
-
-
-/* ==================================================
-   CERRAR SESIÓN
-================================================== */
-
-async function cerrarSesionBiblioteca() {
-
-    try {
-
-        await auth.signOut();
-
-
-        actualizarEstadoBiblioteca(
-            null
-        );
-
-
-    } catch (error) {
-
-        console.error(
-            "No se pudo cerrar la sesión:",
-            error
-        );
-
-    }
-
-}
-
-
-/* ==================================================
-   ESTADO DE BIBLIOTECA
-================================================== */
-
-function actualizarEstadoBiblioteca(
-    usuario
-) {
-
-    const texto =
-        document.getElementById(
-            "textoEstadoBiblioteca"
-        );
-
-
-    const boton =
-        document.getElementById(
-            "btnCerrarSesionBiblioteca"
-        );
-
-
-    if (!texto || !boton) return;
-
-
-    if (usuario) {
-
-        texto.textContent =
-            "🔓 Sesión iniciada · Biblioteca desbloqueada";
-
-
-        boton.hidden =
-            false;
-
-    }
-
-    else {
-
-        texto.textContent =
-            "🔒 Acceso protegido para estudiantes Soubac";
-
-
-        boton.hidden =
-            true;
 
     }
 
@@ -752,6 +737,10 @@ function configurarBiblioteca() {
         );
 
 
+    /*
+       Formulario de login.
+    */
+
     if (formulario) {
 
         formulario.addEventListener(
@@ -761,6 +750,11 @@ function configurarBiblioteca() {
 
     }
 
+
+    /*
+       Clic fuera de la tarjeta
+       para cerrar el modal.
+    */
 
     if (modal) {
 
@@ -784,19 +778,50 @@ function configurarBiblioteca() {
 
 
     /*
-     * Firebase comprueba automáticamente
-     * si existe una sesión activa.
-     */
+       Firebase mantiene la sesión.
+    */
 
     auth.onAuthStateChanged(
         (usuario) => {
 
-            actualizarEstadoBiblioteca(
-                usuario
-            );
+            if (usuario) {
+
+                console.log(
+                    "Sesión de Biblioteca activa."
+                );
+
+            }
 
         }
     );
+
+}
+
+
+/* ==================================================
+   CERRAR SESIÓN
+================================================== */
+
+async function cerrarSesionBiblioteca() {
+
+    try {
+
+        await auth.signOut();
+
+        console.log(
+            "Sesión cerrada."
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "No se pudo cerrar la sesión:",
+            error
+        );
+
+    }
 
 }
 
@@ -832,7 +857,9 @@ try {
 
     }
 
-} catch (error) {
+}
+
+catch (error) {
 
     carrito = [];
 
@@ -856,9 +883,11 @@ function agregarCarrito(
 
     carrito.push({
 
-        nombre: nombre,
+        nombre:
+            nombre,
 
-        precio: Number(precio)
+        precio:
+            Number(precio)
 
     });
 
@@ -918,9 +947,7 @@ function actualizarCarrito() {
         lista.innerHTML = `
 
             <p class="carrito-vacio">
-
                 Tu carrito está vacío.
-
             </p>
 
         `;
@@ -981,11 +1008,8 @@ function actualizarCarrito() {
 
 
                 precioProducto.textContent =
-
                     precio === 0
-
                         ? "Gratis"
-
                         : `S/ ${precio.toFixed(2)}`;
 
 
@@ -1015,10 +1039,13 @@ function actualizarCarrito() {
 
                 botonEliminar.addEventListener(
                     "click",
-                    () =>
+                    () => {
+
                         eliminarProducto(
                             indice
-                        )
+                        );
+
+                    }
                 );
 
 
@@ -1069,7 +1096,9 @@ function actualizarCarrito() {
             )
         );
 
-    } catch (error) {
+    }
+
+    catch (error) {
 
         console.error(
             "No se pudo guardar el carrito:",
@@ -1090,11 +1119,8 @@ function eliminarProducto(
 ) {
 
     if (
-
         indice < 0 ||
-
         indice >= carrito.length
-
     ) {
 
         return;
@@ -1134,11 +1160,14 @@ function vaciarCarrito() {
         );
 
 
-    if (!confirmar) return;
+    if (!confirmar) {
+
+        return;
+
+    }
 
 
     carrito = [];
-
 
     actualizarCarrito();
 
@@ -1247,14 +1276,29 @@ function cerrarCarrito() {
     }
 
 
-    if (
-        !document
+    const modalAbierto =
+        document
             .getElementById(
                 "modalLoginBiblioteca"
             )
             ?.classList.contains(
                 "activo"
+            );
+
+
+    const visorAbierto =
+        document
+            .getElementById(
+                "visorProducto"
             )
+            ?.classList.contains(
+                "activo"
+            );
+
+
+    if (
+        !modalAbierto &&
+        !visorAbierto
     ) {
 
         document.body.style.overflow =
@@ -1279,15 +1323,16 @@ function controlarBotonCarrito(
         );
 
 
-    if (!botonCarrito) return;
+    if (!botonCarrito) {
+
+        return;
+
+    }
 
 
     botonCarrito.style.display =
-
         seccionActual === "tienda"
-
             ? "flex"
-
             : "none";
 
 }
@@ -1328,9 +1373,7 @@ function comprarWhatsApp() {
                 ) || 0;
 
 
-            if (
-                precio === 0
-            ) {
+            if (precio === 0) {
 
                 mensaje +=
                     `• ${producto.nombre}: Gratis\n`;
@@ -1378,9 +1421,7 @@ function comprarWhatsApp() {
    VISOR DE PRODUCTOS
 ================================================== */
 
-function abrirProducto(
-    src
-) {
+function abrirProducto(src) {
 
     const visor =
         document.getElementById(
@@ -1420,7 +1461,7 @@ function abrirProducto(
 
 
 /* ==================================================
-   CERRAR VISOR DE PRODUCTO
+   CERRAR VISOR
 ================================================== */
 
 function cerrarProducto() {
@@ -1437,7 +1478,11 @@ function cerrarProducto() {
         );
 
 
-    if (!visor) return;
+    if (!visor) {
+
+        return;
+
+    }
 
 
     visor.classList.remove(
@@ -1452,26 +1497,29 @@ function cerrarProducto() {
     }
 
 
-    if (
-
-        !document
+    const modalAbierto =
+        document
             .getElementById(
                 "modalLoginBiblioteca"
             )
             ?.classList.contains(
                 "activo"
-            )
+            );
 
-        &&
 
-        !document
+    const carritoAbierto =
+        document
             .getElementById(
                 "panelCarrito"
             )
             ?.classList.contains(
                 "activo"
-            )
+            );
 
+
+    if (
+        !modalAbierto &&
+        !carritoAbierto
     ) {
 
         document.body.style.overflow =
@@ -1494,7 +1542,11 @@ function configurarVisorProducto() {
         );
 
 
-    if (!visor) return;
+    if (!visor) {
+
+        return;
+
+    }
 
 
     visor.addEventListener(
@@ -1517,7 +1569,7 @@ function configurarVisorProducto() {
 
 
 /* ==================================================
-   ESCAPE
+   TECLA ESCAPE
 ================================================== */
 
 document.addEventListener(
@@ -1618,11 +1670,8 @@ document.addEventListener(
 
 
         if (
-
             !clicDentroDelMenu &&
-
             !clicEnElBoton
-
         ) {
 
             menu.classList.remove(
@@ -1642,7 +1691,7 @@ document.addEventListener(
 
 
 /* ==================================================
-   FUNCIONES USADAS POR onclick DEL HTML
+   EXPONER FUNCIONES AL HTML
 ================================================== */
 
 window.abrirMenu =
@@ -1655,6 +1704,10 @@ window.mostrar =
 
 window.abrirLibro =
     abrirLibro;
+
+
+window.abrirLoginBiblioteca =
+    abrirLoginBiblioteca;
 
 
 window.cerrarLoginBiblioteca =
