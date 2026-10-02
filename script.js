@@ -34,53 +34,17 @@ const auth = firebase.auth();
    PERSISTENCIA DE SESIÓN
 ================================================== */
 
-const persistenciaFirebase =
-    auth.setPersistence(
-        firebase.auth.Auth.Persistence.LOCAL
-    ).then(() => {
+const persistenciaFirebase = auth.setPersistence(
+    firebase.auth.Auth.Persistence.LOCAL
+);
 
-        console.log(
-            "Sesión configurada para mantenerse guardada."
-        );
+persistenciaFirebase.catch((error) => {
+    console.error(
+        "Error al configurar la sesión:",
+        error
+    );
+});
 
-    }).catch((error) => {
-
-        console.error(
-            "Error al configurar la sesión:",
-            error
-        );
-
-        throw error;
-
-    });
-
-
-/* ==================================================
-   ESPERAR A QUE FIREBASE RECUPERE LA SESIÓN
-================================================== */
-
-const firebaseAuthInicializado =
-    new Promise((resolve) => {
-
-        const cancelarEscucha =
-            auth.onAuthStateChanged(
-                (usuario) => {
-
-                    cancelarEscucha();
-
-                    console.log(
-                        "Estado inicial de Firebase:",
-                        usuario
-                            ? usuario.email
-                            : "sin sesión"
-                    );
-
-                    resolve(usuario);
-
-                }
-            );
-
-    });
 
 /* ==================================================
    BIBLIOTECA
@@ -97,48 +61,45 @@ document.addEventListener(
     "DOMContentLoaded",
     () => {
 
-        /* ==============================
-           PANTALLA DE CARGA
-        ============================== */
+        /* Pantalla de carga */
 
         const pantallaCarga =
             document.getElementById(
                 "pantalla-carga"
             );
 
-        if (pantallaCarga) {
 
-            pantallaCarga.style.opacity = "0";
-            pantallaCarga.style.pointerEvents = "none";
+        if (pantallaCarga) {
 
             setTimeout(() => {
 
-                if (
-                    pantallaCarga &&
-                    pantallaCarga.parentNode
-                ) {
-                    pantallaCarga.remove();
-                }
+                pantallaCarga.style.opacity =
+                    "0";
 
-            }, 300);
+
+                setTimeout(() => {
+
+                    pantallaCarga.remove();
+
+                }, 700);
+
+            }, 500);
+
         }
 
 
-        /* ==============================
-           CARRITO
-        ============================== */
+        /* Carrito */
 
         actualizarCarrito();
 
 
-        /* ==============================
-           BOTÓN CARRITO
-        ============================== */
+        /* Botón carrito */
 
         const seccionActiva =
             document.querySelector(
                 ".seccion.activa"
             );
+
 
         controlarBotonCarrito(
             seccionActiva
@@ -147,16 +108,12 @@ document.addEventListener(
         );
 
 
-        /* ==============================
-           BIBLIOTECA
-        ============================== */
+        /* Biblioteca */
 
         configurarBiblioteca();
 
 
-        /* ==============================
-           VISOR
-        ============================== */
+        /* Visor */
 
         configurarVisorProducto();
 
@@ -175,19 +132,25 @@ function abrirMenu() {
             "opcionesMenu"
         );
 
+
     const boton =
         document.querySelector(
             ".boton-menu"
         );
 
+
     if (!menu) {
+
         return;
+
     }
+
 
     const abierto =
         menu.classList.toggle(
             "mostrar"
         );
+
 
     if (boton) {
 
@@ -197,6 +160,7 @@ function abrirMenu() {
         );
 
     }
+
 }
 
 
@@ -211,6 +175,7 @@ function mostrar(idSeccion) {
             idSeccion
         );
 
+
     if (!seccion) {
 
         console.error(
@@ -219,12 +184,15 @@ function mostrar(idSeccion) {
         );
 
         return;
+
     }
+
 
     const secciones =
         document.querySelectorAll(
             ".seccion"
         );
+
 
     secciones.forEach(
         (elemento) => {
@@ -236,6 +204,7 @@ function mostrar(idSeccion) {
         }
     );
 
+
     seccion.classList.add(
         "activa"
     );
@@ -246,10 +215,12 @@ function mostrar(idSeccion) {
             "opcionesMenu"
         );
 
+
     const botonMenu =
         document.querySelector(
             ".boton-menu"
         );
+
 
     if (menu) {
 
@@ -258,6 +229,7 @@ function mostrar(idSeccion) {
         );
 
     }
+
 
     if (botonMenu) {
 
@@ -273,6 +245,7 @@ function mostrar(idSeccion) {
         idSeccion
     );
 
+
     cerrarCarrito();
 
 
@@ -286,38 +259,38 @@ function mostrar(idSeccion) {
 
 /* ==================================================
    BIBLIOTECA
+   IMPORTANTE:
+   EL LOGIN SOLO APARECE AL HACER CLIC
+   EN UNA TARJETA.
 ================================================== */
 
-async function abrirLibro(evento, url) {
+function abrirLibro(evento, url) {
 
     if (evento) {
+
         evento.preventDefault();
+
     }
+
 
     if (!url) {
+
         return;
+
     }
 
 
-    /* ==============================
-       GUARDAR LIBRO PENDIENTE
-    ============================== */
+    /*
+       Guardamos el libro seleccionado.
+    */
 
     libroPendiente = url;
 
 
-    /* ==============================
-       ESPERAR A FIREBASE
-    ============================== */
-
-    await persistenciaFirebase;
-
-    await firebaseAuthInicializado;
-
-
-    /* ==============================
-       COMPROBAR SESIÓN
-    ============================== */
+    /*
+       Si ya existe una sesión,
+       abrimos directamente el libro.
+    */
 
     if (auth.currentUser) {
 
@@ -325,53 +298,43 @@ async function abrirLibro(evento, url) {
             url
         );
 
+
         libroPendiente = null;
 
         return;
+
     }
 
 
-    /* ==============================
-       NO HAY SESIÓN
-    ============================== */
+    /*
+       Si NO existe sesión,
+       recién aquí aparece el modal.
+    */
 
     abrirLoginBiblioteca();
 
 }
+
+
 /* ==================================================
    ABRIR LIBRO
 ================================================== */
 
-function abrirLibroEnNuevaPestana(
-    url,
-    ventana = null
-) {
+function abrirLibroEnNuevaPestana(url) {
 
     if (!url) {
-        return null;
+
+        return;
+
     }
 
 
-    if (
-        ventana &&
-        !ventana.closed
-    ) {
+    window.open(
+        url,
+        "_blank",
+        "noopener,noreferrer"
+    );
 
-        ventana.location.href =
-            url;
-
-        return ventana;
-    }
-
-
-    const nuevaVentana =
-        window.open(
-            url,
-            "_blank",
-            "noopener,noreferrer"
-        );
-
-    return nuevaVentana;
 }
 
 
@@ -385,20 +348,25 @@ function abrirLoginBiblioteca() {
         document.getElementById(
             "modalLoginBiblioteca"
         );
-       const email =
+
+
+    const usuario =
         document.getElementById(
             "emailBiblioteca"
         );
+
 
     const password =
         document.getElementById(
             "passwordBiblioteca"
         );
 
+
     const error =
         document.getElementById(
             "errorLoginBiblioteca"
         );
+
 
     if (!modal) {
 
@@ -407,28 +375,42 @@ function abrirLoginBiblioteca() {
         );
 
         return;
+
     }
+
 
     if (error) {
+
         error.textContent = "";
+
     }
 
-    if (email) {
-        email.value = "";
-    }
 
     if (password) {
+
         password.value = "";
+
     }
+
+
+    /*
+       MUY IMPORTANTE:
+
+       El modal inicia oculto mediante CSS.
+
+       Solo aquí agregamos .activo.
+    */
 
     modal.classList.add(
         "activo"
     );
 
+
     modal.setAttribute(
         "aria-hidden",
         "false"
     );
+
 
     document.body.style.overflow =
         "hidden";
@@ -436,11 +418,14 @@ function abrirLoginBiblioteca() {
 
     setTimeout(() => {
 
-        if (email) {
-            email.focus();
+        if (usuario) {
+
+            usuario.focus();
+
         }
 
     }, 150);
+
 }
 
 
@@ -455,8 +440,11 @@ function cerrarLoginBiblioteca() {
             "modalLoginBiblioteca"
         );
 
+
     if (!modal) {
+
         return;
+
     }
 
 
@@ -464,11 +452,17 @@ function cerrarLoginBiblioteca() {
         "activo"
     );
 
+
     modal.setAttribute(
         "aria-hidden",
         "true"
     );
 
+
+    /*
+       Si no hay otro elemento modal abierto,
+       recuperamos el scroll.
+    */
 
     const carritoAbierto =
         document
@@ -507,11 +501,11 @@ function cerrarLoginBiblioteca() {
    INICIAR SESIÓN
 ================================================== */
 
-async function iniciarSesionBiblioteca(evento) {
+async function iniciarSesionBiblioteca(
+    evento
+) {
 
-    if (evento) {
-        evento.preventDefault();
-    }
+    evento.preventDefault();
 
     const emailInput =
         document.getElementById(
@@ -533,7 +527,6 @@ async function iniciarSesionBiblioteca(evento) {
             "btnLoginBiblioteca"
         );
 
-
     const email =
         emailInput
             ? emailInput.value.trim().toLowerCase()
@@ -544,110 +537,53 @@ async function iniciarSesionBiblioteca(evento) {
             ? passwordInput.value
             : "";
 
-
-    /* ==============================
-       LIMPIAR ERROR
-    ============================== */
-
     if (error) {
         error.textContent = "";
     }
 
-
-    /* ==============================
-       VALIDAR CAMPOS
-    ============================== */
-
     if (!email || !password) {
-
         if (error) {
-
             error.textContent =
                 "Completa tu correo de acceso y contraseña.";
-
         }
-
         return;
     }
 
-
-    /* ==============================
-       DESACTIVAR BOTÓN
-    ============================== */
-
     if (boton) {
-
         boton.disabled = true;
-
-        boton.textContent =
-            "Verificando...";
-
+        boton.textContent = "Verificando...";
     }
 
-
     try {
+
+        /* Esperamos a que Firebase configure la persistencia LOCAL. */
+        await persistenciaFirebase;
 
         console.log(
             "Intentando iniciar sesión con:",
             email
         );
 
-
-        /* ==============================
-           ASEGURAR PERSISTENCIA LOCAL
-        ============================== */
-
-        await persistenciaFirebase;
-
-        /* ==============================
-           AUTENTICAR CON FIREBASE
-        ============================== */
-
+        /* El correo se utiliza directamente; no se transforma. */
         await auth.signInWithEmailAndPassword(
             email,
             password
         );
 
-
         console.log(
             "Inicio de sesión correcto."
         );
 
-
-        /* ==============================
-           GUARDAR URL DEL LIBRO
-        ============================== */
-
-        const url =
-            libroPendiente;
-
-
-        libroPendiente =
-            null;
-
-
-        /* ==============================
-           CERRAR LOGIN
-        ============================== */
+        const url = libroPendiente;
+        libroPendiente = null;
 
         cerrarLoginBiblioteca();
 
-
-        /* ==============================
-           ABRIR LIBRO EN NUEVA PESTAÑA
-        ============================== */
-
         if (url) {
-
-            abrirLibroEnNuevaPestana(
-                url
-            );
-
+            abrirLibroEnNuevaPestana(url);
         }
 
-    }
-
-    catch (errorFirebase) {
+    } catch (errorFirebase) {
 
         console.error(
             "ERROR COMPLETO DE FIREBASE:",
@@ -664,115 +600,69 @@ async function iniciarSesionBiblioteca(evento) {
             errorFirebase.message
         );
 
-
         if (error) {
 
-            switch (
-                errorFirebase.code
-            ) {
+            switch (errorFirebase.code) {
 
                 case "auth/invalid-credential":
-
                 case "auth/invalid-login-credentials":
-
                 case "auth/user-not-found":
-
                 case "auth/wrong-password":
-
                     error.textContent =
                         "Correo o contraseña incorrectos.";
-
                     break;
-
 
                 case "auth/invalid-email":
-
                     error.textContent =
                         "El correo de acceso no tiene un formato válido.";
-
                     break;
-
 
                 case "auth/operation-not-allowed":
-
                     error.textContent =
                         "El acceso con correo y contraseña no está habilitado en Firebase.";
-
                     break;
-
 
                 case "auth/unauthorized-domain":
-
                     error.textContent =
                         "Este dominio no está autorizado en Firebase Authentication.";
-
                     break;
-
 
                 case "auth/api-key-not-valid":
-
                     error.textContent =
-                        "Firebase está rechazando la API Key. Debemos actualizar la configuración de Firebase.";
-
+                        "Firebase está rechazando la API Key. Verifica la configuración del proyecto.";
                     break;
-
 
                 case "auth/network-request-failed":
-
                     error.textContent =
                         "No se pudo conectar con Firebase. Revisa tu conexión a Internet.";
-
                     break;
-
 
                 case "auth/too-many-requests":
-
                     error.textContent =
                         "Demasiados intentos. Espera unos minutos e inténtalo nuevamente.";
-
                     break;
-
 
                 case "auth/user-disabled":
-
                     error.textContent =
                         "Esta cuenta está deshabilitada. Comunícate con Soubac.";
-
                     break;
-
 
                 default:
-
                     error.textContent =
                         "Error de Firebase: " +
-                        (
-                            errorFirebase.code ||
-                            "código desconocido"
-                        );
-
+                        (errorFirebase.code || "código desconocido");
                     break;
-
             }
-
         }
 
-    }
-
-    finally {
+    } finally {
 
         if (boton) {
-
             boton.disabled = false;
-
-            boton.textContent =
-                "Iniciar sesión";
-
+            boton.textContent = "Iniciar sesión";
         }
-
     }
-
 }
-
 
 /* ==================================================
    CONFIGURAR BIBLIOTECA
@@ -785,47 +675,41 @@ function configurarBiblioteca() {
             "formLoginBiblioteca"
         );
 
+
     const modal =
         document.getElementById(
             "modalLoginBiblioteca"
         );
 
 
-    /* ==============================
-       FORMULARIO DE LOGIN
-    ============================== */
+    /*
+       Formulario de login.
+    */
 
-    if (
-        formulario &&
-        !formulario.dataset.firebaseConfigured
-    ) {
+    if (formulario) {
 
         formulario.addEventListener(
             "submit",
             iniciarSesionBiblioteca
         );
 
-        formulario.dataset.firebaseConfigured =
-            "true";
-
     }
 
 
-    /* ==============================
-       CERRAR AL HACER CLIC FUERA
-    ============================== */
+    /*
+       Clic fuera de la tarjeta
+       para cerrar el modal.
+    */
 
-    if (
-        modal &&
-        !modal.dataset.firebaseModalConfigured
-    ) {
+    if (modal) {
 
         modal.addEventListener(
             "click",
             (evento) => {
 
                 if (
-                    evento.target === modal
+                    evento.target ===
+                    modal
                 ) {
 
                     cerrarLoginBiblioteca();
@@ -835,15 +719,12 @@ function configurarBiblioteca() {
             }
         );
 
-        modal.dataset.firebaseModalConfigured =
-            "true";
-
     }
 
 
-    /* ==============================
-       ESTADO DE SESIÓN
-    ============================== */
+    /*
+       Firebase mantiene la sesión.
+    */
 
     auth.onAuthStateChanged(
         (usuario) => {
@@ -851,14 +732,7 @@ function configurarBiblioteca() {
             if (usuario) {
 
                 console.log(
-                    "Sesión de Biblioteca activa:",
-                    usuario.email
-                );
-
-            } else {
-
-                console.log(
-                    "No hay sesión activa en Biblioteca."
+                    "Sesión de Biblioteca activa."
                 );
 
             }
@@ -933,6 +807,7 @@ try {
 catch (error) {
 
     carrito = [];
+
 
     console.error(
         "No se pudo recuperar el carrito:",
