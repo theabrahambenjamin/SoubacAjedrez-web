@@ -392,11 +392,19 @@
             id="libros"
             class="seccion"
         >
+<button
+    type="button"
+    id="btnCerrarSesionBiblioteca"
+    class="btn-cerrar-sesion-biblioteca"
+    onclick="cerrarSesionBiblioteca()"
+    style="display: none;"
+>
+    🚪 Cerrar sesión
+</button>
 
-            <h2 class="titulo-seccion">
-                Libros gratuitos para descargar
-            </h2>
-
+<h2 class="titulo-seccion">
+    Libros gratuitos para descargar
+</h2>
             <div class="botones-info">
 
                 <a
@@ -1731,12 +1739,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="script.js?v=20261004"></script>
 
-
-<!-- ==========================================
-     JAVASCRIPT PRINCIPAL
-=========================================== -->
-
-<script src="script.js?v=20261004"></script>
 
 <!-- ==========================================
      VISOR DE IMÁGENES
