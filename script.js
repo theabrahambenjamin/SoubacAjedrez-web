@@ -34,17 +34,51 @@ const auth = firebase.auth();
    PERSISTENCIA DE SESIÓN
 ================================================== */
 
-auth.setPersistence(
-    firebase.auth.Auth.Persistence.LOCAL
-).catch((error) => {
+const persistenciaFirebase =
+    auth.setPersistence(
+        firebase.auth.Auth.Persistence.LOCAL
+    ).then(() => {
 
-    console.error(
-        "Error al configurar la sesión:",
-        error
-    );
+        console.log(
+            "Sesión configurada para mantenerse guardada."
+        );
 
-});
+    }).catch((error) => {
 
+        console.error(
+            "Error al configurar la sesión:",
+            error
+        );
+
+    });
+
+
+/* ==================================================
+   ESPERAR A QUE FIREBASE RECUPERE LA SESIÓN
+================================================== */
+
+const firebaseAuthInicializado =
+    new Promise((resolve) => {
+
+        const cancelarEscucha =
+            auth.onAuthStateChanged(
+                (usuario) => {
+
+                    cancelarEscucha();
+
+                    console.log(
+                        "Estado inicial de Firebase:",
+                        usuario
+                            ? usuario.email
+                            : "sin sesión"
+                    );
+
+                    resolve(usuario);
+
+                }
+            );
+
+    });
 
 /* ==================================================
    BIBLIOTECA
@@ -252,7 +286,7 @@ function mostrar(idSeccion) {
    BIBLIOTECA
 ================================================== */
 
-function abrirLibro(evento, url) {
+async function abrirLibro(evento, url) {
 
     if (evento) {
         evento.preventDefault();
@@ -262,8 +296,26 @@ function abrirLibro(evento, url) {
         return;
     }
 
+
+    /* ==============================
+       GUARDAR LIBRO PENDIENTE
+    ============================== */
+
     libroPendiente = url;
 
+
+    /* ==============================
+       ESPERAR A FIREBASE
+    ============================== */
+
+    await persistenciaFirebase;
+
+    await firebaseAuthInicializado;
+
+
+    /* ==============================
+       COMPROBAR SESIÓN
+    ============================== */
 
     if (auth.currentUser) {
 
@@ -277,11 +329,13 @@ function abrirLibro(evento, url) {
     }
 
 
+    /* ==============================
+       NO HAY SESIÓN
+    ============================== */
+
     abrirLoginBiblioteca();
 
 }
-
-
 /* ==================================================
    ABRIR LIBRO
 ================================================== */
