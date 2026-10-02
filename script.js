@@ -1797,3 +1797,94 @@ window.abrirProducto =
 
 window.cerrarProducto =
     cerrarProducto;
+/* ==================================================
+   BOTÓN CERRAR SESIÓN - BIBLIOTECA
+================================================== */
+
+function actualizarBotonCerrarSesionBiblioteca(session) {
+
+    const boton =
+        document.getElementById(
+            "btnCerrarSesionBiblioteca"
+        );
+
+    if (!boton) {
+        return;
+    }
+
+    if (session && session.user) {
+
+        boton.style.display = "block";
+
+    } else {
+
+        boton.style.display = "none";
+
+    }
+
+}
+
+
+/* ==================================================
+   CONTROLAR SESIÓN DE SUPABASE
+================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async () => {
+
+        if (
+            typeof supabaseClient ===
+            "undefined"
+        ) {
+            console.error(
+                "Supabase no está disponible."
+            );
+
+            return;
+        }
+
+
+        /* Revisar sesión existente */
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient.auth.getSession();
+
+
+        if (error) {
+
+            console.error(
+                "Error al obtener la sesión:",
+                error
+            );
+
+            return;
+
+        }
+
+
+        actualizarBotonCerrarSesionBiblioteca(
+            data.session
+        );
+
+
+        /* Detectar inicio y cierre de sesión */
+
+        supabaseClient.auth.onAuthStateChange(
+            (
+                evento,
+                session
+            ) => {
+
+                actualizarBotonCerrarSesionBiblioteca(
+                    session
+                );
+
+            }
+        );
+
+    }
+);
