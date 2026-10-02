@@ -2996,3 +2996,18 @@ main {
             0.01ms !important;
     }
 }
+.btn-cerrar-sesion-biblioteca {
+    display: none;
+    margin: 10px 35px 10px auto;
+    padding: 9px 16px;
+    border: none;
+    border-radius: 8px;
+    background: #8b0000;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-cerrar-sesion-biblioteca:hover {
+    background: #6f0000;
+}
