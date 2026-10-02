@@ -387,24 +387,37 @@
         <!-- ======================================
              SECCIÓN LIBROS
         ======================================= -->
-
-        <section
-            id="libros"
-            class="seccion"
-        >
-<button
-    type="button"
-    id="btnCerrarSesionBiblioteca"
-    class="btn-cerrar-sesion-biblioteca"
-    onclick="cerrarSesionBiblioteca()"
-    style="display: none;"
+<section
+    id="libros"
+    class="seccion"
+    style="position: relative;"
 >
-    🚪 Cerrar sesión
-</button>
 
-<h2 class="titulo-seccion">
-    Libros gratuitos para descargar
-</h2>
+    <button
+        type="button"
+        id="btnCerrarSesionBiblioteca"
+        onclick="cerrarSesionBiblioteca()"
+        style="
+            display: none;
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            padding: 9px 16px;
+            border: none;
+            border-radius: 8px;
+            background: #8b0000;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            z-index: 10;
+        "
+    >
+        🚪 Cerrar sesión
+    </button>
+
+    <h2 class="titulo-seccion">
+        Libros gratuitos para descargar
+    </h2>
             <div class="botones-info">
 
                 <a
