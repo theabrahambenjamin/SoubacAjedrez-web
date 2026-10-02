@@ -50,6 +50,8 @@ const persistenciaFirebase =
             error
         );
 
+        throw error;
+
     });
 
 
@@ -507,7 +509,9 @@ function cerrarLoginBiblioteca() {
 
 async function iniciarSesionBiblioteca(evento) {
 
-    evento.preventDefault();
+    if (evento) {
+        evento.preventDefault();
+    }
 
     const emailInput =
         document.getElementById(
@@ -768,3 +772,1045 @@ async function iniciarSesionBiblioteca(evento) {
     }
 
 }
+
+
+/* ==================================================
+   CONFIGURAR BIBLIOTECA
+================================================== */
+
+function configurarBiblioteca() {
+
+    const formulario =
+        document.getElementById(
+            "formLoginBiblioteca"
+        );
+
+    const modal =
+        document.getElementById(
+            "modalLoginBiblioteca"
+        );
+
+
+    /* ==============================
+       FORMULARIO DE LOGIN
+    ============================== */
+
+    if (
+        formulario &&
+        !formulario.dataset.firebaseConfigured
+    ) {
+
+        formulario.addEventListener(
+            "submit",
+            iniciarSesionBiblioteca
+        );
+
+        formulario.dataset.firebaseConfigured =
+            "true";
+
+    }
+
+
+    /* ==============================
+       CERRAR AL HACER CLIC FUERA
+    ============================== */
+
+    if (
+        modal &&
+        !modal.dataset.firebaseModalConfigured
+    ) {
+
+        modal.addEventListener(
+            "click",
+            (evento) => {
+
+                if (
+                    evento.target === modal
+                ) {
+
+                    cerrarLoginBiblioteca();
+
+                }
+
+            }
+        );
+
+        modal.dataset.firebaseModalConfigured =
+            "true";
+
+    }
+
+
+    /* ==============================
+       ESTADO DE SESIÓN
+    ============================== */
+
+    auth.onAuthStateChanged(
+        (usuario) => {
+
+            if (usuario) {
+
+                console.log(
+                    "Sesión de Biblioteca activa:",
+                    usuario.email
+                );
+
+            } else {
+
+                console.log(
+                    "No hay sesión activa en Biblioteca."
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* ==================================================
+   CERRAR SESIÓN
+================================================== */
+
+async function cerrarSesionBiblioteca() {
+
+    try {
+
+        await auth.signOut();
+
+        console.log(
+            "Sesión cerrada."
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "No se pudo cerrar la sesión:",
+            error
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+   CARRITO
+================================================== */
+
+let carrito = [];
+
+
+try {
+
+    const carritoGuardado =
+        localStorage.getItem(
+            "carritoSoubac"
+        );
+
+
+    carrito =
+        carritoGuardado
+            ? JSON.parse(
+                carritoGuardado
+            )
+            : [];
+
+
+    if (
+        !Array.isArray(carrito)
+    ) {
+
+        carrito = [];
+
+    }
+
+}
+
+catch (error) {
+
+    carrito = [];
+
+    console.error(
+        "No se pudo recuperar el carrito:",
+        error
+    );
+
+}
+
+
+/* ==================================================
+   AGREGAR AL CARRITO
+================================================== */
+
+function agregarCarrito(
+    nombre,
+    precio
+) {
+
+    carrito.push({
+
+        nombre:
+            nombre,
+
+        precio:
+            Number(precio)
+
+    });
+
+
+    actualizarCarrito();
+
+    abrirCarrito();
+
+}
+
+
+/* ==================================================
+   ACTUALIZAR CARRITO
+================================================== */
+
+function actualizarCarrito() {
+
+    const lista =
+        document.getElementById(
+            "listaCarrito"
+        );
+
+
+    const total =
+        document.getElementById(
+            "total"
+        );
+
+
+    const contador =
+        document.getElementById(
+            "contadorCarrito"
+        );
+
+
+    if (
+        !lista ||
+        !total ||
+        !contador
+    ) {
+
+        return;
+
+    }
+
+
+    lista.innerHTML = "";
+
+
+    let suma = 0;
+
+
+    if (
+        carrito.length === 0
+    ) {
+
+        lista.innerHTML = `
+
+            <p class="carrito-vacio">
+                Tu carrito está vacío.
+            </p>
+
+        `;
+
+    }
+
+    else {
+
+        carrito.forEach(
+            (
+                producto,
+                indice
+            ) => {
+
+                const precio =
+                    Number(
+                        producto.precio
+                    ) || 0;
+
+
+                suma += precio;
+
+
+                const item =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                item.className =
+                    "item-carrito";
+
+
+                const informacion =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                informacion.className =
+                    "item-carrito-info";
+
+
+                const nombre =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                nombre.textContent =
+                    producto.nombre;
+
+
+                const precioProducto =
+                    document.createElement(
+                        "strong"
+                    );
+
+
+                precioProducto.textContent =
+                    precio === 0
+                        ? "Gratis"
+                        : `S/ ${precio.toFixed(2)}`;
+
+
+                const botonEliminar =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                botonEliminar.type =
+                    "button";
+
+
+                botonEliminar.className =
+                    "btn-eliminar";
+
+
+                botonEliminar.setAttribute(
+                    "aria-label",
+                    `Eliminar ${producto.nombre}`
+                );
+
+
+                botonEliminar.textContent =
+                    "🗑";
+
+
+                botonEliminar.addEventListener(
+                    "click",
+                    () => {
+
+                        eliminarProducto(
+                            indice
+                        );
+
+                    }
+                );
+
+
+                informacion.appendChild(
+                    nombre
+                );
+
+
+                informacion.appendChild(
+                    precioProducto
+                );
+
+
+                item.appendChild(
+                    informacion
+                );
+
+
+                item.appendChild(
+                    botonEliminar
+                );
+
+
+                lista.appendChild(
+                    item
+                );
+
+            }
+        );
+
+    }
+
+
+    total.textContent =
+        suma.toFixed(2);
+
+
+    contador.textContent =
+        carrito.length;
+
+
+    try {
+
+        localStorage.setItem(
+            "carritoSoubac",
+            JSON.stringify(
+                carrito
+            )
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "No se pudo guardar el carrito:",
+            error
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+   ELIMINAR PRODUCTO
+================================================== */
+
+function eliminarProducto(
+    indice
+) {
+
+    if (
+        indice < 0 ||
+        indice >= carrito.length
+    ) {
+
+        return;
+
+    }
+
+
+    carrito.splice(
+        indice,
+        1
+    );
+
+
+    actualizarCarrito();
+
+}
+
+
+/* ==================================================
+   VACIAR CARRITO
+================================================== */
+
+function vaciarCarrito() {
+
+    if (
+        carrito.length === 0
+    ) {
+
+        return;
+
+    }
+
+
+    const confirmar =
+        window.confirm(
+            "¿Deseas vaciar todo el carrito?"
+        );
+
+
+    if (!confirmar) {
+
+        return;
+
+    }
+
+
+    carrito = [];
+
+    actualizarCarrito();
+
+}
+
+
+/* ==================================================
+   ABRIR CARRITO
+================================================== */
+
+function abrirCarrito() {
+
+    const panel =
+        document.getElementById(
+            "panelCarrito"
+        );
+
+
+    const fondo =
+        document.getElementById(
+            "fondoCarrito"
+        );
+
+
+    if (panel) {
+
+        panel.classList.add(
+            "activo"
+        );
+
+
+        panel.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+    }
+
+
+    if (fondo) {
+
+        fondo.classList.add(
+            "activo"
+        );
+
+
+        fondo.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+    }
+
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+/* ==================================================
+   CERRAR CARRITO
+================================================== */
+
+function cerrarCarrito() {
+
+    const panel =
+        document.getElementById(
+            "panelCarrito"
+        );
+
+
+    const fondo =
+        document.getElementById(
+            "fondoCarrito"
+        );
+
+
+    if (panel) {
+
+        panel.classList.remove(
+            "activo"
+        );
+
+
+        panel.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+    }
+
+
+    if (fondo) {
+
+        fondo.classList.remove(
+            "activo"
+        );
+
+
+        fondo.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+    }
+
+
+    const modalAbierto =
+        document
+            .getElementById(
+                "modalLoginBiblioteca"
+            )
+            ?.classList.contains(
+                "activo"
+            );
+
+
+    const visorAbierto =
+        document
+            .getElementById(
+                "visorProducto"
+            )
+            ?.classList.contains(
+                "activo"
+            );
+
+
+    if (
+        !modalAbierto &&
+        !visorAbierto
+    ) {
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+}
+
+
+/* ==================================================
+   CONTROLAR BOTÓN CARRITO
+================================================== */
+
+function controlarBotonCarrito(
+    seccionActual = "inicio"
+) {
+
+    const botonCarrito =
+        document.querySelector(
+            ".btn-carrito"
+        );
+
+
+    if (!botonCarrito) {
+
+        return;
+
+    }
+
+
+    botonCarrito.style.display =
+        seccionActual === "tienda"
+            ? "flex"
+            : "none";
+
+}
+
+
+/* ==================================================
+   COMPRAR POR WHATSAPP
+================================================== */
+
+function comprarWhatsApp() {
+
+    if (
+        carrito.length === 0
+    ) {
+
+        alert(
+            "Tu carrito está vacío."
+        );
+
+        return;
+
+    }
+
+
+    let mensaje =
+        "Hola, deseo realizar el siguiente pedido:\n\n";
+
+
+    let suma = 0;
+
+
+    carrito.forEach(
+        (producto) => {
+
+            const precio =
+                Number(
+                    producto.precio
+                ) || 0;
+
+
+            if (precio === 0) {
+
+                mensaje +=
+                    `• ${producto.nombre}: Gratis\n`;
+
+            }
+
+            else {
+
+                mensaje +=
+                    `• ${producto.nombre}: S/ ${precio.toFixed(2)}\n`;
+
+            }
+
+
+            suma += precio;
+
+        }
+    );
+
+
+    mensaje +=
+        `\nTotal: S/ ${suma.toFixed(2)}`;
+
+
+    const telefono =
+        "51973265025";
+
+
+    const enlace =
+        `https://wa.me/${telefono}?text=${encodeURIComponent(
+            mensaje
+        )}`;
+
+
+    window.open(
+        enlace,
+        "_blank",
+        "noopener,noreferrer"
+    );
+
+}
+
+
+/* ==================================================
+   VISOR DE PRODUCTOS
+================================================== */
+
+function abrirProducto(src) {
+
+    const visor =
+        document.getElementById(
+            "visorProducto"
+        );
+
+
+    const imagen =
+        document.getElementById(
+            "imagenProductoGrande"
+        );
+
+
+    if (
+        !visor ||
+        !imagen
+    ) {
+
+        return;
+
+    }
+
+
+    imagen.src =
+        src;
+
+
+    visor.classList.add(
+        "activo"
+    );
+
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+/* ==================================================
+   CERRAR VISOR
+================================================== */
+
+function cerrarProducto() {
+
+    const visor =
+        document.getElementById(
+            "visorProducto"
+        );
+
+
+    const imagen =
+        document.getElementById(
+            "imagenProductoGrande"
+        );
+
+
+    if (!visor) {
+
+        return;
+
+    }
+
+
+    visor.classList.remove(
+        "activo"
+    );
+
+
+    if (imagen) {
+
+        imagen.src = "";
+
+    }
+
+
+    const modalAbierto =
+        document
+            .getElementById(
+                "modalLoginBiblioteca"
+            )
+            ?.classList.contains(
+                "activo"
+            );
+
+
+    const carritoAbierto =
+        document
+            .getElementById(
+                "panelCarrito"
+            )
+            ?.classList.contains(
+                "activo"
+            );
+
+
+    if (
+        !modalAbierto &&
+        !carritoAbierto
+    ) {
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+}
+
+
+/* ==================================================
+   CONFIGURAR VISOR
+================================================== */
+
+function configurarVisorProducto() {
+
+    const visor =
+        document.getElementById(
+            "visorProducto"
+        );
+
+
+    if (!visor) {
+
+        return;
+
+    }
+
+
+    visor.addEventListener(
+        "click",
+        (evento) => {
+
+            if (
+                evento.target ===
+                visor
+            ) {
+
+                cerrarProducto();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* ==================================================
+   TECLA ESCAPE
+================================================== */
+
+document.addEventListener(
+    "keydown",
+    (evento) => {
+
+        if (
+            evento.key !==
+            "Escape"
+        ) {
+
+            return;
+
+        }
+
+
+        cerrarCarrito();
+
+        cerrarLoginBiblioteca();
+
+        cerrarProducto();
+
+
+        const menu =
+            document.getElementById(
+                "opcionesMenu"
+            );
+
+
+        const boton =
+            document.querySelector(
+                ".boton-menu"
+            );
+
+
+        if (menu) {
+
+            menu.classList.remove(
+                "mostrar"
+            );
+
+        }
+
+
+        if (boton) {
+
+            boton.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+        }
+
+    }
+);
+
+
+/* ==================================================
+   CERRAR MENÚ AL HACER CLIC FUERA
+================================================== */
+
+document.addEventListener(
+    "click",
+    (evento) => {
+
+        const menu =
+            document.getElementById(
+                "opcionesMenu"
+            );
+
+
+        const boton =
+            document.querySelector(
+                ".boton-menu"
+            );
+
+
+        if (
+            !menu ||
+            !boton
+        ) {
+
+            return;
+
+        }
+
+
+        const clicDentroDelMenu =
+            menu.contains(
+                evento.target
+            );
+
+
+        const clicEnElBoton =
+            boton.contains(
+                evento.target
+            );
+
+
+        if (
+            !clicDentroDelMenu &&
+            !clicEnElBoton
+        ) {
+
+            menu.classList.remove(
+                "mostrar"
+            );
+
+
+            boton.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+        }
+
+    }
+);
+
+
+/* ==================================================
+   EXPONER FUNCIONES AL HTML
+================================================== */
+
+window.abrirMenu =
+    abrirMenu;
+
+
+window.mostrar =
+    mostrar;
+
+
+window.abrirLibro =
+    abrirLibro;
+
+
+window.abrirLoginBiblioteca =
+    abrirLoginBiblioteca;
+
+
+window.cerrarLoginBiblioteca =
+    cerrarLoginBiblioteca;
+
+
+window.cerrarSesionBiblioteca =
+    cerrarSesionBiblioteca;
+
+
+window.agregarCarrito =
+    agregarCarrito;
+
+
+window.abrirCarrito =
+    abrirCarrito;
+
+
+window.cerrarCarrito =
+    cerrarCarrito;
+
+
+window.vaciarCarrito =
+    vaciarCarrito;
+
+
+window.comprarWhatsApp =
+    comprarWhatsApp;
+
+
+window.abrirProducto =
+    abrirProducto;
+
+
+window.cerrarProducto =
+    cerrarProducto;
