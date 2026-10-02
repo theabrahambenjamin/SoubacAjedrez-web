@@ -1,49 +1,43 @@
 /* ==================================================
    SOUBAC AJEDREZ — JAVASCRIPT PRINCIPAL
-   Firebase Authentication + Biblioteca protegida
+   Supabase Authentication + Biblioteca protegida
 ================================================== */
 
 
 /* ==================================================
-   FIREBASE
+   SUPABASE
+   Autenticación + Biblioteca protegida
 ================================================== */
 
-const firebaseConfig = {
-    apiKey: "AIzaSyCOmb0ZFxGPCz9h7ZYwBhdI1TpZrzZT4jN8",
-    authDomain: "soubac-ajedrez.firebaseapp.com",
-    projectId: "soubac-ajedrez",
-    storageBucket: "soubac-ajedrez.firebasestorage.app",
-    messagingSenderId: "795119435641",
-    appId: "1:795119435641:web:5f2174e3e80a19e97079a8",
-    measurementId: "G-C6SKT2392Q"
-};
+const SUPABASE_URL = "https://eecfmvfbeboltjiyzzgq.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_Q6xz78vVQ6ftvjwHSJKDfg_r97UtR11";
 
 
-/* ==================================================
-   INICIALIZAR FIREBASE
-================================================== */
+if (!window.supabase) {
 
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
+    console.error(
+        "No se encontró la librería de Supabase. Verifica que supabase-js esté cargado antes de script.js."
+    );
+
 }
 
-const auth = firebase.auth();
 
-
-/* ==================================================
-   PERSISTENCIA DE SESIÓN
-================================================== */
-
-const persistenciaFirebase = auth.setPersistence(
-    firebase.auth.Auth.Persistence.LOCAL
-);
-
-persistenciaFirebase.catch((error) => {
-    console.error(
-        "Error al configurar la sesión:",
-        error
-    );
-});
+const supabaseClient =
+    window.supabase
+        ? window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_PUBLISHABLE_KEY,
+            {
+                auth: {
+                    autoRefreshToken: true,
+                    persistSession: true,
+                    detectSessionInUrl: true
+                }
+            }
+        )
+        : null;
 
 
 /* ==================================================
@@ -264,7 +258,7 @@ function mostrar(idSeccion) {
    EN UNA TARJETA.
 ================================================== */
 
-function abrirLibro(evento, url) {
+async function abrirLibro(evento, url) {
 
     if (evento) {
 
@@ -280,36 +274,61 @@ function abrirLibro(evento, url) {
     }
 
 
-    /*
-       Guardamos el libro seleccionado.
-    */
-
     libroPendiente = url;
 
 
-    /*
-       Si ya existe una sesión,
-       abrimos directamente el libro.
-    */
+    if (!supabaseClient) {
 
-    if (auth.currentUser) {
-
-        abrirLibroEnNuevaPestana(
-            url
+        console.error(
+            "Supabase no está disponible."
         );
 
-
-        libroPendiente = null;
+        abrirLoginBiblioteca();
 
         return;
 
     }
 
 
-    /*
-       Si NO existe sesión,
-       recién aquí aparece el modal.
-    */
+    try {
+
+        const { data, error } =
+            await supabaseClient.auth.getSession();
+
+
+        if (error) {
+
+            console.error(
+                "No se pudo comprobar la sesión de Biblioteca:",
+                error
+            );
+
+            abrirLoginBiblioteca();
+
+            return;
+
+        }
+
+
+        if (data?.session?.user) {
+
+            abrirLibroEnNuevaPestana(url);
+
+            libroPendiente = null;
+
+            return;
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Error al comprobar la sesión:",
+            error
+        );
+
+    }
+
 
     abrirLoginBiblioteca();
 
@@ -537,132 +556,191 @@ async function iniciarSesionBiblioteca(
             ? passwordInput.value
             : "";
 
+
     if (error) {
+
         error.textContent = "";
+
     }
+
 
     if (!email || !password) {
+
         if (error) {
+
             error.textContent =
                 "Completa tu correo de acceso y contraseña.";
+
         }
+
         return;
+
     }
 
+
+    if (!supabaseClient) {
+
+        if (error) {
+
+            error.textContent =
+                "No se pudo conectar con el sistema de acceso. Recarga la página e inténtalo nuevamente.";
+
+        }
+
+        return;
+
+    }
+
+
     if (boton) {
+
         boton.disabled = true;
         boton.textContent = "Verificando...";
+
     }
+
 
     try {
 
-        /* Esperamos a que Firebase configure la persistencia LOCAL. */
-        await persistenciaFirebase;
-
         console.log(
-            "Intentando iniciar sesión con:",
+            "Intentando iniciar sesión en Biblioteca con:",
             email
         );
 
-        /* El correo se utiliza directamente; no se transforma. */
-        await auth.signInWithEmailAndPassword(
-            email,
-            password
-        );
+
+        const {
+            data,
+            error: errorSupabase
+        } =
+            await supabaseClient.auth.signInWithPassword({
+
+                email: email,
+
+                password: password
+
+            });
+
+
+        if (errorSupabase) {
+
+            throw errorSupabase;
+
+        }
+
 
         console.log(
-            "Inicio de sesión correcto."
+            "Inicio de sesión correcto en Biblioteca."
         );
 
-        const url = libroPendiente;
+
+        const url =
+            libroPendiente;
+
+
         libroPendiente = null;
+
 
         cerrarLoginBiblioteca();
 
+
         if (url) {
+
             abrirLibroEnNuevaPestana(url);
+
         }
 
-    } catch (errorFirebase) {
+
+    } catch (errorSupabase) {
 
         console.error(
-            "ERROR COMPLETO DE FIREBASE:",
-            errorFirebase
+            "ERROR COMPLETO DE SUPABASE:",
+            errorSupabase
         );
 
-        console.error(
-            "Código Firebase:",
-            errorFirebase.code
-        );
-
-        console.error(
-            "Mensaje Firebase:",
-            errorFirebase.message
-        );
 
         if (error) {
 
-            switch (errorFirebase.code) {
+            const mensaje =
+                String(
+                    errorSupabase?.message ||
+                    ""
+                ).toLowerCase();
 
-                case "auth/invalid-credential":
-                case "auth/invalid-login-credentials":
-                case "auth/user-not-found":
-                case "auth/wrong-password":
-                    error.textContent =
-                        "Correo o contraseña incorrectos.";
-                    break;
 
-                case "auth/invalid-email":
-                    error.textContent =
-                        "El correo de acceso no tiene un formato válido.";
-                    break;
+            const status =
+                errorSupabase?.status;
 
-                case "auth/operation-not-allowed":
-                    error.textContent =
-                        "El acceso con correo y contraseña no está habilitado en Firebase.";
-                    break;
 
-                case "auth/unauthorized-domain":
-                    error.textContent =
-                        "Este dominio no está autorizado en Firebase Authentication.";
-                    break;
+            if (
+                mensaje.includes(
+                    "invalid login credentials"
+                ) ||
+                mensaje.includes(
+                    "invalid credentials"
+                ) ||
+                status === 400
+            ) {
 
-                case "auth/api-key-not-valid":
-                    error.textContent =
-                        "Firebase está rechazando la API Key. Verifica la configuración del proyecto.";
-                    break;
+                error.textContent =
+                    "Correo o contraseña incorrectos.";
 
-                case "auth/network-request-failed":
-                    error.textContent =
-                        "No se pudo conectar con Firebase. Revisa tu conexión a Internet.";
-                    break;
-
-                case "auth/too-many-requests":
-                    error.textContent =
-                        "Demasiados intentos. Espera unos minutos e inténtalo nuevamente.";
-                    break;
-
-                case "auth/user-disabled":
-                    error.textContent =
-                        "Esta cuenta está deshabilitada. Comunícate con Soubac.";
-                    break;
-
-                default:
-                    error.textContent =
-                        "Error de Firebase: " +
-                        (errorFirebase.code || "código desconocido");
-                    break;
             }
+
+            else if (
+                mensaje.includes(
+                    "email not confirmed"
+                )
+            ) {
+
+                error.textContent =
+                    "El correo de acceso todavía no ha sido confirmado.";
+
+            }
+
+            else if (
+                mensaje.includes("email") &&
+                mensaje.includes("invalid")
+            ) {
+
+                error.textContent =
+                    "El correo de acceso no tiene un formato válido.";
+
+            }
+
+            else if (
+                mensaje.includes("too many") ||
+                mensaje.includes("rate limit")
+            ) {
+
+                error.textContent =
+                    "Demasiados intentos. Espera unos minutos e inténtalo nuevamente.";
+
+            }
+
+            else {
+
+                error.textContent =
+                    "No se pudo iniciar sesión. Inténtalo nuevamente.";
+
+            }
+
         }
 
-    } finally {
+    }
+
+    finally {
 
         if (boton) {
+
             boton.disabled = false;
             boton.textContent = "Iniciar sesión";
+
         }
+
     }
+
 }
+
 
 /* ==================================================
    CONFIGURAR BIBLIOTECA
@@ -723,22 +801,37 @@ function configurarBiblioteca() {
 
 
     /*
-       Firebase mantiene la sesión.
+       Supabase mantiene y restaura la sesión.
     */
 
-    auth.onAuthStateChanged(
-        (usuario) => {
+    if (supabaseClient) {
 
-            if (usuario) {
+        supabaseClient.auth.onAuthStateChange(
+            (eventoAuth, session) => {
 
-                console.log(
-                    "Sesión de Biblioteca activa."
-                );
+                if (session?.user) {
+
+                    console.log(
+                        "Sesión de Biblioteca activa."
+                    );
+
+                }
+
+                else if (
+                    eventoAuth ===
+                    "SIGNED_OUT"
+                ) {
+
+                    console.log(
+                        "Sesión de Biblioteca cerrada."
+                    );
+
+                }
 
             }
+        );
 
-        }
-    );
+    }
 
 }
 
@@ -749,13 +842,30 @@ function configurarBiblioteca() {
 
 async function cerrarSesionBiblioteca() {
 
+    if (!supabaseClient) {
+
+        return;
+
+    }
+
+
     try {
 
-        await auth.signOut();
+        const { error } =
+            await supabaseClient.auth.signOut();
+
+
+        if (error) {
+
+            throw error;
+
+        }
+
 
         console.log(
             "Sesión cerrada."
         );
+
 
     }
 
@@ -842,8 +952,6 @@ function agregarCarrito(
     abrirCarrito();
 
 }
-
-
 /* ==================================================
    ACTUALIZAR CARRITO
 ================================================== */
