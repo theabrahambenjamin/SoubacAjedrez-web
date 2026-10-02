@@ -1579,164 +1579,201 @@
     </footer>
 
 
-    <!-- ==========================================
-         MODAL ACCESO A LA BIBLIOTECA
-    =========================================== -->
+ <!-- ==========================================
+     MODAL ACCESO A LA BIBLIOTECA
+=========================================== -->
+
+<div
+    id="modalLoginBiblioteca"
+    class="modal-biblioteca"
+    aria-hidden="true"
+>
 
     <div
-        id="modalLoginBiblioteca"
-        class="modal-biblioteca"
-        aria-hidden="true"
+        class="login-biblioteca"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="tituloLoginBiblioteca"
     >
 
-        <div
-            class="login-biblioteca"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="tituloLoginBiblioteca"
+        <!-- BOTÓN CERRAR -->
+
+        <button
+            type="button"
+            class="cerrar-login"
+            onclick="cerrarLoginBiblioteca()"
+            aria-label="Cerrar ventana de inicio de sesión"
+        >
+            ×
+        </button>
+
+
+        <!-- LOGO -->
+
+        <div class="icono-login">
+
+            <img
+                src="soubac.png"
+                alt="Academia Soubac Ajedrez"
+                class="logo-login"
+            >
+
+        </div>
+
+
+        <!-- TÍTULO -->
+
+        <h2 id="tituloLoginBiblioteca">
+            Acceso a la Biblioteca
+        </h2>
+
+
+        <!-- DESCRIPCIÓN -->
+
+        <p class="texto-login">
+
+            Ingresa con tu
+            <strong>correo de acceso y contraseña</strong>.
+
+        </p>
+
+
+        <!-- FORMULARIO -->
+
+        <form
+            id="formLoginBiblioteca"
+            autocomplete="on"
         >
 
+            <!-- CORREO -->
+
+            <div class="campo-login">
+
+                <label
+                    for="emailBiblioteca"
+                >
+                    Correo de acceso
+                </label>
+
+                <input
+                    type="email"
+                    id="emailBiblioteca"
+                    name="email"
+                    placeholder="Ingresa tu correo de acceso"
+                    autocomplete="username"
+                    autocapitalize="none"
+                    spellcheck="false"
+                    required
+                >
+
+            </div>
+
+
+            <!-- CONTRASEÑA -->
+
+            <div class="campo-login">
+
+                <label
+                    for="passwordBiblioteca"
+                >
+                    Contraseña
+                </label>
+
+                <input
+                    type="password"
+                    id="passwordBiblioteca"
+                    name="password"
+                    placeholder="Ingresa tu contraseña"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+
+            <!-- MENSAJE DE ERROR -->
+
+            <p
+                id="errorLoginBiblioteca"
+                class="error-login"
+                aria-live="polite"
+                role="alert"
+            ></p>
+
+
+            <!-- BOTÓN INGRESAR -->
+
             <button
-                type="button"
-                class="cerrar-login"
-                onclick="cerrarLoginBiblioteca()"
-                aria-label="Cerrar ventana de inicio de sesión"
+                type="submit"
+                id="btnLoginBiblioteca"
+                class="boton-login"
             >
-                ×
+                Iniciar sesión
             </button>
 
-
-            <div class="icono-login">
-
-                <img
-                    src="soubac.png"
-                    alt="Academia Soubac Ajedrez"
-                    class="logo-login"
-                >
-
-            </div>
+        </form>
 
 
-            <h2 id="tituloLoginBiblioteca">
-                Acceso a la Biblioteca
-            </h2>
+        <!-- SEGURIDAD -->
 
+        <div class="seguridad-login">
 
-            <p class="texto-login">
-
-                Ingresa con tu
-                <strong>usuario y contraseña de estudiante Soubac</strong>.
-
-            </p>
-
-
-            <form
-                id="formLoginBiblioteca"
-                autocomplete="on"
-            >
-
-                <div class="campo-login">
-
-                    <label
-                        for="usuarioBiblioteca"
-                    >
-                        Usuario
-                    </label>
-
-                    <input
-                        type="text"
-                        id="usuarioBiblioteca"
-                        name="username"
-                        placeholder="Ingresa tu usuario"
-                        autocomplete="username"
-                        autocapitalize="none"
-                        spellcheck="false"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="campo-login">
-
-                    <label
-                        for="passwordBiblioteca"
-                    >
-                        Contraseña
-                    </label>
-
-                    <input
-                        type="password"
-                        id="passwordBiblioteca"
-                        name="password"
-                        placeholder="Ingresa tu contraseña"
-                        autocomplete="current-password"
-                        required
-                    >
-
-                </div>
-
-
-                <p
-                    id="errorLoginBiblioteca"
-                    class="error-login"
-                    aria-live="polite"
-                    role="alert"
-                ></p>
-
-
-                <button
-                    type="submit"
-                    id="btnLoginBiblioteca"
-                    class="boton-login"
-                >
-                    Iniciar sesión
-                </button>
-
-            </form>
-
-
-            <div class="seguridad-login">
-
-                🔒 Acceso exclusivo para estudiantes Soubac
-
-            </div>
+            🔒 Acceso exclusivo para estudiantes Soubac
 
         </div>
 
     </div>
 
+</div>
 
-<script src="https://www.gstatic.com/firebasejs/11.6.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/11.6.1/firebase-auth-compat.js"></script>
 
-<script src="script.js?v=20261002"></script>    
-    <!-- ==========================================
-         VISOR DE IMÁGENES
-    =========================================== -->
+<!-- ==========================================
+     FIREBASE
+=========================================== -->
 
-    <div
-        id="visorProducto"
-        class="visor-producto"
-        aria-hidden="true"
+<script
+    src="https://www.gstatic.com/firebasejs/11.6.1/firebase-app-compat.js"
+></script>
+
+<script
+    src="https://www.gstatic.com/firebasejs/11.6.1/firebase-auth-compat.js"
+></script>
+
+
+<!-- ==========================================
+     JAVASCRIPT PRINCIPAL
+=========================================== -->
+
+<script src="script.js?v=20261002"></script>
+
+
+<!-- ==========================================
+     VISOR DE IMÁGENES
+=========================================== -->
+
+<div
+    id="visorProducto"
+    class="visor-producto"
+    aria-hidden="true"
+>
+
+    <button
+        type="button"
+        class="cerrar-producto"
+        onclick="cerrarProducto()"
+        aria-label="Cerrar visor de producto"
+    >
+        ✕
+    </button>
+
+
+    <img
+        id="imagenProductoGrande"
+        src=""
+        alt="Producto"
     >
 
-        <button
-            type="button"
-            class="cerrar-producto"
-            onclick="cerrarProducto()"
-            aria-label="Cerrar visor de producto"
-        >
-            ✕
-        </button>
-
-        <img
-            id="imagenProductoGrande"
-            src=""
-            alt="Producto"
-        >
-
-    </div>
+</div>
 
 
 </body>
