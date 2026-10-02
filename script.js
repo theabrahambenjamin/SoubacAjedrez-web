@@ -383,8 +383,7 @@ function abrirLoginBiblioteca() {
         document.getElementById(
             "modalLoginBiblioteca"
         );
-
-    const email =
+       const email =
         document.getElementById(
             "emailBiblioteca"
         );
@@ -591,6 +590,12 @@ async function iniciarSesionBiblioteca(evento) {
 
 
         /* ==============================
+           ASEGURAR PERSISTENCIA LOCAL
+        ============================== */
+
+        await persistenciaFirebase;
+
+        /* ==============================
            AUTENTICAR CON FIREBASE
         ============================== */
 
@@ -625,14 +630,14 @@ async function iniciarSesionBiblioteca(evento) {
 
 
         /* ==============================
-           ABRIR LIBRO
-           SIN ABRIR about:blank
+           ABRIR LIBRO EN NUEVA PESTAÑA
         ============================== */
 
         if (url) {
 
-            window.location.href =
-                url;
+            abrirLibroEnNuevaPestana(
+                url
+            );
 
         }
 
