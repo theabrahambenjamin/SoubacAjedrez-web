@@ -159,6 +159,103 @@ function abrirMenu() {
 
 
 /* ==================================================
+   RUTAS DINÁMICAS — SOUBAC AJEDREZ
+================================================== */
+
+const rutasSoubac = {
+    inicio: "/",
+    libros: "/libros",
+    historia: "/historia",
+    fotos: "/galeria",
+    plataformas: "/plataformas",
+    redes: "/redes-sociales",
+    tienda: "/tienda",
+    opiniones: "/opiniones"
+};
+
+function navegarRuta(idSeccion) {
+    const ruta = rutasSoubac[idSeccion] || "/";
+
+    if (window.location.pathname !== ruta) {
+        history.pushState(
+            { seccion: idSeccion },
+            "",
+            ruta
+        );
+    }
+
+    mostrar(idSeccion);
+}
+
+function obtenerRutaActual() {
+    let ruta = window.location.pathname || "/";
+
+    ruta = ruta
+        .replace(/^\/+/, "")
+        .replace(/\/+$/, "");
+
+    if (!ruta) {
+        return {
+            tipo: "seccion",
+            seccion: "inicio"
+        };
+    }
+
+    const partes = ruta.split("/");
+
+    if (partes[0] === "libros") {
+        if (!partes[1]) {
+            return {
+                tipo: "seccion",
+                seccion: "libros"
+            };
+        }
+
+        return {
+            tipo: "libro",
+            seccion: "libros",
+            categoria: partes[1]
+        };
+    }
+
+    const mapa = {
+        historia: "historia",
+        galeria: "fotos",
+        plataformas: "plataformas",
+        "redes-sociales": "redes",
+        tienda: "tienda",
+        opiniones: "opiniones"
+    };
+
+    if (mapa[partes[0]]) {
+        return {
+            tipo: "seccion",
+            seccion: mapa[partes[0]]
+        };
+    }
+
+    return {
+        tipo: "seccion",
+        seccion: "inicio"
+    };
+}
+
+function aplicarRutaActual() {
+    const ruta = obtenerRutaActual();
+
+    if (ruta.tipo === "libro") {
+        mostrar("libros");
+        return;
+    }
+
+    mostrar(ruta.seccion);
+}
+
+window.addEventListener("popstate", () => {
+    aplicarRutaActual();
+});
+
+/* ==================================================
    MOSTRAR SECCIONES
 ================================================== */
 
@@ -250,6 +347,44 @@ function mostrar(idSeccion) {
 
 }
 
+
+/* ==================================================
+   RUTAS DINÁMICAS DE LIBROS
+================================================== */
+
+function abrirLibroConRuta(evento, elemento) {
+    if (evento) {
+        evento.preventDefault();
+    }
+
+    if (!elemento) {
+        return;
+    }
+
+    const urlDrive = elemento.getAttribute("href");
+    const categoria = elemento.dataset.rutaLibro;
+
+    if (!urlDrive) {
+        return;
+    }
+
+    if (categoria) {
+        const ruta = `/libros/${categoria}`;
+
+        if (window.location.pathname !== ruta) {
+            history.pushState(
+                {
+                    seccion: "libros",
+                    libro: categoria
+                },
+                "",
+                ruta
+            );
+        }
+    }
+
+    abrirLibro(null, urlDrive);
+}
 
 /* ==================================================
    BIBLIOTECA
@@ -1744,6 +1879,14 @@ document.addEventListener(
 
 
 /* ==================================================
+   INICIALIZAR RUTA ACTUAL
+================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+    aplicarRutaActual();
+});
+
+/* ==================================================
    EXPONER FUNCIONES AL HTML
 ================================================== */
 
@@ -1753,6 +1896,14 @@ window.abrirMenu =
 
 window.mostrar =
     mostrar;
+
+
+window.navegarRuta =
+    navegarRuta;
+
+
+window.abrirLibroConRuta =
+    abrirLibroConRuta;
 
 
 window.abrirLibro =
