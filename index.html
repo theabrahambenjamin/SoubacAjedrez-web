@@ -134,7 +134,7 @@
                 <button
                     type="button"
                     class="opcion-menu"
-                    onclick="mostrar('inicio')"
+                    onclick="navegarRuta('inicio')"
                 >
 
                     <i
@@ -150,7 +150,7 @@
                 <button
                     type="button"
                     class="opcion-menu"
-                    onclick="mostrar('libros')"
+                    onclick="navegarRuta('libros')"
                 >
 
                     <i
@@ -166,7 +166,7 @@
                 <button
                     type="button"
                     class="opcion-menu"
-                    onclick="mostrar('historia')"
+                    onclick="navegarRuta('historia')"
                 >
 
                     <i
@@ -182,7 +182,7 @@
                 <button
                     type="button"
                     class="opcion-menu"
-                    onclick="mostrar('fotos')"
+                    onclick="navegarRuta('fotos')"
                 >
 
                     <i
@@ -198,7 +198,7 @@
                 <button
                     type="button"
                     class="opcion-menu"
-                    onclick="mostrar('plataformas')"
+                    onclick="navegarRuta('plataformas')"
                 >
 
                     <i
@@ -214,7 +214,7 @@
                 <button
                     type="button"
                     class="opcion-menu"
-                    onclick="mostrar('redes')"
+                    onclick="navegarRuta('redes')"
                 >
 
                     <i
@@ -230,7 +230,7 @@
                 <button
                     type="button"
                     class="opcion-menu"
-                    onclick="mostrar('tienda')"
+                    onclick="navegarRuta('tienda')"
                 >
 
                     <i
@@ -246,7 +246,7 @@
                 <button
                     type="button"
                     class="opcion-menu"
-                    onclick="mostrar('opiniones')"
+                    onclick="navegarRuta('opiniones')"
                 >
 
                     <i
@@ -421,7 +421,8 @@
 
                 <a
                     href="https://drive.google.com/drive/folders/1s7tAnuWdynVDA54csrYfxV7MKj_L0i9k?usp=drive_link"
-                    onclick="abrirLibro(event, this.href)"
+                    data-ruta-libro="aperturas"
+                    onclick="abrirLibroConRuta(event, this)"
                 >
 
                     Aperturas
@@ -439,7 +440,8 @@
 
                 <a
                     href="https://drive.google.com/drive/folders/1s7tAnuWdynVDA54csrYfxV7MKj_L0i9k?usp=drive_link"
-                    onclick="abrirLibro(event, this.href)"
+                    data-ruta-libro="temas-tacticos"
+                    onclick="abrirLibroConRuta(event, this)"
                 >
 
                     Temas tácticos
@@ -457,7 +459,8 @@
 
                 <a
                     href="https://drive.google.com/drive/u/0/folders/1nPCAhvg_FlbYNdUQX7f3SKEYF1a0eUvt"
-                    onclick="abrirLibro(event, this.href)"
+                    data-ruta-libro="defensas"
+                    onclick="abrirLibroConRuta(event, this)"
                 >
 
                     Defensas
@@ -475,7 +478,8 @@
 
                 <a
                     href="https://drive.google.com/drive/folders/1Rdlm2b3JLb_sGrIqVpJ2YJlT12IQUEFQ?usp=sharing"
-                    onclick="abrirLibro(event, this.href)"
+                    data-ruta-libro="historia"
+                    onclick="abrirLibroConRuta(event, this)"
                 >
 
                     Historia
@@ -493,7 +497,8 @@
 
                 <a
                     href="https://drive.google.com/drive/folders/1BMTeaEMbn0aLVgg1LiCSLGcdNyMWaonM?usp=sharing"
-                    onclick="abrirLibro(event, this.href)"
+                    data-ruta-libro="gambitos"
+                    onclick="abrirLibroConRuta(event, this)"
                 >
 
                     Gambitos
@@ -511,7 +516,8 @@
 
                 <a
                     href="https://drive.google.com/drive/u/0/folders/1_gXmSnxcj2Xetcw6QogtqDeLMVVEW6iB"
-                    onclick="abrirLibro(event, this.href)"
+                    data-ruta-libro="principiantes"
+                    onclick="abrirLibroConRuta(event, this)"
                 >
 
                     Principiantes
@@ -589,7 +595,7 @@
                     <p>
                         Ese mismo año realizamos nuestro primer torneo
                         interno. Uno de nuestros primeros grandes logros
-                        llegó cuando nuestra alumna Laura Fabiola, con
+                                                llegó cuando nuestra alumna Laura Fabiola, con
                         apenas seis años, obtuvo el primer puesto en un
                         torneo realizado en <strong>Chiclayo</strong>.
                     </p>
@@ -1784,3 +1790,4 @@
 </body>
 
 </html>
+
